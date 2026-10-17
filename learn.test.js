@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {makeQuestion,newRound,answerQuestion,advanceRound} from './learn.js';
+const cards=JSON.parse(readFileSync(new URL('./deck.json',import.meta.url))).cards;
+test('each PDF card produces a valid question with one correct choice',()=>{cards.forEach((card,id)=>{const q=makeQuestion(cards,id);assert(q.prompt);assert(q.options.length>=2);assert.equal(new Set(q.options).size,q.options.length);assert.equal(q.options.filter(x=>x===q.answer).length,1);if(!/^(t|f|true|false|all)$/i.test(card.definition)){assert.equal(q.answer,card.definition);assert(q.prompt.endsWith('?')||!card.term.includes('?'));}});});
+test('question stems hide printed answer choices',()=>{const q=makeQuestion(cards,0);assert(!q.prompt.includes('Facebook has'));assert(q.prompt.endsWith('?'));});
+test('boolean answer keys and all-options cards retain meaning',()=>{assert.deepEqual(makeQuestion(cards,15).options,['True','False']);assert.equal(makeQuestion(cards,15).answer,'False');assert.equal(makeQuestion(cards,62).answer,'All of the listed options');assert.match(makeQuestion(cards,62).prompt,/Reduce lockouts/);});
+test('rounds exclude completed cards and limit new cards to ten',()=>{const round=newRound(cards,[0,1,2]);assert.equal(round.total,10);assert.equal(new Set(round.queue).size,10);assert(round.queue.every(id=>id>2));assert.equal(newRound(cards,cards.map((_,i)=>i)).total,0);});
+test('missed questions return, duplicate answers are ignored, and first-try score stays accurate',()=>{const r=newRound(cards.slice(0,2));const id=r.queue[0];r.current=makeQuestion(cards,id);const wrong=r.current.options.find(x=>x!==r.current.answer);assert(answerQuestion(r,wrong));assert(!answerQuestion(r,r.current.answer));assert.equal(r.attempts,1);assert.equal(advanceRound(r),null);assert.equal(r.queue.at(-1),id);while(r.queue.length){r.current=makeQuestion(cards,r.queue[0]);answerQuestion(r,r.current.answer);assert.notEqual(advanceRound(r),null);}assert.equal(r.completed,2);assert.equal(r.firstCorrect,1);assert.equal(r.attempts,3);});
+test('question marks in quoted titles do not truncate the actual question',()=>{assert.match(makeQuestion(cards,83).prompt,/which of the following statements is the most correct\?$/);});

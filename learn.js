@@ -1,0 +1,55 @@
+// Learn questions use the deck's answer key. Distractors come from other cards.
+export function shuffle(items, random = Math.random) {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+const normalize = text => text.toLowerCase().replace(/[^a-z0-9]/g, '');
+const isBoolean = answer => /^(t|f|true|false)$/i.test(answer.trim());
+export function makeQuestion(cards, id, random = Math.random) {
+  const {term, definition} = cards[id];
+  if (isBoolean(definition)) return {
+    prompt: term.replace(/\s*(T\/F|True False)\s*$/i, ''),
+    answer: /^(t|true)$/i.test(definition) ? 'True' : 'False', options: ['True', 'False']
+  };
+  // "All" answers need their original listed choices to remain meaningful.
+  if (/^all$/i.test(definition)) return {
+    prompt: term, answer: 'All of the listed options',
+    options: shuffle(['All of the listed options', 'Only the first listed option', 'Only the last listed option', 'None of the listed options'], random)
+  };
+  const end = term.lastIndexOf('?');
+  const prompt = end >= 0 ? term.slice(0, end + 1) : term;
+  const correct = normalize(definition);
+  const words = new Set((term + ' ' + definition).toLowerCase().match(/[a-z]{4,}/g) || []);
+  const seen = new Set([correct]);
+  const candidates = shuffle(cards, random).filter(card => {
+    const key = normalize(card.definition);
+    if (isBoolean(card.definition) || /^all$/i.test(card.definition) || seen.has(key) || key.includes(correct) || correct.includes(key)) return false;
+    seen.add(key); return true;
+  }).map(card => ({answer: card.definition, score: (card.term.toLowerCase().match(/[a-z]{4,}/g) || []).filter(word => words.has(word)).length})).sort((a,b)=>b.score-a.score);
+  return {prompt, answer: definition, options: shuffle([definition, ...candidates.slice(0,3).map(c=>c.answer)], random)};
+}
+export function newRound(cards, learned = [], random = Math.random) {
+  const queue = shuffle(cards.map((_,id)=>id).filter(id=>!learned.includes(id)),random).slice(0,10);
+  return {queue, total:queue.length, completed:0, attempts:0, firstCorrect:0, seen:[], current:null, feedback:null};
+}
+export function answerQuestion(round, choice) {
+  if (!round.current || round.feedback) return false;
+  const id = round.queue[0], correct = choice === round.current.answer;
+  if (!round.current.options.includes(choice)) return false;
+  round.attempts++;
+  if (!round.seen.includes(id)) {round.seen.push(id);if(correct)round.firstCorrect++;}
+  round.feedback = {choice, correct};
+  return true;
+}
+export function advanceRound(round) {
+  if (!round.feedback) return null;
+  const id = round.queue.shift(), correct = round.feedback.correct;
+  if (correct) round.completed++;
+  else round.queue.push(id);
+  round.current=null;round.feedback=null;
+  return correct ? id : null;
+}

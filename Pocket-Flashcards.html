@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#142e29"><meta name="apple-mobile-web-app-capable" content="yes"><style>:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#19352e;background:#f6f5ef;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,a,input,textarea{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer;border:1px solid #d7ddd4;background:transparent;color:inherit;border-radius:10px;padding:12px 18px}button:hover{background:#e8ece2}button:focus-visible,a:focus-visible{outline:3px solid #ac773c;outline-offset:4px}button:disabled{opacity:.4;cursor:default}header{max-width:1200px;margin:auto;padding:25px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e2e3d9}.brand{text-decoration:none;color:inherit;font-size:30px;font-weight:750;letter-spacing:-1.5px}.logo{display:inline-flex;align-items:center;justify-content:center;background:#193b31;color:#f0eed9;width:34px;height:36px;margin-right:9px;border-radius:10px;transform:rotate(-8deg)}.brand-dot{color:#a68b55}.quiet{border:0;font-size:13px;font-weight:550}main{max-width:1040px;margin:auto;padding:0 40px}.intro{padding:54px 0 38px}.eyebrow{font-size:10px;font-weight:750;letter-spacing:2px;color:#7b8872;margin:0 0 14px}h1{font-family:Georgia,serif;font-size:58px;line-height:1.06;font-weight:400;letter-spacing:-2.5px;margin:0}.subtitle{font-size:14px;color:#7c8477;margin-top:18px}.workspace{max-width:740px;margin:0 auto}.deck-heading{display:flex;align-items:center;justify-content:space-between;gap:15px}.deck-heading .eyebrow{margin-bottom:7px}h2{font-size:20px;letter-spacing:-.6px;margin:0}h2 span{font-size:11px;vertical-align:middle;letter-spacing:0;color:#7d8069;background:#ebeade;padding:5px 8px;border-radius:5px;margin-left:10px;font-weight:500}.badge{font-size:10px;color:#718164;border:1px solid #d9dece;padding:7px 9px;border-radius:20px;white-space:nowrap}.toolbar{display:flex;justify-content:space-between;margin:27px 0 24px;align-items:center}.tabs{display:flex;gap:4px;padding:4px;background:#eaece3;border-radius:10px}.tabs button{border:0;font-size:12px;padding:9px 12px;color:#78816f}.tabs button.active{background:#fff;box-shadow:0 1px 4px #0000000b;color:#274438}.tabs span{font-size:10px;margin-left:5px}.progress-label{display:flex;justify-content:space-between;font-size:10px;color:#7d8775;margin-bottom:9px}.progress-track{height:3px;border-radius:5px;background:#dfe5d8;margin-bottom:20px;overflow:hidden}#progress{background:#839b6b;height:100%;transition:width .3s}.card{width:100%;min-height:300px;background:#193b31;color:#f7f6e9;border:0;border-radius:18px;padding:28px 35px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;box-shadow:0 14px 26px #263b2810;position:relative;overflow:hidden}.card:after{content:"";position:absolute;width:240px;height:240px;border:1px solid #c1d29b12;transform:rotate(28deg);right:-150px;bottom:-120px;border-radius:45px;pointer-events:none}.card:hover{background:#204638}.card .eyebrow{color:#a6b69a;margin:0;font-size:9px}#card-text{font-family:Georgia,serif;font-size:32px;font-weight:400;line-height:1.35;text-align:center;white-space:pre-wrap;overflow-wrap:anywhere;margin:25px 0;max-width:100%}.card.answer #card-text{font:400 20px/1.6 Inter,system-ui,sans-serif}#flip-hint{font-size:10px;color:#a9b9a0}.navigation{display:flex;align-items:center;justify-content:center;gap:27px;padding:18px}.navigation button{border-radius:50%;width:37px;height:37px;padding:0;background:#fff;font-size:17px}.navigation p{font-size:11px;color:#7f8875}.tip{border-top:1px solid #dfe2d5;margin-top:7px;padding:23px 0;display:flex;align-items:center;gap:14px}.tip>span:first-child{background:#e9ecdd;padding:10px;border-radius:10px;color:#7c8d5e}.tip p{margin:0;font-size:11px;line-height:1.8}.tip small{font-size:11px;color:#8a907e}.key-hint{margin-left:auto;font-size:9px;color:#959b8a}footer{display:flex;justify-content:space-between;border-top:1px solid #e2e3d9;margin-top:35px;padding:22px 0 30px;color:#909581;font-size:10px}.answer-actions{display:flex;gap:10px;margin:15px 0 0}.answer-actions[hidden]{display:none}.answer-actions button{flex:1;font-size:12px;background:#ecefdf}dialog{border:1px solid #d3dacb;border-radius:18px;padding:26px;max-width:560px;width:calc(100% - 28px);color:#19352e;background:#f9f9f3}dialog::backdrop{background:#0e241fc9;backdrop-filter:blur(4px)}.dialog-heading{display:flex;justify-content:space-between;align-items:center}dialog p{font-size:13px;line-height:1.6;color:#6d7865}.notice{background:#eeeee0;padding:12px;border-radius:8px}label{display:block;font-size:12px;margin:15px 0 8px}textarea{width:100%;resize:vertical;border:1px solid #bcc8b4;border-radius:8px;background:#fff;padding:12px;font:13px/1.5 monospace}input{max-width:100%}.dialog-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}.primary{background:#193b31;color:white}.fine{font-size:11px!important}#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#193b31;color:white;padding:10px 16px;border-radius:10px;font-size:12px;display:none;max-width:90%;z-index:10}@media(min-width:950px){.intro{padding-left:110px}}@media(max-width:600px){header{padding:20px}main{padding:0 20px}.intro{padding:35px 0}h1{font-size:46px}.deck-heading{align-items:flex-start}.badge{display:none}h2{font-size:18px}h2 span{font-size:10px}.toolbar{margin-top:22px}.tabs button{padding:9px;font-size:11px}.card{min-height:330px;padding:26px 22px}#card-text{font-size:29px}.card.answer #card-text{font-size:18px}.key-hint{display:none}footer{font-size:9px;gap:20px;line-height:1.6;margin-top:15px}.navigation{gap:15px}.navigation p{font-size:10px}dialog{padding:20px}}
+.card.long #card-text{font:400 18px/1.65 Inter,system-ui,sans-serif;text-align:left;margin:22px 0}.card.long{min-height:330px}@media(max-width:600px){.card.long #card-text{font-size:16px;line-height:1.6}}
+[hidden]{display:none!important}.study-switch{display:flex;gap:5px;margin-top:24px;border-bottom:1px solid #dce1d3;padding-bottom:12px}.study-switch button{border:0;font-size:13px;color:#7c8776}.study-switch .active{background:#193b31;color:#f6f5ef}.learn-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:24px}.learn-heading .eyebrow{font-size:9px;margin-bottom:10px}.learn-heading h3{margin:0;font-family:Georgia,serif;font-size:25px;font-weight:400}.learn-description,.learn-footnote{font-size:12px;line-height:1.7;color:#7c8776}.learn-stats{display:flex;justify-content:space-between;margin:24px 0 10px;font-size:11px;color:#7c8776}#learn-progress{height:100%;background:#829c67;transition:width .2s}#learn-question-panel{background:#fffef9;border:1px solid #dfe4d7;border-radius:16px;padding:26px}#learn-question{font-size:19px;line-height:1.6;font-weight:500;margin:15px 0 22px;white-space:pre-wrap;overflow-wrap:anywhere}#learn-options{display:grid;gap:10px}.learn-option{display:flex;align-items:flex-start;gap:12px;text-align:left;width:100%;font-size:14px;line-height:1.6;border-radius:10px;background:#f8f9f2;padding:15px;overflow-wrap:anywhere}.option-letter{flex-shrink:0;display:grid;place-items:center;width:25px;height:25px;background:#e9eddf;border-radius:6px;font-size:11px}.learn-option:disabled{opacity:1;cursor:default}.learn-option.correct{border-color:#55835d;background:#edf5e8}.learn-option.incorrect{border-color:#b6654e;background:#fcf0e9}.learn-option.correct .option-letter{background:#cfe1c6}.learn-option.incorrect .option-letter{background:#f3d6c7}#learn-feedback:not(:empty){margin-top:20px;font-size:13px;line-height:1.7;padding:14px;border-radius:8px;overflow-wrap:anywhere}.feedback-correct{background:#edf5e8;color:#345e3b}.feedback-incorrect{background:#fcf0e9;color:#87452f}#learn-next{width:100%;margin-top:15px}#learn-summary{background:#e8eddf;text-align:center;border-radius:16px;padding:36px 25px}#learn-summary h3{font:400 28px Georgia,serif}#learn-summary p{font-size:14px;line-height:1.8;color:#6b7a60}.summary-icon{font-size:35px}.learn-footnote{font-size:10px;margin:18px 0 25px}@media(max-width:600px){.learn-heading{align-items:flex-start}.learn-heading h3{font-size:22px}.learn-heading .quiet{font-size:11px;padding:5px}.learn-heading .eyebrow{letter-spacing:1px}#learn-question-panel{padding:20px 16px}#learn-question{font-size:17px}.learn-option{font-size:13px;padding:12px}}
+/* High-contrast palette: distinct white surfaces, dark text, and visible controls. */
+:root{color:#102b24;background:#e4eadf}
+header{background:#fff;border-color:#a6b3a0}
+.eyebrow,.subtitle,.learn-description,.learn-footnote,.progress-label,.learn-stats,.navigation p,.tip small,footer,.key-hint{color:#43543d}
+.brand-dot{color:#725522}
+.badge{color:#315126;background:#fff;border-color:#879b7b}
+h2 span{color:#39462c;background:#d3dec6}
+.study-switch{border-color:#9bad92}
+.study-switch button{color:#30452b;border:1px solid #93a48c;background:#fafff6}
+.study-switch button.active{background:#123e30;color:#fff;border-color:#123e30}
+.tabs{background:#cad8c0;border:1px solid #9caf91}
+.tabs button{color:#35482e}.tabs button.active{color:#123a29;background:#fff}
+button{border-color:#899f7e}.quiet{color:#244326}
+button:hover{background:#d1e1c4}
+button:focus-visible,a:focus-visible{outline:3px solid #a34d00;outline-offset:3px}
+button:disabled{opacity:.6}
+.card{background:#103c2d;color:#fff;border:1px solid #06291d;box-shadow:0 8px 20px #12352225}
+.card:hover{background:#174d39}.card .eyebrow,#flip-hint{color:#d8e9ce}
+.progress-track{background:#bac9b0}#progress,#learn-progress{background:#356b27}
+.navigation button{background:#fff;color:#163b25;border-color:#879f79}
+.answer-actions button{background:#fff;color:#1b4026;border-color:#849d75}
+.tip{border-color:#a0b394}.tip>span:first-child{background:#c6d8b7;color:#254b1c}
+footer{border-color:#9eaf94}
+#learn-question-panel{background:#fff;border-color:#849d75;box-shadow:0 5px 16px #20372010}
+.learn-option{color:#16351f;background:#f1f6ec;border:2px solid #8ca37f}
+.learn-option:hover:not(:disabled){background:#dcebd2;border-color:#2d6026}
+.option-letter{background:#d1e1c4;color:#224e19}
+.learn-option:disabled{opacity:1}.learn-option.correct{border-color:#247335;background:#d9f1d5;color:#154b21}.learn-option.incorrect{border-color:#ac402a;background:#ffe5dc;color:#782617}
+.learn-option.correct .option-letter{background:#b6dcae;color:#154b21}.learn-option.incorrect .option-letter{background:#f3c0ae;color:#782617}
+.feedback-correct{background:#d9f1d5;color:#154b21}.feedback-incorrect{background:#ffe5dc;color:#782617}
+.primary{background:#123e30;color:#fff;border-color:#123e30}.primary:hover{background:#205b44;color:#fff}
+#learn-summary{background:#d4e4c7;border:1px solid #809b71}#learn-summary p{color:#334e2a}
+dialog{color:#14361f;background:#fff;border-color:#7b956e}dialog p{color:#43543d}.notice{background:#e2ebd8}.fine{color:#43543d}
+textarea{border-color:#7b956e;color:#102b24}#import-status{color:#6d341c}
+</style><title>Pocket • Computer Ethics</title></head>
+<body><header><a class="brand" href="./"><span class="logo">▱</span> pocket<span class="brand-dot">.</span></a><button id="manage" class="quiet">Manage cards ↗</button></header>
+<main><section class="intro"><p class="eyebrow">YOUR POCKET STUDY SPACE</p><h1>Small cards.<br>Big understanding.</h1><p class="subtitle">A little practice, wherever life takes you.</p></section>
+<section class="workspace"><div class="deck-heading"><div><p class="eyebrow">THE COLLECTION</p><h2>Computer Ethics <span>Final exam</span></h2></div><span id="connection" class="badge">● On this device</span></div>
+<div class="study-switch" aria-label="Study activity"><button id="flash-mode" class="active" aria-pressed="true">▱ Flashcards</button><button id="learn-mode" aria-pressed="false">✧ Learn</button></div>
+<div id="flash-panel"><div class="toolbar"><div class="tabs" aria-label="Study mode"><button id="all" class="active">All cards <span id="total">0</span></button><button id="review">Need practice <span id="remaining">0</span></button></div><button id="shuffle" class="quiet">⇄ Shuffle</button></div>
+<div class="progress-label"><span id="position">Ready when you are</span><span id="mastery">0 mastered</span></div><div class="progress-track"><div id="progress"></div></div>
+<button id="card" class="card" aria-label="Flip flashcard"><span id="side" class="eyebrow">LET’S GET STARTED</span><span id="card-text">Your next study session<br>starts here.</span><span id="flip-hint">Import your cards below to begin</span></button>
+<div id="answer-actions" class="answer-actions" hidden><button id="again">↺ Keep practicing</button><button id="known">✓ Got it</button></div>
+<div class="navigation"><button id="prev" aria-label="Previous card">←</button><p id="navigation-hint">Tap a card to reveal the answer</p><button id="next" aria-label="Next card">→</button></div>
+</div><section id="learn-panel" hidden aria-label="Multiple choice learning"><div class="learn-heading"><div><p class="eyebrow">A LITTLE PRACTICE, A LOT OF PROGRESS</p><h3>Learn it, one question at a time.</h3></div><button id="restart-learn" class="quiet">Restart round</button></div><p class="learn-description">10 cards per round. Choose the answer from your study set. Missed questions return until you get them right.</p><div class="learn-stats"><span id="learn-count"></span><span id="learn-score"></span></div><div class="progress-track"><div id="learn-progress"></div></div><div id="learn-question-panel"><p id="learn-kind" class="eyebrow"></p><h3 id="learn-question"></h3><div id="learn-options"></div><div id="learn-feedback" role="status" aria-live="polite"></div><button id="learn-next" class="primary" hidden>Continue →</button></div><div id="learn-summary" hidden><span class="summary-icon">✧</span><h3 id="summary-title"></h3><p id="summary-detail"></p><button id="next-round" class="primary">Next round →</button></div><p class="learn-footnote">Answers follow your PDF’s key. Multiple-choice distractors are generated from other study cards; true/false cards keep their original format. Learning progress saves on this device.</p></section>
+<div class="tip"><span>✧</span><p>Make it stick.<br><small>Recall the answer before you flip the card.</small></p><span class="key-hint">SPACE to flip · ← → to browse</span></div></section>
+<footer><span>Built for a little progress, every day.</span><span id="offline-status">Saved privately on your device</span></footer></main>
+<dialog id="import-dialog"><form method="dialog" class="dialog-heading"><h2>Your collection</h2><button class="quiet" aria-label="Close">✕</button></form><p>Paste a Quizlet export: one card per line, with a tab between the term and definition. You can also use <strong>term :: definition</strong>.</p><p class="notice">Includes all 94 cards from your Computer Ethics Final copy PDF. The printed answers and original question choices are preserved. You can replace the collection below.</p><label for="import-text">Card text</label><textarea id="import-text" rows="9" placeholder="Term :: Definition"></textarea><label for="import-file">Or restore a Pocket JSON / text export</label><input id="import-file" type="file" accept=".json,.txt,.tsv,text/plain,application/json"><p id="import-status" role="status"></p><div class="dialog-actions"><button id="export" type="button">Export backup</button><button id="import" type="button" class="primary">Import cards</button></div><p class="fine">Import replaces the current collection and resets progress. Export a backup first. Local data can be lost if browser storage is cleared; keep a backup.</p></dialog>
+<div id="toast" role="status"></div><script id="included-deck" type="application/json">{
+  "title": "Computer Ethics Final copy",
+  "source": "User-provided Quizlet print PDF, set 1223528877",
+  "cards": [
+    {
+      "term": "In the video \"Digital Ethics and the Future of Humans in a Connected World\" by Gerd Leonhard, which of the following statements is the most correct? Facebook has 100s of people creating the content for its news feed. Technology has no ethics. People work less mecause they are distracted by social media and mobile devices. Stephen Hawking states Artificial Intelligence is not our last and greatest invention.",
+      "definition": "Technology has no ethics"
+    },
+    {
+      "term": "In the video regarding the paper \"What is Computer Ethics\" by James Moore, which statement below is the most accurate? Computer ethics is about right and wrong behavior as defined by local laws. Computer ethics is about the social impact of computer technology and the ethical use of such Computer ethics is about computer security. Computer ethics is about right and wrong behavior as defined by a person's religion.",
+      "definition": "Computer ethics is about the social impact of computer technology and the ethical use of such tech"
+    },
+    {
+      "term": "\"What is Computer Ethics\" by James Moore, which statement below is the most accurate? Executives that work from home gain spontaneous interaction with colleagues because of handheld devices. Computer technology has made money more accessible, but has not redefined what money is. Computer technology is rigid, fixed, and not mealleable, which leads to abuse of the user. Computer technology has transformed our definition of traditional work as \"work\" is no longer something that happens at a specific time or specific place.",
+      "definition": "Computer technology has transformed our definition of traditional work as \"work\" is no longer something that happens at a specific time or specific place."
+    },
+    {
+      "term": "\"Computer Ethics: Basic Concepts and Historical Overview\" by Terrell Ward Bynum, which statement below is the most accurate? The field of Computer Ethics began after the first recorded network intrusion at the Flagger Dog Track in the state of Floida (USA). The field of Computer Ethics is partially a response to the development of an antiaircraft cannon capable of shooting down fast warplanes. Computer technology has made money more accessible, but has not redefined what money is. Unlinke the Industrial Revolution, computer technology is not transforming society.",
+      "definition": "The field of Computer Ethics is partially a response to the development of an antiaircraft cannon capable of shooting down fast warplanes."
+    },
+    {
+      "term": "\"Computer Ethics: Basic Concepts and Historical Overview\" by Terrell Ward Bynum, which statement below is the most accurate? Although it is possible to own the source code, object code (machine language), and algorithm assosciated with a computer program, it is not possible to own the \"look and feel\" of a program. According to US law, it not is possible for a person to own a patent on a computer algorithm and prevent others from using it. Computer technology may cause \"de-skilling\" by replacing human skill with computer technology. In the long run, computer technology will eliminate more jobs than it creates.",
+      "definition": "Computer technology may cause \"de-skilling\" by replacing human skill with computer technology."
+    },
+    {
+      "term": "In the video \"Ethics in the Age of Technology\" by Juan Enriquez, which of the following statements is the most correct? Doctor J. Marion Sims is regarded as one of the first Doctors to suggest slavery is unethical and should be abolished. Defining who teaches us ethics is difficult because sometimes our traditional sources of guidance like holy books, parents, religious leaders, teachers, lawyers, doctors, and the government provide incorrect information. Baptist Pastor Richard Furman is regarded as one of the first religious leaders to speak out about the abolishment of slavery. Lawyer Thomas Cooper, in his \"1826 pamphlets,\" is regarded as one the first Lawyers to suggest slavery is unethical.",
+      "definition": "Defining who teaches us ethics is difficult because sometimes our traditional sources of guidance like holy books, parents, religious leaders, teachers, lawyers, doctors, and the government provide incorrect information."
+    },
+    {
+      "term": "\"Interaction Between Ethics and Technology\" by Shakib and Layton, which statement below is the most correct?",
+      "definition": "Consumers are having an impact on businesses by supporting those businesses that they believe are morally sound, and thereby making it more difficult for an unethical business to survive."
+    },
+    {
+      "term": "\"Interaction Between Ethics and Technology\" by Shakib and Layton, which statement below is the most accurate?",
+      "definition": "There is no universal ethics."
+    },
+    {
+      "term": "\"Multimedia, Cyberspace, and Ethics\" by Jefferies, which statement below is the most accurate?",
+      "definition": "It is not easy to regulate the Internet because it is a global network without any boundaries."
+    },
+    {
+      "term": "\"Multimedia, Cyberspace, and Ethics\" by Jefferies, which statement below is the most accurate? Bill Gates stated he felt a personal responsibility to build an Internet that is ethical. Deep Fake technology allows one to fake one's fingerprints and frame someone for a crime they did not commit. Deep Fake technology creates an ethical issue by allowing a victim's appearance to be faked in a video, appearing to be doing whatever the Deep Fake developer wants. The Internet is a major contribution to cultural diversity.",
+      "definition": "Deep Fake technology creates an ethical issue by allowing a victim's appearance to be faked in a video, appearing to be doing whatever the Deep Fake developer wants."
+    },
+    {
+      "term": "\"The Social Dilemma of Driverless Cars\" by Iyad Rahwan, what was the suggestion provided by a blogger? Cars should be equipped with a \"people catcher\" (like a \"cow catcher\" on the front of trains) that push people gently out of the way when the driver loses control of the car. The driver of the car should push an eject button just before impact to avoid being killed in a car accident. Cars should be made out of soft spongy material (the \"Nurf car\") to help reduce deaths in the case of accidents. All drivers should wear helmets and other safety gear to help them survive what would normally be a deadly crash.",
+      "definition": "The driver of the car should push an eject button just before impact to avoid being killed in a car accident."
+    },
+    {
+      "term": "\"The Ethics of Driverless Cars\" by Neil McBride, what is meant by an \"iron cage\"? The \"iron cage\" is another name for a driverless car in that it is made of iron, but has no one in it. The \"iron cage\" is a modification to the car that makes it safe. The \"iron cage\" is the place people should be to keep them safe from driverless cars. The \"iron cage\" is technology that has constrained us.",
+      "definition": "The \"iron cage\" is technology that has constrained us."
+    },
+    {
+      "term": "\"The Ethics of Driverless Cars\" by Neil McBride, what is suggested in the conclusion? Driverless cars allow the passenger to have more free time to pursue other activities. We need a car that provides more information to the user so the user can be a better driver. We need to perfect the technology regarding driverless cars so less people are injured. Driverless cars are essential for allowing the human spirit to be free.",
+      "definition": "We need a car that provides more information to the user so the user can be a better driver."
+    },
+    {
+      "term": "\"Automated Detect and Avoid\" by Erik Theunissen and others, which of the following statements is the most correct? An ethical issue arises because writing code involves a degree of premeditation regarding how a robot car will act. Algorithm developers and programmers are forgiven for accidents because everyone knows computer code is imperfect. We should code human behavior because human situations are simple and easy to program. When a human acts without deliberation, they are ethically responsible to the same degree as a programmer making premeditated decisions for a robot car.",
+      "definition": "An ethical issue arises because writing code involves a degree of premeditation regarding how a robot car will act."
+    },
+    {
+      "term": "\"Automated Detect and Avoid\" by Erik Theunissen and others, which of the following statements is the most correct? Current data supports the claim that self-driving cars have resulted in a reduction in the number of accidents. When it comes to programming automated detect and avoid algorithms, human values and judgments do not become part of the code. Current data does not support the claim that self-driving cars have resulted in a reduction in the number of accidents. When it comes to programming automated detect and avoid algorithms, it is best to replace all human judgment with algorithms as algorithms can be perfected to respond correctly in all situations",
+      "definition": "Current data does not support the claim that self-driving cars have resulted in a reduction in the number of accidents.q"
+    },
+    {
+      "term": "\"Right Wrong: How Technology Transforms our Ethics\" (see the PowerPoint slides provided with the course material), ethics does not change over time. T/F",
+      "definition": "F"
+    },
+    {
+      "term": "\"Right Wrong: How Technology Transforms our Ethics\" (see the PowerPoint slides provided with the course material), ethics changes our technology. T/F",
+      "definition": "F"
+    },
+    {
+      "term": "\"Right Wrong: How Technology Transforms our Ethics\" (see the PowerPoint slides provided with the course material), it pays to be humble about the past, as we too will be judged by the future. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "\"Computer Technology is Like the Gift of Fire,\" computer technology is like fire in that if it is not managed appropriately, it can get out of control and hurt many people. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "\"Woman Injured by a Garage Door,\" which direction is the garage door closing? The garage door closes from the top down. The garage door closes from left to right. The garage door closes from left and right at the same time. The garage door closes from right to left.",
+      "definition": "left to right."
+    },
+    {
+      "term": "\"Ethics and Safety of Computer Systems,\" which of the following statements is the most correct? The main issue is regarding the responsibility for computer failures in critical systems. Proving computer systems are correct is easy and therefore we should always prove them correct before allowing the public to use them. Because the 'Computer Medical Assistant' is error free, medical personnel are unethical if they do not follow the suggestion provided by this service. The main issue is regarding the proper use of critical systems by the non-computer scientist.",
+      "definition": "The main issue is regarding the responsibility for computer failures in critical systems."
+    },
+    {
+      "term": "\"Ethics and Safety of Computer Systems,\" which of the following statements is the most correct? Computer professionals do not ignore important human issues when designing and implementing computer technology. A point was made that it is easy for people to not use technology. People use technology that is \"unjustifiably risky\" because they have sufficient knowledge of how risky technology is. A point was made that maybe Computer Scientists should take an oath to 'do no harm.'",
+      "definition": "A point was made that maybe Computer Scientists should take an oath to 'do no harm.'"
+    },
+    {
+      "term": "\"When Formal Systems Kill,\" what is a \"formal system\"? A formal system uses a grammar for encoding logic and states such that a given conclusion follows from a given premise. A formal system requires less time, less money, and less complexity to verify it is correct. A formal system is one that is proven correct through testing. A formal system is computer code that cannot be proven correct.",
+      "definition": "A formal system uses a grammar for encoding logic and states such that a given conclusion follows from a given premise."
+    },
+    {
+      "term": "\"When Formal Systems Kill,\" which of the following statements is the most correct? Modeling complex systems is easy and therefore every system can be proven correct or incorrect. Computational fluid dynamics (CFD) is not a good analogy for a formal method because CFD involves testing in a wind tunnel. Computational fluid dynamics (CFD) is not a good analogy for a formal method because CFD involves mechanical engineering. Modeling complex systems is challenging and prevents us from using a formal method to prove they are correct.",
+      "definition": "Modeling complex systems is challenging and prevents us from using a formal method to prove they are correct."
+    },
+    {
+      "term": "\"Voice Recognition Software in 'Hello Barbie' Doll Concerns Parents Privacy Groups,\" what 'old information' did the doll suggest about the person playing with the doll? The doll suggested the person might be a \"young girl.\" The doll suggested the person might be a \"dancing polititian.\" The doll suggested the person might be a \"teacher.\" The doll suggested the person might be \"single mother.\"",
+      "definition": "The doll suggested the person might be a \"dancing polititian.\""
+    },
+    {
+      "term": "\"Can and Should Hello Barbie Keep a Secret\" by Meg Jones and Kevin Meurer, who maintains the recorded conversations of the child? Mattel (the manufacturer). A 3rd party vendor. The parents of the child. The person that purchased the doll.",
+      "definition": "A 3rd party vendor."
+    },
+    {
+      "term": "\"Can and Should Hello Barbie Keep a Secret\" by Meg Jones and Kevin Meurer\", what is suggested in the conclusion? Hello Barbie has been demonstrated to help children get better grades in school. When programming algorithms, human values and judgements should not become part of the code. The tendency to share a child's personal data among 'big data' collectors has the potential to negatively impact a child's ability to trust others. Purchasers of \"Hello Barbie\" fully understand the risks when they buy this product and are therefore responsible for the abuse of children.",
+      "definition": "The tendency to share a child's personal data among 'big data' collectors has the potential to negatively impact a child's ability to trust others."
+    },
+    {
+      "term": "Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, what is meant by an 'extrinsic loss of freedom'? An extrinsic loss of freedom occurs when a person voluntarily gives someone permission to collect data about themself. An extrinsic loss of freedom is when a person changes their behavior because they think they are being watched. An extrinisic loss of freedom is when a person's behavior is controlled by another person. An extrinsic loss of freedom is when a person chooses to have solitude.",
+      "definition": "An extrinisic loss of freedom is when a person's behavior is controlled by another person."
+    },
+    {
+      "term": "\"Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, which of the following statements is the most correct? There are many ways to define privacy including solitude, maintaining control over personal data, and the right to not being monitored. The best way to ensure privacy in a world of changing technology is to write laws that all countries follow. When it comes to privacy issues regarding ones data, there is no concern regarding stolen identity. When it comes to privacy issues regarding ones data, there is no concern regarding the accuracy of",
+      "definition": "There are many ways to define privacy including solitude, maintaining control over personal data, and the right to not being monitored."
+    },
+    {
+      "term": "\"Ethics and Safety of Computer Systems\" by Michael C. McFarland, which of the following statements is the most correct? Normative ethics recognizes that values and choices are expressed in individual actions, and are emobodied effectively in social structure. Normative ethics asks what kind of person does the right thing. Normative ethics seeks to develop and justify rules for right conduct. Normative ethics asks what social structures are needed to support values such as justice and respect for human life and dignity.",
+      "definition": "Normative ethics seeks to develop and justify rules for right conduct."
+    },
+    {
+      "term": "Normative ethics",
+      "definition": "seeks to develop and justify rules for right conduct."
+    },
+    {
+      "term": "social ethics",
+      "definition": "recognizes that values and choices are expressed in individual actions, and are emobodied effectively in social structure."
+    },
+    {
+      "term": "ethics of virtue",
+      "definition": "asks what kind of person does the right thing"
+    },
+    {
+      "term": "\"Ethics and Safety of Computer Systems\" by Michael C. McFarland, which of the following statements is the most correct? Ethics of virtue asks what kind of person does the right thing. Ethics of virtue asks what social structures are needed to support values such as justice and respect for human life and dignity. Ethics of virtue recognizes that values and choices are expressed in individual actions, and are emobodied effectively in social structure. Ethics of virtue seeks to develop and justify rules for right conduc",
+      "definition": "Ethics of virtue asks what kind of person does the right thing."
+    },
+    {
+      "term": "Ethics and Safety of Computer Systems\" by Michael C. McFarland, which? Social ethics asks what social structures are needed to support values such as justice and respect for human life and dignity. Social ethics seeks to foster and promote knowledge. Social ethics seeks to develop and justify rules for right conduct. Social ethics asks what kind of person does the right thing.",
+      "definition": "Social ethics asks what social structures are needed to support values such as justice and respect for human life and dignity."
+    },
+    {
+      "term": "\"When Formal Systems Kill\" by Darren Abramson and others, what are the challenges to formal methods? Select ALL that apply. Computer code cannot be proven correct. How to mechanically check the correctness of mathematical proofs. How to automate methematical proofs. How to mathematically model formal systems and their environments.",
+      "definition": "How to mechanically check the correctness of mathematical proofs. How to automate methematical proofs. How to mathematically model formal systems and their environments."
+    },
+    {
+      "term": "\"When Formal Systems Kill\" by Darren Abramson and others, one of the points being made is both proof and testing are needed to support good software code. True False",
+      "definition": "True"
+    },
+    {
+      "term": "\"Can and Should Hello Barbie Keep a Secret\" by Meg Jones and Kevin Meurer\", parents are given the perception of complete control over the stored conversations, yet their child's data has the potential to be shared with numerous third parties. True False",
+      "definition": "True"
+    },
+    {
+      "term": "\"Can and Should Hello Barbie Keep a Secret\" by Meg Jones and Kevin Meurer\", in order for Hello Barbie to retain the trust of parents, ToyTalk could make a clearer commitment to withholding individual data from third parties or offer an opt-in system for parental monitoring True False",
+      "definition": "True"
+    },
+    {
+      "term": "\"Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, virtual connections make it feel like people are near us. True False",
+      "definition": "True"
+    },
+    {
+      "term": "\"Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, an intrinsic loss of freedom comes about when people behave in a different manner when they are being monitored, watched or spied upon.\" True False",
+      "definition": "True"
+    },
+    {
+      "term": "\"Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, what does Durlak include in his list of basic rights regarding privacy? Select all that apply. intimacy solitude iron cage reserve",
+      "definition": "intimacy solitude reserve"
+    },
+    {
+      "term": "what did Mark Zuckerberg say might be \"more relevant to your interests right now than people dying in Africa\"? Information about one's favorite musical artist. The happiness and status of one's own family. The happiness and status of one's own friends. A squirrel dying in your front yard.",
+      "definition": "A squirrel dying in your front yard."
+    },
+    {
+      "term": "In the video \"What FACEBOOK and GOOGLE are Hiding from the World - the Filter Bubble,\" which of the following statements is the most correct? Google buys Facebook data to customize the research results provided to Google users. Google is filtering search content based on a user's profile and returning to a user results that are tailored to them. Facebook buys Google search results to customize Facebook news items for the Facebook user. Google is filtering news content based on what Google want's the user to see and therefore hiding the truth.",
+      "definition": "Google is filtering search content based on a user's profile and returning to a user results that are tailored to them."
+    },
+    {
+      "term": "\"Cyberethics - Morality and Law in Cyberspace - Chapter 4 - Intellectual Property in Cyberspace,\" which of the following statements is the most correct? A dance can be copyrighted. A copyright gives an author exclusive rights to their works. A video of a dance cannot be copyrighted.",
+      "definition": "A copyright gives an author exclusive rights to their works."
+    },
+    {
+      "term": "\"Cyberethics - Morality and Law in Cyberspace - Chapter 4 - Intellectual Property in Cyberspace,\" what was the issue regarding Expedia and Priceline? Priceline sued Expedia for infringing on its logo which includes an aircraft in a blue circle. Expedia sued Priceline for infringing on its pricing algorithm for air travel. Expedia sued Priceline for selling discount travel services to the public. Priceline sued Expedia for copying the method of allowing the customer to name the price for a hotel room.",
+      "definition": "Priceline sued Expedia for copying the method of allowing the customer to name the price for a hotel room."
+    },
+    {
+      "term": "\"Intellectual Property and the Process of Invention: Why Software is Different\" by Robert Plotkin, why is software special? Software is special because it can be protected by both patent and a copyright. Software is special because it can be copyrighted, but not patented. Software is special because it can be patented, but not copyrighted. Software is special because all software is in the public domain and cannot by copyrighted.",
+      "definition": "Software is special because it can be protected by both patent and a copyright."
+    },
+    {
+      "term": "Intellectual property consists of original musical compositions, poems, novels, inventions, and product formulas. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "The U.S. Constitution confers upon congress the power to promote the progress of science and the useful arts, by securing for limited time to authors and inventors the exclusive rights to their respective writings and discoveries. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "A dance can be copyrighted. T/F",
+      "definition": "F"
+    },
+    {
+      "term": "The first sale provision allows the first purchaser of a copyrighted work to sell or lend that copy to someone else without the copyright holder's permission. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "A trademark is a word, phrase, or symbol that identifies a product or service. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "__ occurs when a trademark is used by someone else in connection with the sale of its goods or services.",
+      "definition": "infringement"
+    },
+    {
+      "term": "__ occurs when the trademark is associated with dissimilar products - for example, using the Disney trademark name to sell suits for men.",
+      "definition": "blurring"
+    },
+    {
+      "term": "Through financial incentives intellectual property rights induce creators to develop works they would not otherwise produce without this protection, and this contributes to the general good of society. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "\"How Data Brokers Sold my Identity,\" what happened when Massachusetts Governor William Weld approved the release of 135,000 medical records of state employees with the names and social security numbers redacted? Professor Sweeney sent the Governor his medical records as a demonstration that the Governor could be identified by cross-referencing his medical records with public voter registration data. The Governor demonstrated that without a name or Social Security Number, medical records cannot be associated with a person. A health-care provider recognized the Governor's medical records and sent them to the Governor. The union representing the state employees sued the Governor for violating privacy laws.",
+      "definition": "Professor Sweeney sent the Governor his medical records as a demonstration that the Governor could be identified by cross-referencing his medical records with public voter registration data."
+    },
+    {
+      "term": "In the video regarding the paper \"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, what does the author suggest? The author suggests users should use a \"password wallet\" to store all of their passwords. The author suggests passwords should be in different formats, for different devices. The author suggests users should have one password and not many. The author suggests users should change their passwords frequently.",
+      "definition": "The author suggests users should have one password and not many."
+    },
+    {
+      "term": "\"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, what does the author suggest? The author suggests Microsoft Passport is the best solution for maintaining secure passwords. The author suggests passwords should be of an unlimited length. The author suggests more complex rules are needed to control the generation of secure passwords. The author suggests computer systems should restrict password formats to make programming more convenient.",
+      "definition": "The author suggests passwords should be of an unlimited length."
+    },
+    {
+      "term": "\"The Ethics of Collecting Data\" with Marie Wallace, what does the speaker suggest? The speaker suggests we can put an end to big data collection and we should. The speaker suggests users should be paid for giving up personal data. The speaker suggests social media can raise your concern about your own body issues and then exposed you to diet products to generate sales. The speaker suggests users should not give up personal data to support product marketing.",
+      "definition": "The speaker suggests social media can raise your concern about your own body issues and then exposed you to diet products to generate sales."
+    },
+    {
+      "term": "\"The Ethics of Collecting Data\" with Marie Wallace, what does the speaker suggest? The speaker suggests transparency can exist in personal data collection by businesses and customers voluntarily give up their data. The speaker suggests we should enact laws immediately to stop personal data collection because it will be considerably worse for the next generations. The speaker suggests there is no way to embrace personal privacy while also supporting personal data collection by businesses. The speaker suggests 'big data' collection cannot be done in a transparent way such that customers voluntarily give up their data.",
+      "definition": "The speaker suggests transparency can exist in personal data collection by businesses and customers voluntarily give up their data."
+    },
+    {
+      "term": "In an environment where a user has numerous accounts with different passwords, a lockout is a powerful incentive to write down a list of those passwords rather than guess at them when trying to log in. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "\"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, password wallets are a good option for password security T/F",
+      "definition": "F"
+    },
+    {
+      "term": "\"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, which of the following does he suggest are the role of the computer scientist? Select all that apply. Reduce lockouts Modify the lifetime limits Make password management easier for the user Allow a user to have much longer passwords, of a universal format",
+      "definition": "All"
+    },
+    {
+      "term": "Maintaining password security involves striking a delicate balance between having enough rules to maintain good security and not having so many that users will take evasive action that compromises security. T/F",
+      "definition": "True"
+    },
+    {
+      "term": "Regarding the video about \"Elves Ethics - The Digital World,\" which of the following statements is the most accurate? The Orcs slaughter the Elves with stolen weapons. The true identity of the 'gay girl in Damascus' is actually a male American student studying abroad. The Elves defeat the Orcs with magic. There is a strict code of ethics that all participants follow.",
+      "definition": "The true identity of the 'gay girl in Damascus' is actually a male American student studying abroad."
+    },
+    {
+      "term": "\"Ethic in Massively Multiplayer Online Role-Playing Games,\" which of the following statements is the most accurate? Ninja looting is the process of killing a character a second time as soon as that character regenerates. It is not possible to steal items from another person. Behaving unethically in a virtual world might lead to unethical behavior in the real world. Griefing and bullying are not abusive because it is occurring in virtual reality.",
+      "definition": "Behaving unethically in a virtual world might lead to unethical behavior in the real world."
+    },
+    {
+      "term": "griefing",
+      "definition": "Bullying or harassment of players while playing online games."
+    },
+    {
+      "term": "\"Ethic in Massively Multiplayer Online Role-Playing Games,\" which of the following statements is the most accurate? The abuse in virtual reality games is not real. There is no chance for any real monetary damage. The abuse in virtual reality games is real. Games do not help individuals learn good and bad behavior.",
+      "definition": "The abuse in virtual reality games is real."
+    },
+    {
+      "term": "\"An Ethical Examination of the Internet Census 2012 Dataset - A Menlo Report Case Study,\" which of the following statements is the most accurate? Students at Menlo College were involved in a very large cheating scandal. A central point is that commercial products that are accessible from the Internet should not be sold with a default password. Participants that answered questions found in the Internet Census are unethical for not providing honest answers. Students and Menlo University developed password cracking software that allowed them to enter devices connected to the Internet.",
+      "definition": "A central point is that commercial products that are accessible from the Internet should not be sold with a default password."
+    },
+    {
+      "term": "An Ethical Examination of the Internet Census 2012 Dataset - A Menlo Report Case Study,\" which of the following statements is the most accurate? Because there was such an outcry about the unethical behavior in the creation of the Internet Census 2012 Dataset, other researchers are discouraged from similar activity. The author suggests there should be more public outcry regarding the unethical behavior exhibited in the creation of the Internet Census 2012 Dataset. The German Penal Code considers a person's \"good intent\" when deciding if a law has been broken. There is nothing unethical about using default passwords to enter a network that is intended to be locked.",
+      "definition": "The author suggests there should be more public outcry regarding the unethical behavior exhibited in the creation of the Internet Census 2012 Dataset."
+    },
+    {
+      "term": "\"Cyber War,\" which of the following statements is the most accurate? The speaker stated experienced hackers are recruited at the Def Con Hacking Conference in Las Vegas, NV almost every year. Logic bombs have been placed in the power grid of the United States. Cyber-attacks do not cause destruction in physical space, so cyber war is considered ethical. The Federal Bureau of Investigation in the United States engages in Cyber War against hackers in other countries.",
+      "definition": "Logic bombs have been placed in the power grid of the United States."
+    },
+    {
+      "term": "\"An Analysis of a Just Cyber Warfare,\" which of the following statements in the most accurate? The Just War Theory is inadequate for evaluating the ethicalness of cyber warfare. Floridi states 'information does not have a right to exist,' and therefore cyber warfare is not unethical. The Just War Theory states cyber warfare is unethical. Floridi states 'information does not have a right to exist,' and this is the foundation of a Just Cyber Warfare Theory.",
+      "definition": "The Just War Theory is inadequate for evaluating the ethicalness of cyber warfare."
+    },
+    {
+      "term": "\"An Analysis of a Just Cyber Warfare,\" which of the following statements in the most accurate? A principle of Just Cyber Warfare is that a Cyber War should be waged to promote the well-being of the infosphere. When addressing Cyber Warfare, the Just War Theory cannot be applied and should be rejected altogether. Floridi states 'information has a right to exist,' and therefore cyber warfare that destroys information is unethical. Cyber Warfare makes the Just War Theory invalid.",
+      "definition": "Floridi states 'information has a right to exist,' and therefore cyber warfare that destroys information is unethical."
+    },
+    {
+      "term": "According to the paper regarding \"Ethic in Massively Multiplayer Online Role-Playing Games,\" what are the primary means by which playing games help guide moral development? Select all that apply. Defning good and bad behavior. Learning a system of rules. Practice following rules. Developing poor social skills",
+      "definition": "Defning good and bad behavior. Learning a system of rules. Practice following rules."
+    },
+    {
+      "term": "An investigation done by Coyne (as cited in Ethic in Massively Multiplayer Online Role-Playing Games) finds that online griefing has a similar impact as traditional bullying. True False",
+      "definition": "T"
+    },
+    {
+      "term": "There should be more public outcry regarding the unethical mapping of the Internet with the Carna botnet. True False",
+      "definition": "T"
+    },
+    {
+      "term": "What are the main elements of a 'Just War Theory?'",
+      "definition": "War as a last resort Do more good than harm. Avoid harming non-combatants"
+    },
+    {
+      "term": "\"Hacker Tactics Tools - Become a Hacker - Hacking Made Easy,\" what does a \"WiFi Pineapple' allow the user to do? Hack everyone on the same network. Goelocate each user connected to the same network. Encrypt a user's message to protect it from hacking. Conduct penetration testing on a network.",
+      "definition": "Hack everyone on the same network."
+    },
+    {
+      "term": "\"Bias in Computer Systems\" by Friedman and Nissenbaum, what is the bias found in some airline ticketing systems? Some airline ticketing systems charge customers more if their IP address geolocates them to a wealthy part of the world. Some airline ticketing systems always recommend a higher priced ticket for every customer. Some airline ticketing systems do not suggest using multiple air carriers for a multi-fight trip even if doing so would be less expensive for the customer. Some airline ticketing systems advertise inexpensive flights, but then change more than advertised.",
+      "definition": "Some airline ticketing systems do not suggest using multiple air carriers for a multi-fight trip even if doing so would be less expensive for the customer."
+    },
+    {
+      "term": "\"Bias in Computer Systems\" by Friedman and Nissenbaum, what is the bias found in the National Resident Match Program? Medical school students are biased against when they try to select a training program. The National Residency Match Program is biased against those British citizens that do not live in England. The National Residency Match Program is biased against a child with a British father and a mother from another country. Customers that are trying to find an apartment to establish residency within Great Britain are biased against if this is their first attempt.",
+      "definition": "Medical school students are biased against when they try to select a training program."
+    },
+    {
+      "term": "Embedding Ethics in Computer Architecture\" by Alan Clements, which of the following statements is the most correct? In order to be ethical and fair, a computer should be overclocked to increase throughput to accommodate everyone. Algorithms that support the sharing of a computer resource (e.g. 'priority,' 'round-robin,' etc.) are never fair, and therefore are always unethical. Overclocking a CPU can be unethical in certain situations. Operating a computer outside of it recommended limits is encouraged to increase throughput.",
+      "definition": "Overclocking a CPU can be unethical in certain situations."
+    },
+    {
+      "term": "Embedding Ethics in Computer Architecture\" by Alan Clements, what is the result of an error in binary arithmetic? Several people were killed in a missile attack. A nuclear reactor had a meltdown. An airplane was routed to the wrong location and ran out of fuel. Medical equipment gave the wrong amount of radiation.",
+      "definition": "Several people were killed in a missile attack"
+    },
+    {
+      "term": "\"The Ethical Problem with Facebook's Emotional Experiment,\" which of the following statements is the most correct? Facebook demonstrated they could manipulate people's emotions by showing mostly negative or mostly positive posts in people's Facebook data feed. Facebook demonstrated they could make a user sad by displaying a fake news story regarding the death of someone the user had identified as a \"friend\" in their Facebook profile. Facebook demonstrated they could manipulate a person into buying weight loss products by altering their Facebook profile picture by making the user appear to be fatter. Facebook demonstrated they could manipulate a person into buying candy buy making the person feel lonely by blocking all content from their friends for a 16 day period.",
+      "definition": "Facebook demonstrated they could manipulate people's emotions by showing mostly negative or mostly positive posts in people's Facebook data feed."
+    },
+    {
+      "term": "Regarding the video about \"Ethics in Security Research. Which Lines Should Not be Crossed?,\" which of the following statements is the most correct? Developing anti-malware that eliminates some existing malware but also harms a small group of people is an acceptable trade-off. Developing malware and allowing it to operate in the wild is ethical because it is the only way we can learn about malware. Because spam is never harmful, observing spam in the wild and not warning the recipient is one of the few acceptable security research activities. Developing malware to study user infection numbers and malware dissemination strategies is a bad idea.",
+      "definition": "Developing malware to study user infection numbers and malware dissemination strategies is a bad idea."
+    },
+    {
+      "term": "Regarding the video about \"Ethics in Security Research. Which Lines Should Not be Crossed?,\" which of the following statements is the most correct? Developing anti-malware is unethical because it is not ethical to be unethical to the unethical. The biggest threat from spam is that it is a nuisance. About 50% of the spam sent worldwide advertise medicine/pharmaceutical products which are to a large percent counterfeited and a major health threat. It is actually cheaper to engage in ethical research rather than unethical research, so switching to ethical research should be easy.",
+      "definition": "About 50% of the spam sent worldwide advertise medicine/pharmaceutical products which are to a large percent counterfeited and a major health threat."
+    },
+    {
+      "term": "Regarding the video about the paper on \"Research Ethics in Human-Computer Interaction,\" which of the following statements is the most accurate? There is a concern that robots might injure a person if robots engage in activities such as caring for the elderly. It is not a violation of a research subject's privacy if they are not aware of their data being collected during the research process. Research subjects should not be allowed to withdraw from research once they have volunteered to be a research subject. Conducting secret research on a human subject is ethical as long as the human subject is informed of the research after it is completed.",
+      "definition": "There is a concern that robots might injure a person if robots engage in activities such as caring for the elderly."
+    },
+    {
+      "term": "\"Research Ethics in Human-Computer Interaction,\" which of the following statements is the most accurate? Researchers do not need to concerned about cultural differences among the participants. It is not necessary to accommodate a research subject's basic need to be free to move during the research. Researchers need to be careful regarding how recording technology might make the subject feel uncomfortable. Researchers do not need to be open about the data that is collected during the research.",
+      "definition": "Researchers need to be careful regarding how recording technology might make the subject feel uncomfortable."
+    },
+    {
+      "term": "size of a screen display might be a source of bias as it influences what can be seen of the first page. True False",
+      "definition": "True"
+    },
+    {
+      "term": "Once bias is in a computer system, it is easy to remove. T/F",
+      "definition": "False"
+    },
+    {
+      "term": "The term bias refers to a computer system that systematically and unfairly discriminates against certain individuals or groups of individuals in favor of others. True False",
+      "definition": "True"
+    },
+    {
+      "term": "Even though arbitration approaches such as fixed, priority, and round-robin are \"fair,\" they can still have their own bias.",
+      "definition": "True"
+    },
+    {
+      "term": "Computer-based binary arithmetic is precise and does not present any ethical challenges. True False",
+      "definition": "False"
+    },
+    {
+      "term": "Which of the following research topics have the potential to expose real people to harm? Select all that apply. credit card fraud spam viruses botnet",
+      "definition": "all"
+    },
+    {
+      "term": "One abuse that can take place during research is 'secret data collection' in which the participant is unaware of the data that is being collected about them of their computer device(s). True False",
+      "definition": "True"
+    }
+  ]
+}
+</script><script type="module">function parseCards(text) {
+  if (!text.trim()) throw new Error('Paste or select some cards first.');
+  let cards;
+  if (/^[\[{]/.test(text.trim())) {
+    const data = JSON.parse(text);
+    cards = Array.isArray(data) ? data : data.cards;
+    if (!Array.isArray(cards)) throw new Error('JSON must contain a cards array.');
+  } else {
+    cards = text.split(/\r?\n/).filter(line => line.trim()).map((line, index) => {
+      const separator = line.includes('\t') ? '\t' : '::';
+      const split = line.indexOf(separator);
+      if (split < 0) throw new Error(`Line ${index + 1} needs a tab or :: between term and definition.`);
+      return {term: line.slice(0, split), definition: line.slice(split + separator.length)};
+    });
+  }
+  if (!cards.length) throw new Error('The collection has no cards.');
+  return cards.map((card, index) => {
+    if (typeof card.term !== 'string' || typeof card.definition !== 'string' || !card.term.trim() || !card.definition.trim()) throw new Error(`Card ${index + 1} needs both a term and a definition.`);
+    return {term:card.term.trim(),definition:card.definition.trim()};
+  });
+}
+
+// Learn questions use the deck's answer key. Distractors come from other cards.
+function shuffle(items, random = Math.random) {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+const normalize = text => text.toLowerCase().replace(/[^a-z0-9]/g, '');
+const isBoolean = answer => /^(t|f|true|false)$/i.test(answer.trim());
+function makeQuestion(cards, id, random = Math.random) {
+  const {term, definition} = cards[id];
+  if (isBoolean(definition)) return {
+    prompt: term.replace(/\s*(T\/F|True False)\s*$/i, ''),
+    answer: /^(t|true)$/i.test(definition) ? 'True' : 'False', options: ['True', 'False']
+  };
+  // "All" answers need their original listed choices to remain meaningful.
+  if (/^all$/i.test(definition)) return {
+    prompt: term, answer: 'All of the listed options',
+    options: shuffle(['All of the listed options', 'Only the first listed option', 'Only the last listed option', 'None of the listed options'], random)
+  };
+  const end = term.lastIndexOf('?');
+  const prompt = end >= 0 ? term.slice(0, end + 1) : term;
+  const correct = normalize(definition);
+  const words = new Set((term + ' ' + definition).toLowerCase().match(/[a-z]{4,}/g) || []);
+  const seen = new Set([correct]);
+  const candidates = shuffle(cards, random).filter(card => {
+    const key = normalize(card.definition);
+    if (isBoolean(card.definition) || /^all$/i.test(card.definition) || seen.has(key) || key.includes(correct) || correct.includes(key)) return false;
+    seen.add(key); return true;
+  }).map(card => ({answer: card.definition, score: (card.term.toLowerCase().match(/[a-z]{4,}/g) || []).filter(word => words.has(word)).length})).sort((a,b)=>b.score-a.score);
+  return {prompt, answer: definition, options: shuffle([definition, ...candidates.slice(0,3).map(c=>c.answer)], random)};
+}
+function newRound(cards, learned = [], random = Math.random) {
+  const queue = shuffle(cards.map((_,id)=>id).filter(id=>!learned.includes(id)),random).slice(0,10);
+  return {queue, total:queue.length, completed:0, attempts:0, firstCorrect:0, seen:[], current:null, feedback:null};
+}
+function answerQuestion(round, choice) {
+  if (!round.current || round.feedback) return false;
+  const id = round.queue[0], correct = choice === round.current.answer;
+  if (!round.current.options.includes(choice)) return false;
+  round.attempts++;
+  if (!round.seen.includes(id)) {round.seen.push(id);if(correct)round.firstCorrect++;}
+  round.feedback = {choice, correct};
+  return true;
+}
+function advanceRound(round) {
+  if (!round.feedback) return null;
+  const id = round.queue.shift(), correct = round.feedback.correct;
+  if (correct) round.completed++;
+  else round.queue.push(id);
+  round.current=null;round.feedback=null;
+  return correct ? id : null;
+}
+
+const $ = id => document.getElementById(id);
+const storageKey = 'pocket-ethics-v1';
+let state = {cards:[], known:[]}, mode = 'all', order = [], index = 0, flipped = false;
+try { const saved = JSON.parse(localStorage.getItem(storageKey)); if(saved){state.cards=parseCards(JSON.stringify(saved.cards));state.known=Array.isArray(saved.known)?saved.known.filter(n=>Number.isInteger(n)&&n>=0&&n<state.cards.length):[];state.learned=saved.learned;const r=saved.round;if(r&&Array.isArray(r.queue)&&r.queue.every(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length)&&Array.isArray(r.seen)&&['total','completed','attempts','firstCorrect'].every(k=>Number.isInteger(r[k])&&r[k]>=0)&&(!r.current||(typeof r.current.prompt==='string'&&typeof r.current.answer==='string'&&Array.isArray(r.current.options))))state.round=r;} } catch { /* Empty or unavailable storage: start clean. */ }
+let activity = 'flash';
+state.learned = Array.isArray(state.learned) ? state.learned.filter(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length) : [];
+function toast(message){$('toast').textContent=message;$('toast').style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').style.display='none',3500);}
+function save(){try{localStorage.setItem(storageKey,JSON.stringify(state));}catch{toast('Storage unavailable. Export a backup to keep your cards.');}}
+function rebuild(){order=state.cards.map((_,i)=>i).filter(i=>mode==='all'||!state.known.includes(i));index=0;flipped=false;render();}
+function render(){
+ const id=order[index], card=state.cards[id], count=state.known.length;
+ $('total').textContent=state.cards.length;$('remaining').textContent=state.cards.length-count;
+ $('mastery').textContent=`${count} mastered`;$('progress').style.width=`${state.cards.length?count/state.cards.length*100:0}%`;
+ $('position').textContent=card?`CARD ${index+1} OF ${order.length}`:state.cards.length?'All caught up':'Ready when you are';
+ $('side').textContent=card?(flipped?'DEFINITION':'TERM'):state.cards.length?'WELL DONE':'LET’S GET STARTED';
+ $('card-text').textContent=card?(flipped?card.definition:card.term):state.cards.length?'A little practice goes a long way.':'Your next study session\nstarts here.';
+ $('flip-hint').textContent=card?(flipped?'How well did you remember?':'Tap anywhere to reveal'):state.cards.length?'Switch to All cards to study again':'Import your cards to begin';
+ $('card').classList.toggle('answer',flipped);$('card').classList.toggle('long',!!card&&(flipped?card.definition:card.term).length>220);$('answer-actions').hidden=!card||!flipped;
+ $('card').setAttribute('aria-label',card?`${flipped?'Definition':'Term'}: ${flipped?card.definition:card.term}. Tap to flip.`:'Import cards to begin');
+ $('prev').disabled=order.length<2;$('next').disabled=order.length<2;$('shuffle').disabled=order.length<2;
+ $('all').classList.toggle('active',mode==='all');$('review').classList.toggle('active',mode==='review');
+ $('all').setAttribute('aria-pressed',mode==='all');$('review').setAttribute('aria-pressed',mode==='review');
+}
+function move(step){if(!order.length)return;index=(index+step+order.length)%order.length;flipped=false;render();}
+$('card').onclick=()=>{if(order.length){flipped=!flipped;render();}else if(!state.cards.length)$('import-dialog').showModal();};
+$('prev').onclick=()=>move(-1);$('next').onclick=()=>move(1);
+$('all').onclick=()=>{mode='all';rebuild();};$('review').onclick=()=>{mode='review';rebuild();};
+$('shuffle').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}index=0;flipped=false;render();toast('Cards shuffled');};
+$('known').onclick=()=>{const id=order[index];if(!state.known.includes(id))state.known.push(id);save();if(mode==='review'){order.splice(index,1);if(index>=order.length)index=0;flipped=false;render();}else move(1);};
+$('again').onclick=()=>{state.known=state.known.filter(n=>n!==order[index]);save();move(1);};
+$('manage').onclick=()=>$('import-dialog').showModal();
+$('import').onclick=()=>{try{const cards=parseCards($('import-text').value);if(state.cards.length&&!confirm('Replace your current cards and reset study progress? Export a backup first if needed.'))return;state={cards,known:[],learned:[]};activity='flash';setActivity('flash');save();mode='all';rebuild();$('import-dialog').close();$('import-status').textContent='';toast(`${cards.length} cards imported`);}catch(e){$('import-status').textContent=e.message;}};
+$('import-file').onchange=async event=>{const file=event.target.files[0];if(file){$('import-text').value=await file.text();$('import-status').textContent='File loaded. Press Import cards to continue.';}};
+$('export').onclick=()=>{if(!state.cards.length){$('import-status').textContent='Import cards before exporting a backup.';return;}const url=URL.createObjectURL(new Blob([JSON.stringify({title:'Computer Ethics Final',cards:state.cards},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='computer-ethics-cards.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+document.addEventListener('keydown',e=>{if(activity==='learn'||$('import-dialog').open||['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement.tagName))return;if(e.code==='Space'){e.preventDefault();$('card').click();}if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1);});
+if(!state.cards.length){try{state.cards=parseCards(document.getElementById('included-deck').textContent);save();}catch{toast('Could not load the included deck. Use Manage cards to import a backup.');}}
+rebuild();
+$('offline-status').textContent='Standalone edition · no server needed';
+
+function setActivity(value){
+ activity=value;
+ $('flash-panel').hidden=value!=='flash';$('learn-panel').hidden=value!=='learn';
+ for(const [id,active] of [['flash-mode',value==='flash'],['learn-mode',value==='learn']]){ $(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',active); }
+ if(value==='learn'){if(!state.round)state.round=newRound(state.cards,state.learned);renderLearn();}
+}
+function renderLearn(){
+ const round=state.round;
+ if(!round)return;
+ const finished=!round.queue.length;
+ $('learn-question-panel').hidden=finished;$('learn-summary').hidden=!finished;
+ $('learn-count').textContent=`${round.completed} / ${round.total} cards learned`;
+ $('learn-score').textContent=`${state.learned.length} / ${state.cards.length} overall`;
+ $('learn-progress').style.width=`${round.total?round.completed/round.total*100:0}%`;
+ if(finished){
+  const allDone=state.learned.length===state.cards.length;
+  $('summary-title').textContent=!state.cards.length?'Import cards to start learning':allDone?'You’ve practiced the whole collection!':'Round complete. Nicely done.';
+  $('summary-detail').textContent=round.total?`${round.firstCorrect} of ${round.total} correct on the first try (${Math.round(round.firstCorrect/round.total*100)}%). ${round.attempts} total attempts. Every card in this round is now answered correctly.`:'Your next study session is ready when you are.';
+  $('next-round').textContent=allDone?'Practice the collection again':'Next round →';$('next-round').disabled=!state.cards.length;
+  return;
+ }
+ if(!round.current)round.current=makeQuestion(state.cards,round.queue[0]);
+ const q=round.current, feedback=round.feedback;
+ $('learn-kind').textContent=q.options.length===2?'TRUE OR FALSE':'CHOOSE ONE ANSWER';
+ $('learn-question').textContent=q.prompt;
+ $('learn-options').replaceChildren();
+ q.options.forEach((option,i)=>{
+  const button=document.createElement('button');button.className='learn-option';
+  const letter=document.createElement('span');letter.className='option-letter';letter.textContent=String.fromCharCode(65+i);
+  const text=document.createElement('span');text.textContent=option;button.append(letter,text);
+  button.disabled=!!feedback;
+  if(feedback){if(option===q.answer){button.classList.add('correct');button.append(document.createTextNode(' ✓ Correct'));}else if(option===feedback.choice){button.classList.add('incorrect');button.append(document.createTextNode(' ✕ Your answer'));}}
+  button.onclick=()=>{if(answerQuestion(round,option)){save();renderLearn();$('learn-next').focus({preventScroll:true});}};
+  $('learn-options').append(button);
+ });
+ $('learn-feedback').textContent=feedback?(feedback.correct?'Correct! You’re making progress.':`Not quite. Correct answer: ${q.answer}. You’ll see this card again.`):'';
+ $('learn-feedback').className=feedback?(feedback.correct?'feedback-correct':'feedback-incorrect'):'';
+ $('learn-next').hidden=!feedback;
+ save();
+}
+$('flash-mode').onclick=()=>setActivity('flash');$('learn-mode').onclick=()=>setActivity('learn');
+$('learn-next').onclick=()=>{const learned=advanceRound(state.round);if(learned!==null&&!state.learned.includes(learned))state.learned.push(learned);save();renderLearn();$('learn-question').focus({preventScroll:true});};
+$('learn-question').tabIndex=-1;
+$('restart-learn').onclick=()=>{if(confirm('Restart this round? Your previously learned cards will stay saved.')){state.round=newRound(state.cards,state.learned);save();renderLearn();}};
+$('next-round').onclick=()=>{if(state.learned.length===state.cards.length)state.learned=[];state.round=newRound(state.cards,state.learned);save();renderLearn();};
+</script></body></html>
