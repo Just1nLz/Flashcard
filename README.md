@@ -74,3 +74,15 @@ The app also stores one local recovery snapshot before its first upgrade and bef
 These backups are manual transfers, not automatic cloud synchronization. iCloud Drive can store the backup file but does not automatically synchronize Pocket's local study data. No server or account was added.
 
 Upgrade validation exercises actual earlier builds (`7c145b5` and `c5af85c`) with an unfinished Learn round, then loads the new build at the same origin and verifies scores, queue, choices, feedback, and mastery are retained. Browser checks also restore a full backup into a fresh browser and recover progress after replacing the set.
+
+## Exam mode
+
+Choose **Exam → Start full-set exam**. Each card appears once, in shuffled order, with stable shuffled choices for that attempt. Original true/false cards keep two choices. Sets with too few distinct distractors use a written answer instead of showing the only answer as a choice. Written grading ignores case, extra whitespace, and trailing sentence punctuation; it does not interpret paraphrases.
+
+Choose/change answers, clear a selection, move backward or forward, flag uncertain questions, or jump using the question navigator. There is no time limit. Answers and correctness are not shown during the attempt. Submitting confirms any unanswered questions, counts them as wrong in the overall percentage, locks the attempt, and reveals correct / incorrect / unanswered totals and a full answer review. The review defaults to missed questions; turn off the filter to see everything. Scores follow this study set's answer key and generated distractors, not an independent examination rubric.
+
+Practice bands are **Strong recall** at 85% or above, **Developing recall** at 65–84%, and **More practice will help** below 65%. They are study cues, not predicted real exam grades. **Learn up to 10 missed cards** creates a targeted Learn round after confirming replacement of any unfinished Learn round. It keeps prior learned/mastered cards; the exam itself does not alter those counts. Taking a new exam replaces the one saved attempt/results after confirmation; export a full backup to retain a previous attempt.
+
+Exam questions, selected answers, flags, position, and submitted results persist across reloads and offline use. Full backups and local recovery now include the exam too, and older backups without an exam remain supported. Reimporting a new set clears the old set's exam as well as its Learn progress.
+
+Learn feedback now uses solid green/red banners, a brief green outline bloom/check pop for correct answers, and a brief red nudge/cross pop for incorrect ones. Correct-answer streaks are shown. **Sound: off/on** optionally adds a rising success tone or descending retry tone (off by default). All effects retain text/symbol cues and respect reduced motion; scoring does not depend on sound or animation.

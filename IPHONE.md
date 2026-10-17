@@ -40,3 +40,9 @@ Upload the latest ZIP to your **existing** Netlify project; keep the same site a
 After updating, open **Manage cards → Download full backup + progress**, then save the JSON to Files or iCloud Drive. This backup includes scores and your unfinished round, unlike **Export JSON** (cards only). To move to another iPhone/browser, choose the full JSON using the import file picker, check the preview, confirm review, and tap **Restore cards & progress**. The destination's current study data is replaced. You can also use **Recover previous local snapshot** after an accidental set replacement. Local recovery is not a substitute for a downloaded file.
 
 No automatic cloud sync is enabled. Saving a backup in iCloud Drive lets you transfer it manually. Deleting website data or changing site address can make existing local progress unavailable.
+
+## Exam and stronger feedback
+
+Tap **Exam → Start full-set exam** to test every card once. Choose answers, use **Flag for review**, and use the navigator to revisit questions. Your selections save if you close the app. Tap **Submit exam** when ready: unanswered questions lower the total score, and answers appear only after submission. Review missed questions or start a targeted Learn round. Your existing Learn progress stays separate.
+
+In Learn, solid green/red banners, short animations, and a correct-answer streak reinforce each result. Tap **Sound: on** for optional feedback tones; your iPhone/browser must allow sound. Reduced Motion disables the animations. Full backups now include any unfinished or completed exam.

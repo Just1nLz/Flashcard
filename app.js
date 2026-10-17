@@ -1,3 +1,4 @@
+import {createExam,setExamAnswer,scoreExam,submitExam,validateExam} from './exam.js';
 import {createStudyBackup, parseStudyBackup, validateStudyState} from './backup.js';
 import {parsePdfPages} from './pdf-layout.js';
 import {makeQuestion, newRound, answerQuestion, advanceRound} from './learn.js';
@@ -8,8 +9,9 @@ const recoveryKey=storageKey+'-recovery';
 let recoveryAvailable=false;
 function keepRecovery(reason,onlyIfMissing=false){try{const data=localStorage.getItem(storageKey);if(data&&(!onlyIfMissing||!localStorage.getItem(recoveryKey))){localStorage.setItem(recoveryKey,JSON.stringify({createdAt:new Date().toISOString(),reason,data}));}recoveryAvailable=!!localStorage.getItem(recoveryKey);}catch{}}
 keepRecovery('Before app update',true);
+let toastLater='';
 let state = {cards:[], known:[]}, mode = 'all', order = [], index = 0, flipped = false;
-try { const saved = JSON.parse(localStorage.getItem(storageKey)); if(saved){state.cards=parseCards(JSON.stringify(saved.cards));state.known=Array.isArray(saved.known)?saved.known.filter(n=>Number.isInteger(n)&&n>=0&&n<state.cards.length):[];state.lastActivity=saved.lastActivity;state.title=typeof saved.title==='string'?saved.title:'Computer Ethics';state.learned=saved.learned;const r=saved.round;if(r&&Array.isArray(r.queue)&&r.queue.every(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length)&&Array.isArray(r.seen)&&['total','completed','attempts','firstCorrect'].every(k=>Number.isInteger(r[k])&&r[k]>=0)&&(!r.current||(typeof r.current.prompt==='string'&&typeof r.current.answer==='string'&&Array.isArray(r.current.options))))state.round=r;} } catch { /* Empty or unavailable storage: start clean. */ }
+try { const saved = JSON.parse(localStorage.getItem(storageKey)); if(saved){state.cards=parseCards(JSON.stringify(saved.cards));state.known=Array.isArray(saved.known)?saved.known.filter(n=>Number.isInteger(n)&&n>=0&&n<state.cards.length):[];state.lastActivity=saved.lastActivity;state.soundEnabled=saved.soundEnabled===true;state.feedbackStreak=Number.isInteger(saved.feedbackStreak)?saved.feedbackStreak:0;if(saved.exam){try{state.exam=validateExam(saved.exam,state.cards);}catch{toastLater='Saved exam could not be loaded; your other study progress is intact.';}}state.title=typeof saved.title==='string'?saved.title:'Computer Ethics';state.learned=saved.learned;const r=saved.round;if(r&&Array.isArray(r.queue)&&r.queue.every(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length)&&Array.isArray(r.seen)&&['total','completed','attempts','firstCorrect'].every(k=>Number.isInteger(r[k])&&r[k]>=0)&&(!r.current||(typeof r.current.prompt==='string'&&typeof r.current.answer==='string'&&Array.isArray(r.current.options))))state.round=r;} } catch { /* Empty or unavailable storage: start clean. */ }
 state.title ||= 'Computer Ethics';
 let activity = 'flash';
 state.learned = Array.isArray(state.learned) ? state.learned.filter(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length) : [];
@@ -43,7 +45,7 @@ function invalidatePreview(){reviewedText='';reviewedBackup=null;$('backup-previ
 function reviewImport(){
  let backup=null;try{backup=parseStudyBackup($('import-text').value);}catch(e){if($('import-text').value.trim().startsWith('{'))throw e;}
  const cards=backup?backup.cards:parseCards($('import-text').value);if(cards.length>2000)throw new Error('Import up to 2,000 cards at a time.');
- reviewedBackup=backup;$('import').textContent=backup?'Restore cards & progress':'Use these cards';$('backup-preview').hidden=!backup;$('backup-preview').textContent=backup?`Full backup: ${backup.known.length} mastered, ${backup.learned.length} learned${backup.round?`, round ${backup.round.completed}/${backup.round.total} cards complete (${backup.round.attempts} attempts)`:''}. Your cards and progress will be restored together.`:'';
+ reviewedBackup=backup;$('import').textContent=backup?'Restore cards & progress':'Use these cards';$('backup-preview').hidden=!backup;$('backup-preview').textContent=backup?`Full backup: ${backup.known.length} mastered, ${backup.learned.length} learned${backup.round?`, round ${backup.round.completed}/${backup.round.total} cards complete (${backup.round.attempts} attempts)`:''}${backup.exam?`, saved exam (${backup.exam.submittedAt?'submitted':backup.exam.answers.filter(a=>typeof a==='string'&&a.trim()).length+' answered'})`:''}. Your cards and progress will be restored together.`:'';
  reviewedText=$('import-text').value;$('preview-count').textContent=`Review all ${cards.length} cards`;$('preview-cards').replaceChildren();
  cards.forEach((card,i)=>{const item=document.createElement('article');const question=document.createElement('strong');question.textContent=`${i+1}. ${card.term}`;const answer=document.createElement('p');answer.textContent=card.definition;item.append(question,answer);$('preview-cards').append(item);});
  $('import-preview').hidden=false;$('confirm-review').checked=false;$('import').disabled=true;
@@ -56,7 +58,7 @@ $('confirm-review').onchange=()=>{$('import').disabled=!$('confirm-review').chec
 $('import').onclick=()=>{try{
  if(!$('confirm-review').checked||reviewedText!==$('import-text').value)throw new Error('Review the cards and confirm the question / answer pairs first.');
  const cards=parseCards(reviewedText), backup=reviewedBackup;if(state.cards.length&&!confirm(backup?'Restore this backup, replacing this device’s current cards and progress?':'Replace your current cards and reset study progress? Export a full backup first if needed.'))return;
- keepRecovery('Before restoring backup or replacing set');state=backup||{title:$('set-title').value.trim()||'My study set',cards,known:[],learned:[]};if(backup)state.title=$('set-title').value.trim()||state.title;mode='all';rebuild();setActivity(backup?.lastActivity==='learn'?'learn':'flash');save();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(backup?'Cards and study progress restored':`${cards.length} cards imported`);
+ keepRecovery('Before restoring backup or replacing set');state=backup||{title:$('set-title').value.trim()||'My study set',cards,known:[],learned:[]};if(backup)state.title=$('set-title').value.trim()||state.title;mode='all';rebuild();setActivity(['learn','exam'].includes(backup?.lastActivity)?backup.lastActivity:'flash');save();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(backup?'Cards and study progress restored':`${cards.length} cards imported`);
  }catch(e){$('import-status').textContent=e.message;}};
 $('import-file').onchange=async event=>{
  const file=event.target.files[0];if(!file)return;const generation=++importGeneration;invalidatePreview();
@@ -76,10 +78,10 @@ $('pdf-file').onchange=async event=>{
 function exportCards(){if(!state.cards.length){$('import-status').textContent='Import cards before exporting a backup.';return false;}return true;}
 $('export').onclick=()=>{if(!exportCards())return;const url=URL.createObjectURL(new Blob([JSON.stringify({title:state.title,cards:state.cards},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=(state.title.replace(/[^a-z0-9_-]+/gi,'-')||'study-set')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 $('export-progress').onclick=()=>{
- try{const backup=createStudyBackup(state);const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='pocket-full-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('import-status').textContent='Full backup downloaded: cards, mastery, learned cards, and your unfinished round. Save it to Files or iCloud Drive.';}catch(e){$('import-status').textContent=`Could not export backup: ${e.message}`;}
+ try{const backup=createStudyBackup(state);const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='pocket-full-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('import-status').textContent='Full backup downloaded: cards, mastery, learned cards, unfinished Learn round, and saved exam. Save it to Files or iCloud Drive.';}catch(e){$('import-status').textContent=`Could not export backup: ${e.message}`;}
 };
 $('restore-recovery').onclick=()=>{
- try{const saved=JSON.parse(localStorage.getItem(recoveryKey));if(!saved)throw new Error('No local recovery snapshot is available.');const restored=validateStudyState(JSON.parse(saved.data));if(!confirm(`Restore the local snapshot from ${new Date(saved.createdAt).toLocaleString()}? This replaces your current cards and progress.`))return;keepRecovery('Before local recovery');state=restored;mode='all';rebuild();setActivity(state.lastActivity==='learn'?'learn':'flash');save();invalidatePreview();$('import-dialog').close();toast('Local cards and progress recovered');}catch(e){$('import-status').textContent=`Recovery failed: ${e.message}`;}
+ try{const saved=JSON.parse(localStorage.getItem(recoveryKey));if(!saved)throw new Error('No local recovery snapshot is available.');const restored=validateStudyState(JSON.parse(saved.data));if(!confirm(`Restore the local snapshot from ${new Date(saved.createdAt).toLocaleString()}? This replaces your current cards and progress.`))return;keepRecovery('Before local recovery');state=restored;mode='all';rebuild();setActivity(['learn','exam'].includes(state.lastActivity)?state.lastActivity:'flash');save();invalidatePreview();$('import-dialog').close();toast('Local cards and progress recovered');}catch(e){$('import-status').textContent=`Recovery failed: ${e.message}`;}
 };
 $('export-pdf').onclick=()=>{
  if(!exportCards())return;const popup=window.open('','_blank');if(!popup){$('import-status').textContent='Allow pop-ups for this site to open the printable PDF view.';return;}
@@ -87,19 +89,21 @@ $('export-pdf').onclick=()=>{
  const heading=doc.createElement('h1');heading.textContent=state.title;doc.body.append(heading);const help=doc.createElement('p');help.className='print-help';help.textContent='Choose Print, then Save as PDF. On iPhone, use the print preview Share menu to Save to Files. This Question: / Answer: format can be imported again.';doc.body.append(help);const print=doc.createElement('button');print.textContent='Print / Save as PDF';print.onclick=()=>popup.print();doc.body.append(print);
  state.cards.forEach((card,i)=>{const article=doc.createElement('article');const q=doc.createElement('p');q.textContent=`Question: ${card.term}`;const a=doc.createElement('p');a.textContent=`Answer: ${card.definition}`;article.append(q,a);doc.body.append(article);});popup.focus();
 };
-document.addEventListener('keydown',e=>{if(activity==='learn'||$('import-dialog').open||['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement.tagName))return;if(e.code==='Space'){e.preventDefault();$('card').click();}if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1);});
+document.addEventListener('keydown',e=>{if(activity!=='flash'||$('import-dialog').open||['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement.tagName))return;if(e.code==='Space'){e.preventDefault();$('card').click();}if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1);});
 if(!state.cards.length){try{const response=await fetch('./deck.json');if(!response.ok)throw new Error('Deck unavailable');state.cards=parseCards(await response.text());save();}catch{toast('Could not load the included deck. Use Manage cards to import a backup.');}}
 rebuild();
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').then(()=>navigator.serviceWorker.ready).then(()=>{$('offline-status').textContent='Ready for offline study';}).catch(()=>{$('offline-status').textContent='Offline cache unavailable · export a backup';});}
 
 function setActivity(value){
  activity=value;state.lastActivity=value;save();
- $('flash-panel').hidden=value!=='flash';$('learn-panel').hidden=value!=='learn';
- for(const [id,active] of [['flash-mode',value==='flash'],['learn-mode',value==='learn']]){ $(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',active); }
+ $('flash-panel').hidden=value!=='flash';$('learn-panel').hidden=value!=='learn';$('exam-panel').hidden=value!=='exam';
+ for(const [id,active] of [['flash-mode',value==='flash'],['learn-mode',value==='learn'],['exam-mode',value==='exam']]){ $(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',active); }
  if(value==='learn'){if(!state.round)state.round=newRound(state.cards,state.learned);renderLearn();}
+ if(value==='exam')renderExam();
 }
 function renderLearn(){
  const round=state.round;
+ $('sound-toggle').textContent=state.soundEnabled?'Sound: on':'Sound: off';$('sound-toggle').setAttribute('aria-pressed',!!state.soundEnabled);$('learn-streak').textContent=state.feedbackStreak>1?`${state.feedbackStreak} correct in a row`:'';
  if(!round)return;
  const finished=!round.queue.length;
  $('learn-question-panel').hidden=finished;$('learn-summary').hidden=!finished;
@@ -115,6 +119,7 @@ function renderLearn(){
  }
  if(!round.current)round.current=makeQuestion(state.cards,round.queue[0]);
  const q=round.current, feedback=round.feedback;
+ if(!feedback)$('learn-question-panel').classList.remove('celebrate-answer','retry-answer');
  $('learn-kind').textContent=q.options.length===2&&q.options.includes('True')&&q.options.includes('False')?'TRUE OR FALSE':'CHOOSE ONE ANSWER';
  $('learn-question').textContent=q.prompt;
  $('learn-options').replaceChildren();
@@ -124,7 +129,7 @@ function renderLearn(){
   const text=document.createElement('span');text.textContent=option;button.append(letter,text);
   button.disabled=!!feedback;
   if(feedback){if(option===q.answer){button.classList.add('correct');const badge=document.createElement('strong');badge.className='answer-badge';badge.textContent='✓ CORRECT ANSWER';button.append(badge);}else if(option===feedback.choice){button.classList.add('incorrect');const badge=document.createElement('strong');badge.className='answer-badge';badge.textContent='✕ YOUR ANSWER';button.append(badge);}}
-  button.onclick=()=>{if(answerQuestion(round,option)){save();renderLearn();$('learn-feedback').focus({preventScroll:true});$('learn-feedback').scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}};
+  button.onclick=()=>{if(answerQuestion(round,option)){state.feedbackStreak=round.feedback.correct?(state.feedbackStreak||0)+1:0;playAnswerSound(round.feedback.correct);save();renderLearn();animateLearnResult(round.feedback.correct);$('learn-feedback').focus({preventScroll:true});$('learn-feedback').scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}};
   $('learn-options').append(button);
  });
  $('learn-question-panel').classList.toggle('result-correct',!!feedback?.correct);
@@ -148,4 +153,72 @@ $('learn-question').tabIndex=-1;
 $('restart-learn').onclick=()=>{if(confirm('Restart this round? Your previously learned cards will stay saved.')){state.round=newRound(state.cards,state.learned);save();renderLearn();}};
 $('next-round').onclick=()=>{if(state.learned.length===state.cards.length)state.learned=[];state.round=newRound(state.cards,state.learned);save();renderLearn();};
 
-if(state.lastActivity==='learn')setActivity('learn');
+if(['learn','exam'].includes(state.lastActivity))setActivity(state.lastActivity);
+if(toastLater)toast(toastLater);
+
+let answerAudio;
+function playAnswerSound(correct){
+ if(!state.soundEnabled)return;
+ try{const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return;answerAudio ||= new Audio();answerAudio.resume().catch(()=>{});const start=answerAudio.currentTime;const tones=correct?[523,659,784]:[220,165];tones.forEach((frequency,i)=>{const oscillator=answerAudio.createOscillator(),gain=answerAudio.createGain();oscillator.type='sine';oscillator.frequency.value=frequency;gain.gain.setValueAtTime(0,start+i*.09);gain.gain.linearRampToValueAtTime(.09,start+i*.09+.015);gain.gain.exponentialRampToValueAtTime(.001,start+i*.09+.16);oscillator.connect(gain);gain.connect(answerAudio.destination);oscillator.start(start+i*.09);oscillator.stop(start+i*.09+.18);oscillator.onended=()=>{oscillator.disconnect();gain.disconnect();};});}catch{/* Visual feedback stays available when audio is unsupported. */}
+}
+function animateLearnResult(correct){
+ const panel=$('learn-question-panel');panel.classList.remove('celebrate-answer','retry-answer');
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ void panel.offsetWidth;panel.classList.add(correct?'celebrate-answer':'retry-answer');
+ clearTimeout(animateLearnResult.timer);animateLearnResult.timer=setTimeout(()=>panel.classList.remove('celebrate-answer','retry-answer'),900);
+}
+$('sound-toggle').onclick=()=>{state.soundEnabled=!state.soundEnabled;save();renderLearn();if(state.soundEnabled)playAnswerSound(true);};
+$('exam-mode').onclick=()=>setActivity('exam');
+function beginExam(){
+ if(state.exam&&!confirm('Start a fresh full-set exam? This replaces the saved exam only. Your Learn and flashcard progress will stay.'))return;
+ try{state.exam=createExam(state.cards);save();renderExam();$('exam-question').focus({preventScroll:true});}catch(e){toast(e.message);}
+}
+$('start-exam').onclick=beginExam;$('retake-exam').onclick=beginExam;$('discard-exam').onclick=beginExam;
+function renderExam(){
+ const exam=state.exam;
+ $('exam-set-size').textContent=`${state.cards.length} questions · no time limit · answers revealed after submission`;
+ $('start-exam').disabled=!state.cards.length;
+ $('exam-start').hidden=!!exam;$('exam-taking').hidden=!exam||!!exam.submittedAt;$('exam-results').hidden=!exam?.submittedAt;
+ if(!exam)return;
+ if(exam.submittedAt){renderExamResults();return;}
+ const i=exam.cursor,q=exam.questions[i],selected=exam.answers[i];
+ const answered=exam.answers.filter(a=>typeof a==='string'&&a.trim()).length;
+ $('exam-position').textContent=`QUESTION ${i+1} OF ${exam.questions.length}`;
+ $('exam-count').textContent=`${answered} answered · ${exam.flagged.length} flagged`;
+ $('exam-progress').style.width=`${answered/exam.questions.length*100}%`;
+ $('exam-kind').textContent=q.type==='written'?'WRITE YOUR ANSWER':q.options.length===2&&q.options.includes('True')&&q.options.includes('False')?'TRUE OR FALSE':'CHOOSE ONE ANSWER';
+ $('exam-question').textContent=q.prompt;$('exam-options').replaceChildren();
+ $('exam-written-label').hidden=q.type!=='written';$('exam-written').value=selected||'';
+ if(q.type==='choice')q.options.forEach((option,n)=>{const button=document.createElement('button');button.type='button';button.className='learn-option exam-option';button.classList.toggle('selected',option===selected);button.setAttribute('aria-pressed',option===selected);const letter=document.createElement('span');letter.className='option-letter';letter.textContent=String.fromCharCode(65+n);const label=document.createElement('span');label.textContent=option;button.append(letter,label);if(option===selected){const badge=document.createElement('strong');badge.className='answer-badge';badge.textContent='● SELECTED';button.append(badge);}button.onclick=()=>{if(setExamAnswer(exam,i,option)){save();renderExam();}};$('exam-options').append(button);});
+ $('exam-prev').disabled=i===0;$('exam-next').disabled=i===exam.questions.length-1;
+ $('exam-clear').disabled=selected===null;
+ const flagged=exam.flagged.includes(i);$('exam-flag').textContent=flagged?'⚑ Flagged':'Flag for review';$('exam-flag').setAttribute('aria-pressed',flagged);
+ $('exam-map-summary').textContent=`Question navigator · ${answered}/${exam.questions.length} answered`;
+ renderExamGrid();
+}
+function renderExamGrid(){
+ const exam=state.exam;$('exam-grid').replaceChildren();
+ exam.questions.forEach((q,i)=>{const button=document.createElement('button');const answered=typeof exam.answers[i]==='string'&&!!exam.answers[i].trim(),flagged=exam.flagged.includes(i);button.textContent=`${i+1}${flagged?' ⚑':answered?' ✓':''}`;button.className=answered?'map-answered':'';button.classList.toggle('map-current',exam.cursor===i);button.classList.toggle('map-flagged',flagged);button.setAttribute('aria-label',`Question ${i+1}, ${answered?'answered':'unanswered'}${flagged?', flagged':''}`);if(exam.cursor===i)button.setAttribute('aria-current','step');button.onclick=()=>{exam.cursor=i;save();renderExam();$('exam-question').focus({preventScroll:true});};$('exam-grid').append(button);});
+}
+$('exam-written').oninput=()=>{const exam=state.exam;if(!exam)return;setExamAnswer(exam,exam.cursor,$('exam-written').value||null);save();const answered=exam.answers.filter(a=>typeof a==='string'&&a.trim()).length;$('exam-count').textContent=`${answered} answered · ${exam.flagged.length} flagged`;$('exam-progress').style.width=`${answered/exam.questions.length*100}%`;$('exam-clear').disabled=!$('exam-written').value;$('exam-map-summary').textContent=`Question navigator · ${answered}/${exam.questions.length} answered`;renderExamGrid();};
+function moveExam(step){if(!state.exam||state.exam.submittedAt)return;state.exam.cursor=Math.max(0,Math.min(state.exam.questions.length-1,state.exam.cursor+step));save();renderExam();$('exam-question').focus({preventScroll:true});}
+$('exam-prev').onclick=()=>moveExam(-1);$('exam-next').onclick=()=>moveExam(1);
+$('exam-clear').onclick=()=>{if(state.exam&&setExamAnswer(state.exam,state.exam.cursor,null)){save();renderExam();}};
+$('exam-flag').onclick=()=>{const exam=state.exam;if(!exam||exam.submittedAt)return;exam.flagged=exam.flagged.includes(exam.cursor)?exam.flagged.filter(i=>i!==exam.cursor):[...exam.flagged,exam.cursor];save();renderExam();};
+$('submit-exam').onclick=()=>{const exam=state.exam;if(!exam||exam.submittedAt)return;const unanswered=exam.answers.filter(a=>a===null||!a.trim()).length;if(!confirm(unanswered?`Submit with ${unanswered} unanswered question${unanswered===1?'':'s'}? Unanswered questions count as incorrect.`:'Submit your exam? You will see the score and answers, and this attempt will be locked.'))return;submitExam(exam);save();renderExam();$('exam-percent').focus({preventScroll:true});};
+function renderExamResults(){
+ const result=scoreExam(state.exam),percent=result.percent;
+ $('exam-percent').textContent=`${percent}%`;$('exam-percent').tabIndex=-1;
+ $('exam-level').textContent=percent>=85?'Strong recall':percent>=65?'Developing recall':'More practice will help';
+ $('exam-score-detail').textContent=`${result.correct} correct · ${result.incorrect} incorrect · ${result.unanswered} unanswered · ${result.total} total`;
+ $('exam-result-note').textContent=`${percent>=85?'Revisit the questions you missed to strengthen the gaps.':percent>=65?'Review the missed cards, then try a new exam.':'Use Learn to build recall, then test yourself again.'} These are study-set practice bands (85% / 65%), not a prediction of your real test grade. Scores follow the set’s answer key.`;
+ const missed=result.rows.filter(r=>!r.correct);$('practice-exam-missed').disabled=!missed.length;$('practice-exam-missed').textContent=missed.length?`Learn ${Math.min(10,missed.length)} missed card${missed.length===1?'':'s'}`:'No missed cards';
+ const rows=$('exam-missed-only').checked?missed:result.rows;$('exam-review-count').textContent=rows.length?`Showing ${rows.length} ${$('exam-missed-only').checked?'incorrect / unanswered':'total'} questions`:'All questions answered correctly. Turn off the filter to review the full exam.';$('exam-review').replaceChildren();
+ rows.forEach(row=>{const article=document.createElement('article');article.className=`exam-review-item ${row.correct?'review-correct':'review-incorrect'}`;const badge=document.createElement('strong');badge.className='review-result-label';badge.textContent=`${row.correct?'✓ CORRECT':row.chosen?.trim()?'✕ INCORRECT':'— UNANSWERED'} · QUESTION ${row.index+1}`;const question=document.createElement('h4');question.textContent=row.prompt;const chosen=document.createElement('p');chosen.className=row.correct?'review-chosen':'review-wrong';chosen.textContent=`Your answer: ${row.chosen?.trim()?row.chosen:'Not answered'}`;const correct=document.createElement('p');correct.className='review-answer';correct.textContent=`Correct answer: ${row.answer}`;article.append(badge,question,chosen,correct);$('exam-review').append(article);});
+}
+$('exam-missed-only').onchange=renderExamResults;
+$('practice-exam-missed').onclick=()=>{
+ if(!state.exam?.submittedAt)return;const ids=scoreExam(state.exam).rows.filter(r=>!r.correct).map(r=>r.cardId);if(!ids.length)return;
+ if(state.round?.queue.length&&!confirm('Replace your unfinished Learn round with up to 10 missed exam cards? Your learned-card progress will stay.'))return;
+ keepRecovery('Before practicing missed exam cards');state.round=newRound(state.cards,state.cards.map((_,id)=>id).filter(id=>!ids.includes(id)));save();setActivity('learn');
+};
