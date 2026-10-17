@@ -30,16 +30,24 @@ export function makeQuestion(cards, id, random = Math.random) {
     if (isBoolean(card.definition) || /^all$/i.test(card.definition) || seen.has(key) || key.includes(correct) || correct.includes(key)) return false;
     seen.add(key); return true;
   }).map(card => ({answer: card.definition, score: (card.term.toLowerCase().match(/[a-z]{4,}/g) || []).filter(word => words.has(word)).length})).sort((a,b)=>b.score-a.score);
-  return {prompt, answer: definition, options: shuffle([definition, ...candidates.slice(0,3).map(c=>c.answer)], random)};
+  const options=shuffle([definition, ...candidates.slice(0,3).map(c=>c.answer)],random);
+  return {prompt,answer:definition,options,type:options.length<2?'written':'choice'};
 }
 export function newRound(cards, learned = [], random = Math.random) {
   const queue = shuffle(cards.map((_,id)=>id).filter(id=>!learned.includes(id)),random).slice(0,10);
   return {queue, total:queue.length, completed:0, attempts:0, firstCorrect:0, seen:[], current:null, feedback:null};
 }
+export function isLearnAnswerCorrect(question,choice){
+  if(typeof choice!=='string')return false;
+  const written=question.type==='written'||question.options.length<2;
+  const clean=text=>text.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.!?]+$/,'');
+  return written?clean(choice)===clean(question.answer):choice===question.answer;
+}
 export function answerQuestion(round, choice) {
   if (!round.current || round.feedback) return false;
-  const id = round.queue[0], correct = choice === round.current.answer;
-  if (!round.current.options.includes(choice)) return false;
+  const id = round.queue[0], correct = isLearnAnswerCorrect(round.current,choice);
+  const written=round.current.type==='written'||round.current.options.length<2;
+  if(typeof choice!=='string'||!choice.trim()||(!written&&!round.current.options.includes(choice)))return false;
   round.attempts++;
   if (!round.seen.includes(id)) {round.seen.push(id);if(correct)round.firstCorrect++;}
   round.feedback = {choice, correct};

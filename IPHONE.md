@@ -46,3 +46,11 @@ No automatic cloud sync is enabled. Saving a backup in iCloud Drive lets you tra
 Tap **Exam → Start full-set exam** to test every card once. Choose answers, use **Flag for review**, and use the navigator to revisit questions. Your selections save if you close the app. Tap **Submit exam** when ready: unanswered questions lower the total score, and answers appear only after submission. Review missed questions or start a targeted Learn round. Your existing Learn progress stays separate.
 
 In Learn, solid green/red banners, short animations, and a correct-answer streak reinforce each result. Tap **Sound: on** for optional feedback tones; your iPhone/browser must allow sound. Reduced Motion disables the animations. Full backups now include any unfinished or completed exam.
+
+## What “mastered” means
+
+In Learn, each card must be answered correctly **three times in a row** across practice encounters. Wrong answers reset only that card to 0/3. A wrong card returns later in the current round; after a correct retry it stays eligible for later rounds until 3/3. The app rotates less recently practiced cards into new rounds rather than dropping a card after its first success.
+
+Check the current card's **0/3–3/3** badge or expand **See mastery for every card** for the whole set. The across-card success streak is decorative; it does not determine mastery. Flashcard **Got it** means you marked it familiar, not verified mastered. Exam scoring stays separate.
+
+Older learned cards receive one credited success (1/3) when you update. Scores, saved rounds, and exams remain. Full backups include mastery counters. After all cards reach 3/3, **Review mastered cards** lets you keep practicing without clearing progress. There is no required waiting period between rounds.

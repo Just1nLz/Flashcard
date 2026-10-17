@@ -27,13 +27,13 @@ Cards and progress stay in this browser's local storage, without cloud synchroni
 
 ## Validation
 
-`npm test` checks TSV parsing, multiline JSON backup restoration, explicit delimiters, and invalid imports. Browser smoke checks cover importing, flipping, marking mastery, persistence, and offline reload.
+`npm test` checks TSV parsing, multiline JSON backup restoration, explicit delimiters, and invalid imports. Browser smoke checks cover importing, flipping, self-marking familiarity, mastery streaks, persistence, and offline reload.
 
 ## Learn mode
 
-Choose **Learn** to practice up to 10 new cards per round. Answer choices shuffle; true/false cards keep two choices, and “All” answers retain their listed options. Other questions use their question stem without the printed answer choices; distractors are drawn from other cards, prioritizing related wording. Correctness follows the provided PDF, rather than independent fact checking.
+Choose **Learn** to practice up to 10 unmastered cards per round, prioritizing the least recently practiced. Answer choices shuffle; true/false cards keep two choices, and “All” answers retain their listed options. Other questions use their question stem without the printed answer choices; distractors are drawn from other cards, prioritizing related wording. Correctness follows the provided PDF, rather than independent fact checking.
 
-After each answer, feedback highlights the answer key. Missed cards return at the end of the queue until answered correctly. The round summary reports first-attempt accuracy separately from eventual completion. Learning progress and the in-progress round save locally, separate from flashcard mastery. Importing a new collection resets both. **Restart round** keeps already learned cards; after finishing the collection, **Practice the collection again** resets learning progress.
+After each answer, feedback highlights the answer key. A missed card returns at the end of this round until answered correctly; a correct response completes this round’s encounter, not necessarily mastery. Each card requires **three consecutive correct answers to that same card**, across encounters in later rounds. Any wrong Learn answer resets only that card’s streak to zero. Other cards’ answers do not reset its streak. The scheduler keeps unmastered cards eligible and favors the least recently practiced, so all cards get coverage. The summary reports first-attempt accuracy separately from round completion and verified mastery. **Restart round** retains per-card streaks. Once all cards meet the standard, **Review mastered cards** rechecks them without resetting the collection; a wrong answer during review reopens that card for practice. Imported new sets reset progress after confirmation.
 
 Build the self-contained hosted page, offline HTML download, and static-host ZIP with `npm run build`. This writes `Pocket-Flashcards.html` and `pocket-flashcards.zip` in the repository root. Both are included in GitHub for direct download. When replacing the downloaded HTML, use the same file location/browser to retain local progress where the browser permits file storage; export card backups separately.
 
@@ -86,3 +86,13 @@ Practice bands are **Strong recall** at 85% or above, **Developing recall** at 6
 Exam questions, selected answers, flags, position, and submitted results persist across reloads and offline use. Full backups and local recovery now include the exam too, and older backups without an exam remain supported. Reimporting a new set clears the old set's exam as well as its Learn progress.
 
 Learn feedback now uses solid green/red banners, a brief green outline bloom/check pop for correct answers, and a brief red nudge/cross pop for incorrect ones. Correct-answer streaks are shown. **Sound: off/on** optionally adds a rising success tone or descending retry tone (off by default). All effects retain text/symbol cues and respect reduced motion; scoring does not depend on sound or animation.
+
+## Per-card mastery and upgrade policy
+
+Learn mastery is tracked for every card with a 0–3 consecutive-correct streak, recorded correct/incorrect totals, and a last-practiced sequence counter. **See mastery for every card** shows the whole set's ledger, including new/unmastered cards. The per-card badge and set-wide mastery count are distinct from the decorative correct-answer streak across different cards. Flashcard **Got it** is a self-reported familiarity marker and does not award verified mastery. Exam scores remain independent and do not silently modify Learn streaks; explicitly practicing missed exam cards uses the same three-correct rule.
+
+A standard round has at most 10 unique cards. Incorrect answers repeat at the queue's end. After a successful retry, that card leaves this round at 1/3 and remains eligible for future rounds. For example, `wrong → right → right → right` reaches mastery; `right → right → wrong` falls to 0/3. Answer choices reshuffle on later encounters. When too few distinct distractors exist, Learn uses written recall instead of exposing the only answer as a multiple-choice option. Written answers ignore case, repeated whitespace, and trailing sentence punctuation; paraphrases are not interpreted.
+
+Upgrading retains cards, manual familiarity, old learned IDs, scores, unfinished Learn feedback, and saved exams. Older learned IDs receive **one credited correct answer (1/3)** because those versions did not record three successful encounters. Pending old feedback is credited/reset once during migration. New per-card counters are persisted immediately on answering, so reloading before Continue never grants duplicate credit. Full backups and local recovery include all counters, and restoring an older backup performs the same evidence-based migration. Historical totals are not reconstructed beyond the one known success per learned card.
+
+This is a recall practice criterion, not a guarantee of long-term retention or exam performance. There is no required time delay or calendar-based spaced-repetition schedule. Revisit mastered cards and use the full-set exam for an independent check.

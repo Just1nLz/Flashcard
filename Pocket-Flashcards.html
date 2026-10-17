@@ -51,17 +51,19 @@ textarea{border-color:#7b956e;color:#102b24}#import-status{color:#6d341c}
 .celebrate-answer{animation:correct-bloom .65s ease-out}.retry-answer{animation:incorrect-nudge .3s ease-out}.celebrate-answer .result-icon{animation:check-pop .55s ease-out}.retry-answer .result-icon{animation:check-pop .4s ease-out}
 @keyframes correct-bloom{0%{box-shadow:0 0 0 0 #16804288}60%{box-shadow:0 0 0 10px #16804220}100%{box-shadow:0 0 0 4px #cce8d5}}@keyframes incorrect-nudge{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}@keyframes check-pop{0%{transform:scale(.65)}65%{transform:scale(1.18)}100%{transform:scale(1)}}
 #exam-start{padding:28px;background:#fff;border:1px solid #8ca37f;border-radius:14px;margin:22px 0}#exam-set-size{font-size:13px;line-height:1.6;margin:0 0 18px}.exam-question-box{background:#fff;border:1px solid #849d75;border-radius:16px;padding:24px}.exam-question-tools{display:flex;justify-content:space-between;gap:10px;align-items:center}.exam-question-tools .eyebrow{margin:0;font-size:9px}.exam-question-tools button{padding:8px;font-size:11px}#exam-question{font-size:19px;font-weight:550;line-height:1.6;overflow-wrap:anywhere}#exam-options{display:grid;gap:10px}.exam-option.selected{background:#dce4ff;border:3px solid #334ead;color:#1b2d77}.exam-option.selected .option-letter{background:#334ead;color:#fff}.exam-option.selected:hover{background:#dce4ff}.exam-navigation,.exam-submit-actions{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:22px 0 0}.exam-navigation button{font-size:12px;padding:10px 12px}.exam-question-box .exam-navigation{border-top:1px solid #d8e0d1;padding-top:16px}.exam-map{padding:18px;border:1px solid #93a787;background:#f4f8ed;border-radius:12px;margin:20px 0;font-size:12px}.exam-map summary{cursor:pointer;font-weight:700}#exam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:7px;margin-top:15px}#exam-grid button{padding:9px 3px;font-size:11px;background:#fff}#exam-grid .map-answered{background:#d6e9cc;color:#1a4b28}#exam-grid .map-current{outline:2px solid #334ead;outline-offset:1px}#exam-grid .map-flagged{border:2px solid #8a5b10}.exam-score-card{text-align:center;padding:32px 20px;background:#103c2d;color:#fff;border-radius:16px;margin-top:24px}.exam-score-card .eyebrow{color:#d3e7c6}#exam-percent{display:block;font-size:76px;letter-spacing:-4px;line-height:1.2}#exam-level{font:400 27px Georgia,serif;margin:12px 0}#exam-score-detail{font-size:13px;line-height:1.9}#exam-result-note{font-size:11px;color:#d3e7c6;line-height:1.8}.exam-review-item{margin:16px 0;padding:20px;border:1px solid #a0b593;border-left:5px solid #176935;background:#fff;border-radius:10px;overflow-wrap:anywhere}.exam-review-item.review-incorrect{border-left-color:#a62026}.review-result-label{font-size:10px;letter-spacing:1px}.review-incorrect .review-result-label{color:#952228}.exam-review-item h4{font-size:15px;line-height:1.7;font-weight:550;margin:13px 0}.exam-review-item p{font-size:13px;line-height:1.7}.review-wrong{color:#922025}.review-answer{color:#11532b;background:#d9efda;padding:12px;border-radius:8px;font-weight:700}#exam-review-count{font-size:12px;color:#43543d;line-height:1.7}#exam-written{margin-top:10px}.study-switch{flex-wrap:wrap}@media(max-width:600px){.result-icon{width:38px;height:38px;font-size:25px}.result-heading{font-size:20px}.memory-answer{font-size:18px}.exam-question-box{padding:18px 15px}#exam-question{font-size:17px}.exam-question-tools{align-items:flex-start}.exam-submit-actions>*{flex:1;font-size:12px}.study-switch button{padding:11px 13px}}
+.card-mastery{font-size:11px;font-weight:750;line-height:1.6;color:#245a2d;letter-spacing:.3px;margin:12px 0}#learn-card-mastery{background:#e3f0d9;border:1px solid #719661;border-radius:8px;padding:10px;margin:0 0 16px}.mastery-overview{padding:16px;background:#f6fbef;border:1px solid #8ca37f;border-radius:12px;margin:18px 0}.mastery-overview>p{font-size:12px;line-height:1.7;margin:0 0 12px}.mastery-overview .progress-track{margin-bottom:14px}#set-mastery-progress{height:100%;background:#256c35}#mastery-details{font-size:12px}#mastery-details summary{cursor:pointer;font-weight:700}#mastery-list{max-height:330px;overflow:auto;margin-top:10px}#mastery-list article{border-top:1px solid #cedcc2;padding:14px 0}#mastery-list strong{font-size:10px;color:#245a2d}#mastery-list p{font-size:12px;line-height:1.7;overflow-wrap:anywhere}#mastery-list small{font-size:10px;color:#43543d}
+#mastery-migration-note{padding:14px;border:1px solid #8ca37f;border-radius:10px}#mastery-migration-note p{font-size:12px;line-height:1.7;margin:0}#learn-check{width:100%;margin:12px 0 20px}
 </style><title>Pocket • Computer Ethics</title></head>
 <body><header><a class="brand" href="./"><span class="logo">▱</span> pocket<span class="brand-dot">.</span></a><button id="manage" class="quiet">Manage cards ↗</button></header>
 <main><section class="intro"><p class="eyebrow">YOUR POCKET STUDY SPACE</p><h1>Small cards.<br>Big understanding.</h1><p class="subtitle">A little practice, wherever life takes you.</p></section>
 <section class="workspace"><div class="deck-heading"><div><p class="eyebrow">THE COLLECTION</p><h2><span id="deck-title" class="deck-title">Computer Ethics</span> <span>Study set</span></h2></div><span id="connection" class="badge">● On this device</span></div>
 <div class="study-switch" aria-label="Study activity"><button id="flash-mode" class="active" aria-pressed="true">▱ Flashcards</button><button id="learn-mode" aria-pressed="false">✧ Learn</button><button id="exam-mode" aria-pressed="false">◎ Exam</button></div>
 <div id="flash-panel"><div class="toolbar"><div class="tabs" aria-label="Study mode"><button id="all" class="active">All cards <span id="total">0</span></button><button id="review">Need practice <span id="remaining">0</span></button></div><button id="shuffle" class="quiet">⇄ Shuffle</button></div>
-<div class="progress-label"><span id="position">Ready when you are</span><span id="mastery">0 mastered</span></div><div class="progress-track"><div id="progress"></div></div>
-<button id="card" class="card" aria-label="Flip flashcard"><span id="side" class="eyebrow">LET’S GET STARTED</span><span id="card-text">Your next study session<br>starts here.</span><span id="flip-hint">Import your cards below to begin</span></button>
+<div class="progress-label"><span id="position">Ready when you are</span><span id="mastery">0 marked familiar</span></div><div class="progress-track"><div id="progress"></div></div>
+<p id="card-mastery" class="card-mastery"></p><button id="card" class="card" aria-label="Flip flashcard"><span id="side" class="eyebrow">LET’S GET STARTED</span><span id="card-text">Your next study session<br>starts here.</span><span id="flip-hint">Import your cards below to begin</span></button>
 <div id="answer-actions" class="answer-actions" hidden><button id="again">↺ Keep practicing</button><button id="known">✓ Got it</button></div>
 <div class="navigation"><button id="prev" aria-label="Previous card">←</button><p id="navigation-hint">Tap a card to reveal the answer</p><button id="next" aria-label="Next card">→</button></div>
-</div><section id="learn-panel" hidden aria-label="Multiple choice learning"><div class="learn-heading"><div><p class="eyebrow">A LITTLE PRACTICE, A LOT OF PROGRESS</p><h3>Learn it, one question at a time.</h3></div><button id="restart-learn" class="quiet">Restart round</button></div><div class="feedback-controls"><button id="sound-toggle" class="quiet" type="button" aria-pressed="false">Sound: off</button><span id="learn-streak"></span></div><p class="learn-description">10 cards per round. Choose the answer from your study set. Missed questions return until you get them right.</p><div class="learn-stats"><span id="learn-count"></span><span id="learn-score"></span></div><div class="progress-track"><div id="learn-progress"></div></div><div id="learn-question-panel"><p id="learn-kind" class="eyebrow"></p><h3 id="learn-question"></h3><div id="learn-feedback" role="status" aria-live="polite" tabindex="-1"></div><div id="learn-options"></div><button id="learn-next" class="primary" hidden>Continue →</button></div><div id="learn-summary" hidden><span class="summary-icon">✧</span><h3 id="summary-title"></h3><p id="summary-detail"></p><button id="next-round" class="primary">Next round →</button></div><p class="learn-footnote">Answers follow your PDF’s key. Multiple-choice distractors are generated from other study cards; true/false cards keep their original format. Learning progress saves on this device.</p></section>
+</div><section id="learn-panel" hidden aria-label="Multiple choice learning"><div class="learn-heading"><div><p class="eyebrow">A LITTLE PRACTICE, A LOT OF PROGRESS</p><h3>Learn it, one question at a time.</h3></div><button id="restart-learn" class="quiet">Restart round</button></div><div class="feedback-controls"><button id="sound-toggle" class="quiet" type="button" aria-pressed="false">Sound: off</button><span id="learn-streak"></span></div><p class="learn-description">Mastery means 3 correct answers in a row for the same card, across rounds. A wrong answer resets that card to 0/3. Missed questions return later in this round; unmastered cards keep returning in future rounds.</p><div class="learn-stats"><span id="learn-count"></span><span id="learn-score"></span></div><div class="progress-track"><div id="learn-progress"></div></div><div id="mastery-migration-note" class="notice" hidden><p>Your earlier progress is kept. Cards previously learned under the one-correct rule receive 1/3 credit; the new mastery target is 3/3. Previous scores and your saved round remain.</p><button id="dismiss-mastery-note" class="quiet">Got it</button></div><section class="mastery-overview"><p id="mastery-overview-text"></p><div class="progress-track"><div id="set-mastery-progress"></div></div><details id="mastery-details"><summary>See mastery for every card</summary><div id="mastery-list"></div></details></section><div id="learn-question-panel"><p id="learn-card-mastery" class="card-mastery"></p><p id="learn-kind" class="eyebrow"></p><h3 id="learn-question"></h3><label id="learn-written-label" for="learn-written" hidden>Your answer<textarea id="learn-written" rows="3" placeholder="Recall the answer without looking"></textarea></label><button id="learn-check" class="primary" hidden>Check answer</button><div id="learn-feedback" role="status" aria-live="polite" tabindex="-1"></div><div id="learn-options"></div><button id="learn-next" class="primary" hidden>Continue →</button></div><div id="learn-summary" hidden><span class="summary-icon">✧</span><h3 id="summary-title"></h3><p id="summary-detail"></p><button id="next-round" class="primary">Next round →</button></div><p class="learn-footnote">Answers follow your PDF’s key. Multiple-choice distractors are generated from other study cards; true/false cards keep their original format. Learning progress saves on this device.</p></section>
 <section id="exam-panel" hidden aria-label="Exam mode"><div class="learn-heading"><div><p class="eyebrow">PUT YOUR KNOWLEDGE TO THE TEST</p><h3>The whole collection. One attempt.</h3></div></div><p class="learn-description">Every card, shuffled once. Answer at your own pace, flag uncertain questions, and change answers before submitting. Results stay hidden until you submit. Exam work saves separately from Learn.</p><div id="exam-start"><p id="exam-set-size"></p><button id="start-exam" class="primary">Start full-set exam</button></div><section id="exam-taking" hidden><div class="learn-stats"><span id="exam-position"></span><span id="exam-count"></span></div><div class="progress-track"><div id="exam-progress"></div></div><div class="exam-question-box"><div class="exam-question-tools"><span id="exam-kind" class="eyebrow"></span><button id="exam-flag" class="quiet" aria-pressed="false">Flag for review</button></div><h3 id="exam-question" tabindex="-1"></h3><div id="exam-options"></div><label id="exam-written-label" for="exam-written" hidden>Your answer<textarea id="exam-written" rows="3" placeholder="Type your answer"></textarea></label><div class="exam-navigation"><button id="exam-prev">← Previous</button><button id="exam-clear" class="quiet">Clear answer</button><button id="exam-next">Next →</button></div></div><details class="exam-map"><summary id="exam-map-summary">Question navigator</summary><p>✓ Answered · ⚑ Flagged · Blank means unanswered</p><div id="exam-grid"></div></details><div class="exam-submit-actions"><button id="submit-exam" class="primary">Submit exam</button><button id="discard-exam" class="quiet">Start over</button></div></section><section id="exam-results" hidden><div class="exam-score-card"><p class="eyebrow">YOUR STUDY-SET SCORE</p><strong id="exam-percent"></strong><h3 id="exam-level"></h3><p id="exam-score-detail"></p><p id="exam-result-note">This measures recall against this set’s answer key; it is not a prediction of your real test grade.</p></div><div class="exam-submit-actions"><button id="retake-exam" class="primary">Take a new exam</button><button id="practice-exam-missed">Practice missed cards</button></div><label class="review-confirm"><input id="exam-missed-only" type="checkbox" checked> Show incorrect and unanswered only</label><p id="exam-review-count" role="status"></p><div id="exam-review"></div></section></section><div class="tip"><span>✧</span><p>Make it stick.<br><small>Recall the answer before you flip the card.</small></p><span class="key-hint">SPACE to flip · ← → to browse</span></div></section>
 <footer><span>Built for a little progress, every day.</span><span id="offline-status">Saved privately on your device</span></footer></main>
 <dialog id="import-dialog"><form method="dialog" class="dialog-heading"><h2>Import &amp; export</h2><button class="quiet" aria-label="Close">✕</button></form><p>Create a study set from a PDF, paste card text, or restore a JSON backup. Files are read on your device.</p><section class="backup-tools"><h3>Protect your progress</h3><p>App updates on this same site keep your saved progress. Download a full backup to transfer it to another device or browser. Upload that JSON below to restore.</p><button id="export-progress" type="button" class="primary">Download full backup + progress</button><button id="restore-recovery" type="button" hidden>Recover previous local snapshot</button><p class="fine">Local recovery stays on this device; a downloaded backup is safer. No automatic cloud sync.</p></section><label for="set-title">Study set name</label><input id="set-title" type="text" maxlength="120" placeholder="Name your study set"><label for="pdf-file" class="pdf-upload">＋ Import a questions &amp; answers PDF</label><input id="pdf-file" type="file" accept=".pdf,application/pdf"><p class="fine">Supports Quizlet print PDFs like your original, or selectable-text PDFs with Question: / Answer: pairs. Scans, arbitrary layouts, and separate answer keys need conversion first. Up to 25 MB / 100 pages.</p><label for="import-file">Restore full backup, or import JSON / TXT / TSV</label><input id="import-file" type="file" accept=".json,.txt,.tsv,text/plain,application/json"><label for="import-text">Editable card data</label><textarea id="import-text" rows="7" placeholder="Term :: Definition (one card per line), or JSON"></textarea><p class="fine">PDF results appear here as editable JSON. You can correct any question or answer before importing.</p><button id="preview-import" type="button">Review cards</button><p id="import-status" role="status" aria-live="polite"></p><section id="import-preview" hidden><h3 id="preview-count"></h3><p id="backup-preview" class="notice" hidden></p><div id="preview-cards"></div><label class="review-confirm"><input id="confirm-review" type="checkbox"> I checked the questions and answers.</label></section><div class="dialog-actions"><button id="export" type="button">Export JSON</button><button id="export-pdf" type="button">Export PDF / print</button><button id="import" type="button" class="primary" disabled>Use these cards</button></div><p class="fine">Importing a new card set resets its progress. Restoring a full backup includes progress. “Export JSON” and PDF exports contain cards only; use “Download full backup + progress” to preserve scores and unfinished rounds.</p></dialog>
@@ -515,16 +517,24 @@ function makeQuestion(cards, id, random = Math.random) {
     if (isBoolean(card.definition) || /^all$/i.test(card.definition) || seen.has(key) || key.includes(correct) || correct.includes(key)) return false;
     seen.add(key); return true;
   }).map(card => ({answer: card.definition, score: (card.term.toLowerCase().match(/[a-z]{4,}/g) || []).filter(word => words.has(word)).length})).sort((a,b)=>b.score-a.score);
-  return {prompt, answer: definition, options: shuffle([definition, ...candidates.slice(0,3).map(c=>c.answer)], random)};
+  const options=shuffle([definition, ...candidates.slice(0,3).map(c=>c.answer)],random);
+  return {prompt,answer:definition,options,type:options.length<2?'written':'choice'};
 }
 function newRound(cards, learned = [], random = Math.random) {
   const queue = shuffle(cards.map((_,id)=>id).filter(id=>!learned.includes(id)),random).slice(0,10);
   return {queue, total:queue.length, completed:0, attempts:0, firstCorrect:0, seen:[], current:null, feedback:null};
 }
+function isLearnAnswerCorrect(question,choice){
+  if(typeof choice!=='string')return false;
+  const written=question.type==='written'||question.options.length<2;
+  const clean=text=>text.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.!?]+$/,'');
+  return written?clean(choice)===clean(question.answer):choice===question.answer;
+}
 function answerQuestion(round, choice) {
   if (!round.current || round.feedback) return false;
-  const id = round.queue[0], correct = choice === round.current.answer;
-  if (!round.current.options.includes(choice)) return false;
+  const id = round.queue[0], correct = isLearnAnswerCorrect(round.current,choice);
+  const written=round.current.type==='written'||round.current.options.length<2;
+  if(typeof choice!=='string'||!choice.trim()||(!written&&!round.current.options.includes(choice)))return false;
   round.attempts++;
   if (!round.seen.includes(id)) {round.seen.push(id);if(correct)round.firstCorrect++;}
   round.feedback = {choice, correct};
@@ -537,6 +547,47 @@ function advanceRound(round) {
   else round.queue.push(id);
   round.current=null;round.feedback=null;
   return correct ? id : null;
+}
+
+const MASTERY_TARGET=3;
+function validateMastery(value,count){
+ if(!value||value.version!==1||!Number.isInteger(value.clock)||value.clock<0||!Array.isArray(value.cards)||value.cards.length!==count)throw new Error('Invalid per-card mastery data.');
+ const result=JSON.parse(JSON.stringify(value));
+ if(result.cards.some(c=>!c||!['streak','correct','incorrect','lastSeen'].every(k=>Number.isInteger(c[k])&&c[k]>=0)||c.streak>MASTERY_TARGET||c.streak>c.correct||c.lastSeen>result.clock))throw new Error('Invalid per-card mastery counters.');
+ return result;
+}
+function initializeMastery(state){
+ if(state.mastery)return validateMastery(state.mastery,state.cards.length);
+ const learned=new Set(state.learned||[]);
+ const mastery={version:1,clock:0,legacyCredit:learned.size>0||!!state.round?.feedback,cards:state.cards.map((_,id)=>({streak:learned.has(id)?1:0,correct:learned.has(id)?1:0,incorrect:0,lastSeen:0}))};
+ // Older versions recorded one successful answer, not three. Credit that
+ // evidence without inventing a longer streak or deleting the old history.
+ const r=state.round,id=r?.queue?.[0];
+ if(r?.feedback&&Number.isInteger(id)&&mastery.cards[id]){
+  if(!r.feedback.correct)recordMastery(mastery,id,false);
+  else if(!learned.has(id))recordMastery(mastery,id,true);
+ }
+ return mastery;
+}
+function recordMastery(mastery,id,correct){
+ const card=mastery.cards[id];if(!Number.isInteger(id)||!card||typeof correct!=='boolean')throw new Error('Invalid mastery answer.');
+ const wasMastered=card.streak>=MASTERY_TARGET;
+ card.lastSeen=++mastery.clock;
+ if(correct){card.correct++;card.streak=Math.min(MASTERY_TARGET,card.streak+1);}else{card.incorrect++;card.streak=0;}
+ return {streak:card.streak,mastered:card.streak>=MASTERY_TARGET,newlyMastered:!wasMastered&&card.streak>=MASTERY_TARGET};
+}
+function masterySummary(mastery){
+ const mastered=mastery.cards.filter(c=>c.streak>=MASTERY_TARGET).length;
+ const developing=mastery.cards.filter(c=>c.streak>0&&c.streak<MASTERY_TARGET).length;
+ return {mastered,developing,needsWork:mastery.cards.length-mastered-developing,total:mastery.cards.length};
+}
+function newMasteryRound(cards,mastery,random=Math.random,onlyIds=null){
+ const all=cards.map((_,id)=>id);
+ let pool=onlyIds?all.filter(id=>onlyIds.includes(id)):all.filter(id=>mastery.cards[id].streak<MASTERY_TARGET);
+ // Once every card meets the standard, review is explicit and never clears it.
+ if(!pool.length&&!onlyIds)pool=all;
+ const queue=shuffle(pool,random).sort((a,b)=>mastery.cards[a].lastSeen-mastery.cards[b].lastSeen).slice(0,10);
+ return {queue,total:queue.length,completed:0,attempts:0,firstCorrect:0,seen:[],current:null,feedback:null};
 }
 
 function createExam(cards,random=Math.random,now=new Date()){
@@ -576,9 +627,10 @@ function validateStudyState(input) {
     r.queue=ids(r.queue,'round queue');r.seen=ids(r.seen,'round history');
     if(!['total','completed','attempts','firstCorrect'].every(k=>Number.isInteger(r[k])&&r[k]>=0)||r.total>cards.length||r.completed>r.total||r.firstCorrect>r.seen.length||r.seen.length>r.total||r.attempts<r.seen.length||r.queue.length+r.completed!==r.total)throw new Error('Invalid round scores in backup.');
     if(r.current){const q=r.current;if(!r.queue.length||typeof q.prompt!=='string'||typeof q.answer!=='string'||!Array.isArray(q.options)||!q.options.length||q.options.some(o=>typeof o!=='string')||new Set(q.options).size!==q.options.length||!q.options.includes(q.answer))throw new Error('Invalid current question in backup.');}
-    if(r.feedback&&(!r.current||typeof r.feedback.correct!=='boolean'||!r.current.options.includes(r.feedback.choice)||r.feedback.correct!==(r.feedback.choice===r.current.answer)))throw new Error('Invalid answer feedback in backup.');
+    if(r.feedback&&(!r.current||typeof r.feedback.correct!=='boolean'||typeof r.feedback.choice!=='string'||(!(r.current.type==='written'||r.current.options.length<2)&&!r.current.options.includes(r.feedback.choice))||r.feedback.correct!==isLearnAnswerCorrect(r.current,r.feedback.choice)))throw new Error('Invalid answer feedback in backup.');
     state.round=r;
   }
+  if(input.mastery)state.mastery=validateMastery(input.mastery,cards.length);
   if(input.exam)state.exam=validateExam(input.exam,cards);
   if(['learn','exam'].includes(input.lastActivity))state.lastActivity=input.lastActivity;
   if(input.soundEnabled===true)state.soundEnabled=true;
@@ -587,14 +639,14 @@ function validateStudyState(input) {
 }
 function createStudyBackup(state, now=new Date()) {
   const clean=validateStudyState(state);
-  return {format:'pocket-study-backup',version:1,exportedAt:now.toISOString(),title:clean.title,cards:clean.cards,progress:{known:clean.known,learned:clean.learned,round:clean.round||null,lastActivity:clean.lastActivity||'flash',exam:clean.exam||null,soundEnabled:clean.soundEnabled||false,feedbackStreak:clean.feedbackStreak||0}};
+  return {format:'pocket-study-backup',version:1,exportedAt:now.toISOString(),title:clean.title,cards:clean.cards,progress:{known:clean.known,learned:clean.learned,round:clean.round||null,lastActivity:clean.lastActivity||'flash',exam:clean.exam||null,soundEnabled:clean.soundEnabled||false,feedbackStreak:clean.feedbackStreak||0,mastery:clean.mastery||null}};
 }
 function parseStudyBackup(text) {
   const data=JSON.parse(text);
   if(data.format!=='pocket-study-backup')return null;
   if(data.version!==1)throw new Error('This backup version is not supported. Update Pocket before restoring it.');
   if(!data.progress||!Array.isArray(data.progress.known)||!Array.isArray(data.progress.learned))throw new Error('Backup is missing progress. Nothing has been restored.');
-  return validateStudyState({title:data.title,cards:data.cards,known:data.progress.known,learned:data.progress.learned,round:data.progress.round,lastActivity:data.progress.lastActivity,exam:data.progress.exam,soundEnabled:data.progress.soundEnabled,feedbackStreak:data.progress.feedbackStreak});
+  return validateStudyState({title:data.title,cards:data.cards,known:data.progress.known,learned:data.progress.learned,round:data.progress.round,lastActivity:data.progress.lastActivity,exam:data.progress.exam,soundEnabled:data.progress.soundEnabled,feedbackStreak:data.progress.feedbackStreak,mastery:data.progress.mastery});
 }
 
 function joinPdfLines(lines) {
@@ -670,18 +722,21 @@ function keepRecovery(reason,onlyIfMissing=false){try{const data=localStorage.ge
 keepRecovery('Before app update',true);
 let toastLater='';
 let state = {cards:[], known:[]}, mode = 'all', order = [], index = 0, flipped = false;
-try { const saved = JSON.parse(localStorage.getItem(storageKey)); if(saved){state.cards=parseCards(JSON.stringify(saved.cards));state.known=Array.isArray(saved.known)?saved.known.filter(n=>Number.isInteger(n)&&n>=0&&n<state.cards.length):[];state.lastActivity=saved.lastActivity;state.soundEnabled=saved.soundEnabled===true;state.feedbackStreak=Number.isInteger(saved.feedbackStreak)?saved.feedbackStreak:0;if(saved.exam){try{state.exam=validateExam(saved.exam,state.cards);}catch{toastLater='Saved exam could not be loaded; your other study progress is intact.';}}state.title=typeof saved.title==='string'?saved.title:'Computer Ethics';state.learned=saved.learned;const r=saved.round;if(r&&Array.isArray(r.queue)&&r.queue.every(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length)&&Array.isArray(r.seen)&&['total','completed','attempts','firstCorrect'].every(k=>Number.isInteger(r[k])&&r[k]>=0)&&(!r.current||(typeof r.current.prompt==='string'&&typeof r.current.answer==='string'&&Array.isArray(r.current.options))))state.round=r;} } catch { /* Empty or unavailable storage: start clean. */ }
+try { const saved = JSON.parse(localStorage.getItem(storageKey)); if(saved){state.cards=parseCards(JSON.stringify(saved.cards));state.known=Array.isArray(saved.known)?saved.known.filter(n=>Number.isInteger(n)&&n>=0&&n<state.cards.length):[];state.lastActivity=saved.lastActivity;state.soundEnabled=saved.soundEnabled===true;state.feedbackStreak=Number.isInteger(saved.feedbackStreak)?saved.feedbackStreak:0;if(saved.exam){try{state.exam=validateExam(saved.exam,state.cards);}catch{toastLater='Saved exam could not be loaded; your other study progress is intact.';}}state.title=typeof saved.title==='string'?saved.title:'Computer Ethics';state.learned=saved.learned;state.mastery=saved.mastery;const r=saved.round;if(r&&Array.isArray(r.queue)&&r.queue.every(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length)&&Array.isArray(r.seen)&&['total','completed','attempts','firstCorrect'].every(k=>Number.isInteger(r[k])&&r[k]>=0)&&(!r.current||(typeof r.current.prompt==='string'&&typeof r.current.answer==='string'&&Array.isArray(r.current.options))))state.round=r;} } catch { /* Empty or unavailable storage: start clean. */ }
 state.title ||= 'Computer Ethics';
 let activity = 'flash';
 state.learned = Array.isArray(state.learned) ? state.learned.filter(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length) : [];
+try{state.mastery=initializeMastery(state);}catch{state.mastery=initializeMastery({...state,mastery:null});toastLater='Mastery counters could not be read; your previous study history is kept.';}
+if(state.cards.length)save();
 function toast(message){$('toast').textContent=message;$('toast').style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').style.display='none',3500);}
 function save(){try{localStorage.setItem(storageKey,JSON.stringify(state));}catch{toast('Storage unavailable. Export a backup to keep your cards.');}}
 function rebuild(){order=state.cards.map((_,i)=>i).filter(i=>mode==='all'||!state.known.includes(i));index=0;flipped=false;render();}
 function render(){
  $('deck-title').textContent=state.title;document.title=`Pocket • ${state.title}`;
  const id=order[index], card=state.cards[id], count=state.known.length;
+ $('card-mastery').textContent=card?`Learn mastery: ${state.mastery.cards[id].streak}/${MASTERY_TARGET}${state.mastery.cards[id].streak>=MASTERY_TARGET?' · mastered':''}`:'';
  $('total').textContent=state.cards.length;$('remaining').textContent=state.cards.length-count;
- $('mastery').textContent=`${count} mastered`;$('progress').style.width=`${state.cards.length?count/state.cards.length*100:0}%`;
+ $('mastery').textContent=`${count} marked familiar`;$('progress').style.width=`${state.cards.length?count/state.cards.length*100:0}%`;
  $('position').textContent=card?`CARD ${index+1} OF ${order.length}`:state.cards.length?'All caught up':'Ready when you are';
  $('side').textContent=card?(flipped?'DEFINITION':'TERM'):state.cards.length?'WELL DONE':'LET’S GET STARTED';
  $('card-text').textContent=card?(flipped?card.definition:card.term):state.cards.length?'A little practice goes a long way.':'Your next study session\nstarts here.';
@@ -704,7 +759,7 @@ function invalidatePreview(){reviewedText='';reviewedBackup=null;$('backup-previ
 function reviewImport(){
  let backup=null;try{backup=parseStudyBackup($('import-text').value);}catch(e){if($('import-text').value.trim().startsWith('{'))throw e;}
  const cards=backup?backup.cards:parseCards($('import-text').value);if(cards.length>2000)throw new Error('Import up to 2,000 cards at a time.');
- reviewedBackup=backup;$('import').textContent=backup?'Restore cards & progress':'Use these cards';$('backup-preview').hidden=!backup;$('backup-preview').textContent=backup?`Full backup: ${backup.known.length} mastered, ${backup.learned.length} learned${backup.round?`, round ${backup.round.completed}/${backup.round.total} cards complete (${backup.round.attempts} attempts)`:''}${backup.exam?`, saved exam (${backup.exam.submittedAt?'submitted':backup.exam.answers.filter(a=>typeof a==='string'&&a.trim()).length+' answered'})`:''}. Your cards and progress will be restored together.`:'';
+ reviewedBackup=backup;$('import').textContent=backup?'Restore cards & progress':'Use these cards';$('backup-preview').hidden=!backup;$('backup-preview').textContent=backup?`Full backup: ${backup.known.length} marked familiar, ${backup.learned.length} previously learned${backup.mastery?`, ${masterySummary(backup.mastery).mastered} verified mastered`:''}${backup.round?`, round ${backup.round.completed}/${backup.round.total} cards complete (${backup.round.attempts} attempts)`:''}${backup.exam?`, saved exam (${backup.exam.submittedAt?'submitted':backup.exam.answers.filter(a=>typeof a==='string'&&a.trim()).length+' answered'})`:''}. Your cards and progress will be restored together.`:'';
  reviewedText=$('import-text').value;$('preview-count').textContent=`Review all ${cards.length} cards`;$('preview-cards').replaceChildren();
  cards.forEach((card,i)=>{const item=document.createElement('article');const question=document.createElement('strong');question.textContent=`${i+1}. ${card.term}`;const answer=document.createElement('p');answer.textContent=card.definition;item.append(question,answer);$('preview-cards').append(item);});
  $('import-preview').hidden=false;$('confirm-review').checked=false;$('import').disabled=true;
@@ -717,7 +772,7 @@ $('confirm-review').onchange=()=>{$('import').disabled=!$('confirm-review').chec
 $('import').onclick=()=>{try{
  if(!$('confirm-review').checked||reviewedText!==$('import-text').value)throw new Error('Review the cards and confirm the question / answer pairs first.');
  const cards=parseCards(reviewedText), backup=reviewedBackup;if(state.cards.length&&!confirm(backup?'Restore this backup, replacing this device’s current cards and progress?':'Replace your current cards and reset study progress? Export a full backup first if needed.'))return;
- keepRecovery('Before restoring backup or replacing set');state=backup||{title:$('set-title').value.trim()||'My study set',cards,known:[],learned:[]};if(backup)state.title=$('set-title').value.trim()||state.title;mode='all';rebuild();setActivity(['learn','exam'].includes(backup?.lastActivity)?backup.lastActivity:'flash');save();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(backup?'Cards and study progress restored':`${cards.length} cards imported`);
+ keepRecovery('Before restoring backup or replacing set');state=backup||{title:$('set-title').value.trim()||'My study set',cards,known:[],learned:[]};if(backup)state.title=$('set-title').value.trim()||state.title;state.mastery=initializeMastery(state);mode='all';rebuild();setActivity(['learn','exam'].includes(backup?.lastActivity)?backup.lastActivity:'flash');save();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(backup?'Cards and study progress restored':`${cards.length} cards imported`);
  }catch(e){$('import-status').textContent=e.message;}};
 $('import-file').onchange=async event=>{
  const file=event.target.files[0];if(!file)return;const generation=++importGeneration;invalidatePreview();
@@ -740,7 +795,7 @@ $('export-progress').onclick=()=>{
  try{const backup=createStudyBackup(state);const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='pocket-full-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('import-status').textContent='Full backup downloaded: cards, mastery, learned cards, unfinished Learn round, and saved exam. Save it to Files or iCloud Drive.';}catch(e){$('import-status').textContent=`Could not export backup: ${e.message}`;}
 };
 $('restore-recovery').onclick=()=>{
- try{const saved=JSON.parse(localStorage.getItem(recoveryKey));if(!saved)throw new Error('No local recovery snapshot is available.');const restored=validateStudyState(JSON.parse(saved.data));if(!confirm(`Restore the local snapshot from ${new Date(saved.createdAt).toLocaleString()}? This replaces your current cards and progress.`))return;keepRecovery('Before local recovery');state=restored;mode='all';rebuild();setActivity(['learn','exam'].includes(state.lastActivity)?state.lastActivity:'flash');save();invalidatePreview();$('import-dialog').close();toast('Local cards and progress recovered');}catch(e){$('import-status').textContent=`Recovery failed: ${e.message}`;}
+ try{const saved=JSON.parse(localStorage.getItem(recoveryKey));if(!saved)throw new Error('No local recovery snapshot is available.');const restored=validateStudyState(JSON.parse(saved.data));if(!confirm(`Restore the local snapshot from ${new Date(saved.createdAt).toLocaleString()}? This replaces your current cards and progress.`))return;keepRecovery('Before local recovery');state=restored;state.mastery=initializeMastery(state);mode='all';rebuild();setActivity(['learn','exam'].includes(state.lastActivity)?state.lastActivity:'flash');save();invalidatePreview();$('import-dialog').close();toast('Local cards and progress recovered');}catch(e){$('import-status').textContent=`Recovery failed: ${e.message}`;}
 };
 $('export-pdf').onclick=()=>{
  if(!exportCards())return;const popup=window.open('','_blank');if(!popup){$('import-status').textContent='Allow pop-ups for this site to open the printable PDF view.';return;}
@@ -749,7 +804,7 @@ $('export-pdf').onclick=()=>{
  state.cards.forEach((card,i)=>{const article=doc.createElement('article');const q=doc.createElement('p');q.textContent=`Question: ${card.term}`;const a=doc.createElement('p');a.textContent=`Answer: ${card.definition}`;article.append(q,a);doc.body.append(article);});popup.focus();
 };
 document.addEventListener('keydown',e=>{if(activity!=='flash'||$('import-dialog').open||['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement.tagName))return;if(e.code==='Space'){e.preventDefault();$('card').click();}if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1);});
-if(!state.cards.length){try{state.cards=parseCards(document.getElementById('included-deck').textContent);save();}catch{toast('Could not load the included deck. Use Manage cards to import a backup.');}}
+if(!state.cards.length){try{state.cards=parseCards(document.getElementById('included-deck').textContent);state.mastery=initializeMastery({...state,mastery:null});save();}catch{toast('Could not load the included deck. Use Manage cards to import a backup.');}}
 rebuild();
 $('offline-status').textContent='Standalone edition · no server needed';
 
@@ -757,38 +812,42 @@ function setActivity(value){
  activity=value;state.lastActivity=value;save();
  $('flash-panel').hidden=value!=='flash';$('learn-panel').hidden=value!=='learn';$('exam-panel').hidden=value!=='exam';
  for(const [id,active] of [['flash-mode',value==='flash'],['learn-mode',value==='learn'],['exam-mode',value==='exam']]){ $(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',active); }
- if(value==='learn'){if(!state.round)state.round=newRound(state.cards,state.learned);renderLearn();}
+ if(value==='learn'){if(!state.round)state.round=newMasteryRound(state.cards,state.mastery);renderLearn();}
  if(value==='exam')renderExam();
 }
 function renderLearn(){
  const round=state.round;
- $('sound-toggle').textContent=state.soundEnabled?'Sound: on':'Sound: off';$('sound-toggle').setAttribute('aria-pressed',!!state.soundEnabled);$('learn-streak').textContent=state.feedbackStreak>1?`${state.feedbackStreak} correct in a row`:'';
+ $('sound-toggle').textContent=state.soundEnabled?'Sound: on':'Sound: off';$('sound-toggle').setAttribute('aria-pressed',!!state.soundEnabled);$('learn-streak').textContent=state.feedbackStreak>1?`${state.feedbackStreak} correct across cards`:'';
  if(!round)return;
  const finished=!round.queue.length;
  $('learn-question-panel').hidden=finished;$('learn-summary').hidden=!finished;
- $('learn-count').textContent=`${round.completed} / ${round.total} cards learned`;
- $('learn-score').textContent=`${state.learned.length} / ${state.cards.length} overall`;
+ renderMasteryOverview();
+ $('learn-count').textContent=`${round.completed} / ${round.total} practiced this round`;
+ $('learn-score').textContent=`${masterySummary(state.mastery).mastered} / ${state.cards.length} mastered`;
  $('learn-progress').style.width=`${round.total?round.completed/round.total*100:0}%`;
  if(finished){
-  const allDone=state.learned.length===state.cards.length;
-  $('summary-title').textContent=!state.cards.length?'Import cards to start learning':allDone?'You’ve practiced the whole collection!':'Round complete. Nicely done.';
-  $('summary-detail').textContent=round.total?`${round.firstCorrect} of ${round.total} correct on the first try (${Math.round(round.firstCorrect/round.total*100)}%). ${round.attempts} total attempts. Every card in this round is now answered correctly.`:'Your next study session is ready when you are.';
-  $('next-round').textContent=allDone?'Practice the collection again':'Next round →';$('next-round').disabled=!state.cards.length;
+  const allDone=masterySummary(state.mastery).mastered===state.cards.length;
+  $('summary-title').textContent=!state.cards.length?'Import cards to start learning':allDone?'Every card meets the mastery standard!':'Round complete. Keep building mastery.';
+  $('summary-detail').textContent=round.total?`${round.firstCorrect} of ${round.total} correct on the first try (${Math.round(round.firstCorrect/round.total*100)}%). ${round.attempts} total attempts. ${round.seen.filter(id=>state.mastery.cards[id].streak>=MASTERY_TARGET).length} of this round’s cards now meet the 3-in-a-row mastery standard. Other cards will return in later rounds.`:'Your next study session is ready when you are.';
+  $('next-round').textContent=allDone?'Review mastered cards':'Next mastery round →';$('next-round').disabled=!state.cards.length;
   return;
  }
  if(!round.current)round.current=makeQuestion(state.cards,round.queue[0]);
  const q=round.current, feedback=round.feedback;
+ const cardProgress=state.mastery.cards[round.queue[0]];$('learn-card-mastery').textContent=`THIS CARD: ${cardProgress.streak}/${MASTERY_TARGET} consecutive correct${cardProgress.streak>=MASTERY_TARGET?' · MASTERED':''}`;
  if(!feedback)$('learn-question-panel').classList.remove('celebrate-answer','retry-answer');
- $('learn-kind').textContent=q.options.length===2&&q.options.includes('True')&&q.options.includes('False')?'TRUE OR FALSE':'CHOOSE ONE ANSWER';
+ const written=q.type==='written'||q.options.length<2;
+ $('learn-written-label').hidden=!written||!!feedback;$('learn-check').hidden=!written||!!feedback;
+ $('learn-kind').textContent=written?'WRITE YOUR ANSWER':q.options.length===2&&q.options.includes('True')&&q.options.includes('False')?'TRUE OR FALSE':'CHOOSE ONE ANSWER';
  $('learn-question').textContent=q.prompt;
  $('learn-options').replaceChildren();
- q.options.forEach((option,i)=>{
+ if(!written)q.options.forEach((option,i)=>{
   const button=document.createElement('button');button.className='learn-option';
   const letter=document.createElement('span');letter.className='option-letter';letter.textContent=String.fromCharCode(65+i);
   const text=document.createElement('span');text.textContent=option;button.append(letter,text);
   button.disabled=!!feedback;
   if(feedback){if(option===q.answer){button.classList.add('correct');const badge=document.createElement('strong');badge.className='answer-badge';badge.textContent='✓ CORRECT ANSWER';button.append(badge);}else if(option===feedback.choice){button.classList.add('incorrect');const badge=document.createElement('strong');badge.className='answer-badge';badge.textContent='✕ YOUR ANSWER';button.append(badge);}}
-  button.onclick=()=>{if(answerQuestion(round,option)){state.feedbackStreak=round.feedback.correct?(state.feedbackStreak||0)+1:0;playAnswerSound(round.feedback.correct);save();renderLearn();animateLearnResult(round.feedback.correct);$('learn-feedback').focus({preventScroll:true});$('learn-feedback').scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}};
+  button.onclick=()=>submitLearnChoice(option);
   $('learn-options').append(button);
  });
  $('learn-question-panel').classList.toggle('result-correct',!!feedback?.correct);
@@ -799,7 +858,7 @@ function renderLearn(){
   const content=document.createElement('div');const heading=document.createElement('strong');heading.className='result-heading';heading.textContent=feedback.correct?'Correct — you’ve got it!':'Not quite — let’s make it stick.';
   const label=document.createElement('p');label.className='result-label';label.textContent='REMEMBER THIS ANSWER';
   const answer=document.createElement('p');answer.className='memory-answer';answer.textContent=q.answer;
-  const cue=document.createElement('p');cue.className='memory-cue';cue.textContent=feedback.correct?'Say it once more to lock it in.':'Read the correct answer aloud. This card will return for another try.';
+  const cue=document.createElement('p');cue.className='memory-cue';cue.textContent=feedback.correct?(cardProgress.streak>=MASTERY_TARGET?'3 correct in a row for this card — mastery reached. You can still review it.':`${cardProgress.streak}/3 correct in a row for this card. It will return in a later round until you reach 3/3.`):'This card’s streak reset to 0/3. Read the answer aloud; it will return later in this round, then in future rounds until mastered.';
   content.append(heading,label,answer,cue);$('learn-feedback').append(icon,content);
  }
  $('learn-feedback').className=feedback?(feedback.correct?'feedback-correct':'feedback-incorrect'):'';
@@ -807,10 +866,10 @@ function renderLearn(){
  save();
 }
 $('flash-mode').onclick=()=>setActivity('flash');$('learn-mode').onclick=()=>setActivity('learn');
-$('learn-next').onclick=()=>{const learned=advanceRound(state.round);if(learned!==null&&!state.learned.includes(learned))state.learned.push(learned);save();renderLearn();$('learn-question').focus({preventScroll:true});};
+$('learn-next').onclick=()=>{$('learn-written').value='';const learned=advanceRound(state.round);if(learned!==null&&!state.learned.includes(learned))state.learned.push(learned);save();renderLearn();$('learn-question').focus({preventScroll:true});};
 $('learn-question').tabIndex=-1;
-$('restart-learn').onclick=()=>{if(confirm('Restart this round? Your previously learned cards will stay saved.')){state.round=newRound(state.cards,state.learned);save();renderLearn();}};
-$('next-round').onclick=()=>{if(state.learned.length===state.cards.length)state.learned=[];state.round=newRound(state.cards,state.learned);save();renderLearn();};
+$('restart-learn').onclick=()=>{if(confirm('Restart this round? Per-card mastery streaks and previous progress will stay saved.')){state.round=newMasteryRound(state.cards,state.mastery);save();renderLearn();}};
+$('next-round').onclick=()=>{state.round=newMasteryRound(state.cards,state.mastery);save();renderLearn();};
 
 if(['learn','exam'].includes(state.lastActivity))setActivity(state.lastActivity);
 if(toastLater)toast(toastLater);
@@ -879,6 +938,30 @@ $('exam-missed-only').onchange=renderExamResults;
 $('practice-exam-missed').onclick=()=>{
  if(!state.exam?.submittedAt)return;const ids=scoreExam(state.exam).rows.filter(r=>!r.correct).map(r=>r.cardId);if(!ids.length)return;
  if(state.round?.queue.length&&!confirm('Replace your unfinished Learn round with up to 10 missed exam cards? Your learned-card progress will stay.'))return;
- keepRecovery('Before practicing missed exam cards');state.round=newRound(state.cards,state.cards.map((_,id)=>id).filter(id=>!ids.includes(id)));save();setActivity('learn');
+ keepRecovery('Before practicing missed exam cards');state.round=newMasteryRound(state.cards,state.mastery,Math.random,ids);save();setActivity('learn');
 };
+function renderMasteryOverview(){
+ const summary=masterySummary(state.mastery);$('mastery-migration-note').hidden=!state.mastery.legacyCredit;
+ $('mastery-overview-text').textContent=`${summary.mastered} mastered · ${summary.developing} building mastery · ${summary.needsWork} at 0/3 · ${summary.total} total`;
+ $('set-mastery-progress').style.width=`${summary.total?summary.mastered/summary.total*100:0}%`;
+ if($('mastery-details').open)renderMasteryList();
+}
+function renderMasteryList(){
+ $('mastery-list').replaceChildren();
+ state.cards.forEach((card,id)=>{const progress=state.mastery.cards[id];const item=document.createElement('article');const badge=document.createElement('strong');badge.textContent=`${progress.streak>=MASTERY_TARGET?'✓ MASTERED':'IN PRACTICE'} · ${progress.streak}/3 consecutive correct`;const question=document.createElement('p');question.textContent=`${id+1}. ${card.term}`;const counts=document.createElement('small');counts.textContent=`${progress.correct} correct · ${progress.incorrect} incorrect recorded (older history has at most one credited success)`;item.append(badge,question,counts);$('mastery-list').append(item);});
+}
+$('mastery-details').ontoggle=()=>{if($('mastery-details').open)renderMasteryList();};
+
+function submitLearnChoice(choice){
+ const round=state.round;if(!round)return;
+ if(answerQuestion(round,choice)){
+  recordMastery(state.mastery,round.queue[0],round.feedback.correct);
+  state.feedbackStreak=round.feedback.correct?(state.feedbackStreak||0)+1:0;
+  playAnswerSound(round.feedback.correct);save();renderLearn();animateLearnResult(round.feedback.correct);
+  $('learn-feedback').focus({preventScroll:true});$('learn-feedback').scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+ }
+}
+$('learn-check').onclick=()=>{if(!$('learn-written').value.trim()){toast('Type your answer before checking.');return;}submitLearnChoice($('learn-written').value);};
+
+$('dismiss-mastery-note').onclick=()=>{state.mastery.legacyCredit=false;save();renderMasteryOverview();};
 </script></body></html>
