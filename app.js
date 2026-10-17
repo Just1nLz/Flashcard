@@ -1,4 +1,5 @@
 import {installLearnSwipe} from './swipe.js';
+import {initializeRewards,validateRoundReward,awardRoundReward,buildSetRecap} from './rewards.js';
 import {MASTERY_TARGET,initializeMastery,recordMastery,masterySummary,newMasteryRound,isCardMastered,setManualMastery,completeManualCard,ensureRoundReviewMix} from './mastery.js';
 import {createExam,setExamAnswer,scoreExam,submitExam,validateExam} from './exam.js';
 import {createStudyBackup, parseStudyBackup, validateStudyState} from './backup.js';
@@ -15,7 +16,8 @@ let toastLater='';
 let state = {cards:[], known:[]}, mode = 'all', order = [], index = 0, flipped = false;
 try { const saved = JSON.parse(localStorage.getItem(storageKey)); if(saved){state.cards=parseCards(JSON.stringify(saved.cards));state.known=Array.isArray(saved.known)?saved.known.filter(n=>Number.isInteger(n)&&n>=0&&n<state.cards.length):[];state.lastActivity=saved.lastActivity;state.soundEnabled=saved.soundEnabled===true;state.feedbackStreak=Number.isInteger(saved.feedbackStreak)?saved.feedbackStreak:0;if(saved.exam){try{state.exam=validateExam(saved.exam,state.cards);}catch{toastLater='Saved exam could not be loaded; your other study progress is intact.';}}state.title=typeof saved.title==='string'?saved.title:'Computer Ethics';state.learned=saved.learned;state.mastery=saved.mastery;const r=saved.round;if(r&&Array.isArray(r.queue)&&r.queue.every(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length)&&Array.isArray(r.seen)&&['total','completed','attempts','firstCorrect'].every(k=>Number.isInteger(r[k])&&r[k]>=0)&&(!r.current||(typeof r.current.prompt==='string'&&typeof r.current.answer==='string'&&Array.isArray(r.current.options))))state.round=r;} } catch { /* Empty or unavailable storage: start clean. */ }
 state.title ||= 'Computer Ethics';
-let activity = 'flash';
+let activity = 'flash', recapOpen=false;
+try{const saved=JSON.parse(localStorage.getItem(storageKey));state.rewards=initializeRewards(saved?.rewards);if(state.round?.reward)validateRoundReward(state.round.reward);}catch{state.rewards=initializeRewards();if(state.round)delete state.round.reward;toastLater='Reward history could not be read; your cards and study progress are intact.';}
 state.learned = Array.isArray(state.learned) ? state.learned.filter(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length) : [];
 try{state.mastery=initializeMastery(state);}catch{state.mastery=initializeMastery({...state,mastery:null});toastLater='Mastery counters could not be read; your previous study history is kept.';}
 if(state.cards.length){ensureRoundReviewMix(state.cards,state.mastery,state.round);save();}
@@ -50,7 +52,7 @@ function invalidatePreview(){reviewedText='';reviewedBackup=null;$('backup-previ
 function reviewImport(){
  let backup=null;try{backup=parseStudyBackup($('import-text').value);}catch(e){if($('import-text').value.trim().startsWith('{'))throw e;}
  const cards=backup?backup.cards:parseCards($('import-text').value);if(cards.length>2000)throw new Error('Import up to 2,000 cards at a time.');
- reviewedBackup=backup;$('import').textContent=backup?'Restore cards & progress':'Use these cards';$('backup-preview').hidden=!backup;$('backup-preview').textContent=backup?`Full backup: ${backup.known.length} marked familiar, ${backup.learned.length} previously learned${backup.mastery?`, ${masterySummary(backup.mastery).mastered} verified mastered`:''}${backup.round?`, round ${backup.round.completed}/${backup.round.total} cards complete (${backup.round.attempts} attempts)`:''}${backup.exam?`, saved exam (${backup.exam.submittedAt?'submitted':backup.exam.answers.filter(a=>typeof a==='string'&&a.trim()).length+' answered'})`:''}. Your cards and progress will be restored together.`:'';
+ reviewedBackup=backup;$('import').textContent=backup?'Restore cards & progress':'Use these cards';$('backup-preview').hidden=!backup;$('backup-preview').textContent=backup?`Full backup: ${backup.known.length} marked familiar, ${backup.learned.length} previously learned${backup.mastery?`, ${masterySummary(backup.mastery).verified} verified mastered, ${masterySummary(backup.mastery).manual} manually mastered`:''}${backup.rewards?`, ${backup.rewards.xp} XP and ${backup.rewards.completedRounds} completed rounds`:''}${backup.round?`, round ${backup.round.completed}/${backup.round.total} cards complete (${backup.round.attempts} attempts)`:''}${backup.exam?`, saved exam (${backup.exam.submittedAt?'submitted':backup.exam.answers.filter(a=>typeof a==='string'&&a.trim()).length+' answered'})`:''}. Your cards and progress will be restored together.`:'';
  reviewedText=$('import-text').value;$('preview-count').textContent=`Review all ${cards.length} cards`;$('preview-cards').replaceChildren();
  cards.forEach((card,i)=>{const item=document.createElement('article');const question=document.createElement('strong');question.textContent=`${i+1}. ${card.term}`;const answer=document.createElement('p');answer.textContent=card.definition;item.append(question,answer);$('preview-cards').append(item);});
  $('import-preview').hidden=false;$('confirm-review').checked=false;$('import').disabled=true;
@@ -63,7 +65,7 @@ $('confirm-review').onchange=()=>{$('import').disabled=!$('confirm-review').chec
 $('import').onclick=()=>{try{
  if(!$('confirm-review').checked||reviewedText!==$('import-text').value)throw new Error('Review the cards and confirm the question / answer pairs first.');
  const cards=parseCards(reviewedText), backup=reviewedBackup;if(state.cards.length&&!confirm(backup?'Restore this backup, replacing this device’s current cards and progress?':'Replace your current cards and reset study progress? Export a full backup first if needed.'))return;
- keepRecovery('Before restoring backup or replacing set');state=backup||{title:$('set-title').value.trim()||'My study set',cards,known:[],learned:[]};if(backup)state.title=$('set-title').value.trim()||state.title;state.mastery=initializeMastery(state);ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam'].includes(backup?.lastActivity)?backup.lastActivity:'flash');save();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(backup?'Cards and study progress restored':`${cards.length} cards imported`);
+ keepRecovery('Before restoring backup or replacing set');state=backup||{title:$('set-title').value.trim()||'My study set',cards,known:[],learned:[]};if(backup)state.title=$('set-title').value.trim()||state.title;state.mastery=initializeMastery(state);state.rewards=initializeRewards(state.rewards);recapOpen=false;ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam'].includes(backup?.lastActivity)?backup.lastActivity:'flash');save();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(backup?'Cards and study progress restored':`${cards.length} cards imported`);
  }catch(e){$('import-status').textContent=e.message;}};
 $('import-file').onchange=async event=>{
  const file=event.target.files[0];if(!file)return;const generation=++importGeneration;invalidatePreview();
@@ -83,10 +85,10 @@ $('pdf-file').onchange=async event=>{
 function exportCards(){if(!state.cards.length){$('import-status').textContent='Import cards before exporting a backup.';return false;}return true;}
 $('export').onclick=()=>{if(!exportCards())return;const url=URL.createObjectURL(new Blob([JSON.stringify({title:state.title,cards:state.cards},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=(state.title.replace(/[^a-z0-9_-]+/gi,'-')||'study-set')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 $('export-progress').onclick=()=>{
- try{const backup=createStudyBackup(state);const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='pocket-full-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('import-status').textContent='Full backup downloaded: cards, mastery, learned cards, unfinished Learn round, and saved exam. Save it to Files or iCloud Drive.';}catch(e){$('import-status').textContent=`Could not export backup: ${e.message}`;}
+ try{const backup=createStudyBackup(state);const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='pocket-full-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('import-status').textContent='Full backup downloaded: cards, mastery, rewards, unfinished Learn round, and saved exam. Save it to Files or iCloud Drive.';}catch(e){$('import-status').textContent=`Could not export backup: ${e.message}`;}
 };
 $('restore-recovery').onclick=()=>{
- try{const saved=JSON.parse(localStorage.getItem(recoveryKey));if(!saved)throw new Error('No local recovery snapshot is available.');const restored=validateStudyState(JSON.parse(saved.data));if(!confirm(`Restore the local snapshot from ${new Date(saved.createdAt).toLocaleString()}? This replaces your current cards and progress.`))return;keepRecovery('Before local recovery');state=restored;state.mastery=initializeMastery(state);ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam'].includes(state.lastActivity)?state.lastActivity:'flash');save();invalidatePreview();$('import-dialog').close();toast('Local cards and progress recovered');}catch(e){$('import-status').textContent=`Recovery failed: ${e.message}`;}
+ try{const saved=JSON.parse(localStorage.getItem(recoveryKey));if(!saved)throw new Error('No local recovery snapshot is available.');const restored=validateStudyState(JSON.parse(saved.data));if(!confirm(`Restore the local snapshot from ${new Date(saved.createdAt).toLocaleString()}? This replaces your current cards and progress.`))return;keepRecovery('Before local recovery');state=restored;state.mastery=initializeMastery(state);state.rewards=initializeRewards(state.rewards);recapOpen=false;ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam'].includes(state.lastActivity)?state.lastActivity:'flash');save();invalidatePreview();$('import-dialog').close();toast('Local cards and progress recovered');}catch(e){$('import-status').textContent=`Recovery failed: ${e.message}`;}
 };
 $('export-pdf').onclick=()=>{
  if(!exportCards())return;const popup=window.open('','_blank');if(!popup){$('import-status').textContent='Allow pop-ups for this site to open the printable PDF view.';return;}
@@ -114,6 +116,10 @@ function renderLearn(){
  if(!round){syncLearnActions();return;}
  syncLearnActions();
  const finished=!round.queue.length;
+ const reward=awardRoundReward(state);
+ const recap=buildSetRecap(state);
+ if(finished&&recap.complete&&!state.rewards.recapShown&&activity==='learn'){recapOpen=true;state.rewards.recapShown=true;}
+ renderLearningRewards(recap);
  $('learn-question-panel').hidden=finished;$('learn-summary').hidden=!finished;
  renderMasteryOverview();
  $('learn-round-mix').textContent=`${round.baseIds?.length??round.total} core cards + ${round.reviewIds?.length||0} past-mistake reviews · ${round.total} total` ;
@@ -126,6 +132,10 @@ function renderLearn(){
   const verified=round.seen.filter(id=>state.mastery.cards[id].streak>=MASTERY_TARGET&&!state.mastery.cards[id].manualMastered).length;
   $('summary-detail').textContent=round.total?`${round.seen.length?`${round.firstCorrect} of ${round.seen.length} assessed cards correct on the first try (${Math.round(round.firstCorrect/round.seen.length*100)}%).`:'No answers were assessed.'} ${round.attempts} total answer attempts. ${verified} of this round’s assessed cards meet the 3-in-a-row standard. ${round.manualIds?.length||0} cards were manually marked mastered; unattempted cards do not add correct answers or inflate accuracy. Other cards will return in later rounds.`:'Your next study session is ready when you are.';
   $('next-round').textContent=allDone?'Review mastered cards':'Next mastery round →';$('next-round').disabled=!state.cards.length;
+  $('summary-recap').textContent=recap.complete?'✓ Every card assessed — see your full recap ↓':'See your set progress and focus cards ↓';
+  $('round-reward').hidden=!reward;
+  if(reward){$('round-reward-badge').textContent=reward.badge==='perfect'?'★':reward.badge==='persistent'?'↗':'✦';$('round-reward-title').textContent=reward.title;$('round-reward-xp').textContent=reward.xp?`+${reward.xp} XP earned`:'Round completed — your choices are saved';$('round-reward-detail').textContent=reward.assessed?`10 XP for finishing + ${reward.assessed*5} XP for assessed cards + ${reward.firstCorrect*5} XP for first-try answers`:'Manual marks do not earn answer XP. Assess cards to check your recall.';}
+  save();
   return;
  }
  if(!round.current)round.current=makeQuestion(state.cards,round.queue[0]);
@@ -165,11 +175,60 @@ function renderLearn(){
  syncLearnActions();
  save();
 }
+function renderLearningRewards(recap){
+ const rewards=state.rewards,level=Math.floor(rewards.xp/250)+1;
+ $('reward-level').textContent=`✦ Level ${level}`;
+ $('reward-total').textContent=`${rewards.xp} XP · ${rewards.completedRounds} round${rewards.completedRounds===1?'':'s'} complete`;
+ $('reward-level-progress').style.width=`${rewards.xp%250/250*100}%`;
+ $('reward-level-next').textContent=`${250-rewards.xp%250} XP to level ${level+1} · XP rewards practice; mastery still needs 3 in a row`;
+ $('open-set-recap').textContent=`${recap.complete?'✓ Set recap':'Set recap'} · ${recap.assessed}/${recap.total} assessed`;
+ $('open-set-recap').setAttribute('aria-expanded',recapOpen);
+ $('set-recap').hidden=!recapOpen;
+ if(recapOpen)renderSetRecap(recap);
+}
+function renderSetRecap(recap=buildSetRecap(state)){
+ $('recap-title').textContent=recap.complete?'Every card assessed. Here’s your recap.':'Your set so far';
+ $('recap-coverage').textContent=`${recap.assessed} of ${recap.total} cards assessed in Learn. ${recap.unassessed?`${recap.unassessed} still untested${recap.markedOnly?` (${recap.markedOnly} manually marked mastered)`:''}.`:'You have worked through the whole set. Use the priorities below for your next pass.'}`;
+ $('recap-coverage-progress').style.width=`${recap.total?recap.assessed/recap.total*100:0}%`;
+ $('recap-stats').replaceChildren();
+ for(const [value,label] of [[recap.verified,'Verified at 3/3'],[recap.manual,'Manually mastered'],[recap.focusIds.length,'Focus cards'],[recap.accuracy===null?'—':`${recap.accuracy}%`,'Recorded answer accuracy']]){const stat=document.createElement('div'),number=document.createElement('strong'),caption=document.createElement('span');number.textContent=value;caption.textContent=label;stat.append(number,caption);$('recap-stats').append(stat);}
+ $('recap-explanation').textContent=`${recap.correct} correct and ${recap.incorrect} incorrect recorded answers, including retries. This is your cumulative Learn history, not a new exam score. Manual marks are separate from verified mastery. Earlier app versions may contribute one known success per learned card; missing older mistakes cannot be reconstructed.`;
+ $('practice-recap-focus').disabled=!recap.focusIds.length;$('practice-recap-focus').textContent=recap.focusIds.length?`Practice ${Math.min(10,recap.focusIds.length)} focus cards`:'No unmastered focus cards';
+ $('practice-recap-untested').hidden=!recap.unassessedIds.length;$('practice-recap-untested').textContent=`Assess ${Math.min(10,recap.unassessedIds.length)} untested cards`;
+ $('recap-exam').disabled=!recap.total;
+ $('recap-focus-heading').textContent=recap.focusIds.length?'Where to focus next':recap.manual?'Verify your manually mastered cards':'Your mastery is looking strong';
+ $('recap-focus-note').textContent=recap.focusIds.length?'Most-missed unmastered cards come first, followed by lower streaks and cards you have not assessed. Expand a question to review its answer.':recap.manual?'You have no unmastered cards. Manual marks record your judgment; use an exam to check recall across the set.':'Every card has reached 3 correct in a row. Revisit past mistakes below or use an exam to check your recall.';
+ $('recap-focus-list').replaceChildren();
+ for(const id of recap.focusIds)appendRecapCard($('recap-focus-list'),recap.items[id]);
+ $('recap-all-title').textContent=`Review all ${recap.total} cards · ${recap.maintenanceIds.length} mastered cards with past mistakes`;
+ if($('recap-all-details').open)renderAllRecapCards(recap);
+}
+function appendRecapCard(container,item){
+ const details=document.createElement('details');details.className=`recap-card${item.incorrect&&!item.verified&&!item.manualMastered?' recap-needs-work':''}`;
+ details.dataset.cardId=item.id;
+ const summary=document.createElement('summary'),tag=document.createElement('strong'),question=document.createElement('span'),counts=document.createElement('small'),answer=document.createElement('p');
+ tag.textContent=item.manualMastered?'✓ MANUALLY MASTERED':item.verified?'✓ VERIFIED 3/3':!item.assessed?'NOT YET ASSESSED':item.incorrect?'↺ NEEDS PRACTICE':'BUILDING MASTERY';
+ question.textContent=`${item.id+1}. ${state.cards[item.id].term}`;
+ counts.textContent=`${item.correct} correct · ${item.incorrect} incorrect · streak ${item.streak}/3${item.accuracy===null?'':` · ${item.accuracy}% recorded accuracy`}`;
+ answer.textContent=`Answer: ${state.cards[item.id].definition}`;answer.className='recap-answer';summary.append(tag,question,counts);details.append(summary,answer);container.append(details);
+}
+function renderAllRecapCards(recap=buildSetRecap(state)){$('recap-all-list').replaceChildren();recap.items.forEach(item=>appendRecapCard($('recap-all-list'),item));}
+function startRecapPractice(untested=false){
+ const recap=buildSetRecap(state),ids=(untested?recap.unassessedIds:recap.focusIds).slice(0,10);if(!ids.length)return;
+ if(state.round?.queue.length&&!confirm('Replace your unfinished Learn round with these focus cards? Your recorded answers, mastery, and rewards will stay saved.'))return;
+ keepRecovery('Before starting recap practice');recapOpen=false;state.round=newMasteryRound(state.cards,state.mastery,Math.random,ids);save();setActivity('learn');showNextLearnCard();
+}
 $('flash-mode').onclick=()=>setActivity('flash');$('learn-mode').onclick=()=>setActivity('learn');
 $('learn-next').onclick=advanceLearnCard;
 $('learn-question').tabIndex=-1;
 $('restart-learn').onclick=()=>{if(confirm('Restart this round? Per-card mastery streaks and previous progress will stay saved.')){state.round=newMasteryRound(state.cards,state.mastery);save();renderLearn();}};
-$('next-round').onclick=()=>{state.round=newMasteryRound(state.cards,state.mastery);save();renderLearn();};
+$('next-round').onclick=()=>{recapOpen=false;state.round=newMasteryRound(state.cards,state.mastery);save();renderLearn();showNextLearnCard();};
+$('open-set-recap').onclick=()=>{recapOpen=!recapOpen;renderLearningRewards(buildSetRecap(state));if(recapOpen){$('set-recap').scrollIntoView({block:'start',behavior:'instant'});$('recap-title').focus({preventScroll:true});}};
+$('summary-recap').onclick=()=>{recapOpen=true;renderLearningRewards(buildSetRecap(state));$('set-recap').scrollIntoView({block:'start',behavior:'instant'});$('recap-title').focus({preventScroll:true});};
+$('close-set-recap').onclick=()=>{recapOpen=false;renderLearningRewards(buildSetRecap(state));$('open-set-recap').focus();};
+$('recap-all-details').ontoggle=()=>{if($('recap-all-details').open)renderAllRecapCards();};
+$('practice-recap-focus').onclick=()=>startRecapPractice();$('practice-recap-untested').onclick=()=>startRecapPractice(true);
+$('recap-exam').onclick=()=>{setActivity('exam');$('exam-panel').scrollIntoView({block:'start',behavior:'instant'});};
 
 if(['learn','exam'].includes(state.lastActivity))setActivity(state.lastActivity);
 if(toastLater)toast(toastLater);
