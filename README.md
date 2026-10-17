@@ -1,12 +1,14 @@
 # Pocket — Computer Ethics
 
-A mobile-first, installable flashcard app with offline study, card flipping, shuffle, a practice queue, local progress, and import/export. No account, API keys, or dependencies required.
+A mobile-first, installable flashcard app with offline study, card flipping, shuffle, a practice queue, local progress, and import/export. No account, API keys, or server required. PDF.js and its worker are bundled locally for private, offline PDF import.
 
 ## Run
 
-Use Node 22+ for tests and Python 3 for the development server:
+Use Node 22+ and Python 3. To rebuild from source, install pinned build dependencies first:
 
 ```sh
+npm ci
+npm run build
 npm test
 npm start
 ```
@@ -33,7 +35,7 @@ Choose **Learn** to practice up to 10 new cards per round. Answer choices shuffl
 
 After each answer, feedback highlights the answer key. Missed cards return at the end of the queue until answered correctly. The round summary reports first-attempt accuracy separately from eventual completion. Learning progress and the in-progress round save locally, separate from flashcard mastery. Importing a new collection resets both. **Restart round** keeps already learned cards; after finishing the collection, **Practice the collection again** resets learning progress.
 
-Build the single-file offline download and static-host ZIP with `python3 scripts/build-standalone.py`. This writes `Pocket-Flashcards.html` and `pocket-flashcards.zip` in the repository root. Both are included in GitHub for direct download. When replacing the downloaded HTML, use the same file location/browser to retain local progress where the browser permits file storage; export card backups separately.
+Build the self-contained hosted page, offline HTML download, and static-host ZIP with `npm run build`. This writes `Pocket-Flashcards.html` and `pocket-flashcards.zip` in the repository root. Both are included in GitHub for direct download. When replacing the downloaded HTML, use the same file location/browser to retain local progress where the browser permits file storage; export card backups separately.
 
 For publishing and iPhone Home Screen installation, see [IPHONE.md](IPHONE.md). The HTML download alone is not a reliable installation route through iPhone Files.
 
@@ -43,6 +45,20 @@ Open `pocket-flashcards.zip` in this repository and choose **Download raw file**
 
 ## Deployment troubleshooting
 
-The generated `index.html` embeds its CSS, JavaScript, and all 94 cards so the design and study features do not depend on separate asset requests. Edit the page layout in `templates/index.html`, styles in `style.css`, and behavior in `app.js` / `learn.js`, then run `python3 scripts/build-standalone.py` to regenerate both HTML files and the ZIP. Do not edit generated HTML directly.
+The generated `index.html` embeds its CSS, JavaScript, and all 94 cards so the design and study features do not depend on separate asset requests. Edit the page layout in `templates/index.html`, styles in `style.css`, and behavior in `app.js` / `learn.js`, then run `npm run build` to regenerate the bundled PDF reader, both HTML files, and the ZIP. Do not edit generated HTML directly.
 
 For Netlify, upload the extracted ZIP folder with `index.html` at its top level, or connect this repository with publish directory `.` (no build command needed because generated files are committed). Upload the whole folder to retain Home Screen icons, the manifest, and offline installation. If an old deployment appears after updating, close the app tabs and reopen the published site to allow the new service worker to activate; reload once more if needed. Card data and progress stay in local storage.
+
+## PDF import and export
+
+Open **Manage cards → Import a questions & answers PDF**. Choose a selectable-text Quizlet print export like the original 94-card source, or a PDF with explicit `Question:` and `Answer:` pairs. PDF reading happens in the browser without uploading the document or calling an AI service. The reader and worker are embedded in both HTML editions, so import also works offline after the app is installed. Maximum input: 25 MB, 100 pages, 2,000 cards. Modern Safari/iOS is recommended.
+
+Extracted cards appear as editable JSON and a scrollable question/answer preview. Correct text as needed, press **Review cards** after editing, then check **I checked the questions and answers** and press **Use these cards**. Replacing the current set resets its progress after confirmation. A failed import leaves the existing set intact. Change **Study set name** before importing to name any subject.
+
+Scanned/photo PDFs need OCR first. Arbitrary layouts, separate answer-key pages, incomplete Quizlet exports, and password-protected PDFs are not supported. Extraction does not invent missing answers or automatically correct unreadable glyphs. Review is required because PDF text can contain broken characters, headers, and ambiguous layouts.
+
+**Export JSON** saves the named card set for exact restoration. **Export PDF / print** opens a printable Question/Answer document: press **Print / Save as PDF** and select the browser's Save as PDF option. This format can be imported again. On iPhone, expand the print preview if necessary, use Share, then Save to Files. Neither export includes study progress.
+
+Learn feedback uses large green check / red cross banners, labeled and strongly outlined correct answers, a crossed-out wrong choice, and a repeated **Remember this answer** cue. Wrong questions still return later in the round. Animations respect reduced-motion settings, and results use text and symbols in addition to color.
+
+PDF.js is distributed under Apache-2.0; see `vendor/pdfjs-LICENSE.txt`. Generated pages include the bundled library and worker, so deployment needs no npm installation. Run `npm ci` only when rebuilding the source.

@@ -1,6 +1,6 @@
 # Use Pocket Flashcards on iPhone
 
-The downloaded HTML is a standalone browser file, not an iPhone installation package. iPhone Files previews do not reliably run interactive HTML apps. For dependable iPhone use and offline installation, publish the static web version to an HTTPS address first. There is currently no published address for this app.
+The downloaded HTML is a standalone browser file, not an iPhone installation package. iPhone Files previews do not reliably run interactive HTML apps. For dependable iPhone use and offline installation, publish the static web version to an HTTPS address first. Use your published Netlify address, such as https://symphonious-concha-e70db9.netlify.app, after uploading the latest ZIP.
 
 ## One-time publishing from a computer
 
@@ -22,4 +22,13 @@ The deployment includes the study deck, so use a private hosting arrangement if 
 
 Use **Flashcards** to reveal answers and mark cards for practice. Use **Learn** for ten-card multiple-choice rounds, immediate feedback, and repeat practice for missed questions. Progress saves in this app on this device and does not sync to other devices. Safari and a Home Screen web app may use separate storage; continue studying in the Home Screen app once installed.
 
-In **Manage cards**, use **Export backup** to save the card collection to Files. This backs up the cards, not learning progress. Clearing website data or deleting app storage may remove local progress. The PDF deck remains included in the hosted app.
+In **Manage cards**, use **Export JSON** to save the card collection to Files. This backs up the cards, not learning progress. Clearing website data or deleting app storage may remove local progress. The PDF deck remains included in the hosted app.
+
+## Import another PDF on iPhone
+
+1. Save a supported Quizlet print PDF (or a PDF with Question: / Answer: pairs) to Files.
+2. In Pocket, open **Manage cards**, tap **Import a questions & answers PDF**, and choose the file.
+3. Wait for extraction, name the set, and review every pair. Broken characters can be corrected in the editable JSON; tap **Review cards** after editing.
+4. Check **I checked the questions and answers**, tap **Use these cards**, and confirm replacement. Export your current set first if you want to keep it.
+
+For a PDF backup, choose **Export PDF / print**, tap **Print / Save as PDF**, and use the print-preview Share menu to save to Files. JSON backups preserve card text more exactly. Scanned PDFs need OCR before import.
