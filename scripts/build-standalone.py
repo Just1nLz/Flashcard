@@ -1,22 +1,21 @@
-"""Build an offline HTML download plus a static-host ZIP without dependencies."""
+"""Build self-contained hosted and downloadable pages, plus a static-host ZIP."""
 from pathlib import Path
 import re, zipfile
 root = Path(__file__).resolve().parents[1]
-html = (root / 'index.html').read_text()
+template = (root / 'templates/index.html').read_text()
 parser = (root / 'cards.js').read_text().replace('export function ', 'function ')
 learn = (root / 'learn.js').read_text().replace('export function ', 'function ')
-app = (root / 'app.js').read_text()
-app = re.sub(r'^import .*?;\n', '', app, flags=re.M)
+app = re.sub(r'^import .*?;\n', '', (root / 'app.js').read_text(), flags=re.M)
 app = app.replace("const response=await fetch('./deck.json');if(!response.ok)throw new Error('Deck unavailable');state.cards=parseCards(await response.text());", "state.cards=parseCards(document.getElementById('included-deck').textContent);")
-# Drop only the hosted service-worker registration; retain Learn-mode handlers.
-app = re.sub(r"if\('serviceWorker' in navigator\)\{[^\n]*\}", "$('offline-status').textContent='Standalone edition · no server needed';", app)
-html = html.replace('<link rel="stylesheet" href="style.css">', '<style>' + (root / 'style.css').read_text() + '</style>')
-html = re.sub(r'<link rel="(?:manifest|icon|apple-touch-icon)"[^>]*>', '', html)
+base = template.replace('<link rel="stylesheet" href="style.css">', '<style>' + (root / 'style.css').read_text() + '</style>')
 deck = (root / 'deck.json').read_text().replace('<', '\\u003c')
-html = html.replace('<script type="module" src="app.js"></script>', '<script id="included-deck" type="application/json">' + deck + '</script><script type="module">' + parser + '\n' + learn + '\n' + app + '</script>')
-output = root / 'Pocket-Flashcards.html'
-output.write_text(html)
+def bundle(html, script):
+    return html.replace('<script type="module" src="app.js"></script>', '<script id="included-deck" type="application/json">' + deck + '</script><script type="module">' + parser + '\n' + learn + '\n' + script + '</script>')
+(root / 'index.html').write_text(bundle(base, app))
+standalone = re.sub(r'<link rel="(?:manifest|icon|apple-touch-icon)"[^>]*>', '', base)
+script = re.sub(r"if\('serviceWorker' in navigator\)\{[^\n]*\}", "$('offline-status').textContent='Standalone edition · no server needed';", app)
+(root / 'Pocket-Flashcards.html').write_text(bundle(standalone, script))
 with zipfile.ZipFile(root / 'pocket-flashcards.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
     for name in ['index.html','style.css','app.js','cards.js','learn.js','deck.json','sw.js','manifest.webmanifest','icons/icon.svg','icons/icon-192.png','icons/icon-512.png','README.md','IPHONE.md']:
         archive.write(root / name, name)
-print(f'Built {output} and pocket-flashcards.zip')
+print('Built self-contained index.html, Pocket-Flashcards.html, and pocket-flashcards.zip')

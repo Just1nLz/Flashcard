@@ -40,3 +40,9 @@ For publishing and iPhone Home Screen installation, see [IPHONE.md](IPHONE.md). 
 ## Download from GitHub
 
 Open `pocket-flashcards.zip` in this repository and choose **Download raw file** to save the ZIP. Unzip it before uploading the folder to a static host. `Pocket-Flashcards.html` is also available as a single-file desktop browser version; use **Download raw file**, then open the saved HTML.
+
+## Deployment troubleshooting
+
+The generated `index.html` embeds its CSS, JavaScript, and all 94 cards so the design and study features do not depend on separate asset requests. Edit the page layout in `templates/index.html`, styles in `style.css`, and behavior in `app.js` / `learn.js`, then run `python3 scripts/build-standalone.py` to regenerate both HTML files and the ZIP. Do not edit generated HTML directly.
+
+For Netlify, upload the extracted ZIP folder with `index.html` at its top level, or connect this repository with publish directory `.` (no build command needed because generated files are committed). Upload the whole folder to retain Home Screen icons, the manifest, and offline installation. If an old deployment appears after updating, close the app tabs and reopen the published site to allow the new service worker to activate; reload once more if needed. Card data and progress stay in local storage.
