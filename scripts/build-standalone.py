@@ -4,6 +4,7 @@ import re, zipfile
 root = Path(__file__).resolve().parents[1]
 template = (root / 'templates/index.html').read_text()
 parser = (root / 'cards.js').read_text().replace('export function ', 'function ')
+backup = re.sub(r'^import .*?;\n', '', (root / 'backup.js').read_text(), flags=re.M).replace('export function ', 'function ')
 layout = (root / 'pdf-layout.js').read_text().replace('export function ', 'function ')
 runtime = (root / 'vendor/pdf-runtime.js').read_text().replace('</script', '<\\/script')
 learn = (root / 'learn.js').read_text().replace('export function ', 'function ')
@@ -12,7 +13,7 @@ app = app.replace("const response=await fetch('./deck.json');if(!response.ok)thr
 base = template.replace('<link rel="stylesheet" href="style.css">', '<style>' + (root / 'style.css').read_text() + '</style>')
 deck = (root / 'deck.json').read_text().replace('<', '\\u003c')
 def bundle(html, script):
-    return html.replace('<script type="module" src="app.js"></script>', '<script>' + runtime + '</script><script id="included-deck" type="application/json">' + deck + '</script><script type="module">' + parser + '\n' + learn + '\n' + layout + '\n' + script + '</script>')
+    return html.replace('<script type="module" src="app.js"></script>', '<script>' + runtime + '</script><script id="included-deck" type="application/json">' + deck + '</script><script type="module">' + parser + '\n' + backup + '\n' + learn + '\n' + layout + '\n' + script + '</script>')
 (root / 'index.html').write_text(bundle(base, app))
 standalone = re.sub(r'<link rel="(?:manifest|icon|apple-touch-icon)"[^>]*>', '', base)
 script = re.sub(r"if\('serviceWorker' in navigator\)\{[^\n]*\}", "$('offline-status').textContent='Standalone edition · no server needed';", app)

@@ -23,7 +23,7 @@ Extraction separates the PDF’s question and answer fonts and follows numbered 
 
 In **Manage cards**, paste one card per line with a tab (or `::`) separating term and definition. Importing replaces the deck and resets progress. JSON backups use `{ "cards": [{ "term": "...", "definition": "..." }] }` and support multiline text.
 
-Cards and progress stay in this browser's local storage, without cloud synchronization. Export backups to preserve your deck and transfer it to another device. Clearing browser storage removes local cards. Backup exports include cards, not mastery progress. App shell updates require incrementing the service-worker cache version.
+Cards and progress stay in this browser's local storage, without cloud synchronization. Export backups to preserve your deck and transfer it to another device. Clearing browser storage removes local cards. Card-only JSON/PDF exports omit progress. **Download full backup + progress** includes mastery, learning scores, and unfinished rounds. App shell updates require incrementing the service-worker cache version.
 
 ## Validation
 
@@ -62,3 +62,15 @@ Scanned/photo PDFs need OCR first. Arbitrary layouts, separate answer-key pages,
 Learn feedback uses large green check / red cross banners, labeled and strongly outlined correct answers, a crossed-out wrong choice, and a repeated **Remember this answer** cue. Wrong questions still return later in the round. Animations respect reduced-motion settings, and results use text and symbols in addition to color.
 
 PDF.js is distributed under Apache-2.0; see `vendor/pdfjs-LICENSE.txt`. Generated pages include the bundled library and worker, so deployment needs no npm installation. Run `npm ci` only when rebuilding the source.
+
+## Preserve progress during updates and device transfers
+
+Redeploy to the existing Netlify project and keep the same HTTPS hostname. Saved data uses the unchanged `pocket-ethics-v1` local-storage key. Deploying files or refreshing the service worker does not clear it. Keep using the same Safari tab/browser profile or installed Home Screen app: these may have separate storage. A new hostname, cleared website data, or private-browsing storage is not a migration of the old data. Importing a new set intentionally resets progress after confirmation.
+
+Under **Manage cards**, choose **Download full backup + progress** and save the JSON to Files/iCloud Drive. It includes the cards and their order, mastery, learned IDs, scores, missed-question queue, exact answer options, and pending answer feedback. On another device, open the updated app, use **Restore full backup, or import JSON / TXT / TSV**, select the file, review the progress summary, confirm, and press **Restore cards & progress**. Restoration replaces the destination's current set and progress; it does not merge two study histories. When Learn is active at export, the restored app resumes it.
+
+The app also stores one local recovery snapshot before its first upgrade and before replacing a set or restoring a backup. Use **Recover previous local snapshot** to recover the preceding saved set and progress. Recovery is in the same local storage, so clearing browser data removes it too. Save downloaded backups for protection beyond this device. Older card-only exports cannot reconstruct study progress.
+
+These backups are manual transfers, not automatic cloud synchronization. iCloud Drive can store the backup file but does not automatically synchronize Pocket's local study data. No server or account was added.
+
+Upgrade validation exercises actual earlier builds (`7c145b5` and `c5af85c`) with an unfinished Learn round, then loads the new build at the same origin and verifies scores, queue, choices, feedback, and mastery are retained. Browser checks also restore a full backup into a fresh browser and recover progress after replacing the set.

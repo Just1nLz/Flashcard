@@ -1,10 +1,15 @@
+import {createStudyBackup, parseStudyBackup, validateStudyState} from './backup.js';
 import {parsePdfPages} from './pdf-layout.js';
 import {makeQuestion, newRound, answerQuestion, advanceRound} from './learn.js';
 import {parseCards} from './cards.js';
 const $ = id => document.getElementById(id);
 const storageKey = 'pocket-ethics-v1';
+const recoveryKey=storageKey+'-recovery';
+let recoveryAvailable=false;
+function keepRecovery(reason,onlyIfMissing=false){try{const data=localStorage.getItem(storageKey);if(data&&(!onlyIfMissing||!localStorage.getItem(recoveryKey))){localStorage.setItem(recoveryKey,JSON.stringify({createdAt:new Date().toISOString(),reason,data}));}recoveryAvailable=!!localStorage.getItem(recoveryKey);}catch{}}
+keepRecovery('Before app update',true);
 let state = {cards:[], known:[]}, mode = 'all', order = [], index = 0, flipped = false;
-try { const saved = JSON.parse(localStorage.getItem(storageKey)); if(saved){state.cards=parseCards(JSON.stringify(saved.cards));state.known=Array.isArray(saved.known)?saved.known.filter(n=>Number.isInteger(n)&&n>=0&&n<state.cards.length):[];state.title=typeof saved.title==='string'?saved.title:'Computer Ethics';state.learned=saved.learned;const r=saved.round;if(r&&Array.isArray(r.queue)&&r.queue.every(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length)&&Array.isArray(r.seen)&&['total','completed','attempts','firstCorrect'].every(k=>Number.isInteger(r[k])&&r[k]>=0)&&(!r.current||(typeof r.current.prompt==='string'&&typeof r.current.answer==='string'&&Array.isArray(r.current.options))))state.round=r;} } catch { /* Empty or unavailable storage: start clean. */ }
+try { const saved = JSON.parse(localStorage.getItem(storageKey)); if(saved){state.cards=parseCards(JSON.stringify(saved.cards));state.known=Array.isArray(saved.known)?saved.known.filter(n=>Number.isInteger(n)&&n>=0&&n<state.cards.length):[];state.lastActivity=saved.lastActivity;state.title=typeof saved.title==='string'?saved.title:'Computer Ethics';state.learned=saved.learned;const r=saved.round;if(r&&Array.isArray(r.queue)&&r.queue.every(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length)&&Array.isArray(r.seen)&&['total','completed','attempts','firstCorrect'].every(k=>Number.isInteger(r[k])&&r[k]>=0)&&(!r.current||(typeof r.current.prompt==='string'&&typeof r.current.answer==='string'&&Array.isArray(r.current.options))))state.round=r;} } catch { /* Empty or unavailable storage: start clean. */ }
 state.title ||= 'Computer Ethics';
 let activity = 'flash';
 state.learned = Array.isArray(state.learned) ? state.learned.filter(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length) : [];
@@ -33,27 +38,29 @@ $('all').onclick=()=>{mode='all';rebuild();};$('review').onclick=()=>{mode='revi
 $('shuffle').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}index=0;flipped=false;render();toast('Cards shuffled');};
 $('known').onclick=()=>{const id=order[index];if(!state.known.includes(id))state.known.push(id);save();if(mode==='review'){order.splice(index,1);if(index>=order.length)index=0;flipped=false;render();}else move(1);};
 $('again').onclick=()=>{state.known=state.known.filter(n=>n!==order[index]);save();move(1);};
-let importGeneration=0, reviewedText='';
-function invalidatePreview(){reviewedText='';$('import-preview').hidden=true;$('confirm-review').checked=false;$('import').disabled=true;}
+let importGeneration=0, reviewedText='', reviewedBackup=null;
+function invalidatePreview(){reviewedText='';reviewedBackup=null;$('backup-preview').hidden=true;$('import').textContent='Use these cards';$('import-preview').hidden=true;$('confirm-review').checked=false;$('import').disabled=true;}
 function reviewImport(){
- const cards=parseCards($('import-text').value);if(cards.length>2000)throw new Error('Import up to 2,000 cards at a time.');
+ let backup=null;try{backup=parseStudyBackup($('import-text').value);}catch(e){if($('import-text').value.trim().startsWith('{'))throw e;}
+ const cards=backup?backup.cards:parseCards($('import-text').value);if(cards.length>2000)throw new Error('Import up to 2,000 cards at a time.');
+ reviewedBackup=backup;$('import').textContent=backup?'Restore cards & progress':'Use these cards';$('backup-preview').hidden=!backup;$('backup-preview').textContent=backup?`Full backup: ${backup.known.length} mastered, ${backup.learned.length} learned${backup.round?`, round ${backup.round.completed}/${backup.round.total} cards complete (${backup.round.attempts} attempts)`:''}. Your cards and progress will be restored together.`:'';
  reviewedText=$('import-text').value;$('preview-count').textContent=`Review all ${cards.length} cards`;$('preview-cards').replaceChildren();
  cards.forEach((card,i)=>{const item=document.createElement('article');const question=document.createElement('strong');question.textContent=`${i+1}. ${card.term}`;const answer=document.createElement('p');answer.textContent=card.definition;item.append(question,answer);$('preview-cards').append(item);});
  $('import-preview').hidden=false;$('confirm-review').checked=false;$('import').disabled=true;
  return cards;
 }
-$('manage').onclick=()=>{$('set-title').value=state.title;$('import-dialog').showModal();};
+$('manage').onclick=()=>{$('set-title').value=state.title;$('restore-recovery').hidden=!recoveryAvailable;$('import-dialog').showModal();};
 $('import-text').oninput=()=>{importGeneration++;invalidatePreview();};
 $('preview-import').onclick=()=>{try{const cards=reviewImport();$('import-status').textContent=`${cards.length} pairs found. Review below, then check the confirmation box.`;}catch(e){invalidatePreview();$('import-status').textContent=e.message;}};
 $('confirm-review').onchange=()=>{$('import').disabled=!$('confirm-review').checked||reviewedText!==$('import-text').value;};
 $('import').onclick=()=>{try{
  if(!$('confirm-review').checked||reviewedText!==$('import-text').value)throw new Error('Review the cards and confirm the question / answer pairs first.');
- const cards=parseCards(reviewedText);if(state.cards.length&&!confirm('Replace your current cards and reset study progress? Export a backup first if needed.'))return;
- state={title:$('set-title').value.trim()||'My study set',cards,known:[],learned:[]};activity='flash';setActivity('flash');save();mode='all';rebuild();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(`${cards.length} cards imported`);
+ const cards=parseCards(reviewedText), backup=reviewedBackup;if(state.cards.length&&!confirm(backup?'Restore this backup, replacing this device’s current cards and progress?':'Replace your current cards and reset study progress? Export a full backup first if needed.'))return;
+ keepRecovery('Before restoring backup or replacing set');state=backup||{title:$('set-title').value.trim()||'My study set',cards,known:[],learned:[]};if(backup)state.title=$('set-title').value.trim()||state.title;mode='all';rebuild();setActivity(backup?.lastActivity==='learn'?'learn':'flash');save();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(backup?'Cards and study progress restored':`${cards.length} cards imported`);
  }catch(e){$('import-status').textContent=e.message;}};
 $('import-file').onchange=async event=>{
  const file=event.target.files[0];if(!file)return;const generation=++importGeneration;invalidatePreview();
- try{if(file.size>10*1024*1024)throw new Error('Choose a text / JSON file smaller than 10 MB.');const text=await file.text();if(generation!==importGeneration)return;$('import-text').value=text;let title=file.name.replace(/\.[^.]+$/,'');try{const data=JSON.parse(text);if(typeof data.title==='string')title=data.title;}catch{}$('set-title').value=title.slice(0,120);const cards=reviewImport();$('import-status').textContent=`${cards.length} pairs loaded. Review and confirm before importing.`;}catch(e){if(generation===importGeneration)$('import-status').textContent=e.message;}finally{event.target.value='';}
+ try{if(file.size>10*1024*1024)throw new Error('Choose a text / JSON file smaller than 10 MB.');const text=await file.text();if(generation!==importGeneration)return;$('import-text').value=text;let title=file.name.replace(/\.[^.]+$/,'');try{const data=JSON.parse(text);if(typeof data.title==='string')title=data.title;}catch{}$('set-title').value=title.slice(0,120);const cards=reviewImport();$('import-status').textContent=reviewedBackup?'Full study backup loaded. Review and confirm to restore cards and progress.':`${cards.length} pairs loaded. Review and confirm before importing.`;}catch(e){if(generation===importGeneration)$('import-status').textContent=e.message;}finally{event.target.value='';}
 };
 $('pdf-file').onchange=async event=>{
  const file=event.target.files[0];if(!file)return;const generation=++importGeneration;invalidatePreview();$('pdf-file').disabled=true;$('import-status').textContent='Reading PDF on your device…';
@@ -68,6 +75,12 @@ $('pdf-file').onchange=async event=>{
 };
 function exportCards(){if(!state.cards.length){$('import-status').textContent='Import cards before exporting a backup.';return false;}return true;}
 $('export').onclick=()=>{if(!exportCards())return;const url=URL.createObjectURL(new Blob([JSON.stringify({title:state.title,cards:state.cards},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=(state.title.replace(/[^a-z0-9_-]+/gi,'-')||'study-set')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('export-progress').onclick=()=>{
+ try{const backup=createStudyBackup(state);const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='pocket-full-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('import-status').textContent='Full backup downloaded: cards, mastery, learned cards, and your unfinished round. Save it to Files or iCloud Drive.';}catch(e){$('import-status').textContent=`Could not export backup: ${e.message}`;}
+};
+$('restore-recovery').onclick=()=>{
+ try{const saved=JSON.parse(localStorage.getItem(recoveryKey));if(!saved)throw new Error('No local recovery snapshot is available.');const restored=validateStudyState(JSON.parse(saved.data));if(!confirm(`Restore the local snapshot from ${new Date(saved.createdAt).toLocaleString()}? This replaces your current cards and progress.`))return;keepRecovery('Before local recovery');state=restored;mode='all';rebuild();setActivity(state.lastActivity==='learn'?'learn':'flash');save();invalidatePreview();$('import-dialog').close();toast('Local cards and progress recovered');}catch(e){$('import-status').textContent=`Recovery failed: ${e.message}`;}
+};
 $('export-pdf').onclick=()=>{
  if(!exportCards())return;const popup=window.open('','_blank');if(!popup){$('import-status').textContent='Allow pop-ups for this site to open the printable PDF view.';return;}
  const doc=popup.document;doc.title=state.title;const style=doc.createElement('style');style.textContent='body{font:14px/1.6 system-ui,sans-serif;margin:32px;color:#111}h1{font-size:24px}article{margin-bottom:24px;border-bottom:1px solid #bbb;padding-bottom:15px;white-space:pre-wrap;overflow-wrap:anywhere}p{margin:6px 0}@media print{button,.print-help{display:none}article{break-inside:avoid}body{margin:12mm}}';doc.head.append(style);
@@ -80,7 +93,7 @@ rebuild();
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').then(()=>navigator.serviceWorker.ready).then(()=>{$('offline-status').textContent='Ready for offline study';}).catch(()=>{$('offline-status').textContent='Offline cache unavailable · export a backup';});}
 
 function setActivity(value){
- activity=value;
+ activity=value;state.lastActivity=value;save();
  $('flash-panel').hidden=value!=='flash';$('learn-panel').hidden=value!=='learn';
  for(const [id,active] of [['flash-mode',value==='flash'],['learn-mode',value==='learn']]){ $(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',active); }
  if(value==='learn'){if(!state.round)state.round=newRound(state.cards,state.learned);renderLearn();}
@@ -134,3 +147,5 @@ $('learn-next').onclick=()=>{const learned=advanceRound(state.round);if(learned!
 $('learn-question').tabIndex=-1;
 $('restart-learn').onclick=()=>{if(confirm('Restart this round? Your previously learned cards will stay saved.')){state.round=newRound(state.cards,state.learned);save();renderLearn();}};
 $('next-round').onclick=()=>{if(state.learned.length===state.cards.length)state.learned=[];state.round=newRound(state.cards,state.learned);save();renderLearn();};
+
+if(state.lastActivity==='learn')setActivity('learn');

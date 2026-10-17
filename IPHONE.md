@@ -32,3 +32,11 @@ In **Manage cards**, use **Export JSON** to save the card collection to Files. T
 4. Check **I checked the questions and answers**, tap **Use these cards**, and confirm replacement. Export your current set first if you want to keep it.
 
 For a PDF backup, choose **Export PDF / print**, tap **Print / Save as PDF**, and use the print-preview Share menu to save to Files. JSON backups preserve card text more exactly. Scanned PDFs need OCR before import.
+
+## Update without losing progress
+
+Upload the latest ZIP to your **existing** Netlify project; keep the same site address. Continue using the same Safari session or Home Screen app as before. Updates preserve existing local cards and progress. If an older version opens in Flashcards, tap **Learn** to return to the saved round. Do not reimport your PDF merely to update the app, because a new set import resets progress.
+
+After updating, open **Manage cards → Download full backup + progress**, then save the JSON to Files or iCloud Drive. This backup includes scores and your unfinished round, unlike **Export JSON** (cards only). To move to another iPhone/browser, choose the full JSON using the import file picker, check the preview, confirm review, and tap **Restore cards & progress**. The destination's current study data is replaced. You can also use **Recover previous local snapshot** after an accidental set replacement. Local recovery is not a substitute for a downloaded file.
+
+No automatic cloud sync is enabled. Saving a backup in iCloud Drive lets you transfer it manually. Deleting website data or changing site address can make existing local progress unavailable.
