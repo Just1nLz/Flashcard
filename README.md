@@ -96,3 +96,11 @@ A standard round has at most 10 unique cards. Incorrect answers repeat at the qu
 Upgrading retains cards, manual familiarity, old learned IDs, scores, unfinished Learn feedback, and saved exams. Older learned IDs receive **one credited correct answer (1/3)** because those versions did not record three successful encounters. Pending old feedback is credited/reset once during migration. New per-card counters are persisted immediately on answering, so reloading before Continue never grants duplicate credit. Full backups and local recovery include all counters, and restoring an older backup performs the same evidence-based migration. Historical totals are not reconstructed beyond the one known success per learned card.
 
 This is a recall practice criterion, not a guarantee of long-term retention or exam performance. There is no required time delay or calendar-based spaced-repetition schedule. Revisit mastered cards and use the full-set exam for an independent check.
+
+## Swipe through answered Learn cards
+
+After choosing or checking an answer, **swipe left on the answered card** to continue. This works over the feedback or disabled answer choices. A pinned **Next question** / **Finish round** button stays above the bottom safe area, so long feedback never requires scrolling to reach Continue. Advancing aligns the next question (or round summary) with the viewport. The answered card has a small drag preview and the next card slides in; reduced-motion settings disable the animations.
+
+Swipes are accepted only after an answer. A deliberate horizontal left movement (at least 72 CSS pixels, more horizontal than vertical, within 1.6 seconds) advances exactly once. Vertical gestures keep normal reading/scrolling, while taps, short drags, right swipes, cancelled gestures, form editing, and screen-edge gestures do not skip questions. Horizontal drags over unanswered options do not accidentally select an answer. The fixed controls hide in other modes and while the import dialog is open.
+
+Both navigation methods use the same existing round logic. They never grade a question twice or change mastery counters; incorrect cards remain in the retry queue. State format, backups, and storage key are unchanged.

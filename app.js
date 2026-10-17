@@ -1,3 +1,4 @@
+import {installLearnSwipe} from './swipe.js';
 import {MASTERY_TARGET,initializeMastery,recordMastery,masterySummary,newMasteryRound} from './mastery.js';
 import {createExam,setExamAnswer,scoreExam,submitExam,validateExam} from './exam.js';
 import {createStudyBackup, parseStudyBackup, validateStudyState} from './backup.js';
@@ -38,7 +39,7 @@ function render(){
  $('all').setAttribute('aria-pressed',mode==='all');$('review').setAttribute('aria-pressed',mode==='review');
 }
 function move(step){if(!order.length)return;index=(index+step+order.length)%order.length;flipped=false;render();}
-$('card').onclick=()=>{if(order.length){flipped=!flipped;render();}else if(!state.cards.length)$('import-dialog').showModal();};
+$('card').onclick=()=>{if(order.length){flipped=!flipped;render();}else if(!state.cards.length)$('import-dialog').showModal();syncLearnActions();};
 $('prev').onclick=()=>move(-1);$('next').onclick=()=>move(1);
 $('all').onclick=()=>{mode='all';rebuild();};$('review').onclick=()=>{mode='review';rebuild();};
 $('shuffle').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}index=0;flipped=false;render();toast('Cards shuffled');};
@@ -55,7 +56,7 @@ function reviewImport(){
  $('import-preview').hidden=false;$('confirm-review').checked=false;$('import').disabled=true;
  return cards;
 }
-$('manage').onclick=()=>{$('set-title').value=state.title;$('restore-recovery').hidden=!recoveryAvailable;$('import-dialog').showModal();};
+$('manage').onclick=()=>{$('set-title').value=state.title;$('restore-recovery').hidden=!recoveryAvailable;$('import-dialog').showModal();syncLearnActions();};
 $('import-text').oninput=()=>{importGeneration++;invalidatePreview();};
 $('preview-import').onclick=()=>{try{const cards=reviewImport();$('import-status').textContent=`${cards.length} pairs found. Review below, then check the confirmation box.`;}catch(e){invalidatePreview();$('import-status').textContent=e.message;}};
 $('confirm-review').onchange=()=>{$('import').disabled=!$('confirm-review').checked||reviewedText!==$('import-text').value;};
@@ -104,11 +105,14 @@ function setActivity(value){
  for(const [id,active] of [['flash-mode',value==='flash'],['learn-mode',value==='learn'],['exam-mode',value==='exam']]){ $(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',active); }
  if(value==='learn'){if(!state.round)state.round=newMasteryRound(state.cards,state.mastery);renderLearn();}
  if(value==='exam')renderExam();
+ syncLearnActions();
 }
 function renderLearn(){
+ $('learn-question-panel').classList.remove('next-card-enter');
  const round=state.round;
  $('sound-toggle').textContent=state.soundEnabled?'Sound: on':'Sound: off';$('sound-toggle').setAttribute('aria-pressed',!!state.soundEnabled);$('learn-streak').textContent=state.feedbackStreak>1?`${state.feedbackStreak} correct across cards`:'';
- if(!round)return;
+ if(!round){syncLearnActions();return;}
+ syncLearnActions();
  const finished=!round.queue.length;
  $('learn-question-panel').hidden=finished;$('learn-summary').hidden=!finished;
  renderMasteryOverview();
@@ -152,11 +156,11 @@ function renderLearn(){
   content.append(heading,label,answer,cue);$('learn-feedback').append(icon,content);
  }
  $('learn-feedback').className=feedback?(feedback.correct?'feedback-correct':'feedback-incorrect'):'';
- $('learn-next').hidden=!feedback;
+ syncLearnActions();
  save();
 }
 $('flash-mode').onclick=()=>setActivity('flash');$('learn-mode').onclick=()=>setActivity('learn');
-$('learn-next').onclick=()=>{$('learn-written').value='';const learned=advanceRound(state.round);if(learned!==null&&!state.learned.includes(learned))state.learned.push(learned);save();renderLearn();$('learn-question').focus({preventScroll:true});};
+$('learn-next').onclick=advanceLearnCard;
 $('learn-question').tabIndex=-1;
 $('restart-learn').onclick=()=>{if(confirm('Restart this round? Per-card mastery streaks and previous progress will stay saved.')){state.round=newMasteryRound(state.cards,state.mastery);save();renderLearn();}};
 $('next-round').onclick=()=>{state.round=newMasteryRound(state.cards,state.mastery);save();renderLearn();};
@@ -254,3 +258,27 @@ function submitLearnChoice(choice){
 $('learn-check').onclick=()=>{if(!$('learn-written').value.trim()){toast('Type your answer before checking.');return;}submitLearnChoice($('learn-written').value);};
 
 $('dismiss-mastery-note').onclick=()=>{state.mastery.legacyCredit=false;save();renderMasteryOverview();};
+
+function syncLearnActions(){
+ const round=state.round,ready=activity==='learn'&&!!round?.feedback&&!!round.queue.length&&!$('import-dialog').open;
+ $('learn-swipe-actions').hidden=!ready;$('learn-next').disabled=!ready;
+ document.body.classList.toggle('learn-answer-ready',ready);
+ if(ready){$('learn-action-result').textContent=round.feedback.correct?'✓ Correct — ready for the next card':'↺ Correct answer shown — keep practicing';$('learn-next').textContent=round.queue.length===1&&round.feedback.correct?'Finish round →':'Next question →';}
+}
+function advanceLearnCard(){
+ if(activity!=='learn'||!state.round?.feedback||$('import-dialog').open)return;
+ $('learn-written').value='';
+ const learned=advanceRound(state.round);if(learned!==null&&!state.learned.includes(learned))state.learned.push(learned);
+ save();renderLearn();
+ const finished=!state.round.queue.length,target=finished?$('learn-summary'):$('learn-question-panel');
+ if(finished){$('summary-title').tabIndex=-1;$('summary-title').focus({preventScroll:true});}else $('learn-question').focus({preventScroll:true});
+ target.scrollIntoView({block:'start',behavior:'instant'});
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!finished){target.classList.remove('next-card-enter');void target.offsetWidth;target.classList.add('next-card-enter');}
+}
+$('import-dialog').addEventListener('close',syncLearnActions);
+installLearnSwipe($('learn-question-panel'),{
+ canAdvance:()=>activity==='learn'&&!!state.round?.feedback&&!$('import-dialog').open,
+ getToken:()=>`${state.round?.queue[0]}:${state.round?.attempts}`,
+ onNext:advanceLearnCard
+});
+syncLearnActions();

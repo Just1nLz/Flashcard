@@ -54,3 +54,9 @@ In Learn, each card must be answered correctly **three times in a row** across p
 Check the current card's **0/3–3/3** badge or expand **See mastery for every card** for the whole set. The across-card success streak is decorative; it does not determine mastery. Flashcard **Got it** means you marked it familiar, not verified mastered. Exam scoring stays separate.
 
 Older learned cards receive one credited success (1/3) when you update. Scores, saved rounds, and exams remain. Full backups include mastery counters. After all cards reach 3/3, **Review mastered cards** lets you keep practicing without clearing progress. There is no required waiting period between rounds.
+
+## Move to the next Learn question without scrolling
+
+Choose an answer, review the feedback, then **swipe left across the card** to continue. You can swipe over the feedback or answer choices. You can also tap the **Next question** button pinned above the bottom edge; on the final correct answer it says **Finish round**. The next question automatically comes into view.
+
+Swiping before answering does not skip the question. Vertical scrolling still works if you want to read the full explanation. Wrong answers still return for practice and the three-correct mastery rule stays the same. Swipe from inside the card rather than the phone's edge, where Safari handles its own navigation gestures.
