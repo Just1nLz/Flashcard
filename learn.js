@@ -9,11 +9,26 @@ export function shuffle(items, random = Math.random) {
 }
 const normalize = text => text.toLowerCase().replace(/[^a-z0-9]/g, '');
 const isBoolean = answer => /^(t|f|true|false)$/i.test(answer.trim());
+function allCorrectPracticeDistractors(card){
+ const answers=card.answers;
+ if(card.term.includes('Choosing Passwords: Security and Human Factors')&&answers.length===4&&['Reduce lockouts','Modify the lifetime limits','Make password management easier for the user','Allow a user to have much longer passwords, of a universal format'].every(answer=>answers.includes(answer)))return [
+  'The author suggests passwords should be in different formats, for different devices.',
+  'The author suggests computer systems should restrict password formats to make programming more convenient.'
+ ];
+ if(card.term.startsWith('Which of the following research topics have the potential to expose real people to harm?')&&answers.length===4&&['credit card fraud','spam','viruses','botnet'].every(answer=>answers.includes(answer)))return [
+  'Comparing sorting algorithms using generated, non-personal numbers.',
+  'Comparing font styles in fictional mockups without human participants.'
+ ];
+ return [];
+}
 export function makeQuestion(cards, id, random = Math.random) {
   const {term, definition} = cards[id];
   if (cards[id].type === 'multi') {
     const answers = [...cards[id].answers];
-    if (Array.isArray(cards[id].options)) return {type:'multi',prompt:term,answer:definition,answers,options:shuffle(cards[id].options,random)};
+    const printedOptions=cards[id].options;
+    if (Array.isArray(printedOptions)&&printedOptions.some(option=>!answers.includes(option))) return {type:'multi',prompt:term,answer:definition,answers,options:shuffle(printedOptions,random)};
+    const practiceOptions=allCorrectPracticeDistractors(cards[id]);
+    if(practiceOptions.length)return {type:'multi',prompt:term,answer:definition,answers,options:shuffle([...answers,...practiceOptions],random)};
     const seen = new Set(answers.map(normalize));
     const words = new Set((term + ' ' + definition).toLowerCase().match(/[a-z]{4,}/g) || []);
     const candidates = shuffle(cards, random).filter(card => {
@@ -44,6 +59,14 @@ export function makeQuestion(cards, id, random = Math.random) {
   }).map(card => ({answer: card.definition, score: (card.term.toLowerCase().match(/[a-z]{4,}/g) || []).filter(word => words.has(word)).length})).sort((a,b)=>b.score-a.score);
   const options=shuffle([definition, ...candidates.slice(0,3).map(c=>c.answer)],random);
   return {prompt,answer:definition,options,type:options.length<2?'written':'choice'};
+}
+export function ensureQuestionDistractors(question,cards,id,random=Math.random){
+ if(question.type!=='multi'||question.options.some(option=>!question.answers.includes(option)))return false;
+ const fresh=makeQuestion(cards,id,random);
+ const additions=fresh.options.filter(option=>!question.options.includes(option)&&!question.answers.includes(option));
+ if(!additions.length)return false;
+ question.options=shuffle([...question.options,...additions],random);
+ return true;
 }
 export function newRound(cards, learned = [], random = Math.random) {
   const queue = shuffle(cards.map((_,id)=>id).filter(id=>!learned.includes(id)),random).slice(0,10);

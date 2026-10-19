@@ -4,7 +4,7 @@ import {MASTERY_TARGET,initializeMastery,recordMastery,masterySummary,newMastery
 import {createExam,setExamAnswer,scoreExam,submitExam,validateExam} from './exam.js';
 import {createStudyBackup, parseStudyBackup, validateStudyState} from './backup.js';
 import {parsePdfPages} from './pdf-layout.js';
-import {makeQuestion, answerQuestion, advanceRound,isAnswerProvided} from './learn.js';
+import {makeQuestion, answerQuestion, advanceRound,isAnswerProvided,ensureQuestionDistractors} from './learn.js';
 import {parseCards} from './cards.js';
 import {prepareStudyCards} from './source-upgrade.js';
 import {migrateStudyCards} from './merge-progress.js';
@@ -168,6 +168,7 @@ function renderLearn(){
  }
  if(!round.current)round.current=makeQuestion(state.cards,round.queue[0]);
  const q=round.current, feedback=round.feedback;
+ if(!feedback)ensureQuestionDistractors(q,state.cards,round.queue[0]);
  const cardProgress=state.mastery.cards[round.queue[0]],cardMastered=isCardMastered(cardProgress);
  $('learn-card-mastery').textContent=cardProgress.manualMastered?`MANUALLY MASTERED · actual streak ${cardProgress.streak}/3`:`THIS CARD: ${cardProgress.streak}/${MASTERY_TARGET} consecutive correct${cardMastered?' · MASTERED':''}`;
  for(const id of ['learn-manual-mastered','learn-manual-footer']){$(id).disabled=!!cardProgress.manualMastered;$(id).textContent=cardProgress.manualMastered?'✓ Marked by you':'I mastered this';}
@@ -296,6 +297,7 @@ function renderExam(){
  if(!exam)return;
  if(exam.submittedAt){renderExamResults();return;}
  const i=exam.cursor,q=exam.questions[i],selected=exam.answers[i];
+ if(ensureQuestionDistractors(q,state.cards,q.cardId))save();
  const answered=exam.questions.filter((question,n)=>isAnswerProvided(question,exam.answers[n])).length;
  $('exam-position').textContent=`QUESTION ${i+1} OF ${exam.questions.length}`;
  $('exam-count').textContent=`${answered} answered · ${exam.flagged.length} flagged`;

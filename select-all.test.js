@@ -88,3 +88,19 @@ test('manually completing a pending select-all question clears its ungraded sele
  setManualMastery(mastery,0,true);assert(completeManualCard(round,0));assert.equal(round.selection,undefined);assert.equal(round.attempts,0);assert.equal(mastery.cards[0].correct,0);
  const restored=parseStudyBackup(JSON.stringify(createStudyBackup({cards,known:[],learned:[],mastery,round})));assert.equal(restored.round.selection,undefined);assert.equal(restored.mastery.cards[0].manualMastered,true);
 });
+
+test('all-correct PDF questions gain incorrect practice choices without changing source keys or Flashcards choices',async()=>{
+ const {readFileSync}=await import('node:fs');const deck=JSON.parse(readFileSync(new URL('./deck.json',import.meta.url))).cards;const source=JSON.parse(readFileSync(new URL('./source-deck.json',import.meta.url))).cards;const before=JSON.stringify(deck);
+ const ids=deck.flatMap((card,id)=>card.type==='multi'&&card.options?.every(option=>card.answers.includes(option))?[id]:[]);assert.equal(ids.length,2);
+ for(const id of ids){const card=deck[id],question=makeQuestion(deck,id,()=>.5);assert.equal(question.answers.length,4);assert.equal(question.options.length,6);assert.equal(card.options.length,4);assert(question.options.some(option=>!question.answers.includes(option)));assert(isLearnAnswerCorrect(question,card.answers));assert(!isLearnAnswerCorrect(question,question.options));assert(!isLearnAnswerCorrect(question,card.answers.slice(1)));if(card.term.includes('Choosing Passwords'))for(const option of question.options.filter(option=>!card.answers.includes(option)))assert(source.some(original=>original.term.includes(option)),'password practice distractors must come from printed source choices');}
+ assert.equal(JSON.stringify(deck),before);
+});
+test('unanswered saved all-correct snapshots gain choices once while preserving their selection and scores',async()=>{
+ const {ensureQuestionDistractors}=await import('./learn.js');const {readFileSync}=await import('node:fs');const deck=JSON.parse(readFileSync(new URL('./deck.json',import.meta.url))).cards;const id=deck.findIndex(card=>card.type==='multi'&&card.term.includes('role of the computer scientist'));
+ const card=deck[id],round={queue:[id],total:1,completed:0,attempts:0,firstCorrect:0,seen:[],current:{type:'multi',prompt:card.term,answer:card.definition,answers:[...card.answers],options:[...card.options]},feedback:null,selection:[card.answers[0]]};const before=structuredClone(round);
+ assert(ensureQuestionDistractors(round.current,deck,id,()=>.5));const copy=structuredClone(round);assert(!ensureQuestionDistractors(round.current,deck,id));assert.deepEqual(round,copy);assert.deepEqual({...round,current:null},{...before,current:null});assert.deepEqual({...round.current,options:[]},{...before.current,options:[]});
+ const restored=parseStudyBackup(JSON.stringify(createStudyBackup({cards:deck,known:[],learned:[],round})));assert.deepEqual(restored.round,round);
+});
+test('new exams use extra choices for all-correct source questions and still require exact answers',async()=>{
+ const {readFileSync}=await import('node:fs');const deck=JSON.parse(readFileSync(new URL('./deck.json',import.meta.url))).cards;const exam=createExam(deck,()=>.5);const index=exam.questions.findIndex(question=>question.prompt.includes('role of the computer scientist'));const question=exam.questions[index];assert.equal(question.options.length,6);assert(setExamAnswer(exam,index,question.options));assert.equal(scoreExam(exam).rows[index].correct,false);assert(setExamAnswer(exam,index,question.answers));assert.equal(scoreExam(exam).rows[index].correct,true);assert.deepEqual(validateExam(exam,deck),exam);
+});
