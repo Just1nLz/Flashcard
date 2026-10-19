@@ -6,14 +6,14 @@ The included **Computer Ethics Final copy** set has **94 original flashcards** a
 
 ## Download and use
 
-1. [Download pocket-flashcards.zip](https://github.com/Just1nLz/Flashcard/raw/refs/heads/main/pocket-flashcards.zip).
+1. [Download pocket-flashcards.zip](https://github.com/Just1nLz/Pocket-Study/raw/refs/heads/main/pocket-flashcards.zip).
 2. Unzip it and deploy the folder containing `index.html` to an HTTPS static host. To update an existing Netlify site, upload the latest package to that same project.
 3. Open the published address in Safari on your iPhone. Wait for **Ready for offline study**, then choose **Share → Add to Home Screen**.
 4. Launch the Home Screen app while online once and wait for the offline-ready message. Subsequent study works offline.
 
 See [IPHONE.md](IPHONE.md) for installation, updates, and backup instructions. A cloud development server's localhost address is not a public phone-accessible app link.
 
-The repository includes generated deployment files, so hosting requires no npm installation. For a Git-connected static host, use publish directory `.` with no build command. The desktop [Pocket-Flashcards.html](https://github.com/Just1nLz/Flashcard/raw/refs/heads/main/Pocket-Flashcards.html) download is self-contained; iPhone Files previews are not a reliable installation route.
+The repository includes generated deployment files, so hosting requires no npm installation. For a Git-connected static host, use publish directory `.` with no build command. The desktop [Pocket-Flashcards.html](https://github.com/Just1nLz/Pocket-Study/raw/refs/heads/main/Pocket-Flashcards.html) download is self-contained; iPhone Files previews are not a reliable installation route.
 
 ## Study modes
 
