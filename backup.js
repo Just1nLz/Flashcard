@@ -3,6 +3,7 @@ import {validateMastery} from './mastery.js';
 import {validateExam} from './exam.js';
 import {parseCards} from './cards.js';
 import {validateRewards,validateRoundReward} from './rewards.js';
+import {validateFlashcards} from './flashcards.js';
 function validateCardMigration(value,depth=0){
  if(!value||depth>10||value.version!==1||!['fromCount','toCount','mergedCount'].every(key=>Number.isInteger(value[key])&&value[key]>=0)||value.toCount>value.fromCount||value.mergedCount!==value.fromCount-value.toCount||(value.dismissed!==undefined&&typeof value.dismissed!=='boolean'))throw new Error('Invalid archived question update.');
  const result=JSON.parse(JSON.stringify(value));
@@ -17,6 +18,7 @@ export function validateStudyState(input) {
   const validId=id=>Number.isInteger(id)&&id>=0&&id<cards.length;
   function ids(value,label){if(value===undefined)return [];if(!Array.isArray(value)||value.some(id=>!validId(id))||new Set(value).size!==value.length)throw new Error(`Invalid ${label} in backup.`);return [...value];}
   const state={title:typeof input.title==='string'?input.title.slice(0,120):'My study set',cards,known:ids(input.known,'flashcard progress'),learned:ids(input.learned,'learning progress')};
+  if(input.flashcards){state.flashcards=validateFlashcards(input.flashcards,cards);if(input.flashKnown!==undefined){if(!Array.isArray(input.flashKnown)||input.flashKnown.some(id=>!Number.isInteger(id)||id<0||id>=state.flashcards.length)||new Set(input.flashKnown).size!==input.flashKnown.length)throw new Error('Invalid original flashcard progress.');state.flashKnown=[...input.flashKnown];}}
   if(input.round){
     const r=JSON.parse(JSON.stringify(input.round));
     r.queue=ids(r.queue,'round queue');r.seen=ids(r.seen,'round history');
@@ -52,12 +54,12 @@ export function validateStudyState(input) {
 }
 export function createStudyBackup(state, now=new Date()) {
   const clean=validateStudyState(state);
-  return {format:'pocket-study-backup',version:1,exportedAt:now.toISOString(),title:clean.title,cards:clean.cards,progress:{known:clean.known,learned:clean.learned,round:clean.round||null,lastActivity:clean.lastActivity||'flash',exam:clean.exam||null,soundEnabled:clean.soundEnabled||false,feedbackStreak:clean.feedbackStreak||0,mastery:clean.mastery||null,rewards:clean.rewards||null,cardMigration:clean.cardMigration||null}};
+  return {format:'pocket-study-backup',version:1,exportedAt:now.toISOString(),title:clean.title,cards:clean.cards,progress:{known:clean.known,learned:clean.learned,round:clean.round||null,lastActivity:clean.lastActivity||'flash',exam:clean.exam||null,soundEnabled:clean.soundEnabled||false,feedbackStreak:clean.feedbackStreak||0,mastery:clean.mastery||null,rewards:clean.rewards||null,cardMigration:clean.cardMigration||null,flashcards:clean.flashcards||null,flashKnown:clean.flashKnown||[]}};
 }
 export function parseStudyBackup(text) {
   const data=JSON.parse(text);
   if(data.format!=='pocket-study-backup')return null;
   if(data.version!==1)throw new Error('This backup version is not supported. Update Pocket before restoring it.');
   if(!data.progress||!Array.isArray(data.progress.known)||!Array.isArray(data.progress.learned))throw new Error('Backup is missing progress. Nothing has been restored.');
-  return validateStudyState({title:data.title,cards:data.cards,known:data.progress.known,learned:data.progress.learned,round:data.progress.round,lastActivity:data.progress.lastActivity,exam:data.progress.exam,soundEnabled:data.progress.soundEnabled,feedbackStreak:data.progress.feedbackStreak,mastery:data.progress.mastery,rewards:data.progress.rewards,cardMigration:data.progress.cardMigration});
+  return validateStudyState({title:data.title,cards:data.cards,known:data.progress.known,learned:data.progress.learned,round:data.progress.round,lastActivity:data.progress.lastActivity,exam:data.progress.exam,soundEnabled:data.progress.soundEnabled,feedbackStreak:data.progress.feedbackStreak,mastery:data.progress.mastery,rewards:data.progress.rewards,cardMigration:data.progress.cardMigration,flashcards:data.progress.flashcards,flashKnown:data.progress.flashKnown});
 }

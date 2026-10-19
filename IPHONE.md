@@ -13,7 +13,7 @@ The deployment includes the study deck, so use a private hosting arrangement if 
 ## Install on iPhone
 
 1. Open the published HTTPS app address in Safari.
-2. Wait for the 80 cards to load and for “Ready for offline study” to appear at the bottom.
+2. Wait for the study set to load (94 original Flashcards / 80 Learn questions) and for “Ready for offline study” to appear at the bottom.
 3. Tap Share (the square with an upward arrow), then **Add to Home Screen**. You may need to scroll through the actions. If shown, leave **Open as Web App** enabled.
 4. Tap **Add**. Launch Pocket from its new Home Screen icon, once while connected to the Internet, and wait for the offline-ready message there too.
 5. Try Airplane Mode and reopen Pocket to confirm offline study works on your iPhone.

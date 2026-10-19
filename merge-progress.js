@@ -58,6 +58,7 @@ export function migrateStudyCards(state,plan=consolidateCards(state.cards)){
  if(examArchived){migration.previousExam=cloneMigrationData(state.exam);delete state.exam;}
  if(migration.previousRound||migration.previousExam)migration.previousCards=oldCards;
  state.cards=cloneMigrationData(plan.cards);
+ if(Array.isArray(state.flashcards))state.flashcards=state.flashcards.map(card=>({...card,cardId:plan.oldToNew[card.cardId]}));
  state.known=remapMigrationIds(state.known);
  state.learned=remapMigrationIds(state.learned);
  state.mastery=mastery;

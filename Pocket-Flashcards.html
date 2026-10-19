@@ -61,17 +61,21 @@ textarea{border-color:#7b956e;color:#102b24}#import-status{color:#6d341c}
 .learning-rewards{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:16px 18px;margin:18px 0;background:#173e32;color:#fff;border:1px solid #12372b;border-radius:12px}.learning-rewards>div{flex:1;min-width:0}.learning-rewards strong{font-size:16px;display:block}.learning-rewards span{font-size:12px;display:block;margin-top:5px}.learning-rewards small{font-size:10px;color:#e0eed6;line-height:1.6;display:block}.learning-rewards button{background:#fff7d6;color:#4d3605;border-color:#e3c26d;font-size:11px;font-weight:750;max-width:170px;min-height:44px}.reward-track{height:5px;border-radius:8px;background:#426356;margin:10px 0 7px;overflow:hidden}#reward-level-progress{height:100%;background:#f1cd62}.round-reward{display:flex;align-items:center;gap:16px;text-align:left;margin:20px 0;padding:20px;border:2px solid #a87717;background:#fff4cf;border-radius:14px;color:#4d3605;animation:reward-arrive .35s ease-out}.reward-medal{font-size:40px;display:grid;place-items:center;min-width:60px;height:60px;border-radius:50%;border:2px solid #a87717;background:#ffe18c}.round-reward strong{font-size:19px}.round-reward p{margin:7px 0!important;font-size:22px!important;font-weight:800;color:#4d3605!important}.round-reward small{display:block;font-size:11px;line-height:1.7}.set-recap{padding:24px;border:2px solid #648653;border-radius:16px;background:#fff;margin:24px 0;scroll-margin-top:20px}.recap-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.recap-heading .eyebrow{color:#385b2d;margin-bottom:8px}.recap-heading h3{font:400 27px/1.3 Georgia,serif;margin:0;color:#123c2c}.recap-heading button{min-width:44px;min-height:44px}#recap-coverage{font-size:13px;line-height:1.8;color:#244b2d}#recap-coverage-progress{height:100%;background:#2b713a}.recap-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.recap-stats>div{background:#edf5e6;padding:15px 10px;border:1px solid #adc49e;border-radius:10px}.recap-stats strong{display:block;font-size:27px;color:#173e32}.recap-stats span{display:block;font-size:10px;line-height:1.6;margin-top:4px;color:#334c2b}.recap-actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.recap-actions button{font-size:12px;min-height:44px;flex:1}#recap-focus-heading{font-size:17px;margin:26px 0 8px}#recap-focus-note{font-size:12px;line-height:1.8;color:#43543d}.recap-card{border:1px solid #9fb692;border-left:4px solid #497b3a;padding:14px;background:#f7fbf3;border-radius:9px;margin:12px 0;overflow-wrap:anywhere}.recap-card.recap-needs-work{border-left-color:#a55019;background:#fff9ed}.recap-card summary{cursor:pointer;line-height:1.7;font-size:13px}.recap-card summary strong{font-size:10px;letter-spacing:.5px;color:#3f532e}.recap-needs-work summary strong{color:#85420d}.recap-card summary span,.recap-card summary small{display:block}.recap-card summary small{font-size:11px;color:#43543d;margin-top:7px}.recap-answer{font-size:13px;line-height:1.8;font-weight:650;color:#18512b;background:#e1efd7;border-radius:7px;padding:13px;white-space:pre-wrap}#recap-all-details>summary{font-size:12px;line-height:1.7;font-weight:750;cursor:pointer;margin:24px 0 12px}#summary-recap{display:block;margin:14px auto 0;min-height:44px;font-size:13px;border:1px solid #719661;background:#fff}#recap-explanation{line-height:1.8}@keyframes reward-arrive{from{opacity:.5;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}@media(max-width:600px){.learning-rewards{padding:14px;gap:12px}.learning-rewards button{max-width:125px;padding:10px;font-size:10px}.set-recap{padding:18px 14px}.recap-stats{grid-template-columns:repeat(2,1fr)}.recap-heading h3{font-size:23px}.round-reward{padding:16px 12px;gap:12px}.reward-medal{min-width:46px;height:46px;font-size:30px}.round-reward p{font-size:20px!important}.recap-actions button{flex-basis:100%}.learning-rewards small{font-size:10px}}
 /* Multi-answer questions keep selection separate from grading. */
 .multi-hint{font-size:12px;line-height:1.8;color:#253c65;background:#edf2ff;border:1px solid #8c9fc1;padding:12px;border-radius:9px;margin:0 0 18px}.learn-option.multi-selected{border:2px solid #334ead;background:#e0e8ff;color:#1b2d77;font-weight:650}.multi-selected .option-letter{background:#334ead;color:#fff}.learn-option[role=checkbox] .option-letter{font-size:19px;line-height:1.1}.memory-answer,.review-answer,.review-wrong,.review-chosen{white-space:pre-wrap}.question-update-note{padding:16px;border:1px solid #8c9fc1;border-radius:12px;background:#edf2ff;color:#203b6d;margin-top:18px}.question-update-note p{font-size:12px;line-height:1.8;margin:0}#learn-check-footer{font-size:14px;font-weight:750;min-height:48px;padding:14px 18px;flex-shrink:0}#learn-check:not([hidden]){margin-bottom:18px}@media(max-width:600px){#learn-check-footer{font-size:12px;padding:12px 14px}}
+/* Flashcards retain the printed alternatives with one labeled choice per row. */
+#card-text{display:block;width:100%;text-align:left;font-family:inherit;font-size:18px;line-height:1.7;letter-spacing:0}.flash-question{display:block;font:500 21px/1.6 Georgia,serif;white-space:pre-wrap}.flash-choice-list{display:grid;gap:12px;margin-top:24px}.flash-choice{display:flex;align-items:flex-start;gap:12px;padding:14px;background:#ffffff10;border:1px solid #a6c7a85c;border-radius:10px;font:400 14px/1.7 system-ui,sans-serif}.flash-choice-code{flex:0 0 26px;color:#fff4bb;font-weight:800}.flash-choice>span:last-child{min-width:0;white-space:pre-wrap;overflow-wrap:anywhere}.flash-answer-line{display:flex;align-items:flex-start;gap:12px;white-space:pre-wrap;margin:12px 0;padding:14px;background:#ffffff14;border:1px solid #a6c7a85c;border-radius:10px}.card.answer #card-text{font:500 18px/1.8 system-ui,sans-serif}.card.answer .flash-choice-code{color:#fff1a4}.card.long #card-text{font-size:16px}.card .eyebrow,#flip-hint{align-self:center}#flash-mode-description{margin:18px 0 0;color:#304c32}@media(max-width:600px){.flash-question{font-size:19px;line-height:1.65}.flash-choice{font-size:14px;padding:12px;gap:9px}.flash-choice-list{gap:10px}.card.answer #card-text{font-size:16px}.flash-answer-line{padding:12px;gap:9px}}
+/* State how many answers to choose before the learner reads the options. */
+.answer-format{display:flex;align-items:flex-start;gap:12px;padding:16px;border:2px solid #49804a;border-radius:12px;margin:6px 0 18px;background:#eaf5e5;color:#17452a}.answer-format>span{font-size:27px;line-height:1.25;flex-shrink:0}.answer-format strong{display:block;font-size:18px;line-height:1.5}.answer-format p{font-size:12px;line-height:1.7;margin:5px 0 0}.answer-format-multi{border-color:#3452a4;background:#e6edff;color:#172f75}.answer-format-written{border-color:#896125;background:#fff4d6;color:#573a12}#learn-options .learn-option:not([role=checkbox]) .option-letter{border-radius:50%;border:1px solid #6e956c}#learn-options .learn-option[role=checkbox] .option-letter{border-radius:4px;font-size:22px;min-width:28px}.answer-format+#learn-kind{font-size:10px;letter-spacing:1px}@media(max-width:600px){.answer-format{padding:13px;gap:10px}.answer-format strong{font-size:17px}.answer-format p{font-size:12px}}
 </style><title>Pocket • Computer Ethics</title></head>
 <body><header><a class="brand" href="./"><span class="logo">▱</span> pocket<span class="brand-dot">.</span></a><button id="manage" class="quiet">Manage cards ↗</button></header>
 <main><section class="intro"><p class="eyebrow">YOUR POCKET STUDY SPACE</p><h1>Small cards.<br>Big understanding.</h1><p class="subtitle">A little practice, wherever life takes you.</p></section>
 <section class="workspace"><div class="deck-heading"><div><p class="eyebrow">THE COLLECTION</p><h2><span id="deck-title" class="deck-title">Computer Ethics</span> <span>Study set</span></h2></div><span id="connection" class="badge">● On this device</span></div>
 <div class="study-switch" aria-label="Study activity"><button id="flash-mode" class="active" aria-pressed="true">▱ Flashcards</button><button id="learn-mode" aria-pressed="false">✧ Learn</button><button id="exam-mode" aria-pressed="false">◎ Exam</button></div>
-<div id="flash-panel"><div class="toolbar"><div class="tabs" aria-label="Study mode"><button id="all" class="active">All cards <span id="total">0</span></button><button id="review">Need practice <span id="remaining">0</span></button></div><button id="shuffle" class="quiet">⇄ Shuffle</button></div>
+<div id="flash-panel"><p id="flash-mode-description" class="learn-description"></p><div class="toolbar"><div class="tabs" aria-label="Study mode"><button id="all" class="active">All cards <span id="total">0</span></button><button id="review">Need practice <span id="remaining">0</span></button></div><button id="shuffle" class="quiet">⇄ Shuffle</button></div>
 <div class="progress-label"><span id="position">Ready when you are</span><span id="mastery">0 marked familiar</span></div><div class="progress-track"><div id="progress"></div></div>
 <p id="card-mastery" class="card-mastery"></p><button id="card" class="card" aria-label="Flip flashcard"><span id="side" class="eyebrow">LET’S GET STARTED</span><span id="card-text">Your next study session<br>starts here.</span><span id="flip-hint">Import your cards below to begin</span></button>
 <div id="answer-actions" class="answer-actions" hidden><button id="again">↺ Keep practicing</button><button id="known">✓ Got it</button></div>
 <div class="navigation"><button id="prev" aria-label="Previous card">←</button><p id="navigation-hint">Tap a card to reveal the answer</p><button id="next" aria-label="Next card">→</button></div>
-</div><section id="learn-panel" hidden aria-label="Multiple choice learning"><div class="learn-heading"><div><p class="eyebrow">A LITTLE PRACTICE, A LOT OF PROGRESS</p><h3>Learn it, one question at a time.</h3></div><button id="restart-learn" class="quiet">Restart round</button></div><div class="feedback-controls"><button id="sound-toggle" class="quiet" type="button" aria-pressed="false">Sound: off</button><span id="learn-streak"></span></div><p class="learn-description">Each round has up to 10 core cards plus 3 labeled past-mistake reviews. Mastery means 3 correct answers in a row for the same card, across rounds, or you can mark a card mastered yourself. A wrong answer resets that card to 0/3. Missed questions return later in this round; unmastered cards keep returning in future rounds.</p><p id="learn-round-mix" class="round-mix"></p><div class="learn-stats"><span id="learn-count"></span><span id="learn-score"></span></div><div class="progress-track"><div id="learn-progress"></div></div><div id="mastery-migration-note" class="notice" hidden><p>Your earlier progress is kept. Cards previously learned under the one-correct rule receive 1/3 credit; the new mastery target is 3/3. Previous scores and your saved round remain.</p><button id="dismiss-mastery-note" class="quiet">Got it</button></div><section id="question-update-note" class="notice question-update-note" hidden><p id="question-update-detail"></p><button id="dismiss-question-update" class="quiet" type="button">Got it</button></section><section class="mastery-overview"><p id="mastery-overview-text"></p><div class="progress-track"><div id="set-mastery-progress"></div></div><details id="mastery-details"><summary>See mastery for every card</summary><div id="mastery-list"></div></details></section><div class="learning-rewards" aria-label="Learning rewards"><div><strong id="reward-level">Level 1</strong><span id="reward-total">0 XP · 0 rounds complete</span><div class="reward-track"><div id="reward-level-progress"></div></div><small id="reward-level-next"></small></div><button id="open-set-recap" type="button" aria-expanded="false" aria-controls="set-recap">See set recap</button></div><div id="learn-question-panel"><p id="learn-history-badge" class="past-mistake-badge" hidden></p><div class="learn-card-controls"><p id="learn-card-mastery" class="card-mastery"></p><button id="learn-manual-mastered" type="button" class="quiet" title="Self-mark mastery without changing answer scores">I mastered this</button></div><p id="learn-kind" class="eyebrow"></p><h3 id="learn-question"></h3><p id="learn-multi-hint" class="multi-hint" hidden></p><label id="learn-written-label" for="learn-written" hidden>Your answer<textarea id="learn-written" rows="3" placeholder="Recall the answer without looking"></textarea></label><button id="learn-check" class="primary" hidden>Check answer</button><div id="learn-feedback" role="status" aria-live="polite" tabindex="-1"></div><div id="learn-options"></div></div><div id="learn-swipe-actions" class="learn-swipe-actions" role="region" aria-label="Answered question navigation" hidden><div><strong id="learn-action-result"></strong><span id="learn-action-hint">Swipe left on the card to continue</span><button id="learn-manual-footer" class="quiet" type="button">I mastered this</button></div><button id="learn-check-footer" class="primary" hidden>Check answers</button><button id="learn-next" class="primary">Next question →</button></div><div id="learn-summary" hidden><span class="summary-icon">✧</span><h3 id="summary-title"></h3><div id="round-reward" class="round-reward" hidden role="status"><span id="round-reward-badge" class="reward-medal" aria-hidden="true">✦</span><div><strong id="round-reward-title"></strong><p id="round-reward-xp"></p><small id="round-reward-detail"></small></div></div><p id="summary-detail"></p><button id="next-round" class="primary">Next round →</button><button id="summary-recap" type="button">See set recap ↓</button></div><section id="set-recap" class="set-recap" hidden aria-labelledby="recap-title"><div class="recap-heading"><div><p class="eyebrow">YOUR COLLECTION, AT A GLANCE</p><h3 id="recap-title" tabindex="-1">Your set so far</h3></div><button id="close-set-recap" class="quiet" type="button" aria-label="Close set recap">✕</button></div><p id="recap-coverage"></p><div class="progress-track"><div id="recap-coverage-progress"></div></div><div id="recap-stats" class="recap-stats"></div><p id="recap-explanation" class="fine"></p><div class="recap-actions"><button id="practice-recap-focus" type="button" class="primary">Practice focus cards</button><button id="practice-recap-untested" type="button">Assess untested cards</button><button id="recap-exam" type="button">Check recall in Exam</button></div><h4 id="recap-focus-heading">Where to focus next</h4><p id="recap-focus-note"></p><div id="recap-focus-list"></div><details id="recap-all-details"><summary id="recap-all-title">Review every card</summary><div id="recap-all-list"></div></details></section><p class="learn-footnote">Answers follow your PDF’s key. Multiple-choice distractors are generated from other study cards; true/false cards keep their original format. Learning progress saves on this device.</p></section>
+</div><section id="learn-panel" hidden aria-label="Multiple choice learning"><div class="learn-heading"><div><p class="eyebrow">A LITTLE PRACTICE, A LOT OF PROGRESS</p><h3>Learn it, one question at a time.</h3></div><button id="restart-learn" class="quiet">Restart round</button></div><div class="feedback-controls"><button id="sound-toggle" class="quiet" type="button" aria-pressed="false">Sound: off</button><span id="learn-streak"></span></div><p class="learn-description">Each round has up to 10 core cards plus 3 labeled past-mistake reviews. Mastery means 3 correct answers in a row for the same card, across rounds, or you can mark a card mastered yourself. A wrong answer resets that card to 0/3. Missed questions return later in this round; unmastered cards keep returning in future rounds.</p><p id="learn-round-mix" class="round-mix"></p><div class="learn-stats"><span id="learn-count"></span><span id="learn-score"></span></div><div class="progress-track"><div id="learn-progress"></div></div><div id="mastery-migration-note" class="notice" hidden><p>Your earlier progress is kept. Cards previously learned under the one-correct rule receive 1/3 credit; the new mastery target is 3/3. Previous scores and your saved round remain.</p><button id="dismiss-mastery-note" class="quiet">Got it</button></div><section id="question-update-note" class="notice question-update-note" hidden><p id="question-update-detail"></p><button id="dismiss-question-update" class="quiet" type="button">Got it</button></section><section class="mastery-overview"><p id="mastery-overview-text"></p><div class="progress-track"><div id="set-mastery-progress"></div></div><details id="mastery-details"><summary>See mastery for every card</summary><div id="mastery-list"></div></details></section><div class="learning-rewards" aria-label="Learning rewards"><div><strong id="reward-level">Level 1</strong><span id="reward-total">0 XP · 0 rounds complete</span><div class="reward-track"><div id="reward-level-progress"></div></div><small id="reward-level-next"></small></div><button id="open-set-recap" type="button" aria-expanded="false" aria-controls="set-recap">See set recap</button></div><div id="learn-question-panel"><p id="learn-history-badge" class="past-mistake-badge" hidden></p><div class="learn-card-controls"><p id="learn-card-mastery" class="card-mastery"></p><button id="learn-manual-mastered" type="button" class="quiet" title="Self-mark mastery without changing answer scores">I mastered this</button></div><div id="learn-format-notice" class="answer-format"><span id="learn-format-icon" aria-hidden="true"></span><div><strong id="learn-format-title"></strong><p id="learn-format-detail"></p></div></div><p id="learn-kind" class="eyebrow"></p><h3 id="learn-question"></h3><p id="learn-multi-hint" class="multi-hint" hidden></p><label id="learn-written-label" for="learn-written" hidden>Your answer<textarea id="learn-written" rows="3" placeholder="Recall the answer without looking"></textarea></label><button id="learn-check" class="primary" hidden>Check answer</button><div id="learn-feedback" role="status" aria-live="polite" tabindex="-1"></div><div id="learn-options"></div></div><div id="learn-swipe-actions" class="learn-swipe-actions" role="region" aria-label="Answered question navigation" hidden><div><strong id="learn-action-result"></strong><span id="learn-action-hint">Swipe left on the card to continue</span><button id="learn-manual-footer" class="quiet" type="button">I mastered this</button></div><button id="learn-check-footer" class="primary" hidden>Check answers</button><button id="learn-next" class="primary">Next question →</button></div><div id="learn-summary" hidden><span class="summary-icon">✧</span><h3 id="summary-title"></h3><div id="round-reward" class="round-reward" hidden role="status"><span id="round-reward-badge" class="reward-medal" aria-hidden="true">✦</span><div><strong id="round-reward-title"></strong><p id="round-reward-xp"></p><small id="round-reward-detail"></small></div></div><p id="summary-detail"></p><button id="next-round" class="primary">Next round →</button><button id="summary-recap" type="button">See set recap ↓</button></div><section id="set-recap" class="set-recap" hidden aria-labelledby="recap-title"><div class="recap-heading"><div><p class="eyebrow">YOUR COLLECTION, AT A GLANCE</p><h3 id="recap-title" tabindex="-1">Your set so far</h3></div><button id="close-set-recap" class="quiet" type="button" aria-label="Close set recap">✕</button></div><p id="recap-coverage"></p><div class="progress-track"><div id="recap-coverage-progress"></div></div><div id="recap-stats" class="recap-stats"></div><p id="recap-explanation" class="fine"></p><div class="recap-actions"><button id="practice-recap-focus" type="button" class="primary">Practice focus cards</button><button id="practice-recap-untested" type="button">Assess untested cards</button><button id="recap-exam" type="button">Check recall in Exam</button></div><h4 id="recap-focus-heading">Where to focus next</h4><p id="recap-focus-note"></p><div id="recap-focus-list"></div><details id="recap-all-details"><summary id="recap-all-title">Review every card</summary><div id="recap-all-list"></div></details></section><p class="learn-footnote">Answers follow your PDF’s key. Multiple-choice distractors are generated from other study cards; true/false cards keep their original format. Learning progress saves on this device.</p></section>
 <section id="exam-panel" hidden aria-label="Exam mode"><div class="learn-heading"><div><p class="eyebrow">PUT YOUR KNOWLEDGE TO THE TEST</p><h3>The whole collection. One attempt.</h3></div></div><p class="learn-description">Every card, shuffled once. Answer at your own pace, flag uncertain questions, and change answers before submitting. Results stay hidden until you submit. Exam work saves separately from Learn.</p><div id="exam-start"><p id="exam-set-size"></p><button id="start-exam" class="primary">Start full-set exam</button></div><section id="exam-taking" hidden><div class="learn-stats"><span id="exam-position"></span><span id="exam-count"></span></div><div class="progress-track"><div id="exam-progress"></div></div><div class="exam-question-box"><div class="exam-question-tools"><span id="exam-kind" class="eyebrow"></span><button id="exam-flag" class="quiet" aria-pressed="false">Flag for review</button></div><h3 id="exam-question" tabindex="-1"></h3><p id="exam-multi-hint" class="multi-hint" hidden>Select every correct answer. A missing correct option or an extra incorrect choice makes this question incorrect. Results appear after submitting the exam.</p><div id="exam-options"></div><label id="exam-written-label" for="exam-written" hidden>Your answer<textarea id="exam-written" rows="3" placeholder="Type your answer"></textarea></label><div class="exam-navigation"><button id="exam-prev">← Previous</button><button id="exam-clear" class="quiet">Clear answer</button><button id="exam-next">Next →</button></div></div><details class="exam-map"><summary id="exam-map-summary">Question navigator</summary><p>✓ Answered · ⚑ Flagged · Blank means unanswered</p><div id="exam-grid"></div></details><div class="exam-submit-actions"><button id="submit-exam" class="primary">Submit exam</button><button id="discard-exam" class="quiet">Start over</button></div></section><section id="exam-results" hidden><div class="exam-score-card"><p class="eyebrow">YOUR STUDY-SET SCORE</p><strong id="exam-percent"></strong><h3 id="exam-level"></h3><p id="exam-score-detail"></p><p id="exam-result-note">This measures recall against this set’s answer key; it is not a prediction of your real test grade.</p></div><div class="exam-submit-actions"><button id="retake-exam" class="primary">Take a new exam</button><button id="practice-exam-missed">Practice missed cards</button></div><label class="review-confirm"><input id="exam-missed-only" type="checkbox" checked> Show incorrect and unanswered only</label><p id="exam-review-count" role="status"></p><div id="exam-review"></div></section></section><div class="tip"><span>✧</span><p>Make it stick.<br><small>Recall the answer before you flip the card.</small></p><span class="key-hint">SPACE to flip · ← → to browse</span></div></section>
 <footer><span>Built for a little progress, every day.</span><span id="offline-status">Saved privately on your device</span></footer></main>
 <dialog id="import-dialog"><form method="dialog" class="dialog-heading"><h2>Import &amp; export</h2><button class="quiet" aria-label="Close">✕</button></form><p>Create a study set from a PDF, paste card text, or restore a JSON backup. Files are read on your device.</p><section class="backup-tools"><h3>Protect your progress</h3><p>App updates on this same site keep your saved progress. Download a full backup to transfer it to another device or browser. Upload that JSON below to restore.</p><button id="export-progress" type="button" class="primary">Download full backup + progress</button><button id="restore-recovery" type="button" hidden>Recover previous local snapshot</button><p class="fine">Local recovery stays on this device; a downloaded backup is safer. No automatic cloud sync.</p></section><label for="set-title">Study set name</label><input id="set-title" type="text" maxlength="120" placeholder="Name your study set"><label for="pdf-file" class="pdf-upload">＋ Import a questions &amp; answers PDF</label><input id="pdf-file" type="file" accept=".pdf,application/pdf"><p class="fine">Supports Quizlet print PDFs like your original, or selectable-text PDFs with Question: / Answer: pairs. Scans, arbitrary layouts, and separate answer keys need conversion first. Up to 25 MB / 100 pages.</p><label for="import-file">Restore full backup, or import JSON / TXT / TSV</label><input id="import-file" type="file" accept=".json,.txt,.tsv,text/plain,application/json"><label for="import-text">Editable card data</label><textarea id="import-text" rows="7" placeholder="Term :: Definition (one card per line), or JSON"></textarea><p class="fine">PDF results appear here as editable JSON. You can correct any question or answer before importing.</p><button id="preview-import" type="button">Review cards</button><p id="import-status" role="status" aria-live="polite"></p><section id="import-preview" hidden><h3 id="preview-count"></h3><p id="backup-preview" class="notice" hidden></p><div id="preview-cards"></div><label class="review-confirm"><input id="confirm-review" type="checkbox"> I checked the questions and answers.</label></section><div class="dialog-actions"><button id="export" type="button">Export JSON</button><button id="export-pdf" type="button">Export PDF / print</button><button id="import" type="button" class="primary" disabled>Use these cards</button></div><p class="fine">Importing a new card set resets its progress. Restoring a full backup includes progress. “Export JSON” and PDF exports contain cards only; use “Download full backup + progress” to preserve scores and unfinished rounds.</p></dialog>
@@ -1054,6 +1058,388 @@ textarea{border-color:#7b956e;color:#102b24}#import-status{color:#6d341c}
   ],
   "consolidationWarnings": []
 }
+</script><script id="included-source-deck" type="application/json">{
+  "title": "Computer Ethics Final copy",
+  "source": "User-provided Quizlet print PDF, set 1223528877",
+  "cards": [
+    {
+      "term": "In the video \"Digital Ethics and the Future of Humans in a Connected World\" by Gerd Leonhard, which of the following statements is the most correct? Facebook has 100s of people creating the content for its news feed. Technology has no ethics. People work less mecause they are distracted by social media and mobile devices. Stephen Hawking states Artificial Intelligence is not our last and greatest invention.",
+      "definition": "Technology has no ethics"
+    },
+    {
+      "term": "In the video regarding the paper \"What is Computer Ethics\" by James Moore, which statement below is the most accurate? Computer ethics is about right and wrong behavior as defined by local laws. Computer ethics is about the social impact of computer technology and the ethical use of such Computer ethics is about computer security. Computer ethics is about right and wrong behavior as defined by a person's religion.",
+      "definition": "Computer ethics is about the social impact of computer technology and the ethical use of such tech"
+    },
+    {
+      "term": "\"What is Computer Ethics\" by James Moore, which statement below is the most accurate? Executives that work from home gain spontaneous interaction with colleagues because of handheld devices. Computer technology has made money more accessible, but has not redefined what money is. Computer technology is rigid, fixed, and not mealleable, which leads to abuse of the user. Computer technology has transformed our definition of traditional work as \"work\" is no longer something that happens at a specific time or specific place.",
+      "definition": "Computer technology has transformed our definition of traditional work as \"work\" is no longer something that happens at a specific time or specific place."
+    },
+    {
+      "term": "\"Computer Ethics: Basic Concepts and Historical Overview\" by Terrell Ward Bynum, which statement below is the most accurate? The field of Computer Ethics began after the first recorded network intrusion at the Flagger Dog Track in the state of Floida (USA). The field of Computer Ethics is partially a response to the development of an antiaircraft cannon capable of shooting down fast warplanes. Computer technology has made money more accessible, but has not redefined what money is. Unlinke the Industrial Revolution, computer technology is not transforming society.",
+      "definition": "The field of Computer Ethics is partially a response to the development of an antiaircraft cannon capable of shooting down fast warplanes."
+    },
+    {
+      "term": "\"Computer Ethics: Basic Concepts and Historical Overview\" by Terrell Ward Bynum, which statement below is the most accurate? Although it is possible to own the source code, object code (machine language), and algorithm assosciated with a computer program, it is not possible to own the \"look and feel\" of a program. According to US law, it not is possible for a person to own a patent on a computer algorithm and prevent others from using it. Computer technology may cause \"de-skilling\" by replacing human skill with computer technology. In the long run, computer technology will eliminate more jobs than it creates.",
+      "definition": "Computer technology may cause \"de-skilling\" by replacing human skill with computer technology."
+    },
+    {
+      "term": "In the video \"Ethics in the Age of Technology\" by Juan Enriquez, which of the following statements is the most correct? Doctor J. Marion Sims is regarded as one of the first Doctors to suggest slavery is unethical and should be abolished. Defining who teaches us ethics is difficult because sometimes our traditional sources of guidance like holy books, parents, religious leaders, teachers, lawyers, doctors, and the government provide incorrect information. Baptist Pastor Richard Furman is regarded as one of the first religious leaders to speak out about the abolishment of slavery. Lawyer Thomas Cooper, in his \"1826 pamphlets,\" is regarded as one the first Lawyers to suggest slavery is unethical.",
+      "definition": "Defining who teaches us ethics is difficult because sometimes our traditional sources of guidance like holy books, parents, religious leaders, teachers, lawyers, doctors, and the government provide incorrect information."
+    },
+    {
+      "term": "\"Interaction Between Ethics and Technology\" by Shakib and Layton, which statement below is the most correct?",
+      "definition": "Consumers are having an impact on businesses by supporting those businesses that they believe are morally sound, and thereby making it more difficult for an unethical business to survive."
+    },
+    {
+      "term": "\"Interaction Between Ethics and Technology\" by Shakib and Layton, which statement below is the most accurate?",
+      "definition": "There is no universal ethics."
+    },
+    {
+      "term": "\"Multimedia, Cyberspace, and Ethics\" by Jefferies, which statement below is the most accurate?",
+      "definition": "It is not easy to regulate the Internet because it is a global network without any boundaries."
+    },
+    {
+      "term": "\"Multimedia, Cyberspace, and Ethics\" by Jefferies, which statement below is the most accurate? Bill Gates stated he felt a personal responsibility to build an Internet that is ethical. Deep Fake technology allows one to fake one's fingerprints and frame someone for a crime they did not commit. Deep Fake technology creates an ethical issue by allowing a victim's appearance to be faked in a video, appearing to be doing whatever the Deep Fake developer wants. The Internet is a major contribution to cultural diversity.",
+      "definition": "Deep Fake technology creates an ethical issue by allowing a victim's appearance to be faked in a video, appearing to be doing whatever the Deep Fake developer wants."
+    },
+    {
+      "term": "\"The Social Dilemma of Driverless Cars\" by Iyad Rahwan, what was the suggestion provided by a blogger? Cars should be equipped with a \"people catcher\" (like a \"cow catcher\" on the front of trains) that push people gently out of the way when the driver loses control of the car. The driver of the car should push an eject button just before impact to avoid being killed in a car accident. Cars should be made out of soft spongy material (the \"Nurf car\") to help reduce deaths in the case of accidents. All drivers should wear helmets and other safety gear to help them survive what would normally be a deadly crash.",
+      "definition": "The driver of the car should push an eject button just before impact to avoid being killed in a car accident."
+    },
+    {
+      "term": "\"The Ethics of Driverless Cars\" by Neil McBride, what is meant by an \"iron cage\"? The \"iron cage\" is another name for a driverless car in that it is made of iron, but has no one in it. The \"iron cage\" is a modification to the car that makes it safe. The \"iron cage\" is the place people should be to keep them safe from driverless cars. The \"iron cage\" is technology that has constrained us.",
+      "definition": "The \"iron cage\" is technology that has constrained us."
+    },
+    {
+      "term": "\"The Ethics of Driverless Cars\" by Neil McBride, what is suggested in the conclusion? Driverless cars allow the passenger to have more free time to pursue other activities. We need a car that provides more information to the user so the user can be a better driver. We need to perfect the technology regarding driverless cars so less people are injured. Driverless cars are essential for allowing the human spirit to be free.",
+      "definition": "We need a car that provides more information to the user so the user can be a better driver."
+    },
+    {
+      "term": "\"Automated Detect and Avoid\" by Erik Theunissen and others, which of the following statements is the most correct? An ethical issue arises because writing code involves a degree of premeditation regarding how a robot car will act. Algorithm developers and programmers are forgiven for accidents because everyone knows computer code is imperfect. We should code human behavior because human situations are simple and easy to program. When a human acts without deliberation, they are ethically responsible to the same degree as a programmer making premeditated decisions for a robot car.",
+      "definition": "An ethical issue arises because writing code involves a degree of premeditation regarding how a robot car will act."
+    },
+    {
+      "term": "\"Automated Detect and Avoid\" by Erik Theunissen and others, which of the following statements is the most correct? Current data supports the claim that self-driving cars have resulted in a reduction in the number of accidents. When it comes to programming automated detect and avoid algorithms, human values and judgments do not become part of the code. Current data does not support the claim that self-driving cars have resulted in a reduction in the number of accidents. When it comes to programming automated detect and avoid algorithms, it is best to replace all human judgment with algorithms as algorithms can be perfected to respond correctly in all situations",
+      "definition": "Current data does not support the claim that self-driving cars have resulted in a reduction in the number of accidents.q"
+    },
+    {
+      "term": "\"Right Wrong: How Technology Transforms our Ethics\" (see the PowerPoint slides provided with the course material), ethics does not change over time. T/F",
+      "definition": "F"
+    },
+    {
+      "term": "\"Right Wrong: How Technology Transforms our Ethics\" (see the PowerPoint slides provided with the course material), ethics changes our technology. T/F",
+      "definition": "F"
+    },
+    {
+      "term": "\"Right Wrong: How Technology Transforms our Ethics\" (see the PowerPoint slides provided with the course material), it pays to be humble about the past, as we too will be judged by the future. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "\"Computer Technology is Like the Gift of Fire,\" computer technology is like fire in that if it is not managed appropriately, it can get out of control and hurt many people. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "\"Woman Injured by a Garage Door,\" which direction is the garage door closing? The garage door closes from the top down. The garage door closes from left to right. The garage door closes from left and right at the same time. The garage door closes from right to left.",
+      "definition": "left to right."
+    },
+    {
+      "term": "\"Ethics and Safety of Computer Systems,\" which of the following statements is the most correct? The main issue is regarding the responsibility for computer failures in critical systems. Proving computer systems are correct is easy and therefore we should always prove them correct before allowing the public to use them. Because the 'Computer Medical Assistant' is error free, medical personnel are unethical if they do not follow the suggestion provided by this service. The main issue is regarding the proper use of critical systems by the non-computer scientist.",
+      "definition": "The main issue is regarding the responsibility for computer failures in critical systems."
+    },
+    {
+      "term": "\"Ethics and Safety of Computer Systems,\" which of the following statements is the most correct? Computer professionals do not ignore important human issues when designing and implementing computer technology. A point was made that it is easy for people to not use technology. People use technology that is \"unjustifiably risky\" because they have sufficient knowledge of how risky technology is. A point was made that maybe Computer Scientists should take an oath to 'do no harm.'",
+      "definition": "A point was made that maybe Computer Scientists should take an oath to 'do no harm.'"
+    },
+    {
+      "term": "\"When Formal Systems Kill,\" what is a \"formal system\"? A formal system uses a grammar for encoding logic and states such that a given conclusion follows from a given premise. A formal system requires less time, less money, and less complexity to verify it is correct. A formal system is one that is proven correct through testing. A formal system is computer code that cannot be proven correct.",
+      "definition": "A formal system uses a grammar for encoding logic and states such that a given conclusion follows from a given premise."
+    },
+    {
+      "term": "\"When Formal Systems Kill,\" which of the following statements is the most correct? Modeling complex systems is easy and therefore every system can be proven correct or incorrect. Computational fluid dynamics (CFD) is not a good analogy for a formal method because CFD involves testing in a wind tunnel. Computational fluid dynamics (CFD) is not a good analogy for a formal method because CFD involves mechanical engineering. Modeling complex systems is challenging and prevents us from using a formal method to prove they are correct.",
+      "definition": "Modeling complex systems is challenging and prevents us from using a formal method to prove they are correct."
+    },
+    {
+      "term": "\"Voice Recognition Software in 'Hello Barbie' Doll Concerns Parents Privacy Groups,\" what 'old information' did the doll suggest about the person playing with the doll? The doll suggested the person might be a \"young girl.\" The doll suggested the person might be a \"dancing polititian.\" The doll suggested the person might be a \"teacher.\" The doll suggested the person might be \"single mother.\"",
+      "definition": "The doll suggested the person might be a \"dancing polititian.\""
+    },
+    {
+      "term": "\"Can and Should Hello Barbie Keep a Secret\" by Meg Jones and Kevin Meurer, who maintains the recorded conversations of the child? Mattel (the manufacturer). A 3rd party vendor. The parents of the child. The person that purchased the doll.",
+      "definition": "A 3rd party vendor."
+    },
+    {
+      "term": "\"Can and Should Hello Barbie Keep a Secret\" by Meg Jones and Kevin Meurer\", what is suggested in the conclusion? Hello Barbie has been demonstrated to help children get better grades in school. When programming algorithms, human values and judgements should not become part of the code. The tendency to share a child's personal data among 'big data' collectors has the potential to negatively impact a child's ability to trust others. Purchasers of \"Hello Barbie\" fully understand the risks when they buy this product and are therefore responsible for the abuse of children.",
+      "definition": "The tendency to share a child's personal data among 'big data' collectors has the potential to negatively impact a child's ability to trust others."
+    },
+    {
+      "term": "Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, what is meant by an 'extrinsic loss of freedom'? An extrinsic loss of freedom occurs when a person voluntarily gives someone permission to collect data about themself. An extrinsic loss of freedom is when a person changes their behavior because they think they are being watched. An extrinisic loss of freedom is when a person's behavior is controlled by another person. An extrinsic loss of freedom is when a person chooses to have solitude.",
+      "definition": "An extrinisic loss of freedom is when a person's behavior is controlled by another person."
+    },
+    {
+      "term": "\"Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, which of the following statements is the most correct? There are many ways to define privacy including solitude, maintaining control over personal data, and the right to not being monitored. The best way to ensure privacy in a world of changing technology is to write laws that all countries follow. When it comes to privacy issues regarding ones data, there is no concern regarding stolen identity. When it comes to privacy issues regarding ones data, there is no concern regarding the accuracy of",
+      "definition": "There are many ways to define privacy including solitude, maintaining control over personal data, and the right to not being monitored."
+    },
+    {
+      "term": "\"Ethics and Safety of Computer Systems\" by Michael C. McFarland, which of the following statements is the most correct? Normative ethics recognizes that values and choices are expressed in individual actions, and are emobodied effectively in social structure. Normative ethics asks what kind of person does the right thing. Normative ethics seeks to develop and justify rules for right conduct. Normative ethics asks what social structures are needed to support values such as justice and respect for human life and dignity.",
+      "definition": "Normative ethics seeks to develop and justify rules for right conduct."
+    },
+    {
+      "term": "Normative ethics",
+      "definition": "seeks to develop and justify rules for right conduct."
+    },
+    {
+      "term": "social ethics",
+      "definition": "recognizes that values and choices are expressed in individual actions, and are emobodied effectively in social structure."
+    },
+    {
+      "term": "ethics of virtue",
+      "definition": "asks what kind of person does the right thing"
+    },
+    {
+      "term": "\"Ethics and Safety of Computer Systems\" by Michael C. McFarland, which of the following statements is the most correct? Ethics of virtue asks what kind of person does the right thing. Ethics of virtue asks what social structures are needed to support values such as justice and respect for human life and dignity. Ethics of virtue recognizes that values and choices are expressed in individual actions, and are emobodied effectively in social structure. Ethics of virtue seeks to develop and justify rules for right conduc",
+      "definition": "Ethics of virtue asks what kind of person does the right thing."
+    },
+    {
+      "term": "Ethics and Safety of Computer Systems\" by Michael C. McFarland, which? Social ethics asks what social structures are needed to support values such as justice and respect for human life and dignity. Social ethics seeks to foster and promote knowledge. Social ethics seeks to develop and justify rules for right conduct. Social ethics asks what kind of person does the right thing.",
+      "definition": "Social ethics asks what social structures are needed to support values such as justice and respect for human life and dignity."
+    },
+    {
+      "term": "\"When Formal Systems Kill\" by Darren Abramson and others, what are the challenges to formal methods? Select ALL that apply. Computer code cannot be proven correct. How to mechanically check the correctness of mathematical proofs. How to automate methematical proofs. How to mathematically model formal systems and their environments.",
+      "definition": "How to mechanically check the correctness of mathematical proofs. How to automate methematical proofs. How to mathematically model formal systems and their environments."
+    },
+    {
+      "term": "\"When Formal Systems Kill\" by Darren Abramson and others, one of the points being made is both proof and testing are needed to support good software code. True False",
+      "definition": "True"
+    },
+    {
+      "term": "\"Can and Should Hello Barbie Keep a Secret\" by Meg Jones and Kevin Meurer\", parents are given the perception of complete control over the stored conversations, yet their child's data has the potential to be shared with numerous third parties. True False",
+      "definition": "True"
+    },
+    {
+      "term": "\"Can and Should Hello Barbie Keep a Secret\" by Meg Jones and Kevin Meurer\", in order for Hello Barbie to retain the trust of parents, ToyTalk could make a clearer commitment to withholding individual data from third parties or offer an opt-in system for parental monitoring True False",
+      "definition": "True"
+    },
+    {
+      "term": "\"Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, virtual connections make it feel like people are near us. True False",
+      "definition": "True"
+    },
+    {
+      "term": "\"Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, an intrinsic loss of freedom comes about when people behave in a different manner when they are being monitored, watched or spied upon.\" True False",
+      "definition": "True"
+    },
+    {
+      "term": "\"Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, what does Durlak include in his list of basic rights regarding privacy? Select all that apply. intimacy solitude iron cage reserve",
+      "definition": "intimacy solitude reserve"
+    },
+    {
+      "term": "what did Mark Zuckerberg say might be \"more relevant to your interests right now than people dying in Africa\"? Information about one's favorite musical artist. The happiness and status of one's own family. The happiness and status of one's own friends. A squirrel dying in your front yard.",
+      "definition": "A squirrel dying in your front yard."
+    },
+    {
+      "term": "In the video \"What FACEBOOK and GOOGLE are Hiding from the World - the Filter Bubble,\" which of the following statements is the most correct? Google buys Facebook data to customize the research results provided to Google users. Google is filtering search content based on a user's profile and returning to a user results that are tailored to them. Facebook buys Google search results to customize Facebook news items for the Facebook user. Google is filtering news content based on what Google want's the user to see and therefore hiding the truth.",
+      "definition": "Google is filtering search content based on a user's profile and returning to a user results that are tailored to them."
+    },
+    {
+      "term": "\"Cyberethics - Morality and Law in Cyberspace - Chapter 4 - Intellectual Property in Cyberspace,\" which of the following statements is the most correct? A dance can be copyrighted. A copyright gives an author exclusive rights to their works. A video of a dance cannot be copyrighted.",
+      "definition": "A copyright gives an author exclusive rights to their works."
+    },
+    {
+      "term": "\"Cyberethics - Morality and Law in Cyberspace - Chapter 4 - Intellectual Property in Cyberspace,\" what was the issue regarding Expedia and Priceline? Priceline sued Expedia for infringing on its logo which includes an aircraft in a blue circle. Expedia sued Priceline for infringing on its pricing algorithm for air travel. Expedia sued Priceline for selling discount travel services to the public. Priceline sued Expedia for copying the method of allowing the customer to name the price for a hotel room.",
+      "definition": "Priceline sued Expedia for copying the method of allowing the customer to name the price for a hotel room."
+    },
+    {
+      "term": "\"Intellectual Property and the Process of Invention: Why Software is Different\" by Robert Plotkin, why is software special? Software is special because it can be protected by both patent and a copyright. Software is special because it can be copyrighted, but not patented. Software is special because it can be patented, but not copyrighted. Software is special because all software is in the public domain and cannot by copyrighted.",
+      "definition": "Software is special because it can be protected by both patent and a copyright."
+    },
+    {
+      "term": "Intellectual property consists of original musical compositions, poems, novels, inventions, and product formulas. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "The U.S. Constitution confers upon congress the power to promote the progress of science and the useful arts, by securing for limited time to authors and inventors the exclusive rights to their respective writings and discoveries. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "A dance can be copyrighted. T/F",
+      "definition": "F"
+    },
+    {
+      "term": "The first sale provision allows the first purchaser of a copyrighted work to sell or lend that copy to someone else without the copyright holder's permission. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "A trademark is a word, phrase, or symbol that identifies a product or service. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "__ occurs when a trademark is used by someone else in connection with the sale of its goods or services.",
+      "definition": "infringement"
+    },
+    {
+      "term": "__ occurs when the trademark is associated with dissimilar products - for example, using the Disney trademark name to sell suits for men.",
+      "definition": "blurring"
+    },
+    {
+      "term": "Through financial incentives intellectual property rights induce creators to develop works they would not otherwise produce without this protection, and this contributes to the general good of society. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "\"How Data Brokers Sold my Identity,\" what happened when Massachusetts Governor William Weld approved the release of 135,000 medical records of state employees with the names and social security numbers redacted? Professor Sweeney sent the Governor his medical records as a demonstration that the Governor could be identified by cross-referencing his medical records with public voter registration data. The Governor demonstrated that without a name or Social Security Number, medical records cannot be associated with a person. A health-care provider recognized the Governor's medical records and sent them to the Governor. The union representing the state employees sued the Governor for violating privacy laws.",
+      "definition": "Professor Sweeney sent the Governor his medical records as a demonstration that the Governor could be identified by cross-referencing his medical records with public voter registration data."
+    },
+    {
+      "term": "In the video regarding the paper \"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, what does the author suggest? The author suggests users should use a \"password wallet\" to store all of their passwords. The author suggests passwords should be in different formats, for different devices. The author suggests users should have one password and not many. The author suggests users should change their passwords frequently.",
+      "definition": "The author suggests users should have one password and not many."
+    },
+    {
+      "term": "\"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, what does the author suggest? The author suggests Microsoft Passport is the best solution for maintaining secure passwords. The author suggests passwords should be of an unlimited length. The author suggests more complex rules are needed to control the generation of secure passwords. The author suggests computer systems should restrict password formats to make programming more convenient.",
+      "definition": "The author suggests passwords should be of an unlimited length."
+    },
+    {
+      "term": "\"The Ethics of Collecting Data\" with Marie Wallace, what does the speaker suggest? The speaker suggests we can put an end to big data collection and we should. The speaker suggests users should be paid for giving up personal data. The speaker suggests social media can raise your concern about your own body issues and then exposed you to diet products to generate sales. The speaker suggests users should not give up personal data to support product marketing.",
+      "definition": "The speaker suggests social media can raise your concern about your own body issues and then exposed you to diet products to generate sales."
+    },
+    {
+      "term": "\"The Ethics of Collecting Data\" with Marie Wallace, what does the speaker suggest? The speaker suggests transparency can exist in personal data collection by businesses and customers voluntarily give up their data. The speaker suggests we should enact laws immediately to stop personal data collection because it will be considerably worse for the next generations. The speaker suggests there is no way to embrace personal privacy while also supporting personal data collection by businesses. The speaker suggests 'big data' collection cannot be done in a transparent way such that customers voluntarily give up their data.",
+      "definition": "The speaker suggests transparency can exist in personal data collection by businesses and customers voluntarily give up their data."
+    },
+    {
+      "term": "In an environment where a user has numerous accounts with different passwords, a lockout is a powerful incentive to write down a list of those passwords rather than guess at them when trying to log in. T/F",
+      "definition": "T"
+    },
+    {
+      "term": "\"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, password wallets are a good option for password security T/F",
+      "definition": "F"
+    },
+    {
+      "term": "\"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, which of the following does he suggest are the role of the computer scientist? Select all that apply. Reduce lockouts Modify the lifetime limits Make password management easier for the user Allow a user to have much longer passwords, of a universal format",
+      "definition": "All"
+    },
+    {
+      "term": "Maintaining password security involves striking a delicate balance between having enough rules to maintain good security and not having so many that users will take evasive action that compromises security. T/F",
+      "definition": "True"
+    },
+    {
+      "term": "Regarding the video about \"Elves Ethics - The Digital World,\" which of the following statements is the most accurate? The Orcs slaughter the Elves with stolen weapons. The true identity of the 'gay girl in Damascus' is actually a male American student studying abroad. The Elves defeat the Orcs with magic. There is a strict code of ethics that all participants follow.",
+      "definition": "The true identity of the 'gay girl in Damascus' is actually a male American student studying abroad."
+    },
+    {
+      "term": "\"Ethic in Massively Multiplayer Online Role-Playing Games,\" which of the following statements is the most accurate? Ninja looting is the process of killing a character a second time as soon as that character regenerates. It is not possible to steal items from another person. Behaving unethically in a virtual world might lead to unethical behavior in the real world. Griefing and bullying are not abusive because it is occurring in virtual reality.",
+      "definition": "Behaving unethically in a virtual world might lead to unethical behavior in the real world."
+    },
+    {
+      "term": "griefing",
+      "definition": "Bullying or harassment of players while playing online games."
+    },
+    {
+      "term": "\"Ethic in Massively Multiplayer Online Role-Playing Games,\" which of the following statements is the most accurate? The abuse in virtual reality games is not real. There is no chance for any real monetary damage. The abuse in virtual reality games is real. Games do not help individuals learn good and bad behavior.",
+      "definition": "The abuse in virtual reality games is real."
+    },
+    {
+      "term": "\"An Ethical Examination of the Internet Census 2012 Dataset - A Menlo Report Case Study,\" which of the following statements is the most accurate? Students at Menlo College were involved in a very large cheating scandal. A central point is that commercial products that are accessible from the Internet should not be sold with a default password. Participants that answered questions found in the Internet Census are unethical for not providing honest answers. Students and Menlo University developed password cracking software that allowed them to enter devices connected to the Internet.",
+      "definition": "A central point is that commercial products that are accessible from the Internet should not be sold with a default password."
+    },
+    {
+      "term": "An Ethical Examination of the Internet Census 2012 Dataset - A Menlo Report Case Study,\" which of the following statements is the most accurate? Because there was such an outcry about the unethical behavior in the creation of the Internet Census 2012 Dataset, other researchers are discouraged from similar activity. The author suggests there should be more public outcry regarding the unethical behavior exhibited in the creation of the Internet Census 2012 Dataset. The German Penal Code considers a person's \"good intent\" when deciding if a law has been broken. There is nothing unethical about using default passwords to enter a network that is intended to be locked.",
+      "definition": "The author suggests there should be more public outcry regarding the unethical behavior exhibited in the creation of the Internet Census 2012 Dataset."
+    },
+    {
+      "term": "\"Cyber War,\" which of the following statements is the most accurate? The speaker stated experienced hackers are recruited at the Def Con Hacking Conference in Las Vegas, NV almost every year. Logic bombs have been placed in the power grid of the United States. Cyber-attacks do not cause destruction in physical space, so cyber war is considered ethical. The Federal Bureau of Investigation in the United States engages in Cyber War against hackers in other countries.",
+      "definition": "Logic bombs have been placed in the power grid of the United States."
+    },
+    {
+      "term": "\"An Analysis of a Just Cyber Warfare,\" which of the following statements in the most accurate? The Just War Theory is inadequate for evaluating the ethicalness of cyber warfare. Floridi states 'information does not have a right to exist,' and therefore cyber warfare is not unethical. The Just War Theory states cyber warfare is unethical. Floridi states 'information does not have a right to exist,' and this is the foundation of a Just Cyber Warfare Theory.",
+      "definition": "The Just War Theory is inadequate for evaluating the ethicalness of cyber warfare."
+    },
+    {
+      "term": "\"An Analysis of a Just Cyber Warfare,\" which of the following statements in the most accurate? A principle of Just Cyber Warfare is that a Cyber War should be waged to promote the well-being of the infosphere. When addressing Cyber Warfare, the Just War Theory cannot be applied and should be rejected altogether. Floridi states 'information has a right to exist,' and therefore cyber warfare that destroys information is unethical. Cyber Warfare makes the Just War Theory invalid.",
+      "definition": "Floridi states 'information has a right to exist,' and therefore cyber warfare that destroys information is unethical."
+    },
+    {
+      "term": "According to the paper regarding \"Ethic in Massively Multiplayer Online Role-Playing Games,\" what are the primary means by which playing games help guide moral development? Select all that apply. Defning good and bad behavior. Learning a system of rules. Practice following rules. Developing poor social skills",
+      "definition": "Defning good and bad behavior. Learning a system of rules. Practice following rules."
+    },
+    {
+      "term": "An investigation done by Coyne (as cited in Ethic in Massively Multiplayer Online Role-Playing Games) finds that online griefing has a similar impact as traditional bullying. True False",
+      "definition": "T"
+    },
+    {
+      "term": "There should be more public outcry regarding the unethical mapping of the Internet with the Carna botnet. True False",
+      "definition": "T"
+    },
+    {
+      "term": "What are the main elements of a 'Just War Theory?'",
+      "definition": "War as a last resort Do more good than harm. Avoid harming non-combatants"
+    },
+    {
+      "term": "\"Hacker Tactics Tools - Become a Hacker - Hacking Made Easy,\" what does a \"WiFi Pineapple' allow the user to do? Hack everyone on the same network. Goelocate each user connected to the same network. Encrypt a user's message to protect it from hacking. Conduct penetration testing on a network.",
+      "definition": "Hack everyone on the same network."
+    },
+    {
+      "term": "\"Bias in Computer Systems\" by Friedman and Nissenbaum, what is the bias found in some airline ticketing systems? Some airline ticketing systems charge customers more if their IP address geolocates them to a wealthy part of the world. Some airline ticketing systems always recommend a higher priced ticket for every customer. Some airline ticketing systems do not suggest using multiple air carriers for a multi-fight trip even if doing so would be less expensive for the customer. Some airline ticketing systems advertise inexpensive flights, but then change more than advertised.",
+      "definition": "Some airline ticketing systems do not suggest using multiple air carriers for a multi-fight trip even if doing so would be less expensive for the customer."
+    },
+    {
+      "term": "\"Bias in Computer Systems\" by Friedman and Nissenbaum, what is the bias found in the National Resident Match Program? Medical school students are biased against when they try to select a training program. The National Residency Match Program is biased against those British citizens that do not live in England. The National Residency Match Program is biased against a child with a British father and a mother from another country. Customers that are trying to find an apartment to establish residency within Great Britain are biased against if this is their first attempt.",
+      "definition": "Medical school students are biased against when they try to select a training program."
+    },
+    {
+      "term": "Embedding Ethics in Computer Architecture\" by Alan Clements, which of the following statements is the most correct? In order to be ethical and fair, a computer should be overclocked to increase throughput to accommodate everyone. Algorithms that support the sharing of a computer resource (e.g. 'priority,' 'round-robin,' etc.) are never fair, and therefore are always unethical. Overclocking a CPU can be unethical in certain situations. Operating a computer outside of it recommended limits is encouraged to increase throughput.",
+      "definition": "Overclocking a CPU can be unethical in certain situations."
+    },
+    {
+      "term": "Embedding Ethics in Computer Architecture\" by Alan Clements, what is the result of an error in binary arithmetic? Several people were killed in a missile attack. A nuclear reactor had a meltdown. An airplane was routed to the wrong location and ran out of fuel. Medical equipment gave the wrong amount of radiation.",
+      "definition": "Several people were killed in a missile attack"
+    },
+    {
+      "term": "\"The Ethical Problem with Facebook's Emotional Experiment,\" which of the following statements is the most correct? Facebook demonstrated they could manipulate people's emotions by showing mostly negative or mostly positive posts in people's Facebook data feed. Facebook demonstrated they could make a user sad by displaying a fake news story regarding the death of someone the user had identified as a \"friend\" in their Facebook profile. Facebook demonstrated they could manipulate a person into buying weight loss products by altering their Facebook profile picture by making the user appear to be fatter. Facebook demonstrated they could manipulate a person into buying candy buy making the person feel lonely by blocking all content from their friends for a 16 day period.",
+      "definition": "Facebook demonstrated they could manipulate people's emotions by showing mostly negative or mostly positive posts in people's Facebook data feed."
+    },
+    {
+      "term": "Regarding the video about \"Ethics in Security Research. Which Lines Should Not be Crossed?,\" which of the following statements is the most correct? Developing anti-malware that eliminates some existing malware but also harms a small group of people is an acceptable trade-off. Developing malware and allowing it to operate in the wild is ethical because it is the only way we can learn about malware. Because spam is never harmful, observing spam in the wild and not warning the recipient is one of the few acceptable security research activities. Developing malware to study user infection numbers and malware dissemination strategies is a bad idea.",
+      "definition": "Developing malware to study user infection numbers and malware dissemination strategies is a bad idea."
+    },
+    {
+      "term": "Regarding the video about \"Ethics in Security Research. Which Lines Should Not be Crossed?,\" which of the following statements is the most correct? Developing anti-malware is unethical because it is not ethical to be unethical to the unethical. The biggest threat from spam is that it is a nuisance. About 50% of the spam sent worldwide advertise medicine/pharmaceutical products which are to a large percent counterfeited and a major health threat. It is actually cheaper to engage in ethical research rather than unethical research, so switching to ethical research should be easy.",
+      "definition": "About 50% of the spam sent worldwide advertise medicine/pharmaceutical products which are to a large percent counterfeited and a major health threat."
+    },
+    {
+      "term": "Regarding the video about the paper on \"Research Ethics in Human-Computer Interaction,\" which of the following statements is the most accurate? There is a concern that robots might injure a person if robots engage in activities such as caring for the elderly. It is not a violation of a research subject's privacy if they are not aware of their data being collected during the research process. Research subjects should not be allowed to withdraw from research once they have volunteered to be a research subject. Conducting secret research on a human subject is ethical as long as the human subject is informed of the research after it is completed.",
+      "definition": "There is a concern that robots might injure a person if robots engage in activities such as caring for the elderly."
+    },
+    {
+      "term": "\"Research Ethics in Human-Computer Interaction,\" which of the following statements is the most accurate? Researchers do not need to concerned about cultural differences among the participants. It is not necessary to accommodate a research subject's basic need to be free to move during the research. Researchers need to be careful regarding how recording technology might make the subject feel uncomfortable. Researchers do not need to be open about the data that is collected during the research.",
+      "definition": "Researchers need to be careful regarding how recording technology might make the subject feel uncomfortable."
+    },
+    {
+      "term": "size of a screen display might be a source of bias as it influences what can be seen of the first page. True False",
+      "definition": "True"
+    },
+    {
+      "term": "Once bias is in a computer system, it is easy to remove. T/F",
+      "definition": "False"
+    },
+    {
+      "term": "The term bias refers to a computer system that systematically and unfairly discriminates against certain individuals or groups of individuals in favor of others. True False",
+      "definition": "True"
+    },
+    {
+      "term": "Even though arbitration approaches such as fixed, priority, and round-robin are \"fair,\" they can still have their own bias.",
+      "definition": "True"
+    },
+    {
+      "term": "Computer-based binary arithmetic is precise and does not present any ethical challenges. True False",
+      "definition": "False"
+    },
+    {
+      "term": "Which of the following research topics have the potential to expose real people to harm? Select all that apply. credit card fraud spam viruses botnet",
+      "definition": "all"
+    },
+    {
+      "term": "One abuse that can take place during research is 'secret data collection' in which the participant is unaware of the data that is being collected about them of their computer device(s). True False",
+      "definition": "True"
+    }
+  ]
+}
 </script><script type="module">function isNextCardSwipe(dx,dy,duration){
  return [dx,dy,duration].every(Number.isFinite)&&dx<=-72&&Math.abs(dx)>=Math.abs(dy)*1.5&&duration>=0&&duration<=1600;
 }
@@ -1530,6 +1916,82 @@ function prepareStudyCards(inputCards) {
 }
 
 
+const flashSignature=card=>JSON.stringify([card.term,card.definition,card.type||'',card.answers||[]]);
+function validateFlashcards(value,cards){
+ if(!Array.isArray(value)||!value.length||value.length>4000)throw new Error('Invalid original flashcards.');
+ const entries=value.map(entry=>{
+  if(!entry||!Number.isInteger(entry.cardId)||entry.cardId<0||entry.cardId>=cards.length)throw new Error('Invalid flashcard question reference.');
+  return {...parseCards(JSON.stringify([entry]))[0],cardId:entry.cardId};
+ });
+ if(new Set(entries.map(entry=>entry.cardId)).size!==cards.length)throw new Error('Original flashcards must cover every Learn question.');
+ return entries;
+}
+function flashSourceEntry(card,cardId){
+ // Preserve the original prompt/choices; audited answer boundaries and the
+ // corroborated source typo correction still apply to its answer side.
+ const prepared=prepareStudyCards([card]).cards[0];
+ return {...prepared,term:card.term,cardId};
+}
+function createFlashcards(state,sourceCards=[]){
+ if(state.flashcards)return validateFlashcards(state.flashcards,state.cards);
+ const library=sourceCards.length?prepareStudyCards(sourceCards):null;
+ const currentIds=new Map(state.cards.map((card,id)=>[flashSignature(card),id]));
+ if(library&&library.cards.every(card=>currentIds.has(flashSignature(card)))&&library.cards.length===state.cards.length){
+  return sourceCards.map((card,id)=>flashSourceEntry(card,currentIds.get(flashSignature(library.cards[library.oldToNew[id]]))));
+ }
+ const variants=new Map();
+ if(library)library.cards.forEach((card,id)=>variants.set(flashSignature(card),library.groups[id].map(oldId=>sourceCards[oldId])));
+ return state.cards.flatMap((card,id)=>{
+  const originals=variants.get(flashSignature(card))||state.mastery?.cards[id]?.previousVersions?.map(version=>version.card);
+  return originals?.length?originals.map(original=>flashSourceEntry(original,id)):[{...card,cardId:id}];
+ });
+}
+function flashcardsFromImport(originalCards,plan){
+ return originalCards.map((card,id)=>flashSourceEntry(card,plan.oldToNew[id]));
+}
+function initializeFlashProgress(state,sourceCards=[]){
+ state.flashcards=createFlashcards(state,sourceCards);
+ const valid=id=>Number.isInteger(id)&&id>=0&&id<state.flashcards.length;
+ state.flashKnown=Array.isArray(state.flashKnown)?[...new Set(state.flashKnown.filter(valid))]:state.flashcards.flatMap((entry,id)=>(state.known||[]).includes(entry.cardId)?[id]:[]);
+}
+function markFlashFamiliar(state,id,familiar){
+ if(!Number.isInteger(id)||!state.flashcards[id])return;
+ state.flashKnown=state.flashKnown.filter(value=>value!==id);if(familiar)state.flashKnown.push(id);
+ const parent=state.flashcards[id].cardId;
+ state.known=state.known.filter(value=>value!==parent);
+ if(state.flashcards.every((entry,index)=>entry.cardId!==parent||state.flashKnown.includes(index)))state.known.push(parent);
+}
+function flashSentences(text){
+ const protectedText=text.replace(/the ethical use of such Computer ethics is about computer security\./g,'the ethical use of such\nComputer ethics is about computer security.')
+  .replace(/\b(?:e\.g|i\.e|etc)\.|\b(?:[A-Z]\.){2,}|\b(?:[A-Z]|Dr|Mr|Mrs|Ms|Prof|St)\.(?=\s+[A-Z])/g,match=>match.replaceAll('.','\u0001'));
+ return protectedText.split(/\n|(?<=[.!?])\s+(?=[A-Z"“'])/).map(part=>part.replaceAll('\u0001','.').trim()).filter(Boolean);
+}
+function flashcardLayout(card){
+ const end=card.term.lastIndexOf('?'),tail=end>=0?card.term.slice(end+1).trim():'';
+ let prompt=card.term,options=[];
+ if(card.options?.length){options=[...card.options];prompt=end>=0?card.term.slice(0,end+1):card.term;}
+ else if(end>=0&&tail&&!/^["'”’]*$/.test(tail)){
+  const choices=tail.replace(/^select\s+all\s+that\s+apply[.!:]?\s*/i,'').replace(/\s*(?:T\/F|True False)\s*$/i,'').trim();
+  const labels=[...choices.matchAll(/(?:^|\s)([A-Z])[).]\s+/g)];
+  if(labels.length>=2&&labels.every((match,i)=>match[1]===String.fromCharCode(65+i))){options=labels.map((match,i)=>choices.slice(match.index+match[0].length,labels[i+1]?.index??choices.length).trim());}
+  else options=flashSentences(choices);
+  if(options.length>=2)prompt=card.term.slice(0,end+1);else options=[];
+ }
+ if(!options.length&&/^(?:t|f|true|false)$/i.test(card.definition)){options=['True','False'];prompt=card.term.replace(/\s*(?:T\/F|True False)\s*$/i,'');}
+ if(card.type==='multi'&&!options.length)options=[...card.answers];
+ if(card.type==='multi'&&!/select all/i.test(prompt))prompt+=' Select all that apply.';
+ const clean=text=>text.toLowerCase().replace(/[^a-z0-9]/g,'').replace(/^t$/,'true').replace(/^f$/,'false');
+ const answers=card.type==='multi'?card.answers:/^all$/i.test(card.definition)?options:[card.definition];
+ const answerLines=answers.map(answer=>{
+  const exact=options.findIndex(option=>clean(option)===clean(answer));
+  const partial=exact<0?options.map((option,i)=>({i,key:clean(option)})).filter(option=>Math.min(clean(answer).length,option.key.length)>=10&&(option.key.endsWith(clean(answer))||clean(answer).endsWith(option.key)||option.key.startsWith(clean(answer))||clean(answer).startsWith(option.key))):[];
+  const index=exact>=0?exact:partial.length===1?partial[0].i:-1;
+  return {code:index>=0?`${String.fromCharCode(65+index)})`:null,text:answer};
+ });
+ return {prompt,options,answerLines};
+}
+
+
 const cloneMigrationData=value=>JSON.parse(JSON.stringify(value));
 
 function validateMigrationPlan(cards,plan){
@@ -1587,6 +2049,7 @@ function migrateStudyCards(state,plan=consolidateCards(state.cards)){
  if(examArchived){migration.previousExam=cloneMigrationData(state.exam);delete state.exam;}
  if(migration.previousRound||migration.previousExam)migration.previousCards=oldCards;
  state.cards=cloneMigrationData(plan.cards);
+ if(Array.isArray(state.flashcards))state.flashcards=state.flashcards.map(card=>({...card,cardId:plan.oldToNew[card.cardId]}));
  state.known=remapMigrationIds(state.known);
  state.learned=remapMigrationIds(state.learned);
  state.mastery=mastery;
@@ -1704,6 +2167,7 @@ function validateStudyState(input) {
   const validId=id=>Number.isInteger(id)&&id>=0&&id<cards.length;
   function ids(value,label){if(value===undefined)return [];if(!Array.isArray(value)||value.some(id=>!validId(id))||new Set(value).size!==value.length)throw new Error(`Invalid ${label} in backup.`);return [...value];}
   const state={title:typeof input.title==='string'?input.title.slice(0,120):'My study set',cards,known:ids(input.known,'flashcard progress'),learned:ids(input.learned,'learning progress')};
+  if(input.flashcards){state.flashcards=validateFlashcards(input.flashcards,cards);if(input.flashKnown!==undefined){if(!Array.isArray(input.flashKnown)||input.flashKnown.some(id=>!Number.isInteger(id)||id<0||id>=state.flashcards.length)||new Set(input.flashKnown).size!==input.flashKnown.length)throw new Error('Invalid original flashcard progress.');state.flashKnown=[...input.flashKnown];}}
   if(input.round){
     const r=JSON.parse(JSON.stringify(input.round));
     r.queue=ids(r.queue,'round queue');r.seen=ids(r.seen,'round history');
@@ -1739,14 +2203,14 @@ function validateStudyState(input) {
 }
 function createStudyBackup(state, now=new Date()) {
   const clean=validateStudyState(state);
-  return {format:'pocket-study-backup',version:1,exportedAt:now.toISOString(),title:clean.title,cards:clean.cards,progress:{known:clean.known,learned:clean.learned,round:clean.round||null,lastActivity:clean.lastActivity||'flash',exam:clean.exam||null,soundEnabled:clean.soundEnabled||false,feedbackStreak:clean.feedbackStreak||0,mastery:clean.mastery||null,rewards:clean.rewards||null,cardMigration:clean.cardMigration||null}};
+  return {format:'pocket-study-backup',version:1,exportedAt:now.toISOString(),title:clean.title,cards:clean.cards,progress:{known:clean.known,learned:clean.learned,round:clean.round||null,lastActivity:clean.lastActivity||'flash',exam:clean.exam||null,soundEnabled:clean.soundEnabled||false,feedbackStreak:clean.feedbackStreak||0,mastery:clean.mastery||null,rewards:clean.rewards||null,cardMigration:clean.cardMigration||null,flashcards:clean.flashcards||null,flashKnown:clean.flashKnown||[]}};
 }
 function parseStudyBackup(text) {
   const data=JSON.parse(text);
   if(data.format!=='pocket-study-backup')return null;
   if(data.version!==1)throw new Error('This backup version is not supported. Update Pocket before restoring it.');
   if(!data.progress||!Array.isArray(data.progress.known)||!Array.isArray(data.progress.learned))throw new Error('Backup is missing progress. Nothing has been restored.');
-  return validateStudyState({title:data.title,cards:data.cards,known:data.progress.known,learned:data.progress.learned,round:data.progress.round,lastActivity:data.progress.lastActivity,exam:data.progress.exam,soundEnabled:data.progress.soundEnabled,feedbackStreak:data.progress.feedbackStreak,mastery:data.progress.mastery,rewards:data.progress.rewards,cardMigration:data.progress.cardMigration});
+  return validateStudyState({title:data.title,cards:data.cards,known:data.progress.known,learned:data.progress.learned,round:data.progress.round,lastActivity:data.progress.lastActivity,exam:data.progress.exam,soundEnabled:data.progress.soundEnabled,feedbackStreak:data.progress.feedbackStreak,mastery:data.progress.mastery,rewards:data.progress.rewards,cardMigration:data.progress.cardMigration,flashcards:data.progress.flashcards,flashKnown:data.progress.flashKnown});
 }
 
 function joinPdfLines(lines) {
@@ -1823,8 +2287,10 @@ let recoveryAvailable=false;
 function keepRecovery(reason,onlyIfMissing=false){try{const data=localStorage.getItem(storageKey);if(data&&(!onlyIfMissing||!localStorage.getItem(recoveryKey))){localStorage.setItem(recoveryKey,JSON.stringify({createdAt:new Date().toISOString(),reason,data}));}recoveryAvailable=!!localStorage.getItem(recoveryKey);}catch{}}
 keepRecovery('Before app update',true);
 let toastLater='';
+let originalFlashCards=[];
 let state = {cards:[], known:[]}, mode = 'all', order = [], index = 0, flipped = false;
 try { const saved = JSON.parse(localStorage.getItem(storageKey)); if(saved){state.cards=parseCards(JSON.stringify(saved.cards));state.known=Array.isArray(saved.known)?saved.known.filter(n=>Number.isInteger(n)&&n>=0&&n<state.cards.length):[];state.lastActivity=saved.lastActivity;state.soundEnabled=saved.soundEnabled===true;state.feedbackStreak=Number.isInteger(saved.feedbackStreak)?saved.feedbackStreak:0;if(saved.exam){try{state.exam=validateExam(saved.exam,state.cards);}catch{toastLater='Saved exam could not be loaded; your other study progress is intact.';}}state.title=typeof saved.title==='string'?saved.title:'Computer Ethics';state.learned=saved.learned;state.mastery=saved.mastery;const r=saved.round;if(r&&Array.isArray(r.queue)&&r.queue.every(id=>Number.isInteger(id)&&id>=0&&id<state.cards.length)&&Array.isArray(r.seen)&&['total','completed','attempts','firstCorrect'].every(k=>Number.isInteger(r[k])&&r[k]>=0)&&(!r.current||(typeof r.current.prompt==='string'&&typeof r.current.answer==='string'&&Array.isArray(r.current.options))))state.round=r;} } catch { /* Empty or unavailable storage: start clean. */ }
+try{const saved=JSON.parse(localStorage.getItem(storageKey));if(saved?.flashcards){state.flashcards=validateFlashcards(saved.flashcards,state.cards);state.flashKnown=saved.flashKnown;}}catch{toastLater='Original flashcard layout will be restored; your Learn progress is intact.';}
 state.title ||= 'Computer Ethics';
 let activity = 'flash', recapOpen=false;
 try{const saved=JSON.parse(localStorage.getItem(storageKey));state.rewards=initializeRewards(saved?.rewards);if(state.round?.reward)validateRoundReward(state.round.reward);}catch{state.rewards=initializeRewards();if(state.round)delete state.round.reward;toastLater='Reward history could not be read; your cards and study progress are intact.';}
@@ -1842,19 +2308,29 @@ function upgradeSavedQuestions(){
 }
 function toast(message){$('toast').textContent=message;$('toast').style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').style.display='none',3500);}
 function save(){try{localStorage.setItem(storageKey,JSON.stringify(state));}catch{toast('Storage unavailable. Export a backup to keep your cards.');}}
-function rebuild(){order=state.cards.map((_,i)=>i).filter(i=>mode==='all'||!state.known.includes(i));index=0;flipped=false;render();}
+function rebuild(){order=state.flashcards.map((_,i)=>i).filter(i=>mode==='all'||!state.flashKnown.includes(i));index=0;flipped=false;render();}
 function render(){
  $('deck-title').textContent=state.title;document.title=`Pocket • ${state.title}`;
- const id=order[index], card=state.cards[id], count=state.known.length;
- $('card-mastery').textContent=card?(state.mastery.cards[id].manualMastered?'Learn mastery: marked mastered by you':`Learn mastery: ${state.mastery.cards[id].streak}/${MASTERY_TARGET}${isCardMastered(state.mastery.cards[id])?' · mastered':''}`):'';
- $('total').textContent=state.cards.length;$('remaining').textContent=state.cards.length-count;
- $('mastery').textContent=`${count} marked familiar`;$('progress').style.width=`${state.cards.length?count/state.cards.length*100:0}%`;
- $('position').textContent=card?`CARD ${index+1} OF ${order.length}`:state.cards.length?'All caught up':'Ready when you are';
- $('side').textContent=card?(flipped?'DEFINITION':'TERM'):state.cards.length?'WELL DONE':'LET’S GET STARTED';
- $('card-text').textContent=card?(flipped?card.definition:card.term):state.cards.length?'A little practice goes a long way.':'Your next study session\nstarts here.';
- $('flip-hint').textContent=card?(flipped?'How well did you remember?':'Tap anywhere to reveal'):state.cards.length?'Switch to All cards to study again':'Import your cards to begin';
+ const id=order[index],card=state.flashcards[id],count=state.flashKnown.length,progress=card&&state.mastery.cards[card.cardId];
+ $('card-mastery').textContent=card?(progress.manualMastered?'Learn question: marked mastered by you':`Learn question mastery: ${progress.streak}/${MASTERY_TARGET}${isCardMastered(progress)?' · mastered':''}`):'';
+ $('flash-mode-description').textContent=`${state.flashcards.length} individual flashcards · ${state.cards.length} Learn questions. Repeated prompts stay separate here; Learn combines their correct answers.`;
+ $('total').textContent=state.flashcards.length;$('remaining').textContent=state.flashcards.length-count;
+ $('mastery').textContent=`${count} marked familiar`;$('progress').style.width=`${state.flashcards.length?count/state.flashcards.length*100:0}%`;
+ $('position').textContent=card?`CARD ${index+1} OF ${order.length}`:state.flashcards.length?'All caught up':'Ready when you are';
+ $('side').textContent=card?(flipped?'CORRECT ANSWER':'QUESTION'):state.flashcards.length?'WELL DONE':'LET’S GET STARTED';
+ $('card-text').replaceChildren();
+ if(card){
+  const layout=flashcardLayout(card),heading=document.createElement('span');heading.className='flash-question';heading.textContent=layout.prompt;
+  if(flipped){
+   layout.answerLines.forEach(answer=>{const row=document.createElement('span');row.className='flash-answer-line';if(answer.code){const code=document.createElement('strong');code.className='flash-choice-code';code.textContent=answer.code;row.append(code);}const text=document.createElement('span');text.textContent=answer.text;row.append(text);$('card-text').append(row);});
+  }else{
+   $('card-text').append(heading);
+   if(layout.options.length){const list=document.createElement('span');list.className='flash-choice-list';layout.options.forEach((option,n)=>{const row=document.createElement('span');row.className='flash-choice';const code=document.createElement('strong');code.className='flash-choice-code';code.textContent=`${String.fromCharCode(65+n)})`;const text=document.createElement('span');text.textContent=option;row.append(code,text);list.append(row);});$('card-text').append(list);}
+  }
+  $('card').setAttribute('aria-label',`${flipped?'Correct answer':'Question'}: ${$('card-text').textContent}. Tap to flip.`);
+ }else{$('card-text').textContent=state.flashcards.length?'A little practice goes a long way.':'Your next study session starts here.';$('card').setAttribute('aria-label','Import cards to begin');}
+ $('flip-hint').textContent=card?(flipped?'How well did you remember?':'Tap anywhere to reveal'):state.flashcards.length?'Switch to All cards to study again':'Import your cards to begin';
  $('card').classList.toggle('answer',flipped);$('card').classList.toggle('long',!!card&&(flipped?card.definition:card.term).length>220);$('answer-actions').hidden=!card||!flipped;
- $('card').setAttribute('aria-label',card?`${flipped?'Definition':'Term'}: ${flipped?card.definition:card.term}. Tap to flip.`:'Import cards to begin');
  $('prev').disabled=order.length<2;$('next').disabled=order.length<2;$('shuffle').disabled=order.length<2;
  $('all').classList.toggle('active',mode==='all');$('review').classList.toggle('active',mode==='review');
  $('all').setAttribute('aria-pressed',mode==='all');$('review').setAttribute('aria-pressed',mode==='review');
@@ -1864,16 +2340,16 @@ $('card').onclick=()=>{if(order.length){flipped=!flipped;render();}else if(!stat
 $('prev').onclick=()=>move(-1);$('next').onclick=()=>move(1);
 $('all').onclick=()=>{mode='all';rebuild();};$('review').onclick=()=>{mode='review';rebuild();};
 $('shuffle').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}index=0;flipped=false;render();toast('Cards shuffled');};
-$('known').onclick=()=>{const id=order[index];if(!state.known.includes(id))state.known.push(id);save();if(mode==='review'){order.splice(index,1);if(index>=order.length)index=0;flipped=false;render();}else move(1);};
-$('again').onclick=()=>{state.known=state.known.filter(n=>n!==order[index]);save();move(1);};
-let importGeneration=0, reviewedText='', reviewedBackup=null;
-function invalidatePreview(){reviewedText='';reviewedBackup=null;$('backup-preview').hidden=true;$('import').textContent='Use these cards';$('import-preview').hidden=true;$('confirm-review').checked=false;$('import').disabled=true;}
+$('known').onclick=()=>{const id=order[index];markFlashFamiliar(state,id,true);save();if(mode==='review'){order.splice(index,1);if(index>=order.length)index=0;flipped=false;render();}else move(1);};
+$('again').onclick=()=>{markFlashFamiliar(state,order[index],false);save();move(1);};
+let importGeneration=0, reviewedText='', reviewedBackup=null,reviewedFlashcards=null;
+function invalidatePreview(){reviewedText='';reviewedBackup=null;reviewedFlashcards=null;$('backup-preview').hidden=true;$('import').textContent='Use these cards';$('import-preview').hidden=true;$('confirm-review').checked=false;$('import').disabled=true;}
 function reviewImport(){
  let backup=null;try{backup=parseStudyBackup($('import-text').value);}catch(e){if($('import-text').value.trim().startsWith('{'))throw e;}
  let cards=backup?backup.cards:parseCards($('import-text').value);if(cards.length>2000)throw new Error('Import up to 2,000 cards at a time.');
  let merged=0;
- if(!backup){const plan=prepareStudyCards(cards);cards=plan.cards;merged=plan.mergedCount;if(plan.changed)$('import-text').value=JSON.stringify({cards},null,2);}
- reviewedBackup=backup;$('import').textContent=backup?'Restore cards & progress':'Use these cards';$('backup-preview').hidden=!backup;$('backup-preview').textContent=backup?`Full backup: ${backup.known.length} marked familiar, ${backup.learned.length} previously learned${backup.mastery?`, ${masterySummary(backup.mastery).verified} verified mastered, ${masterySummary(backup.mastery).manual} manually mastered`:''}${backup.rewards?`, ${backup.rewards.xp} XP and ${backup.rewards.completedRounds} completed rounds`:''}${backup.round?`, round ${backup.round.completed}/${backup.round.total} cards complete (${backup.round.attempts} attempts)`:''}${backup.exam?`, saved exam (${backup.exam.submittedAt?'submitted':backup.exam.questions.filter((question,i)=>isAnswerProvided(question,backup.exam.answers[i])).length+' answered'})`:''}. Your cards and progress will be restored together.`:'';
+ if(!backup){const raw=cards,plan=prepareStudyCards(raw);let data;try{data=JSON.parse($('import-text').value);}catch{}cards=plan.cards;merged=plan.mergedCount;reviewedFlashcards=data?.flashcards?validateFlashcards(data.flashcards,cards):flashcardsFromImport(raw,plan);if(plan.changed)$('import-text').value=JSON.stringify({cards,flashcards:reviewedFlashcards},null,2);}
+ reviewedBackup=backup;$('import').textContent=backup?'Restore cards & progress':'Use these cards';$('backup-preview').hidden=!backup;$('backup-preview').textContent=backup?`Full backup: ${backup.flashKnown?.length??backup.known.length} marked familiar, ${backup.learned.length} previously learned${backup.mastery?`, ${masterySummary(backup.mastery).verified} verified mastered, ${masterySummary(backup.mastery).manual} manually mastered`:''}${backup.rewards?`, ${backup.rewards.xp} XP and ${backup.rewards.completedRounds} completed rounds`:''}${backup.round?`, round ${backup.round.completed}/${backup.round.total} cards complete (${backup.round.attempts} attempts)`:''}${backup.exam?`, saved exam (${backup.exam.submittedAt?'submitted':backup.exam.questions.filter((question,i)=>isAnswerProvided(question,backup.exam.answers[i])).length+' answered'})`:''}. Your cards and progress will be restored together.`:'';
  reviewedText=$('import-text').value;$('preview-count').textContent=`Review all ${cards.length} cards${merged?` · ${merged} repeated questions combined`:''}`;$('preview-cards').replaceChildren();
  cards.forEach((card,i)=>{const item=document.createElement('article');const question=document.createElement('strong');question.textContent=`${i+1}. ${card.term}`;const answer=document.createElement('p');answer.textContent=card.definition;item.append(question,answer);$('preview-cards').append(item);});
  $('import-preview').hidden=false;$('confirm-review').checked=false;$('import').disabled=true;
@@ -1886,7 +2362,7 @@ $('confirm-review').onchange=()=>{$('import').disabled=!$('confirm-review').chec
 $('import').onclick=()=>{try{
  if(!$('confirm-review').checked||reviewedText!==$('import-text').value)throw new Error('Review the cards and confirm the question / answer pairs first.');
  const cards=parseCards(reviewedText), backup=reviewedBackup;if(state.cards.length&&!confirm(backup?'Restore this backup, replacing this device’s current cards and progress?':'Replace your current cards and reset study progress? Export a full backup first if needed.'))return;
- keepRecovery('Before restoring backup or replacing set');state=backup||{title:$('set-title').value.trim()||'My study set',cards,known:[],learned:[]};if(backup)state.title=$('set-title').value.trim()||state.title;state.mastery=initializeMastery(state);state.rewards=initializeRewards(state.rewards);upgradeSavedQuestions();recapOpen=false;ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam'].includes(backup?.lastActivity)?backup.lastActivity:'flash');save();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(backup?'Cards and study progress restored':`${cards.length} cards imported`);
+ keepRecovery('Before restoring backup or replacing set');state=backup||{title:$('set-title').value.trim()||'My study set',cards,flashcards:reviewedFlashcards,flashKnown:[],known:[],learned:[]};if(backup)state.title=$('set-title').value.trim()||state.title;state.mastery=initializeMastery(state);state.rewards=initializeRewards(state.rewards);upgradeSavedQuestions();initializeFlashProgress(state,originalFlashCards);recapOpen=false;ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam'].includes(backup?.lastActivity)?backup.lastActivity:'flash');save();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(backup?'Cards and study progress restored':`${cards.length} cards imported`);
  }catch(e){$('import-status').textContent=e.message;}};
 $('import-file').onchange=async event=>{
  const file=event.target.files[0];if(!file)return;const generation=++importGeneration;invalidatePreview();
@@ -1898,18 +2374,18 @@ $('pdf-file').onchange=async event=>{
   const pages=await PocketPDF.readPdf(file,message=>{if(generation===importGeneration)$('import-status').textContent=message;});
   if(generation!==importGeneration)return;
   const result=parsePdfPages(pages),plan=prepareStudyCards(result.cards);const title=file.name.replace(/\.pdf$/i,'').slice(0,120);
-  $('set-title').value=title;$('import-text').value=JSON.stringify({title,cards:plan.cards},null,2);reviewImport();
+  $('set-title').value=title;$('import-text').value=JSON.stringify({title,cards:plan.cards,flashcards:flashcardsFromImport(result.cards,plan)},null,2);reviewImport();
   $('import-status').textContent=`${result.cards.length} pairs extracted (${result.format}); ${plan.cards.length} study cards after combining ${plan.mergedCount} repeats. Review every question and answer before importing. ${[...result.warnings,...plan.warnings].join(' ')}`;
  }catch(e){if(generation===importGeneration){invalidatePreview();$('import-status').textContent=`PDF not imported: ${e.message}`;}}
  finally{$('pdf-file').disabled=false;event.target.value='';}
 };
 function exportCards(){if(!state.cards.length){$('import-status').textContent='Import cards before exporting a backup.';return false;}return true;}
-$('export').onclick=()=>{if(!exportCards())return;const url=URL.createObjectURL(new Blob([JSON.stringify({title:state.title,cards:state.cards},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=(state.title.replace(/[^a-z0-9_-]+/gi,'-')||'study-set')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('export').onclick=()=>{if(!exportCards())return;const url=URL.createObjectURL(new Blob([JSON.stringify({title:state.title,cards:state.cards,flashcards:state.flashcards},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=(state.title.replace(/[^a-z0-9_-]+/gi,'-')||'study-set')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 $('export-progress').onclick=()=>{
- try{const backup=createStudyBackup(state);const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='pocket-full-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('import-status').textContent='Full backup downloaded: cards, mastery, rewards, unfinished Learn round, and saved exam. Save it to Files or iCloud Drive.';}catch(e){$('import-status').textContent=`Could not export backup: ${e.message}`;}
+ try{const backup=createStudyBackup(state);const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='pocket-full-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('import-status').textContent='Full backup downloaded: original flashcards, familiarity, Learn mastery, rewards, unfinished round, and saved exam. Save it to Files or iCloud Drive.';}catch(e){$('import-status').textContent=`Could not export backup: ${e.message}`;}
 };
 $('restore-recovery').onclick=()=>{
- try{const saved=JSON.parse(localStorage.getItem(recoveryKey));if(!saved)throw new Error('No local recovery snapshot is available.');const restored=validateStudyState(JSON.parse(saved.data));if(!confirm(`Restore the local snapshot from ${new Date(saved.createdAt).toLocaleString()}? This replaces your current cards and progress.`))return;keepRecovery('Before local recovery');state=restored;state.mastery=initializeMastery(state);state.rewards=initializeRewards(state.rewards);upgradeSavedQuestions();recapOpen=false;ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam'].includes(state.lastActivity)?state.lastActivity:'flash');save();invalidatePreview();$('import-dialog').close();toast('Local cards and progress recovered');}catch(e){$('import-status').textContent=`Recovery failed: ${e.message}`;}
+ try{const saved=JSON.parse(localStorage.getItem(recoveryKey));if(!saved)throw new Error('No local recovery snapshot is available.');const restored=validateStudyState(JSON.parse(saved.data));if(!confirm(`Restore the local snapshot from ${new Date(saved.createdAt).toLocaleString()}? This replaces your current cards and progress.`))return;keepRecovery('Before local recovery');state=restored;state.mastery=initializeMastery(state);state.rewards=initializeRewards(state.rewards);upgradeSavedQuestions();initializeFlashProgress(state,originalFlashCards);recapOpen=false;ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam'].includes(state.lastActivity)?state.lastActivity:'flash');save();invalidatePreview();$('import-dialog').close();toast('Local cards and progress recovered');}catch(e){$('import-status').textContent=`Recovery failed: ${e.message}`;}
 };
 $('export-pdf').onclick=()=>{
  if(!exportCards())return;const popup=window.open('','_blank');if(!popup){$('import-status').textContent='Allow pop-ups for this site to open the printable PDF view.';return;}
@@ -1919,6 +2395,8 @@ $('export-pdf').onclick=()=>{
 };
 document.addEventListener('keydown',e=>{if(activity!=='flash'||$('import-dialog').open||['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement.tagName))return;if(e.code==='Space'){e.preventDefault();$('card').click();}if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1);});
 if(!state.cards.length){try{state.cards=parseCards(document.getElementById('included-deck').textContent);state.mastery=initializeMastery({...state,mastery:null});save();}catch{toast('Could not load the included deck. Use Manage cards to import a backup.');}}
+originalFlashCards=parseCards(document.getElementById('included-source-deck').textContent);
+initializeFlashProgress(state,originalFlashCards);save();
 rebuild();
 $('offline-status').textContent='Standalone edition · no server needed';
 
@@ -1968,6 +2446,10 @@ function renderLearn(){
  $('learn-question-panel').classList.toggle('past-mistake-card',isReview);
  if(!feedback)$('learn-question-panel').classList.remove('celebrate-answer','retry-answer');
  const multi=q.type==='multi',written=q.type==='written'||(!multi&&q.options.length<2);
+ $('learn-format-notice').className=`answer-format ${multi?'answer-format-multi':written?'answer-format-written':'answer-format-single'}`;
+ $('learn-format-icon').textContent=multi?'☑':written?'✎':'◉';
+ $('learn-format-title').textContent=multi?'Select ALL correct answers':written?'Write your answer':'Choose ONE answer';
+ $('learn-format-detail').textContent=multi?'More than one option is correct. Select every correct option, then tap Check answers.':written?'Type your answer, then tap Check answer.':'Only one option is correct. Tap your choice to check it.';
  const selection=multi?(feedback?feedback.choice:(round.selection||[])):[];
  $('learn-written-label').hidden=!written||!!feedback;$('learn-check').hidden=!(written||multi)||!!feedback;
  $('learn-check').textContent=multi?'Check selected answers':'Check answer';$('learn-check').disabled=multi&&!selection.length;
