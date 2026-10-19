@@ -177,13 +177,13 @@ function renderLearn(){
  const multi=q.type==='multi',written=q.type==='written'||(!multi&&q.options.length<2);
  $('learn-format-notice').className=`answer-format ${multi?'answer-format-multi':written?'answer-format-written':'answer-format-single'}`;
  $('learn-format-icon').textContent=multi?'☑':written?'✎':'◉';
- $('learn-format-title').textContent=multi?'Select ALL correct answers':written?'Write your answer':'Choose ONE answer';
- $('learn-format-detail').textContent=multi?'More than one option is correct. Select every correct option, then tap Check answers.':written?'Type your answer, then tap Check answer.':'Only one option is correct. Tap your choice to check it.';
+ $('learn-format-title').textContent=multi?`Select exactly ${q.answers.length} answers`:written?'Write your answer':'Choose ONE answer';
+ $('learn-format-detail').textContent=multi?`There are ${q.answers.length} correct answers. Select them all, then tap Check answers.`:written?'Type your answer, then tap Check answer.':'Only one option is correct. Tap your choice to check it.';
  const selection=multi?(feedback?feedback.choice:(round.selection||[])):[];
  $('learn-written-label').hidden=!written||!!feedback;$('learn-check').hidden=!(written||multi)||!!feedback;
  $('learn-check').textContent=multi?'Check selected answers':'Check answer';$('learn-check').disabled=multi&&!selection.length;
- $('learn-multi-hint').hidden=!multi;$('learn-multi-hint').textContent='Select every correct answer, then tap Check selected answers. A missing correct answer or an extra incorrect choice counts as a miss.';
- $('learn-kind').textContent=multi?'SELECT ALL THAT APPLY':written?'WRITE YOUR ANSWER':q.options.length===2&&q.options.includes('True')&&q.options.includes('False')?'TRUE OR FALSE':'CHOOSE ONE ANSWER';
+ $('learn-multi-hint').hidden=!multi;if(multi)$('learn-multi-hint').textContent=`${selection.length} of ${q.answers.length} answers selected. A missing correct answer or an extra incorrect choice counts as a miss.`;
+ $('learn-kind').textContent=multi?`SELECT ALL THAT APPLY · ${q.answers.length} CORRECT ANSWERS`:written?'WRITE YOUR ANSWER':q.options.length===2&&q.options.includes('True')&&q.options.includes('False')?'TRUE OR FALSE':'CHOOSE ONE ANSWER';
  $('learn-question').textContent=q.prompt;
  $('learn-options').replaceChildren();
  if(!written)q.options.forEach((option,i)=>{
@@ -300,8 +300,9 @@ function renderExam(){
  $('exam-position').textContent=`QUESTION ${i+1} OF ${exam.questions.length}`;
  $('exam-count').textContent=`${answered} answered · ${exam.flagged.length} flagged`;
  $('exam-progress').style.width=`${answered/exam.questions.length*100}%`;
- $('exam-kind').textContent=q.type==='multi'?'SELECT ALL THAT APPLY':q.type==='written'?'WRITE YOUR ANSWER':q.options.length===2&&q.options.includes('True')&&q.options.includes('False')?'TRUE OR FALSE':'CHOOSE ONE ANSWER';
+ $('exam-kind').textContent=q.type==='multi'?`SELECT ALL THAT APPLY · ${q.answers.length} CORRECT ANSWERS`:q.type==='written'?'WRITE YOUR ANSWER':q.options.length===2&&q.options.includes('True')&&q.options.includes('False')?'TRUE OR FALSE':'CHOOSE ONE ANSWER';
  $('exam-multi-hint').hidden=q.type!=='multi';
+ if(q.type==='multi')$('exam-multi-hint').textContent=`Select exactly ${q.answers.length} answers. ${selected?.length||0} of ${q.answers.length} selected. Each selected option must be correct; results appear after submitting the exam.`;
  $('exam-question').textContent=q.prompt;$('exam-options').replaceChildren();
  $('exam-written-label').hidden=q.type!=='written';$('exam-written').value=selected||'';
  if(q.type==='choice'||q.type==='multi')q.options.forEach((option,n)=>{const multi=q.type==='multi',chosen=multi?Array.isArray(selected)&&selected.includes(option):option===selected;const button=document.createElement('button');button.type='button';button.className='learn-option exam-option';button.classList.toggle('selected',chosen);if(multi){button.setAttribute('role','checkbox');button.setAttribute('aria-checked',chosen);}else button.setAttribute('aria-pressed',chosen);const letter=document.createElement('span');letter.className='option-letter';letter.textContent=multi?(chosen?'☑':'☐'):String.fromCharCode(65+n);letter.setAttribute('aria-hidden','true');const label=document.createElement('span');label.textContent=option;button.append(letter,label);if(chosen){const badge=document.createElement('strong');badge.className='answer-badge';badge.textContent='● SELECTED';button.append(badge);}button.onclick=()=>{const answer=multi?(chosen?selected.filter(value=>value!==option):[...(selected||[]),option]):option;if(setExamAnswer(exam,i,answer)){save();renderExam();$('exam-options').children[n].focus({preventScroll:true});}};$('exam-options').append(button);});
@@ -372,7 +373,7 @@ function syncLearnActions(){
  $('learn-swipe-actions').setAttribute('aria-label',multiPending?'Select-all answer submission':'Answered question navigation');
  document.body.classList.toggle('learn-answer-ready',ready||multiPending);
  if(ready){$('learn-action-result').textContent=round.feedback.correct?'✓ Correct — ready for the next card':'↺ Correct answer shown — keep practicing';$('learn-next').textContent=round.queue.length===1&&round.feedback.correct?'Finish round →':'Next question →';$('learn-action-hint').textContent='Swipe left on the card to continue';}
- if(multiPending){$('learn-action-result').textContent=`${round.selection?.length||0} answer${round.selection?.length===1?'':'s'} selected`;$('learn-action-hint').textContent='Select all correct options, then check';}
+ if(multiPending){const required=round.current.answers.length;$('learn-action-result').textContent=`${round.selection?.length||0} of ${required} answers selected`;$('learn-action-hint').textContent=`Select exactly ${required}, then check`;}
 }
 function advanceLearnCard(){
  if(activity!=='learn'||!state.round?.feedback||$('import-dialog').open)return;
