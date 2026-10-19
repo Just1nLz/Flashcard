@@ -1,5 +1,6 @@
 import {installLearnSwipe} from './swipe.js';
 import {initializeRewards,validateRoundReward,awardRoundReward,buildSetRecap} from './rewards.js';
+import {rankTrickyQuestions,trickyPracticeIds,newTrickyRound,advanceTrickyRound} from './tricky.js';
 import {MASTERY_TARGET,initializeMastery,recordMastery,masterySummary,newMasteryRound,isCardMastered,setManualMastery,completeManualCard,ensureRoundReviewMix} from './mastery.js';
 import {createExam,setExamAnswer,scoreExam,submitExam,validateExam} from './exam.js';
 import {createStudyBackup, parseStudyBackup, validateStudyState} from './backup.js';
@@ -91,7 +92,7 @@ $('confirm-review').onchange=()=>{$('import').disabled=!$('confirm-review').chec
 $('import').onclick=()=>{try{
  if(!$('confirm-review').checked||reviewedText!==$('import-text').value)throw new Error('Review the cards and confirm the question / answer pairs first.');
  const cards=parseCards(reviewedText), backup=reviewedBackup;if(state.cards.length&&!confirm(backup?'Restore this backup, replacing this device’s current cards and progress?':'Replace your current cards and reset study progress? Export a full backup first if needed.'))return;
- keepRecovery('Before restoring backup or replacing set');state=backup||{title:$('set-title').value.trim()||'My study set',cards,flashcards:reviewedFlashcards,flashKnown:[],known:[],learned:[]};if(backup)state.title=$('set-title').value.trim()||state.title;state.mastery=initializeMastery(state);state.rewards=initializeRewards(state.rewards);upgradeSavedQuestions();initializeFlashProgress(state,originalFlashCards);recapOpen=false;ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam'].includes(backup?.lastActivity)?backup.lastActivity:'flash');save();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(backup?'Cards and study progress restored':`${cards.length} cards imported`);
+ keepRecovery('Before restoring backup or replacing set');state=backup||{title:$('set-title').value.trim()||'My study set',cards,flashcards:reviewedFlashcards,flashKnown:[],known:[],learned:[]};if(backup)state.title=$('set-title').value.trim()||state.title;state.mastery=initializeMastery(state);state.rewards=initializeRewards(state.rewards);upgradeSavedQuestions();initializeFlashProgress(state,originalFlashCards);recapOpen=false;ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam','tricky'].includes(backup?.lastActivity)?backup.lastActivity:'flash');save();$('import-dialog').close();$('import-status').textContent='';invalidatePreview();toast(backup?'Cards and study progress restored':`${cards.length} cards imported`);
  }catch(e){$('import-status').textContent=e.message;}};
 $('import-file').onchange=async event=>{
  const file=event.target.files[0];if(!file)return;const generation=++importGeneration;invalidatePreview();
@@ -114,7 +115,7 @@ $('export-progress').onclick=()=>{
  try{const backup=createStudyBackup(state);const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='pocket-full-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('import-status').textContent='Full backup downloaded: original flashcards, familiarity, Learn mastery, rewards, unfinished round, and saved exam. Save it to Files or iCloud Drive.';}catch(e){$('import-status').textContent=`Could not export backup: ${e.message}`;}
 };
 $('restore-recovery').onclick=()=>{
- try{const saved=JSON.parse(localStorage.getItem(recoveryKey));if(!saved)throw new Error('No local recovery snapshot is available.');const restored=validateStudyState(JSON.parse(saved.data));if(!confirm(`Restore the local snapshot from ${new Date(saved.createdAt).toLocaleString()}? This replaces your current cards and progress.`))return;keepRecovery('Before local recovery');state=restored;state.mastery=initializeMastery(state);state.rewards=initializeRewards(state.rewards);upgradeSavedQuestions();initializeFlashProgress(state,originalFlashCards);recapOpen=false;ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam'].includes(state.lastActivity)?state.lastActivity:'flash');save();invalidatePreview();$('import-dialog').close();toast('Local cards and progress recovered');}catch(e){$('import-status').textContent=`Recovery failed: ${e.message}`;}
+ try{const saved=JSON.parse(localStorage.getItem(recoveryKey));if(!saved)throw new Error('No local recovery snapshot is available.');const restored=validateStudyState(JSON.parse(saved.data));if(!confirm(`Restore the local snapshot from ${new Date(saved.createdAt).toLocaleString()}? This replaces your current cards and progress.`))return;keepRecovery('Before local recovery');state=restored;state.mastery=initializeMastery(state);state.rewards=initializeRewards(state.rewards);upgradeSavedQuestions();initializeFlashProgress(state,originalFlashCards);recapOpen=false;ensureRoundReviewMix(state.cards,state.mastery,state.round);mode='all';rebuild();setActivity(['learn','exam','tricky'].includes(state.lastActivity)?state.lastActivity:'flash');save();invalidatePreview();$('import-dialog').close();toast('Local cards and progress recovered');}catch(e){$('import-status').textContent=`Recovery failed: ${e.message}`;}
 };
 $('export-pdf').onclick=()=>{
  if(!exportCards())return;const popup=window.open('','_blank');if(!popup){$('import-status').textContent='Allow pop-ups for this site to open the printable PDF view.';return;}
@@ -131,15 +132,19 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').the
 
 function setActivity(value){
  activity=value;state.lastActivity=value;save();
- $('flash-panel').hidden=value!=='flash';$('learn-panel').hidden=value!=='learn';$('exam-panel').hidden=value!=='exam';
- for(const [id,active] of [['flash-mode',value==='flash'],['learn-mode',value==='learn'],['exam-mode',value==='exam']]){ $(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',active); }
+ $('flash-panel').hidden=value!=='flash';$('learn-panel').hidden=value!=='learn';$('exam-panel').hidden=value!=='exam';$('tricky-panel').hidden=value!=='tricky';
+ for(const [id,active] of [['flash-mode',value==='flash'],['learn-mode',value==='learn'],['exam-mode',value==='exam'],['tricky-mode',value==='tricky']]){ $(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',active); }
  if(value==='learn'){if(!state.round)state.round=newMasteryRound(state.cards,state.mastery);renderLearn();}
  if(value==='exam')renderExam();
+ if(value==='tricky')renderTricky();
  syncLearnActions();
 }
 function renderLearn(){
  $('learn-question-panel').classList.remove('next-card-enter');
  const round=state.round;
+ const strengthening=round?.practice?.kind==='tricky';
+ $('tricky-practice-notice').hidden=!strengthening;
+ if(strengthening){const verified=round.practice.ids.filter(id=>state.mastery.cards[id].streak>=MASTERY_TARGET).length;$('tricky-practice-progress').textContent=`${verified} of ${round.total} questions at 3/3. Each question stays until three consecutive correct answers; existing streaks count. A wrong answer resets only that question to 0/3.`;}
  $('sound-toggle').textContent=state.soundEnabled?'Sound: on':'Sound: off';$('sound-toggle').setAttribute('aria-pressed',!!state.soundEnabled);$('learn-streak').textContent=state.feedbackStreak>1?`${state.feedbackStreak} correct across cards`:'';
  if(!round){syncLearnActions();return;}
  syncLearnActions();
@@ -151,14 +156,17 @@ function renderLearn(){
  $('learn-question-panel').hidden=finished;$('learn-summary').hidden=!finished;
  renderMasteryOverview();
  $('learn-round-mix').textContent=`${round.baseIds?.length??round.total} core cards + ${round.reviewIds?.length||0} past-mistake reviews · ${round.total} total` ;
+ if(strengthening)$('learn-round-mix').textContent=`${round.total} tricky questions · focused practice to 3/3 · no unrelated questions`;
  $('learn-count').textContent=`${round.completed} / ${round.total} completed this round`;
  $('learn-score').textContent=`${masterySummary(state.mastery).mastered} / ${state.cards.length} mastered`;
  $('learn-progress').style.width=`${round.total?round.completed/round.total*100:0}%`;
  if(finished){
   const allDone=masterySummary(state.mastery).mastered===state.cards.length;
   $('summary-title').textContent=!state.cards.length?'Import cards to start learning':allDone?(masterySummary(state.mastery).manual?'Collection complete: verified and self-marked mastery.':'Every card meets the mastery standard!'):'Round complete. Keep building mastery.';
+  if(strengthening)$('summary-title').textContent='Strengthening round finished';
   const verified=round.seen.filter(id=>state.mastery.cards[id].streak>=MASTERY_TARGET&&!state.mastery.cards[id].manualMastered).length;
   $('summary-detail').textContent=round.total?`${round.seen.length?`${round.firstCorrect} of ${round.seen.length} assessed cards correct on the first try (${Math.round(round.firstCorrect/round.seen.length*100)}%).`:'No answers were assessed.'} ${round.attempts} total answer attempts. ${verified} of this round’s assessed cards meet the 3-in-a-row standard. ${round.manualIds?.length||0} cards were manually marked mastered; unattempted cards do not add correct answers or inflate accuracy. Other cards will return in later rounds.`:'Your next study session is ready when you are.';
+  if(strengthening){const reached=round.practice.ids.filter(id=>state.mastery.cards[id].streak>=MASTERY_TARGET).length;$('summary-detail').textContent=`${reached} of ${round.total} selected questions now meet the 3-in-a-row standard. ${round.attempts} answer attempts; ${round.firstCorrect} of ${round.seen.length} assessed questions correct on the first encounter. ${round.manualIds?.length||0} manually completed; manual marks do not count as verified strengthening. Historical mistake counts stay in your ranking so you can see what has improved.`;}
   $('next-round').textContent=allDone?'Review mastered cards':'Next mastery round →';$('next-round').disabled=!state.cards.length;
   $('summary-recap').textContent=recap.complete?'✓ Every card assessed — see your full recap ↓':'See your set progress and focus cards ↓';
   $('round-reward').hidden=!reward;
@@ -207,6 +215,7 @@ function renderLearn(){
   const label=document.createElement('p');label.className='result-label';label.textContent='REMEMBER THIS ANSWER';
   const answer=document.createElement('p');answer.className='memory-answer';answer.textContent=multi?q.answers.map(text=>'• '+text).join('\n'):q.answer;
   const cue=document.createElement('p');cue.className='memory-cue';cue.textContent=feedback.correct?(cardProgress.manualMastered?'Marked mastered by you; actual answer history remains recorded separately.':cardProgress.streak>=MASTERY_TARGET?'3 correct in a row for this card — mastery reached. You can still review it.':`${cardProgress.streak}/3 correct in a row for this card. It will return in a later round until you reach 3/3.`):'This card’s streak reset to 0/3. Read the answer aloud; it will return later in this round, then in future rounds until mastered.';
+  if(strengthening)cue.textContent=feedback.correct?(cardProgress.streak>=MASTERY_TARGET?'3 correct in a row — this question meets the strengthening goal.':`${cardProgress.streak}/3 correct in a row. This question returns within this strengthening round until 3/3.`):'Streak reset to 0/3. Explain the correct answer aloud, then recall it again when this question returns. It stays in this round until 3/3.';
   content.append(heading,label,answer,cue);$('learn-feedback').append(icon,content);
  }
  $('learn-feedback').className=feedback?(feedback.correct?'feedback-correct':'feedback-incorrect'):'';
@@ -223,6 +232,29 @@ function renderLearningRewards(recap){
  $('open-set-recap').setAttribute('aria-expanded',recapOpen);
  $('set-recap').hidden=!recapOpen;
  if(recapOpen)renderSetRecap(recap);
+}
+function renderTricky(){
+ const rows=rankTrickyQuestions(state),targets=trickyPracticeIds(rows),pending=rows.filter(row=>!row.verified).length;
+ $('tricky-stats').textContent=`${rows.length} questions with recorded mistakes · ${rows.reduce((sum,row)=>sum+row.totalIncorrect,0)} total misses · ${pending} still below 3/3`;
+ $('tricky-empty').hidden=!!rows.length;
+ $('strengthen-tricky').disabled=!targets.length;
+ $('strengthen-tricky').textContent=targets.length?`${pending?'Strengthen':'Recheck'} ${targets.length} ${pending?'priority':'tricky'} question${targets.length===1?'':'s'}`:'No tricky questions yet';
+ $('tricky-list').replaceChildren();
+ rows.forEach((row,index)=>{
+  const article=document.createElement('article');article.className='tricky-item';article.dataset.cardId=row.id;
+  const header=document.createElement('div');header.className='tricky-item-heading';const rank=document.createElement('strong');rank.className='tricky-rank';rank.textContent=`#${index+1}`;const misses=document.createElement('strong');misses.className='tricky-misses';misses.textContent=`${row.totalIncorrect} miss${row.totalIncorrect===1?'':'es'}`;header.append(rank,misses);
+  const question=document.createElement('h4'),card=state.cards[row.id],end=card.term.lastIndexOf('?');question.textContent=end>=0?card.term.slice(0,end+1):card.term;
+  const status=document.createElement('p');status.className=`tricky-status${row.verified?' tricky-verified':''}`;status.textContent=`${row.verified?'✓ Verified at 3/3':row.manual?'Marked mastered by you; still needs verification':'Building recall'} · ${row.streak}/3 consecutive correct`;
+  const counts=document.createElement('p');counts.className='tricky-counts';counts.textContent=`${row.incorrect} current-format misses${row.earlierIncorrect?` + ${row.earlierIncorrect} from earlier question versions`:''} · ${row.correct} correct${row.accuracy===null?'':` · ${row.accuracy}% current-format accuracy`}`;
+  const review=document.createElement('details');review.className='tricky-answer';const label=document.createElement('summary');label.textContent='Review the correct answer';const answer=document.createElement('p');answer.textContent=card.definition;const tip=document.createElement('small');tip.textContent='Read it once, explain why it is correct, then hide the answer and recall it before practicing.';review.append(label,answer,tip);
+  const practice=document.createElement('button');practice.type='button';practice.className='primary';practice.textContent=row.verified?'Recheck this question':'Strengthen this question';practice.onclick=()=>startTrickyPractice([row.id]);
+  article.append(header,question,status,counts,review,practice);$('tricky-list').append(article);
+ });
+}
+function startTrickyPractice(ids){
+ if(!ids.length)return;
+ if(state.round?.queue.length&&!confirm('Replace your unfinished Learn round with focused tricky-question practice? Recorded answers, mastery, and XP will stay saved.'))return;
+ keepRecovery('Before strengthening tricky questions');recapOpen=false;state.round=newTrickyRound(state.cards,state.mastery,ids);save();setActivity('learn');showNextLearnCard();
 }
 function renderSetRecap(recap=buildSetRecap(state)){
  $('recap-title').textContent=recap.complete?'Every card assessed. Here’s your recap.':'Your set so far';
@@ -257,9 +289,13 @@ function startRecapPractice(untested=false){
  keepRecovery('Before starting recap practice');recapOpen=false;state.round=newMasteryRound(state.cards,state.mastery,Math.random,ids);save();setActivity('learn');showNextLearnCard();
 }
 $('flash-mode').onclick=()=>setActivity('flash');$('learn-mode').onclick=()=>setActivity('learn');
+$('tricky-mode').onclick=()=>setActivity('tricky');
+$('strengthen-tricky').onclick=()=>startTrickyPractice(trickyPracticeIds(rankTrickyQuestions(state)));
+$('tricky-go-learn').onclick=()=>setActivity('learn');
+$('back-to-tricky').onclick=()=>{setActivity('tricky');$('tricky-panel').scrollIntoView({block:'start',behavior:'instant'});};
 $('learn-next').onclick=advanceLearnCard;
 $('learn-question').tabIndex=-1;
-$('restart-learn').onclick=()=>{if(confirm('Restart this round? Per-card mastery streaks and previous progress will stay saved.')){state.round=newMasteryRound(state.cards,state.mastery);save();renderLearn();}};
+$('restart-learn').onclick=()=>{if(confirm('Restart this round? Per-card mastery streaks and previous progress will stay saved.')){state.round=state.round?.practice?.kind==='tricky'?newTrickyRound(state.cards,state.mastery,state.round.practice.ids):newMasteryRound(state.cards,state.mastery);save();renderLearn();}};
 $('next-round').onclick=()=>{recapOpen=false;state.round=newMasteryRound(state.cards,state.mastery);save();renderLearn();showNextLearnCard();};
 $('open-set-recap').onclick=()=>{recapOpen=!recapOpen;renderLearningRewards(buildSetRecap(state));if(recapOpen){$('set-recap').scrollIntoView({block:'start',behavior:'instant'});$('recap-title').focus({preventScroll:true});}};
 $('summary-recap').onclick=()=>{recapOpen=true;renderLearningRewards(buildSetRecap(state));$('set-recap').scrollIntoView({block:'start',behavior:'instant'});$('recap-title').focus({preventScroll:true});};
@@ -268,7 +304,7 @@ $('recap-all-details').ontoggle=()=>{if($('recap-all-details').open)renderAllRec
 $('practice-recap-focus').onclick=()=>startRecapPractice();$('practice-recap-untested').onclick=()=>startRecapPractice(true);
 $('recap-exam').onclick=()=>{setActivity('exam');$('exam-panel').scrollIntoView({block:'start',behavior:'instant'});};
 
-if(['learn','exam'].includes(state.lastActivity))setActivity(state.lastActivity);
+if(['learn','exam','tricky'].includes(state.lastActivity))setActivity(state.lastActivity);
 if(toastLater)toast(toastLater);
 
 let answerAudio;
@@ -374,13 +410,13 @@ function syncLearnActions(){
  $('learn-check-footer').hidden=!multiPending;$('learn-check-footer').disabled=!round?.selection?.length;
  $('learn-swipe-actions').setAttribute('aria-label',multiPending?'Select-all answer submission':'Answered question navigation');
  document.body.classList.toggle('learn-answer-ready',ready||multiPending);
- if(ready){$('learn-action-result').textContent=round.feedback.correct?'✓ Correct — ready for the next card':'↺ Correct answer shown — keep practicing';$('learn-next').textContent=round.queue.length===1&&round.feedback.correct?'Finish round →':'Next question →';$('learn-action-hint').textContent='Swipe left on the card to continue';}
+ if(ready){const strengthening=round.practice?.kind==='tricky',streak=state.mastery.cards[round.queue[0]].streak;$('learn-action-result').textContent=round.feedback.correct?(strengthening?`✓ Correct · ${streak}/3 for this question`:'✓ Correct — ready for the next card'):'↺ Correct answer shown — keep practicing';$('learn-next').textContent=round.queue.length===1&&round.feedback.correct&&(!strengthening||streak>=MASTERY_TARGET)?'Finish round →':'Next question →';$('learn-action-hint').textContent=strengthening&&streak<MASTERY_TARGET?'This question returns until 3/3 · swipe left to continue':'Swipe left on the card to continue';}
  if(multiPending){const required=round.current.answers.length;$('learn-action-result').textContent=`${round.selection?.length||0} of ${required} answers selected`;$('learn-action-hint').textContent=`Select exactly ${required}, then check`;}
 }
 function advanceLearnCard(){
  if(activity!=='learn'||!state.round?.feedback||$('import-dialog').open)return;
  $('learn-written').value='';
- const learned=advanceRound(state.round);if(learned!==null&&!state.learned.includes(learned))state.learned.push(learned);
+ const learned=state.round.practice?.kind==='tricky'?advanceTrickyRound(state.round,state.mastery):advanceRound(state.round);if(learned!==null&&!state.learned.includes(learned))state.learned.push(learned);
  save();renderLearn();
  showNextLearnCard();
 }

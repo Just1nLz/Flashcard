@@ -6,6 +6,7 @@ template = (root / 'templates/index.html').read_text()
 parser = (root / 'cards.js').read_text().replace('export function ', 'function ')
 swipe = (root / 'swipe.js').read_text().replace('export function ', 'function ')
 mastery = re.sub(r'^import .*?;\n', '', (root / 'mastery.js').read_text(), flags=re.M).replace('export function ', 'function ').replace('export const ', 'const ')
+tricky = re.sub(r'^import .*?;\n', '', (root / 'tricky.js').read_text(), flags=re.M).replace('export function ', 'function ')
 duplicates = re.sub(r'^import .*?;\n', '', (root / 'duplicates.js').read_text(), flags=re.M).replace('export function ', 'function ')
 source_upgrade = re.sub(r'^import .*?;\n', '', (root / 'source-upgrade.js').read_text(), flags=re.M).replace('export function ', 'function ')
 flashcards = re.sub(r'^import .*?;\n', '', (root / 'flashcards.js').read_text(), flags=re.M).replace('export function ', 'function ')
@@ -23,12 +24,12 @@ base = template.replace('<link rel="stylesheet" href="style.css">', '<style>' + 
 deck = (root / 'deck.json').read_text().replace('<', '\\u003c')
 source_deck = (root / 'source-deck.json').read_text().replace('<', '\\u003c')
 def bundle(html, script):
-    return html.replace('<script type="module" src="app.js"></script>', '<script>' + runtime + '</script><script id="included-deck" type="application/json">' + deck + '</script><script id="included-source-deck" type="application/json">' + source_deck + '</script><script type="module">' + swipe + '\n' + parser + '\n' + learn + '\n' + mastery + '\n' + duplicates + '\n' + source_upgrade + '\n' + flashcards + '\n' + migration + '\n' + rewards + '\n' + exam + '\n' + backup + '\n' + layout + '\n' + script + '</script>')
+    return html.replace('<script type="module" src="app.js"></script>', '<script>' + runtime + '</script><script id="included-deck" type="application/json">' + deck + '</script><script id="included-source-deck" type="application/json">' + source_deck + '</script><script type="module">' + swipe + '\n' + parser + '\n' + learn + '\n' + mastery + '\n' + tricky + '\n' + duplicates + '\n' + source_upgrade + '\n' + flashcards + '\n' + migration + '\n' + rewards + '\n' + exam + '\n' + backup + '\n' + layout + '\n' + script + '</script>')
 (root / 'index.html').write_text(bundle(base, app))
 standalone = re.sub(r'<link rel="(?:manifest|icon|apple-touch-icon)"[^>]*>', '', base)
 script = re.sub(r"if\('serviceWorker' in navigator\)\{[^\n]*\}", "$('offline-status').textContent='Standalone edition · no server needed';", app)
 (root / 'Pocket-Flashcards.html').write_text(bundle(standalone, script))
 with zipfile.ZipFile(root / 'pocket-flashcards.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
-    for name in ['index.html','style.css','app.js','cards.js','learn.js','exam.js','mastery.js','duplicates.js','source-upgrade.js','flashcards.js','merge-progress.js','rewards.js','swipe.js','backup.js','pdf-layout.js','deck.json','source-deck.json','DATA-AUDIT.md','sw.js','manifest.webmanifest','icons/icon.svg','icons/icon-192.png','icons/icon-512.png','README.md','IPHONE.md','vendor/pdfjs-LICENSE.txt']:
+    for name in ['index.html','style.css','app.js','cards.js','learn.js','exam.js','mastery.js','tricky.js','duplicates.js','source-upgrade.js','flashcards.js','merge-progress.js','rewards.js','swipe.js','backup.js','pdf-layout.js','deck.json','source-deck.json','DATA-AUDIT.md','sw.js','manifest.webmanifest','icons/icon.svg','icons/icon-192.png','icons/icon-512.png','README.md','IPHONE.md','vendor/pdfjs-LICENSE.txt']:
         archive.write(root / name, name)
 print('Built self-contained index.html, Pocket-Flashcards.html, and pocket-flashcards.zip')

@@ -24,6 +24,7 @@ export function validateStudyState(input) {
     r.queue=ids(r.queue,'round queue');r.seen=ids(r.seen,'round history');
     if(r.baseIds!==undefined){r.baseIds=ids(r.baseIds,'core card IDs');r.reviewIds=ids(r.reviewIds,'past-mistake review IDs');r.manualIds=ids(r.manualIds,'manually completed IDs');const selected=[...r.baseIds,...r.reviewIds];if(new Set(selected).size!==selected.length||selected.length!==r.total||r.baseIds.length>10||r.reviewIds.length>3||r.queue.some(id=>!selected.includes(id))||r.seen.some(id=>!selected.includes(id))||r.manualIds.some(id=>!selected.includes(id)||r.queue.includes(id))||(r.roundNumber!==undefined&&(!Number.isInteger(r.roundNumber)||r.roundNumber<0)))throw new Error('Invalid round review mix in backup.');}
     if(!['total','completed','attempts','firstCorrect'].every(k=>Number.isInteger(r[k])&&r[k]>=0)||r.total>cards.length||r.completed>r.total||r.firstCorrect>r.seen.length||r.seen.length>r.total||r.attempts<r.seen.length||r.queue.length+r.completed!==r.total)throw new Error('Invalid round scores in backup.');
+    if(r.practice!==undefined){if(!r.practice||r.practice.kind!=='tricky'||r.practice.target!==3||!Array.isArray(r.baseIds)||r.reviewIds.length)throw new Error('Invalid strengthening round.');r.practice.ids=ids(r.practice.ids,'strengthening questions');if(!r.practice.ids.length||r.practice.ids.length!==r.total||r.practice.ids.some(id=>!r.baseIds.includes(id)))throw new Error('Invalid strengthening targets.');}
     if(r.current){
       const q=r.current;
       if(!r.queue.length||typeof q.prompt!=='string'||typeof q.answer!=='string'||!Array.isArray(q.options)||!q.options.length||q.options.some(o=>typeof o!=='string'||!o.trim())||new Set(q.options).size!==q.options.length||(q.type!==undefined&&!['written','choice','multi'].includes(q.type)))throw new Error('Invalid current question in backup.');
@@ -47,7 +48,7 @@ export function validateStudyState(input) {
   if(input.rewards)state.rewards=validateRewards(input.rewards);
   if(input.cardMigration){state.cardMigration=validateCardMigration(input.cardMigration);if(state.cardMigration.toCount!==cards.length)throw new Error('Question update archive does not match this study set.');}
   if(input.exam)state.exam=validateExam(input.exam,cards);
-  if(['learn','exam'].includes(input.lastActivity))state.lastActivity=input.lastActivity;
+  if(['learn','exam','tricky'].includes(input.lastActivity))state.lastActivity=input.lastActivity;
   if(input.soundEnabled===true)state.soundEnabled=true;
   if(Number.isInteger(input.feedbackStreak)&&input.feedbackStreak>0)state.feedbackStreak=input.feedbackStreak;
   return state;

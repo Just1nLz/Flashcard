@@ -52,6 +52,7 @@ export function migrateStudyCards(state,plan=consolidateCards(state.cards)){
    for(const key of ['queue','seen','baseIds','reviewIds','manualIds']){
     if(Array.isArray(state.round[key]))state.round[key]=remapMigrationIds(state.round[key]);
    }
+   if(state.round.practice?.kind==='tricky')state.round.practice.ids=remapMigrationIds(state.round.practice.ids);
   }
  }
  const examArchived=Boolean(state.exam);
