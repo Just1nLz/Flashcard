@@ -124,13 +124,14 @@ $('export-pdf').onclick=()=>{
  state.cards.forEach((card,i)=>{const article=doc.createElement('article');const q=doc.createElement('p');q.textContent=`Question: ${card.term}`;article.append(q);if(card.type==='multi'){const type=doc.createElement('p');type.textContent='Type: Select all that apply';article.append(type);}for(const answer of card.type==='multi'?card.answers:[card.definition]){const a=doc.createElement('p');a.textContent=`Answer: ${answer}`;article.append(a);}doc.body.append(article);});popup.focus();
 };
 document.addEventListener('keydown',e=>{if(activity!=='flash'||$('import-dialog').open||['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement.tagName))return;if(e.code==='Space'){e.preventDefault();$('card').click();}if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1);});
-if(!state.cards.length){try{const response=await fetch('./deck.json');if(!response.ok)throw new Error('Deck unavailable');state.cards=parseCards(await response.text());state.mastery=initializeMastery({...state,mastery:null});save();}catch{toast('Could not load the included deck. Use Manage cards to import a backup.');}}
+if(!state.cards.length){try{const response=await fetch('./deck.json');if(!response.ok)throw new Error('Deck unavailable');state.cards=parseCards(await response.text());state.mastery=initializeMastery({...state,mastery:null});save();}catch{toast('Could not load the included deck. Use Manage set to import a backup.');}}
 try{const source=await fetch('./source-deck.json');if(source.ok)originalFlashCards=parseCards(await source.text());}catch{}
 initializeFlashProgress(state,originalFlashCards);save();
 rebuild();
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').then(()=>navigator.serviceWorker.ready).then(()=>{$('offline-status').textContent='Ready for offline study';}).catch(()=>{$('offline-status').textContent='Offline cache unavailable · export a backup';});}
 
 function setActivity(value){
+ if($('study-dialog').open)$('study-dialog').close();
  activity=value;state.lastActivity=value;save();
  $('flash-panel').hidden=value!=='flash';$('learn-panel').hidden=value!=='learn';$('exam-panel').hidden=value!=='exam';$('tricky-panel').hidden=value!=='tricky';
  for(const [id,active] of [['flash-mode',value==='flash'],['learn-mode',value==='learn'],['exam-mode',value==='exam'],['tricky-mode',value==='tricky']]){ $(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',active); }
@@ -138,6 +139,7 @@ function setActivity(value){
  if(value==='exam')renderExam();
  if(value==='tricky')renderTricky();
  syncLearnActions();
+ window.scrollTo({top:0,behavior:'instant'});
 }
 function renderLearn(){
  $('learn-question-panel').classList.remove('next-card-enter');
@@ -157,7 +159,7 @@ function renderLearn(){
  renderMasteryOverview();
  $('learn-round-mix').textContent=`${round.baseIds?.length??round.total} core cards + ${round.reviewIds?.length||0} past-mistake reviews · ${round.total} total` ;
  if(strengthening)$('learn-round-mix').textContent=`${round.total} tricky questions · focused practice to 3/3 · no unrelated questions`;
- $('learn-count').textContent=`${round.completed} / ${round.total} completed this round`;
+ $('learn-count').textContent=`${round.completed} / ${round.total} complete`;
  $('learn-score').textContent=`${masterySummary(state.mastery).mastered} / ${state.cards.length} mastered`;
  $('learn-progress').style.width=`${round.total?round.completed/round.total*100:0}%`;
  if(finished){
@@ -178,21 +180,19 @@ function renderLearn(){
  const q=round.current, feedback=round.feedback;
  if(!feedback)ensureQuestionDistractors(q,state.cards,round.queue[0]);
  const cardProgress=state.mastery.cards[round.queue[0]],cardMastered=isCardMastered(cardProgress);
- $('learn-card-mastery').textContent=cardProgress.manualMastered?`MANUALLY MASTERED · actual streak ${cardProgress.streak}/3`:`THIS CARD: ${cardProgress.streak}/${MASTERY_TARGET} consecutive correct${cardMastered?' · MASTERED':''}`;
- for(const id of ['learn-manual-mastered','learn-manual-footer']){$(id).disabled=!!cardProgress.manualMastered;$(id).textContent=cardProgress.manualMastered?'✓ Marked by you':'I mastered this';}
- const isReview=!!round.reviewIds?.includes(round.queue[0]);$('learn-history-badge').hidden=!isReview;$('learn-history-badge').textContent=`↺ PAST MISTAKE REVIEW · missed ${cardProgress.incorrect} time${cardProgress.incorrect===1?'':'s'}${cardProgress.streak>=MASTERY_TARGET?' · mastery recheck':''}`;
+ $('learn-card-mastery').textContent=cardProgress.manualMastered?'Self-marked':`${cardProgress.streak}/${MASTERY_TARGET}${cardMastered?' · Mastered':' streak'}`;
+ $('learn-card-mastery').setAttribute('aria-label',cardProgress.manualMastered?`Manually mastered; actual streak ${cardProgress.streak}/3`:`${cardProgress.streak} of ${MASTERY_TARGET} consecutive correct answers${cardMastered?'; mastered':''}`);
+ for(const id of ['learn-manual-mastered']){$(id).disabled=!!cardProgress.manualMastered;$(id).textContent=cardProgress.manualMastered?'✓ Marked by you':'I mastered this';}
+ const isReview=!!round.reviewIds?.includes(round.queue[0]);$('learn-history-badge').hidden=!isReview;$('learn-history-badge').textContent=`↺ PAST MISTAKE REVIEW · ${cardProgress.incorrect} miss${cardProgress.incorrect===1?'':'es'}${cardProgress.streak>=MASTERY_TARGET?' · recheck':''}`;
  $('learn-question-panel').classList.toggle('past-mistake-card',isReview);
  if(!feedback)$('learn-question-panel').classList.remove('celebrate-answer','retry-answer');
  const multi=q.type==='multi',written=q.type==='written'||(!multi&&q.options.length<2);
  $('learn-format-notice').className=`answer-format ${multi?'answer-format-multi':written?'answer-format-written':'answer-format-single'}`;
  $('learn-format-icon').textContent=multi?'☑':written?'✎':'◉';
  $('learn-format-title').textContent=multi?`Select exactly ${q.answers.length} answers`:written?'Write your answer':'Choose ONE answer';
- $('learn-format-detail').textContent=multi?`There are ${q.answers.length} correct answers. Select them all, then tap Check answers.`:written?'Type your answer, then tap Check answer.':'Only one option is correct. Tap your choice to check it.';
  const selection=multi?(feedback?feedback.choice:(round.selection||[])):[];
- $('learn-written-label').hidden=!written||!!feedback;$('learn-check').hidden=!(written||multi)||!!feedback;
+ $('learn-written-label').hidden=!written||!!feedback;$('learn-check').hidden=!written||!!feedback;
  $('learn-check').textContent=multi?'Check selected answers':'Check answer';$('learn-check').disabled=multi&&!selection.length;
- $('learn-multi-hint').hidden=!multi;if(multi)$('learn-multi-hint').textContent=`${selection.length} of ${q.answers.length} answers selected. A missing correct answer or an extra incorrect choice counts as a miss.`;
- $('learn-kind').textContent=multi?`SELECT ALL THAT APPLY · ${q.answers.length} CORRECT ANSWERS`:written?'WRITE YOUR ANSWER':q.options.length===2&&q.options.includes('True')&&q.options.includes('False')?'TRUE OR FALSE':'CHOOSE ONE ANSWER';
  $('learn-question').textContent=q.prompt;
  $('learn-options').replaceChildren();
  if(!written)q.options.forEach((option,i)=>{
@@ -295,11 +295,13 @@ $('tricky-go-learn').onclick=()=>setActivity('learn');
 $('back-to-tricky').onclick=()=>{setActivity('tricky');$('tricky-panel').scrollIntoView({block:'start',behavior:'instant'});};
 $('learn-next').onclick=advanceLearnCard;
 $('learn-question').tabIndex=-1;
-$('restart-learn').onclick=()=>{if(confirm('Restart this round? Per-card mastery streaks and previous progress will stay saved.')){state.round=state.round?.practice?.kind==='tricky'?newTrickyRound(state.cards,state.mastery,state.round.practice.ids):newMasteryRound(state.cards,state.mastery);save();renderLearn();}};
+$('open-study-details').onclick=()=>{renderMasteryOverview();renderLearningRewards(buildSetRecap(state));$('study-dialog').showModal();syncLearnActions();};
+$('study-dialog').addEventListener('close',syncLearnActions);
+$('restart-learn').onclick=()=>{if(confirm('Restart this round? Per-card mastery streaks and previous progress will stay saved.')){state.round=state.round?.practice?.kind==='tricky'?newTrickyRound(state.cards,state.mastery,state.round.practice.ids):newMasteryRound(state.cards,state.mastery);save();renderLearn();$('study-dialog').close();showNextLearnCard();}};
 $('next-round').onclick=()=>{recapOpen=false;state.round=newMasteryRound(state.cards,state.mastery);save();renderLearn();showNextLearnCard();};
-$('open-set-recap').onclick=()=>{recapOpen=!recapOpen;renderLearningRewards(buildSetRecap(state));if(recapOpen){$('set-recap').scrollIntoView({block:'start',behavior:'instant'});$('recap-title').focus({preventScroll:true});}};
+$('open-set-recap').onclick=()=>{$('study-dialog').close();recapOpen=true;renderLearningRewards(buildSetRecap(state));$('set-recap').scrollIntoView({block:'start',behavior:'instant'});$('recap-title').focus({preventScroll:true});};
 $('summary-recap').onclick=()=>{recapOpen=true;renderLearningRewards(buildSetRecap(state));$('set-recap').scrollIntoView({block:'start',behavior:'instant'});$('recap-title').focus({preventScroll:true});};
-$('close-set-recap').onclick=()=>{recapOpen=false;renderLearningRewards(buildSetRecap(state));$('open-set-recap').focus();};
+$('close-set-recap').onclick=()=>{recapOpen=false;renderLearningRewards(buildSetRecap(state));window.scrollTo({top:0,behavior:'instant'});$('open-study-details').focus({preventScroll:true});};
 $('recap-all-details').ontoggle=()=>{if($('recap-all-details').open)renderAllRecapCards();};
 $('practice-recap-focus').onclick=()=>startRecapPractice();$('practice-recap-untested').onclick=()=>startRecapPractice(true);
 $('recap-exam').onclick=()=>{setActivity('exam');$('exam-panel').scrollIntoView({block:'start',behavior:'instant'});};
@@ -405,7 +407,7 @@ $('dismiss-mastery-note').onclick=()=>{state.mastery.legacyCredit=false;save();r
 $('dismiss-question-update').onclick=()=>{if(state.cardMigration)state.cardMigration.dismissed=true;save();renderMasteryOverview();};
 
 function syncLearnActions(){
- const round=state.round,active=activity==='learn'&&!!round?.queue.length&&!$('import-dialog').open,ready=active&&!!round.feedback,multiPending=active&&round.current?.type==='multi'&&!round.feedback;
+ const round=state.round,active=activity==='learn'&&!!round?.queue.length&&!$('import-dialog').open&&!$('study-dialog').open,ready=active&&!!round.feedback,multiPending=active&&round.current?.type==='multi'&&!round.feedback;
  $('learn-swipe-actions').hidden=!(ready||multiPending);$('learn-next').disabled=!ready;$('learn-next').hidden=!ready;
  $('learn-check-footer').hidden=!multiPending;$('learn-check-footer').disabled=!round?.selection?.length;
  $('learn-swipe-actions').setAttribute('aria-label',multiPending?'Select-all answer submission':'Answered question navigation');
@@ -414,13 +416,14 @@ function syncLearnActions(){
  if(multiPending){const required=round.current.answers.length;$('learn-action-result').textContent=`${round.selection?.length||0} of ${required} answers selected`;$('learn-action-hint').textContent=`Select exactly ${required}, then check`;}
 }
 function advanceLearnCard(){
- if(activity!=='learn'||!state.round?.feedback||$('import-dialog').open)return;
+ if(activity!=='learn'||!state.round?.feedback||$('import-dialog').open||$('study-dialog').open)return;
  $('learn-written').value='';
  const learned=state.round.practice?.kind==='tricky'?advanceTrickyRound(state.round,state.mastery):advanceRound(state.round);if(learned!==null&&!state.learned.includes(learned))state.learned.push(learned);
  save();renderLearn();
  showNextLearnCard();
 }
 function showNextLearnCard(){
+ $('learn-card-menu').open=false;
  const finished=!state.round.queue.length,target=finished?$('learn-summary'):$('learn-question-panel');
  if(finished){$('summary-title').tabIndex=-1;$('summary-title').focus({preventScroll:true});}else $('learn-question').focus({preventScroll:true});
  target.scrollIntoView({block:'start',behavior:'instant'});
@@ -428,7 +431,7 @@ function showNextLearnCard(){
 }
 $('import-dialog').addEventListener('close',syncLearnActions);
 installLearnSwipe($('learn-question-panel'),{
- canAdvance:()=>activity==='learn'&&!!state.round?.feedback&&!$('import-dialog').open,
+ canAdvance:()=>activity==='learn'&&!!state.round?.feedback&&!$('import-dialog').open&&!$('study-dialog').open,
  getToken:()=>`${state.round?.queue[0]}:${state.round?.attempts}`,
  onNext:advanceLearnCard
 });
@@ -437,14 +440,14 @@ syncLearnActions();
 function applyManualMastery(id,mastered){
  if(!state.mastery.cards[id])return;
  keepRecovery('Before manually changing mastery');
+ $('learn-card-menu').open=false;
  const wasCurrent=state.round?.queue[0]===id;
  if(mastered&&wasCurrent&&state.round.feedback?.correct&&!state.learned.includes(id))state.learned.push(id);
  setManualMastery(state.mastery,id,mastered);
  const removed=mastered&&completeManualCard(state.round,id);
  save();render();if(state.round)renderLearn();
- if(activity==='learn'&&wasCurrent&&removed)showNextLearnCard();
+ if(activity==='learn'&&wasCurrent&&removed&&!$('study-dialog').open)showNextLearnCard();
  toast(mastered?'Marked mastered by you. Undo with “Return to practice” in the mastery list.':`Returned to practice at ${state.mastery.cards[id].streak}/3. Past scores are unchanged.`);
 }
 $('learn-manual-mastered').onclick=()=>{if(state.round?.queue.length)applyManualMastery(state.round.queue[0],true);};
-$('learn-manual-footer').onclick=$('learn-manual-mastered').onclick;
 $('learn-check-footer').onclick=()=>$('learn-check').click();

@@ -24,12 +24,18 @@ The repository includes generated deployment files, so hosting requires no npm i
 | **Exam** | Test the whole consolidated set once, with shuffled questions, flags, navigation, and grading after submission. |
 | **Tricky** | Rank recorded Learn mistakes from most to least, review correct answers, and strengthen one question or up to 10 priorities until they reach 3/3. |
 
+### Focused study interface
+
+The app opens directly to the study set without a welcome banner. Activity tabs stay reachable while scrolling, and switching activities returns to the top. Learn puts round progress, a compact answer-type label, the current streak, and the question first.
+
+Open **Study details** for XP/level progress, set recap, the mastery list, round composition, update notes, sound, restart, and learning instructions. These details stay off the active question screen. **Card options → I mastered this** holds the manual mastery action; **Check answers** and **Next question** stay pinned when needed, with one submission control for Select all questions. Rewards appear after a round, with detailed statistics under **Round breakdown**. Flashcards, Exam, and Tricky also keep instructions in expandable help sections.
+
 ### Learn and mastery
 
 A standard round contains up to **10 core questions plus 3 labeled past-mistake reviews**. Core questions favor those least recently practiced. Bonus reviews rotate through saved mistakes and do not occupy a bonus slot in consecutive rounds. Previously verified questions with past mistakes may return for a retention check.
 
 - **Choose ONE answer:** a green notice and round choice markers; tapping an option checks it immediately.
-- **Select exactly N answers:** a blue notice and square checkboxes; select options, then tap **Check selected answers** or the pinned **Check answers** button. A live counter shows how many you have selected.
+- **Select exactly N answers:** a blue label and square checkboxes; select options, then tap the pinned **Check answers** button. Its live counter shows how many you have selected.
 - **Write your answer:** used when a single-answer question has too few distinct distractors. Grading ignores case, repeated whitespace, and trailing sentence punctuation, but does not interpret paraphrases.
 
 Select all grading requires **every correct option and no incorrect options**. Missing a correct choice or adding an incorrect one counts as a miss. Original true/false cards keep two choices.
@@ -92,7 +98,7 @@ Unanswered saved questions can receive these extra choices when displayed, retai
 
 ## Import and export
 
-Open **Manage cards** to name a set, import a PDF, paste text, or restore a backup. PDF reading uses bundled PDF.js and its worker locally, including offline; documents are not uploaded to an external service.
+Open **Manage set** to name a set, import a PDF, paste text, or restore a backup. PDF reading uses bundled PDF.js and its worker locally, including offline; documents are not uploaded to an external service.
 
 Supported inputs:
 
