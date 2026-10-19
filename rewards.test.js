@@ -61,9 +61,9 @@ test('empty recap never claims full coverage or invents an accuracy score',()=>{
  const state={cards:[],mastery:initializeMastery({cards:[]})};const recap=buildSetRecap(state);
  assert.equal(recap.complete,false);assert.equal(recap.accuracy,null);assert.deepEqual(recap.focusIds,[]);
 });
-test('the bundled 94-card Learn workflow earns one receipt per round and unlocks an accurate full-set recap',()=>{
+test('the bundled 80-card Learn workflow earns one receipt per round and unlocks an accurate full-set recap',()=>{
  const cards=JSON.parse(readFileSync(new URL('./deck.json',import.meta.url))).cards;
- assert.equal(cards.length,94);
+ assert.equal(cards.length,80);
  let state={title:'Computer Ethics',cards,known:[],learned:[],mastery:initializeMastery({cards}),rewards:initializeRewards()};
  const attempted=new Set(),evidence=cards.map(()=>({correct:0,incorrect:0}));
  let missedId=null,rounds=0,expectedXp=0,totalAttempts=0;
@@ -77,7 +77,8 @@ test('the bundled 94-card Learn workflow earns one receipt per round and unlocks
   while(state.round.queue.length){
    const round=state.round,id=round.queue[0];round.current=makeQuestion(cards,id,()=>.5);
    const answerWrong=missedId===null;
-   const choice=answerWrong?(round.current.options.find(option=>option!==round.current.answer)||'An incorrect written answer'):round.current.answer;
+   const question=round.current,expected=question.type==='multi'?question.answers:question.answer;
+   const choice=answerWrong?(question.type==='multi'?[question.answers[0]]:(question.options.find(option=>option!==question.answer)||'An incorrect written answer')):expected;
    assert.equal(answerQuestion(round,choice),true);
    const correct=round.feedback.correct;
    assert.equal(correct,!answerWrong);
@@ -90,7 +91,7 @@ test('the bundled 94-card Learn workflow earns one receipt per round and unlocks
    assert.deepEqual(state.rewards,rewardsBefore);
    const beforeAdvance=buildSetRecap(state);
    assert.equal(beforeAdvance.assessed,attempted.size);
-   assert.equal(beforeAdvance.complete,attempted.size===94);
+   assert.equal(beforeAdvance.complete,attempted.size===cards.length);
    const doneId=advanceRound(round);
    if(correct){assert.equal(doneId,id);if(!state.learned.includes(id))state.learned.push(id);}else assert.equal(doneId,null);
    assert.equal(round.completed+round.queue.length,round.total);
@@ -114,7 +115,7 @@ test('the bundled 94-card Learn workflow earns one receipt per round and unlocks
   assert.deepEqual(state.rewards,savedRewards);
  }
  const recap=buildSetRecap(state);
- assert.equal(recap.assessed,94);assert.equal(recap.unassessed,0);assert.equal(recap.complete,true);
+ assert.equal(recap.assessed,cards.length);assert.equal(recap.unassessed,0);assert.equal(recap.complete,true);
  assert.equal(recap.correct,totalAttempts-1);assert.equal(recap.incorrect,1);
  assert.equal(recap.attempts,totalAttempts);assert.equal(recap.markedOnly,0);assert.equal(recap.manual,0);
  for(const item of recap.items){assert.equal(item.correct,evidence[item.id].correct);assert.equal(item.incorrect,evidence[item.id].incorrect);}

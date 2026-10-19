@@ -11,6 +11,18 @@ const normalize = text => text.toLowerCase().replace(/[^a-z0-9]/g, '');
 const isBoolean = answer => /^(t|f|true|false)$/i.test(answer.trim());
 export function makeQuestion(cards, id, random = Math.random) {
   const {term, definition} = cards[id];
+  if (cards[id].type === 'multi') {
+    const answers = [...cards[id].answers];
+    if (Array.isArray(cards[id].options)) return {type:'multi',prompt:term,answer:definition,answers,options:shuffle(cards[id].options,random)};
+    const seen = new Set(answers.map(normalize));
+    const words = new Set((term + ' ' + definition).toLowerCase().match(/[a-z]{4,}/g) || []);
+    const candidates = shuffle(cards, random).filter(card => {
+      const key = normalize(card.definition);
+      if (card.type === 'multi' || isBoolean(card.definition) || /^all$/i.test(card.definition) || seen.has(key) || answers.some(answer => key.includes(normalize(answer)) || normalize(answer).includes(key))) return false;
+      seen.add(key); return true;
+    }).map(card => ({answer:card.definition,score:(card.term.toLowerCase().match(/[a-z]{4,}/g) || []).filter(word => words.has(word)).length})).sort((a,b)=>b.score-a.score);
+    return {type:'multi',prompt:term,answer:definition,answers,options:shuffle([...answers,...candidates.slice(0,3).map(candidate=>candidate.answer)],random)};
+  }
   if (isBoolean(definition)) return {
     prompt: term.replace(/\s*(T\/F|True False)\s*$/i, ''),
     answer: /^(t|true)$/i.test(definition) ? 'True' : 'False', options: ['True', 'False']
@@ -27,7 +39,7 @@ export function makeQuestion(cards, id, random = Math.random) {
   const seen = new Set([correct]);
   const candidates = shuffle(cards, random).filter(card => {
     const key = normalize(card.definition);
-    if (isBoolean(card.definition) || /^all$/i.test(card.definition) || seen.has(key) || key.includes(correct) || correct.includes(key)) return false;
+    if (card.type === 'multi' || isBoolean(card.definition) || /^all$/i.test(card.definition) || seen.has(key) || key.includes(correct) || correct.includes(key)) return false;
     seen.add(key); return true;
   }).map(card => ({answer: card.definition, score: (card.term.toLowerCase().match(/[a-z]{4,}/g) || []).filter(word => words.has(word)).length})).sort((a,b)=>b.score-a.score);
   const options=shuffle([definition, ...candidates.slice(0,3).map(c=>c.answer)],random);
@@ -38,19 +50,27 @@ export function newRound(cards, learned = [], random = Math.random) {
   return {queue, total:queue.length, completed:0, attempts:0, firstCorrect:0, seen:[], current:null, feedback:null};
 }
 export function isLearnAnswerCorrect(question,choice){
+  if(question.type==='multi')return Array.isArray(choice)&&choice.length===question.answers.length&&new Set(choice).size===choice.length&&choice.every(answer=>question.answers.includes(answer));
   if(typeof choice!=='string')return false;
   const written=question.type==='written'||question.options.length<2;
   const clean=text=>text.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.!?]+$/,'');
   return written?clean(choice)===clean(question.answer):choice===question.answer;
 }
+export function isAnswerProvided(question,value){
+  return question.type==='multi'?Array.isArray(value)&&value.length>0:typeof value==='string'&&Boolean(value.trim());
+}
 export function answerQuestion(round, choice) {
   if (!round.current || round.feedback) return false;
   const id = round.queue[0], correct = isLearnAnswerCorrect(round.current,choice);
-  const written=round.current.type==='written'||round.current.options.length<2;
-  if(typeof choice!=='string'||!choice.trim()||(!written&&!round.current.options.includes(choice)))return false;
+  if(round.current.type==='multi'){
+    if(!Array.isArray(choice)||!choice.length||new Set(choice).size!==choice.length||choice.some(answer=>!round.current.options.includes(answer)))return false;
+  }else{
+    const written=round.current.type==='written'||round.current.options.length<2;
+    if(typeof choice!=='string'||!choice.trim()||(!written&&!round.current.options.includes(choice)))return false;
+  }
   round.attempts++;
   if (!round.seen.includes(id)) {round.seen.push(id);if(correct)round.firstCorrect++;}
-  round.feedback = {choice, correct};
+  round.feedback = {choice:Array.isArray(choice)?[...choice]:choice, correct};
   return true;
 }
 export function advanceRound(round) {
@@ -59,5 +79,6 @@ export function advanceRound(round) {
   if (correct) round.completed++;
   else round.queue.push(id);
   round.current=null;round.feedback=null;
+  delete round.selection;
   return correct ? id : null;
 }

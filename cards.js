@@ -15,7 +15,20 @@ export function parseCards(text) {
   }
   if (!cards.length) throw new Error('The collection has no cards.');
   return cards.map((card, index) => {
-    if (typeof card.term !== 'string' || typeof card.definition !== 'string' || !card.term.trim() || !card.definition.trim()) throw new Error(`Card ${index + 1} needs both a term and a definition.`);
+    if (!card || typeof card.term !== 'string' || typeof card.definition !== 'string' || !card.term.trim() || !card.definition.trim()) throw new Error(`Card ${index + 1} needs both a term and a definition.`);
+    if (card.type === 'multi') {
+      if (!Array.isArray(card.answers) || card.answers.some(answer => typeof answer !== 'string' || !answer.trim())) throw new Error(`Card ${index + 1} needs at least two different answers for Select all.`);
+      const answers = [...new Set(card.answers.map(answer => answer.trim()))];
+      if (answers.length < 2) throw new Error(`Card ${index + 1} needs at least two different answers for Select all.`);
+      const result = {term:card.term.trim(),definition:answers.join('\n'),type:'multi',answers};
+      if (card.options !== undefined) {
+        if (!Array.isArray(card.options) || card.options.some(option => typeof option !== 'string' || !option.trim())) throw new Error(`Card ${index + 1} has invalid Select all options.`);
+        const options = [...new Set(card.options.map(option => option.trim()))];
+        if (answers.some(answer => !options.includes(answer))) throw new Error(`Card ${index + 1} must include every answer in its Select all options.`);
+        result.options = options;
+      }
+      return result;
+    }
     return {term:card.term.trim(),definition:card.definition.trim()};
   });
 }

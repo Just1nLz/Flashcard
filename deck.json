@@ -7,40 +7,44 @@
       "definition": "Technology has no ethics"
     },
     {
-      "term": "In the video regarding the paper \"What is Computer Ethics\" by James Moore, which statement below is the most accurate? Computer ethics is about right and wrong behavior as defined by local laws. Computer ethics is about the social impact of computer technology and the ethical use of such Computer ethics is about computer security. Computer ethics is about right and wrong behavior as defined by a person's religion.",
-      "definition": "Computer ethics is about the social impact of computer technology and the ethical use of such tech"
+      "term": "In the video regarding the paper \"What is Computer Ethics\" by James Moore, which statements below are correct? Select all that apply.",
+      "definition": "Computer ethics is about the social impact of computer technology and the ethical use of such tech\nComputer technology has transformed our definition of traditional work as \"work\" is no longer something that happens at a specific time or specific place.",
+      "type": "multi",
+      "answers": [
+        "Computer ethics is about the social impact of computer technology and the ethical use of such tech",
+        "Computer technology has transformed our definition of traditional work as \"work\" is no longer something that happens at a specific time or specific place."
+      ]
     },
     {
-      "term": "\"What is Computer Ethics\" by James Moore, which statement below is the most accurate? Executives that work from home gain spontaneous interaction with colleagues because of handheld devices. Computer technology has made money more accessible, but has not redefined what money is. Computer technology is rigid, fixed, and not mealleable, which leads to abuse of the user. Computer technology has transformed our definition of traditional work as \"work\" is no longer something that happens at a specific time or specific place.",
-      "definition": "Computer technology has transformed our definition of traditional work as \"work\" is no longer something that happens at a specific time or specific place."
-    },
-    {
-      "term": "\"Computer Ethics: Basic Concepts and Historical Overview\" by Terrell Ward Bynum, which statement below is the most accurate? The field of Computer Ethics began after the first recorded network intrusion at the Flagger Dog Track in the state of Floida (USA). The field of Computer Ethics is partially a response to the development of an antiaircraft cannon capable of shooting down fast warplanes. Computer technology has made money more accessible, but has not redefined what money is. Unlinke the Industrial Revolution, computer technology is not transforming society.",
-      "definition": "The field of Computer Ethics is partially a response to the development of an antiaircraft cannon capable of shooting down fast warplanes."
-    },
-    {
-      "term": "\"Computer Ethics: Basic Concepts and Historical Overview\" by Terrell Ward Bynum, which statement below is the most accurate? Although it is possible to own the source code, object code (machine language), and algorithm assosciated with a computer program, it is not possible to own the \"look and feel\" of a program. According to US law, it not is possible for a person to own a patent on a computer algorithm and prevent others from using it. Computer technology may cause \"de-skilling\" by replacing human skill with computer technology. In the long run, computer technology will eliminate more jobs than it creates.",
-      "definition": "Computer technology may cause \"de-skilling\" by replacing human skill with computer technology."
+      "term": "\"Computer Ethics: Basic Concepts and Historical Overview\" by Terrell Ward Bynum, which statements below are correct? Select all that apply.",
+      "definition": "The field of Computer Ethics is partially a response to the development of an antiaircraft cannon capable of shooting down fast warplanes.\nComputer technology may cause \"de-skilling\" by replacing human skill with computer technology.",
+      "type": "multi",
+      "answers": [
+        "The field of Computer Ethics is partially a response to the development of an antiaircraft cannon capable of shooting down fast warplanes.",
+        "Computer technology may cause \"de-skilling\" by replacing human skill with computer technology."
+      ]
     },
     {
       "term": "In the video \"Ethics in the Age of Technology\" by Juan Enriquez, which of the following statements is the most correct? Doctor J. Marion Sims is regarded as one of the first Doctors to suggest slavery is unethical and should be abolished. Defining who teaches us ethics is difficult because sometimes our traditional sources of guidance like holy books, parents, religious leaders, teachers, lawyers, doctors, and the government provide incorrect information. Baptist Pastor Richard Furman is regarded as one of the first religious leaders to speak out about the abolishment of slavery. Lawyer Thomas Cooper, in his \"1826 pamphlets,\" is regarded as one the first Lawyers to suggest slavery is unethical.",
       "definition": "Defining who teaches us ethics is difficult because sometimes our traditional sources of guidance like holy books, parents, religious leaders, teachers, lawyers, doctors, and the government provide incorrect information."
     },
     {
-      "term": "\"Interaction Between Ethics and Technology\" by Shakib and Layton, which statement below is the most correct?",
-      "definition": "Consumers are having an impact on businesses by supporting those businesses that they believe are morally sound, and thereby making it more difficult for an unethical business to survive."
+      "term": "\"Interaction Between Ethics and Technology\" by Shakib and Layton, which statements below are correct? Select all that apply.",
+      "definition": "Consumers are having an impact on businesses by supporting those businesses that they believe are morally sound, and thereby making it more difficult for an unethical business to survive.\nThere is no universal ethics.",
+      "type": "multi",
+      "answers": [
+        "Consumers are having an impact on businesses by supporting those businesses that they believe are morally sound, and thereby making it more difficult for an unethical business to survive.",
+        "There is no universal ethics."
+      ]
     },
     {
-      "term": "\"Interaction Between Ethics and Technology\" by Shakib and Layton, which statement below is the most accurate?",
-      "definition": "There is no universal ethics."
-    },
-    {
-      "term": "\"Multimedia, Cyberspace, and Ethics\" by Jefferies, which statement below is the most accurate?",
-      "definition": "It is not easy to regulate the Internet because it is a global network without any boundaries."
-    },
-    {
-      "term": "\"Multimedia, Cyberspace, and Ethics\" by Jefferies, which statement below is the most accurate? Bill Gates stated he felt a personal responsibility to build an Internet that is ethical. Deep Fake technology allows one to fake one's fingerprints and frame someone for a crime they did not commit. Deep Fake technology creates an ethical issue by allowing a victim's appearance to be faked in a video, appearing to be doing whatever the Deep Fake developer wants. The Internet is a major contribution to cultural diversity.",
-      "definition": "Deep Fake technology creates an ethical issue by allowing a victim's appearance to be faked in a video, appearing to be doing whatever the Deep Fake developer wants."
+      "term": "\"Multimedia, Cyberspace, and Ethics\" by Jefferies, which statements below are correct? Select all that apply.",
+      "definition": "It is not easy to regulate the Internet because it is a global network without any boundaries.\nDeep Fake technology creates an ethical issue by allowing a victim's appearance to be faked in a video, appearing to be doing whatever the Deep Fake developer wants.",
+      "type": "multi",
+      "answers": [
+        "It is not easy to regulate the Internet because it is a global network without any boundaries.",
+        "Deep Fake technology creates an ethical issue by allowing a victim's appearance to be faked in a video, appearing to be doing whatever the Deep Fake developer wants."
+      ]
     },
     {
       "term": "\"The Social Dilemma of Driverless Cars\" by Iyad Rahwan, what was the suggestion provided by a blogger? Cars should be equipped with a \"people catcher\" (like a \"cow catcher\" on the front of trains) that push people gently out of the way when the driver loses control of the car. The driver of the car should push an eject button just before impact to avoid being killed in a car accident. Cars should be made out of soft spongy material (the \"Nurf car\") to help reduce deaths in the case of accidents. All drivers should wear helmets and other safety gear to help them survive what would normally be a deadly crash.",
@@ -55,12 +59,13 @@
       "definition": "We need a car that provides more information to the user so the user can be a better driver."
     },
     {
-      "term": "\"Automated Detect and Avoid\" by Erik Theunissen and others, which of the following statements is the most correct? An ethical issue arises because writing code involves a degree of premeditation regarding how a robot car will act. Algorithm developers and programmers are forgiven for accidents because everyone knows computer code is imperfect. We should code human behavior because human situations are simple and easy to program. When a human acts without deliberation, they are ethically responsible to the same degree as a programmer making premeditated decisions for a robot car.",
-      "definition": "An ethical issue arises because writing code involves a degree of premeditation regarding how a robot car will act."
-    },
-    {
-      "term": "\"Automated Detect and Avoid\" by Erik Theunissen and others, which of the following statements is the most correct? Current data supports the claim that self-driving cars have resulted in a reduction in the number of accidents. When it comes to programming automated detect and avoid algorithms, human values and judgments do not become part of the code. Current data does not support the claim that self-driving cars have resulted in a reduction in the number of accidents. When it comes to programming automated detect and avoid algorithms, it is best to replace all human judgment with algorithms as algorithms can be perfected to respond correctly in all situations",
-      "definition": "Current data does not support the claim that self-driving cars have resulted in a reduction in the number of accidents.q"
+      "term": "\"Automated Detect and Avoid\" by Erik Theunissen and others, which of the following statements are correct? Select all that apply.",
+      "definition": "An ethical issue arises because writing code involves a degree of premeditation regarding how a robot car will act.\nCurrent data does not support the claim that self-driving cars have resulted in a reduction in the number of accidents.",
+      "type": "multi",
+      "answers": [
+        "An ethical issue arises because writing code involves a degree of premeditation regarding how a robot car will act.",
+        "Current data does not support the claim that self-driving cars have resulted in a reduction in the number of accidents."
+      ]
     },
     {
       "term": "\"Right Wrong: How Technology Transforms our Ethics\" (see the PowerPoint slides provided with the course material), ethics does not change over time. T/F",
@@ -83,12 +88,13 @@
       "definition": "left to right."
     },
     {
-      "term": "\"Ethics and Safety of Computer Systems,\" which of the following statements is the most correct? The main issue is regarding the responsibility for computer failures in critical systems. Proving computer systems are correct is easy and therefore we should always prove them correct before allowing the public to use them. Because the 'Computer Medical Assistant' is error free, medical personnel are unethical if they do not follow the suggestion provided by this service. The main issue is regarding the proper use of critical systems by the non-computer scientist.",
-      "definition": "The main issue is regarding the responsibility for computer failures in critical systems."
-    },
-    {
-      "term": "\"Ethics and Safety of Computer Systems,\" which of the following statements is the most correct? Computer professionals do not ignore important human issues when designing and implementing computer technology. A point was made that it is easy for people to not use technology. People use technology that is \"unjustifiably risky\" because they have sufficient knowledge of how risky technology is. A point was made that maybe Computer Scientists should take an oath to 'do no harm.'",
-      "definition": "A point was made that maybe Computer Scientists should take an oath to 'do no harm.'"
+      "term": "\"Ethics and Safety of Computer Systems,\" which of the following statements are correct? Select all that apply.",
+      "definition": "The main issue is regarding the responsibility for computer failures in critical systems.\nA point was made that maybe Computer Scientists should take an oath to 'do no harm.'",
+      "type": "multi",
+      "answers": [
+        "The main issue is regarding the responsibility for computer failures in critical systems.",
+        "A point was made that maybe Computer Scientists should take an oath to 'do no harm.'"
+      ]
     },
     {
       "term": "\"When Formal Systems Kill,\" what is a \"formal system\"? A formal system uses a grammar for encoding logic and states such that a given conclusion follows from a given premise. A formal system requires less time, less money, and less complexity to verify it is correct. A formal system is one that is proven correct through testing. A formal system is computer code that cannot be proven correct.",
@@ -119,8 +125,13 @@
       "definition": "There are many ways to define privacy including solitude, maintaining control over personal data, and the right to not being monitored."
     },
     {
-      "term": "\"Ethics and Safety of Computer Systems\" by Michael C. McFarland, which of the following statements is the most correct? Normative ethics recognizes that values and choices are expressed in individual actions, and are emobodied effectively in social structure. Normative ethics asks what kind of person does the right thing. Normative ethics seeks to develop and justify rules for right conduct. Normative ethics asks what social structures are needed to support values such as justice and respect for human life and dignity.",
-      "definition": "Normative ethics seeks to develop and justify rules for right conduct."
+      "term": "\"Ethics and Safety of Computer Systems\" by Michael C. McFarland, which of the following statements are correct? Select all that apply.",
+      "definition": "Normative ethics seeks to develop and justify rules for right conduct.\nEthics of virtue asks what kind of person does the right thing.",
+      "type": "multi",
+      "answers": [
+        "Normative ethics seeks to develop and justify rules for right conduct.",
+        "Ethics of virtue asks what kind of person does the right thing."
+      ]
     },
     {
       "term": "Normative ethics",
@@ -135,16 +146,24 @@
       "definition": "asks what kind of person does the right thing"
     },
     {
-      "term": "\"Ethics and Safety of Computer Systems\" by Michael C. McFarland, which of the following statements is the most correct? Ethics of virtue asks what kind of person does the right thing. Ethics of virtue asks what social structures are needed to support values such as justice and respect for human life and dignity. Ethics of virtue recognizes that values and choices are expressed in individual actions, and are emobodied effectively in social structure. Ethics of virtue seeks to develop and justify rules for right conduc",
-      "definition": "Ethics of virtue asks what kind of person does the right thing."
-    },
-    {
       "term": "Ethics and Safety of Computer Systems\" by Michael C. McFarland, which? Social ethics asks what social structures are needed to support values such as justice and respect for human life and dignity. Social ethics seeks to foster and promote knowledge. Social ethics seeks to develop and justify rules for right conduct. Social ethics asks what kind of person does the right thing.",
       "definition": "Social ethics asks what social structures are needed to support values such as justice and respect for human life and dignity."
     },
     {
-      "term": "\"When Formal Systems Kill\" by Darren Abramson and others, what are the challenges to formal methods? Select ALL that apply. Computer code cannot be proven correct. How to mechanically check the correctness of mathematical proofs. How to automate methematical proofs. How to mathematically model formal systems and their environments.",
-      "definition": "How to mechanically check the correctness of mathematical proofs. How to automate methematical proofs. How to mathematically model formal systems and their environments."
+      "term": "\"When Formal Systems Kill\" by Darren Abramson and others, what are the challenges to formal methods? Select all that apply.",
+      "definition": "How to mechanically check the correctness of mathematical proofs.\nHow to automate methematical proofs.\nHow to mathematically model formal systems and their environments.",
+      "type": "multi",
+      "answers": [
+        "How to mechanically check the correctness of mathematical proofs.",
+        "How to automate methematical proofs.",
+        "How to mathematically model formal systems and their environments."
+      ],
+      "options": [
+        "Computer code cannot be proven correct.",
+        "How to mechanically check the correctness of mathematical proofs.",
+        "How to automate methematical proofs.",
+        "How to mathematically model formal systems and their environments."
+      ]
     },
     {
       "term": "\"When Formal Systems Kill\" by Darren Abramson and others, one of the points being made is both proof and testing are needed to support good software code. True False",
@@ -167,8 +186,20 @@
       "definition": "True"
     },
     {
-      "term": "\"Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, what does Durlak include in his list of basic rights regarding privacy? Select all that apply. intimacy solitude iron cage reserve",
-      "definition": "intimacy solitude reserve"
+      "term": "\"Privacy and Ethical Concerns in Internet Security\" by Rebecca and James Rutherfoord, what does Durlak include in his list of basic rights regarding privacy? Select all that apply.",
+      "definition": "intimacy\nsolitude\nreserve",
+      "type": "multi",
+      "answers": [
+        "intimacy",
+        "solitude",
+        "reserve"
+      ],
+      "options": [
+        "intimacy",
+        "solitude",
+        "iron cage",
+        "reserve"
+      ]
     },
     {
       "term": "what did Mark Zuckerberg say might be \"more relevant to your interests right now than people dying in Africa\"? Information about one's favorite musical artist. The happiness and status of one's own family. The happiness and status of one's own friends. A squirrel dying in your front yard.",
@@ -227,20 +258,22 @@
       "definition": "Professor Sweeney sent the Governor his medical records as a demonstration that the Governor could be identified by cross-referencing his medical records with public voter registration data."
     },
     {
-      "term": "In the video regarding the paper \"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, what does the author suggest? The author suggests users should use a \"password wallet\" to store all of their passwords. The author suggests passwords should be in different formats, for different devices. The author suggests users should have one password and not many. The author suggests users should change their passwords frequently.",
-      "definition": "The author suggests users should have one password and not many."
+      "term": "In the video regarding the paper \"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, what does the author suggest? Select all that apply.",
+      "definition": "The author suggests users should have one password and not many.\nThe author suggests passwords should be of an unlimited length.",
+      "type": "multi",
+      "answers": [
+        "The author suggests users should have one password and not many.",
+        "The author suggests passwords should be of an unlimited length."
+      ]
     },
     {
-      "term": "\"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, what does the author suggest? The author suggests Microsoft Passport is the best solution for maintaining secure passwords. The author suggests passwords should be of an unlimited length. The author suggests more complex rules are needed to control the generation of secure passwords. The author suggests computer systems should restrict password formats to make programming more convenient.",
-      "definition": "The author suggests passwords should be of an unlimited length."
-    },
-    {
-      "term": "\"The Ethics of Collecting Data\" with Marie Wallace, what does the speaker suggest? The speaker suggests we can put an end to big data collection and we should. The speaker suggests users should be paid for giving up personal data. The speaker suggests social media can raise your concern about your own body issues and then exposed you to diet products to generate sales. The speaker suggests users should not give up personal data to support product marketing.",
-      "definition": "The speaker suggests social media can raise your concern about your own body issues and then exposed you to diet products to generate sales."
-    },
-    {
-      "term": "\"The Ethics of Collecting Data\" with Marie Wallace, what does the speaker suggest? The speaker suggests transparency can exist in personal data collection by businesses and customers voluntarily give up their data. The speaker suggests we should enact laws immediately to stop personal data collection because it will be considerably worse for the next generations. The speaker suggests there is no way to embrace personal privacy while also supporting personal data collection by businesses. The speaker suggests 'big data' collection cannot be done in a transparent way such that customers voluntarily give up their data.",
-      "definition": "The speaker suggests transparency can exist in personal data collection by businesses and customers voluntarily give up their data."
+      "term": "\"The Ethics of Collecting Data\" with Marie Wallace, what does the speaker suggest? Select all that apply.",
+      "definition": "The speaker suggests social media can raise your concern about your own body issues and then exposed you to diet products to generate sales.\nThe speaker suggests transparency can exist in personal data collection by businesses and customers voluntarily give up their data.",
+      "type": "multi",
+      "answers": [
+        "The speaker suggests social media can raise your concern about your own body issues and then exposed you to diet products to generate sales.",
+        "The speaker suggests transparency can exist in personal data collection by businesses and customers voluntarily give up their data."
+      ]
     },
     {
       "term": "In an environment where a user has numerous accounts with different passwords, a lockout is a powerful incentive to write down a list of those passwords rather than guess at them when trying to log in. T/F",
@@ -251,8 +284,21 @@
       "definition": "F"
     },
     {
-      "term": "\"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, which of the following does he suggest are the role of the computer scientist? Select all that apply. Reduce lockouts Modify the lifetime limits Make password management easier for the user Allow a user to have much longer passwords, of a universal format",
-      "definition": "All"
+      "term": "\"Choosing Passwords: Security and Human Factors\" by Edward Gehringer, which of the following does he suggest are the role of the computer scientist? Select all that apply.",
+      "definition": "Reduce lockouts\nModify the lifetime limits\nMake password management easier for the user\nAllow a user to have much longer passwords, of a universal format",
+      "type": "multi",
+      "answers": [
+        "Reduce lockouts",
+        "Modify the lifetime limits",
+        "Make password management easier for the user",
+        "Allow a user to have much longer passwords, of a universal format"
+      ],
+      "options": [
+        "Reduce lockouts",
+        "Modify the lifetime limits",
+        "Make password management easier for the user",
+        "Allow a user to have much longer passwords, of a universal format"
+      ]
     },
     {
       "term": "Maintaining password security involves striking a delicate balance between having enough rules to maintain good security and not having so many that users will take evasive action that compromises security. T/F",
@@ -263,40 +309,55 @@
       "definition": "The true identity of the 'gay girl in Damascus' is actually a male American student studying abroad."
     },
     {
-      "term": "\"Ethic in Massively Multiplayer Online Role-Playing Games,\" which of the following statements is the most accurate? Ninja looting is the process of killing a character a second time as soon as that character regenerates. It is not possible to steal items from another person. Behaving unethically in a virtual world might lead to unethical behavior in the real world. Griefing and bullying are not abusive because it is occurring in virtual reality.",
-      "definition": "Behaving unethically in a virtual world might lead to unethical behavior in the real world."
+      "term": "\"Ethic in Massively Multiplayer Online Role-Playing Games,\" which of the following statements are correct? Select all that apply.",
+      "definition": "Behaving unethically in a virtual world might lead to unethical behavior in the real world.\nThe abuse in virtual reality games is real.",
+      "type": "multi",
+      "answers": [
+        "Behaving unethically in a virtual world might lead to unethical behavior in the real world.",
+        "The abuse in virtual reality games is real."
+      ]
     },
     {
       "term": "griefing",
       "definition": "Bullying or harassment of players while playing online games."
     },
     {
-      "term": "\"Ethic in Massively Multiplayer Online Role-Playing Games,\" which of the following statements is the most accurate? The abuse in virtual reality games is not real. There is no chance for any real monetary damage. The abuse in virtual reality games is real. Games do not help individuals learn good and bad behavior.",
-      "definition": "The abuse in virtual reality games is real."
-    },
-    {
-      "term": "\"An Ethical Examination of the Internet Census 2012 Dataset - A Menlo Report Case Study,\" which of the following statements is the most accurate? Students at Menlo College were involved in a very large cheating scandal. A central point is that commercial products that are accessible from the Internet should not be sold with a default password. Participants that answered questions found in the Internet Census are unethical for not providing honest answers. Students and Menlo University developed password cracking software that allowed them to enter devices connected to the Internet.",
-      "definition": "A central point is that commercial products that are accessible from the Internet should not be sold with a default password."
-    },
-    {
-      "term": "An Ethical Examination of the Internet Census 2012 Dataset - A Menlo Report Case Study,\" which of the following statements is the most accurate? Because there was such an outcry about the unethical behavior in the creation of the Internet Census 2012 Dataset, other researchers are discouraged from similar activity. The author suggests there should be more public outcry regarding the unethical behavior exhibited in the creation of the Internet Census 2012 Dataset. The German Penal Code considers a person's \"good intent\" when deciding if a law has been broken. There is nothing unethical about using default passwords to enter a network that is intended to be locked.",
-      "definition": "The author suggests there should be more public outcry regarding the unethical behavior exhibited in the creation of the Internet Census 2012 Dataset."
+      "term": "\"An Ethical Examination of the Internet Census 2012 Dataset - A Menlo Report Case Study,\" which of the following statements are correct? Select all that apply.",
+      "definition": "A central point is that commercial products that are accessible from the Internet should not be sold with a default password.\nThe author suggests there should be more public outcry regarding the unethical behavior exhibited in the creation of the Internet Census 2012 Dataset.",
+      "type": "multi",
+      "answers": [
+        "A central point is that commercial products that are accessible from the Internet should not be sold with a default password.",
+        "The author suggests there should be more public outcry regarding the unethical behavior exhibited in the creation of the Internet Census 2012 Dataset."
+      ]
     },
     {
       "term": "\"Cyber War,\" which of the following statements is the most accurate? The speaker stated experienced hackers are recruited at the Def Con Hacking Conference in Las Vegas, NV almost every year. Logic bombs have been placed in the power grid of the United States. Cyber-attacks do not cause destruction in physical space, so cyber war is considered ethical. The Federal Bureau of Investigation in the United States engages in Cyber War against hackers in other countries.",
       "definition": "Logic bombs have been placed in the power grid of the United States."
     },
     {
-      "term": "\"An Analysis of a Just Cyber Warfare,\" which of the following statements in the most accurate? The Just War Theory is inadequate for evaluating the ethicalness of cyber warfare. Floridi states 'information does not have a right to exist,' and therefore cyber warfare is not unethical. The Just War Theory states cyber warfare is unethical. Floridi states 'information does not have a right to exist,' and this is the foundation of a Just Cyber Warfare Theory.",
-      "definition": "The Just War Theory is inadequate for evaluating the ethicalness of cyber warfare."
+      "term": "\"An Analysis of a Just Cyber Warfare,\" which of the following statements are correct? Select all that apply.",
+      "definition": "The Just War Theory is inadequate for evaluating the ethicalness of cyber warfare.\nFloridi states 'information has a right to exist,' and therefore cyber warfare that destroys information is unethical.",
+      "type": "multi",
+      "answers": [
+        "The Just War Theory is inadequate for evaluating the ethicalness of cyber warfare.",
+        "Floridi states 'information has a right to exist,' and therefore cyber warfare that destroys information is unethical."
+      ]
     },
     {
-      "term": "\"An Analysis of a Just Cyber Warfare,\" which of the following statements in the most accurate? A principle of Just Cyber Warfare is that a Cyber War should be waged to promote the well-being of the infosphere. When addressing Cyber Warfare, the Just War Theory cannot be applied and should be rejected altogether. Floridi states 'information has a right to exist,' and therefore cyber warfare that destroys information is unethical. Cyber Warfare makes the Just War Theory invalid.",
-      "definition": "Floridi states 'information has a right to exist,' and therefore cyber warfare that destroys information is unethical."
-    },
-    {
-      "term": "According to the paper regarding \"Ethic in Massively Multiplayer Online Role-Playing Games,\" what are the primary means by which playing games help guide moral development? Select all that apply. Defning good and bad behavior. Learning a system of rules. Practice following rules. Developing poor social skills",
-      "definition": "Defning good and bad behavior. Learning a system of rules. Practice following rules."
+      "term": "According to the paper regarding \"Ethic in Massively Multiplayer Online Role-Playing Games,\" what are the primary means by which playing games help guide moral development? Select all that apply.",
+      "definition": "Defning good and bad behavior.\nLearning a system of rules.\nPractice following rules.",
+      "type": "multi",
+      "answers": [
+        "Defning good and bad behavior.",
+        "Learning a system of rules.",
+        "Practice following rules."
+      ],
+      "options": [
+        "Defning good and bad behavior.",
+        "Learning a system of rules.",
+        "Practice following rules.",
+        "Developing poor social skills"
+      ]
     },
     {
       "term": "An investigation done by Coyne (as cited in Ethic in Massively Multiplayer Online Role-Playing Games) finds that online griefing has a similar impact as traditional bullying. True False",
@@ -335,20 +396,22 @@
       "definition": "Facebook demonstrated they could manipulate people's emotions by showing mostly negative or mostly positive posts in people's Facebook data feed."
     },
     {
-      "term": "Regarding the video about \"Ethics in Security Research. Which Lines Should Not be Crossed?,\" which of the following statements is the most correct? Developing anti-malware that eliminates some existing malware but also harms a small group of people is an acceptable trade-off. Developing malware and allowing it to operate in the wild is ethical because it is the only way we can learn about malware. Because spam is never harmful, observing spam in the wild and not warning the recipient is one of the few acceptable security research activities. Developing malware to study user infection numbers and malware dissemination strategies is a bad idea.",
-      "definition": "Developing malware to study user infection numbers and malware dissemination strategies is a bad idea."
+      "term": "Regarding the video about \"Ethics in Security Research. Which Lines Should Not be Crossed?,\" which of the following statements are correct? Select all that apply.",
+      "definition": "Developing malware to study user infection numbers and malware dissemination strategies is a bad idea.\nAbout 50% of the spam sent worldwide advertise medicine/pharmaceutical products which are to a large percent counterfeited and a major health threat.",
+      "type": "multi",
+      "answers": [
+        "Developing malware to study user infection numbers and malware dissemination strategies is a bad idea.",
+        "About 50% of the spam sent worldwide advertise medicine/pharmaceutical products which are to a large percent counterfeited and a major health threat."
+      ]
     },
     {
-      "term": "Regarding the video about \"Ethics in Security Research. Which Lines Should Not be Crossed?,\" which of the following statements is the most correct? Developing anti-malware is unethical because it is not ethical to be unethical to the unethical. The biggest threat from spam is that it is a nuisance. About 50% of the spam sent worldwide advertise medicine/pharmaceutical products which are to a large percent counterfeited and a major health threat. It is actually cheaper to engage in ethical research rather than unethical research, so switching to ethical research should be easy.",
-      "definition": "About 50% of the spam sent worldwide advertise medicine/pharmaceutical products which are to a large percent counterfeited and a major health threat."
-    },
-    {
-      "term": "Regarding the video about the paper on \"Research Ethics in Human-Computer Interaction,\" which of the following statements is the most accurate? There is a concern that robots might injure a person if robots engage in activities such as caring for the elderly. It is not a violation of a research subject's privacy if they are not aware of their data being collected during the research process. Research subjects should not be allowed to withdraw from research once they have volunteered to be a research subject. Conducting secret research on a human subject is ethical as long as the human subject is informed of the research after it is completed.",
-      "definition": "There is a concern that robots might injure a person if robots engage in activities such as caring for the elderly."
-    },
-    {
-      "term": "\"Research Ethics in Human-Computer Interaction,\" which of the following statements is the most accurate? Researchers do not need to concerned about cultural differences among the participants. It is not necessary to accommodate a research subject's basic need to be free to move during the research. Researchers need to be careful regarding how recording technology might make the subject feel uncomfortable. Researchers do not need to be open about the data that is collected during the research.",
-      "definition": "Researchers need to be careful regarding how recording technology might make the subject feel uncomfortable."
+      "term": "Regarding the video about the paper on \"Research Ethics in Human-Computer Interaction,\" which of the following statements are correct? Select all that apply.",
+      "definition": "There is a concern that robots might injure a person if robots engage in activities such as caring for the elderly.\nResearchers need to be careful regarding how recording technology might make the subject feel uncomfortable.",
+      "type": "multi",
+      "answers": [
+        "There is a concern that robots might injure a person if robots engage in activities such as caring for the elderly.",
+        "Researchers need to be careful regarding how recording technology might make the subject feel uncomfortable."
+      ]
     },
     {
       "term": "size of a screen display might be a source of bias as it influences what can be seen of the first page. True False",
@@ -371,12 +434,532 @@
       "definition": "False"
     },
     {
-      "term": "Which of the following research topics have the potential to expose real people to harm? Select all that apply. credit card fraud spam viruses botnet",
-      "definition": "all"
+      "term": "Which of the following research topics have the potential to expose real people to harm? Select all that apply.",
+      "definition": "credit card fraud\nspam\nviruses\nbotnet",
+      "type": "multi",
+      "answers": [
+        "credit card fraud",
+        "spam",
+        "viruses",
+        "botnet"
+      ],
+      "options": [
+        "credit card fraud",
+        "spam",
+        "viruses",
+        "botnet"
+      ]
     },
     {
       "term": "One abuse that can take place during research is 'secret data collection' in which the participant is unaware of the data that is being collected about them of their computer device(s). True False",
       "definition": "True"
     }
-  ]
+  ],
+  "originalCardCount": 94,
+  "cardCount": 80,
+  "sourceCardGroups": [
+    {
+      "card": 1,
+      "sourceCards": [
+        1
+      ]
+    },
+    {
+      "card": 2,
+      "sourceCards": [
+        2,
+        3
+      ]
+    },
+    {
+      "card": 3,
+      "sourceCards": [
+        4,
+        5
+      ]
+    },
+    {
+      "card": 4,
+      "sourceCards": [
+        6
+      ]
+    },
+    {
+      "card": 5,
+      "sourceCards": [
+        7,
+        8
+      ]
+    },
+    {
+      "card": 6,
+      "sourceCards": [
+        9,
+        10
+      ]
+    },
+    {
+      "card": 7,
+      "sourceCards": [
+        11
+      ]
+    },
+    {
+      "card": 8,
+      "sourceCards": [
+        12
+      ]
+    },
+    {
+      "card": 9,
+      "sourceCards": [
+        13
+      ]
+    },
+    {
+      "card": 10,
+      "sourceCards": [
+        14,
+        15
+      ]
+    },
+    {
+      "card": 11,
+      "sourceCards": [
+        16
+      ]
+    },
+    {
+      "card": 12,
+      "sourceCards": [
+        17
+      ]
+    },
+    {
+      "card": 13,
+      "sourceCards": [
+        18
+      ]
+    },
+    {
+      "card": 14,
+      "sourceCards": [
+        19
+      ]
+    },
+    {
+      "card": 15,
+      "sourceCards": [
+        20
+      ]
+    },
+    {
+      "card": 16,
+      "sourceCards": [
+        21,
+        22
+      ]
+    },
+    {
+      "card": 17,
+      "sourceCards": [
+        23
+      ]
+    },
+    {
+      "card": 18,
+      "sourceCards": [
+        24
+      ]
+    },
+    {
+      "card": 19,
+      "sourceCards": [
+        25
+      ]
+    },
+    {
+      "card": 20,
+      "sourceCards": [
+        26
+      ]
+    },
+    {
+      "card": 21,
+      "sourceCards": [
+        27
+      ]
+    },
+    {
+      "card": 22,
+      "sourceCards": [
+        28
+      ]
+    },
+    {
+      "card": 23,
+      "sourceCards": [
+        29
+      ]
+    },
+    {
+      "card": 24,
+      "sourceCards": [
+        30,
+        34
+      ]
+    },
+    {
+      "card": 25,
+      "sourceCards": [
+        31
+      ]
+    },
+    {
+      "card": 26,
+      "sourceCards": [
+        32
+      ]
+    },
+    {
+      "card": 27,
+      "sourceCards": [
+        33
+      ]
+    },
+    {
+      "card": 28,
+      "sourceCards": [
+        35
+      ]
+    },
+    {
+      "card": 29,
+      "sourceCards": [
+        36
+      ]
+    },
+    {
+      "card": 30,
+      "sourceCards": [
+        37
+      ]
+    },
+    {
+      "card": 31,
+      "sourceCards": [
+        38
+      ]
+    },
+    {
+      "card": 32,
+      "sourceCards": [
+        39
+      ]
+    },
+    {
+      "card": 33,
+      "sourceCards": [
+        40
+      ]
+    },
+    {
+      "card": 34,
+      "sourceCards": [
+        41
+      ]
+    },
+    {
+      "card": 35,
+      "sourceCards": [
+        42
+      ]
+    },
+    {
+      "card": 36,
+      "sourceCards": [
+        43
+      ]
+    },
+    {
+      "card": 37,
+      "sourceCards": [
+        44
+      ]
+    },
+    {
+      "card": 38,
+      "sourceCards": [
+        45
+      ]
+    },
+    {
+      "card": 39,
+      "sourceCards": [
+        46
+      ]
+    },
+    {
+      "card": 40,
+      "sourceCards": [
+        47
+      ]
+    },
+    {
+      "card": 41,
+      "sourceCards": [
+        48
+      ]
+    },
+    {
+      "card": 42,
+      "sourceCards": [
+        49
+      ]
+    },
+    {
+      "card": 43,
+      "sourceCards": [
+        50
+      ]
+    },
+    {
+      "card": 44,
+      "sourceCards": [
+        51
+      ]
+    },
+    {
+      "card": 45,
+      "sourceCards": [
+        52
+      ]
+    },
+    {
+      "card": 46,
+      "sourceCards": [
+        53
+      ]
+    },
+    {
+      "card": 47,
+      "sourceCards": [
+        54
+      ]
+    },
+    {
+      "card": 48,
+      "sourceCards": [
+        55
+      ]
+    },
+    {
+      "card": 49,
+      "sourceCards": [
+        56
+      ]
+    },
+    {
+      "card": 50,
+      "sourceCards": [
+        57,
+        58
+      ]
+    },
+    {
+      "card": 51,
+      "sourceCards": [
+        59,
+        60
+      ]
+    },
+    {
+      "card": 52,
+      "sourceCards": [
+        61
+      ]
+    },
+    {
+      "card": 53,
+      "sourceCards": [
+        62
+      ]
+    },
+    {
+      "card": 54,
+      "sourceCards": [
+        63
+      ]
+    },
+    {
+      "card": 55,
+      "sourceCards": [
+        64
+      ]
+    },
+    {
+      "card": 56,
+      "sourceCards": [
+        65
+      ]
+    },
+    {
+      "card": 57,
+      "sourceCards": [
+        66,
+        68
+      ]
+    },
+    {
+      "card": 58,
+      "sourceCards": [
+        67
+      ]
+    },
+    {
+      "card": 59,
+      "sourceCards": [
+        69,
+        70
+      ]
+    },
+    {
+      "card": 60,
+      "sourceCards": [
+        71
+      ]
+    },
+    {
+      "card": 61,
+      "sourceCards": [
+        72,
+        73
+      ]
+    },
+    {
+      "card": 62,
+      "sourceCards": [
+        74
+      ]
+    },
+    {
+      "card": 63,
+      "sourceCards": [
+        75
+      ]
+    },
+    {
+      "card": 64,
+      "sourceCards": [
+        76
+      ]
+    },
+    {
+      "card": 65,
+      "sourceCards": [
+        77
+      ]
+    },
+    {
+      "card": 66,
+      "sourceCards": [
+        78
+      ]
+    },
+    {
+      "card": 67,
+      "sourceCards": [
+        79
+      ]
+    },
+    {
+      "card": 68,
+      "sourceCards": [
+        80
+      ]
+    },
+    {
+      "card": 69,
+      "sourceCards": [
+        81
+      ]
+    },
+    {
+      "card": 70,
+      "sourceCards": [
+        82
+      ]
+    },
+    {
+      "card": 71,
+      "sourceCards": [
+        83
+      ]
+    },
+    {
+      "card": 72,
+      "sourceCards": [
+        84,
+        85
+      ]
+    },
+    {
+      "card": 73,
+      "sourceCards": [
+        86,
+        87
+      ]
+    },
+    {
+      "card": 74,
+      "sourceCards": [
+        88
+      ]
+    },
+    {
+      "card": 75,
+      "sourceCards": [
+        89
+      ]
+    },
+    {
+      "card": 76,
+      "sourceCards": [
+        90
+      ]
+    },
+    {
+      "card": 77,
+      "sourceCards": [
+        91
+      ]
+    },
+    {
+      "card": 78,
+      "sourceCards": [
+        92
+      ]
+    },
+    {
+      "card": 79,
+      "sourceCards": [
+        93
+      ]
+    },
+    {
+      "card": 80,
+      "sourceCards": [
+        94
+      ]
+    }
+  ],
+  "auditedSourceUpgrades": [
+    15,
+    36,
+    42,
+    63,
+    74,
+    93
+  ],
+  "consolidationWarnings": []
 }

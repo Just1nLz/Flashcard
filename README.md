@@ -17,7 +17,7 @@ The development server listens on port 3000. For phone use, deploy the repositor
 
 ## Included study set
 
-All 94 numbered cards from the user-provided `quizlet.com_1223528877_print.pdf` are included in `deck.json` and loaded automatically on first use. The PDF is titled **Computer Ethics Final copy**, a different set ID from the originally linked Quizlet page. Questions include their original answer choices; answers follow the PDF, including source typos. This is a study copy, not independently fact-checked course material.
+All 94 original records from the user-provided `quizlet.com_1223528877_print.pdf` are preserved in `source-deck.json`. The consolidated `deck.json` contains 80 study cards and loads automatically on first use. The PDF is titled **Computer Ethics Final copy**, a different set ID from the originally linked Quizlet page. Answers follow the PDF; consolidated questions include all correct selections. Source-specific changes are documented in DATA-AUDIT.md. This is a study copy, not independently fact-checked course material.
 
 Extraction separates the PDF’s question and answer fonts and follows numbered card boundaries across page breaks, removing print headers, footers, and line-wrap hyphenation. Malformed PDF glyphs in words such as finds, griefing, WiFi, flights, identified, profile, influences, first, and fixed are restored for readability. Original spelling is otherwise preserved. Quizlet itself returned a proxy HTTP 403, so the provided PDF is the source.
 
@@ -45,13 +45,13 @@ Open `pocket-flashcards.zip` in this repository and choose **Download raw file**
 
 ## Deployment troubleshooting
 
-The generated `index.html` embeds its CSS, JavaScript, and all 94 cards so the design and study features do not depend on separate asset requests. Edit the page layout in `templates/index.html`, styles in `style.css`, and behavior in `app.js` / `learn.js`, then run `npm run build` to regenerate the bundled PDF reader, both HTML files, and the ZIP. Do not edit generated HTML directly.
+The generated `index.html` embeds its CSS, JavaScript, and all 80 study cards so the design and study features do not depend on separate asset requests. Edit the page layout in `templates/index.html`, styles in `style.css`, and behavior in `app.js` / `learn.js`, then run `npm run build` to regenerate the bundled PDF reader, both HTML files, and the ZIP. Do not edit generated HTML directly.
 
 For Netlify, upload the extracted ZIP folder with `index.html` at its top level, or connect this repository with publish directory `.` (no build command needed because generated files are committed). Upload the whole folder to retain Home Screen icons, the manifest, and offline installation. If an old deployment appears after updating, close the app tabs and reopen the published site to allow the new service worker to activate; reload once more if needed. Card data and progress stay in local storage.
 
 ## PDF import and export
 
-Open **Manage cards → Import a questions & answers PDF**. Choose a selectable-text Quizlet print export like the original 94-card source, or a PDF with explicit `Question:` and `Answer:` pairs. PDF reading happens in the browser without uploading the document or calling an AI service. The reader and worker are embedded in both HTML editions, so import also works offline after the app is installed. Maximum input: 25 MB, 100 pages, 2,000 cards. Modern Safari/iOS is recommended.
+Open **Manage cards → Import a questions & answers PDF**. Choose a selectable-text Quizlet print export like the original 94-record source, or a PDF with explicit `Question:` and `Answer:` pairs. PDF reading happens in the browser without uploading the document or calling an AI service. The reader and worker are embedded in both HTML editions, so import also works offline after the app is installed. Maximum input: 25 MB, 100 pages, 2,000 cards. Modern Safari/iOS is recommended.
 
 Extracted cards appear as editable JSON and a scrollable question/answer preview. Correct text as needed, press **Review cards** after editing, then check **I checked the questions and answers** and press **Use these cards**. Replacing the current set resets its progress after confirmation. A failed import leaves the existing set intact. Change **Study set name** before importing to name any subject.
 
@@ -126,3 +126,14 @@ Use **Set recap** at any time to see coverage so far. After a completed round wh
 The recap shows verified mastery, manual mastery, cumulative recorded-answer accuracy (including retries), and every focus card’s question, answer, mistake count, and current 0–3 streak. Unmastered cards with more recorded mistakes come first, followed by lower streaks and untested cards. **Practice focus cards** starts a targeted round of up to 10 priorities, without unrelated bonus questions. **Review all cards** includes mastered cards with past mistakes and manually mastered cards. **Check recall in Exam** opens the separate full-set exam mode. Starting targeted practice confirms replacement of an unfinished round and preserves its recorded answers, mastery, and rewards.
 
 XP, completed-round totals, the current round’s reward receipt, and the recap milestone save with the existing study state and are included in full backups and local recovery. Refreshing or switching modes does not award the same round twice. Replacing the study set resets that set’s rewards with its study progress; older backups without rewards remain supported.
+
+
+## Consolidated questions and Select all
+
+The original PDF’s 94 records now form **80 study cards**: 14 repeated question pairs share a single question with both correct answers. Five existing Select-all questions are also interactive, giving **19 Select all cards**. The original records remain in `source-deck.json`; [DATA-AUDIT.md](DATA-AUDIT.md) lists the original PDF card numbers and answer boundaries. Run `npm run build` to reproduce the consolidated deck and deployment files.
+
+In Learn, select every correct option, then use **Check selected answers** or the pinned **Check answers** button. Toggling a choice does not grade it. The whole answer is correct only when all correct options and no incorrect options are selected. Feedback identifies omitted correct answers and extra incorrect selections. Misses return in the same round and reset that card’s streak; verified mastery still requires three consecutive fully correct answers. Exam uses the same exact-set rule but keeps grading hidden until submission. Selections survive refreshes and full backups.
+
+Existing saved sets and newly imported PDFs are consolidated automatically using matching question stems. Different questions about the same topic remain separate, and ambiguous conflicting True/False or “All” answer keys are kept separate. Explicit source-specific answer boundaries are applied only to exact matches from the original PDF. JSON exports and full backups retain answer arrays. PDF export prints a `Type: Select all that apply` line and a separate `Answer:` for each correct option so the exported format can be imported again.
+
+On upgrade, unaffected questions keep their mastery and familiarity, and XP stays intact. The full-set recap milestone reopens after the new answer sets have been assessed. Combined or reformatted questions require a fresh assessment: old single-answer results do not prove recall of the complete answer set. Their original cards and counters are archived under per-card `previousVersions` in full backups. A round containing changed questions starts fresh, with its original queue, feedback, and scores archived; an unaffected round keeps its saved question and scores with remapped IDs. Old exams are archived alongside their original deck because the new set has different questions. A notice explains the change in Learn. A local pre-update recovery snapshot is also retained.

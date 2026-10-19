@@ -54,11 +54,13 @@ export function parsePdfPages(pages) {
   for(let line of allText.split('\n')){
     line=line.trim();if(!line||/^\d+\s*\/\s*\d+$/.test(line))continue;
     let match=line.match(/^(?:\d+[.)]\s*)?(?:Q(?:uestion)?)[.:]\s*(.*)$/i);
-    if(match){current={term:[match[1]],definition:[]};cards.push(current);part='term';continue;}
+    if(match){current={term:[match[1]],definition:[],answers:[]};cards.push(current);part='term';continue;}
+    if(current&&/^Type:\s*Select all that apply\.?$/i.test(line)){current.multi=true;part=null;continue;}
     match=line.match(/^(?:A(?:nswer)?)[.:]\s*(.*)$/i);
-    if(match&&current){current.definition.push(match[1]);part='definition';continue;}
+    if(match&&current){if(current.multi){current.answers.push([match[1]]);part='multi-answer';}else{current.definition.push(match[1]);part='definition';}continue;}
+    if(current&&part==='multi-answer'){current.answers.at(-1).push(line);continue;}
     if(current&&part)current[part].push(line);
   }
-  if(!cards.length||cards.some(c=>!joinPdfLines(c.term)||!joinPdfLines(c.definition)))throw new Error('Unsupported PDF layout. Use a Quizlet print export or a text PDF with each Question: followed by Answer:. Scanned PDFs and separate answer-key pages are not supported.');
-  return {cards:cards.map(c=>({term:joinPdfLines(c.term),definition:joinPdfLines(c.definition)})),format:'Question / Answer',warnings:['Check every pair: page headers or footers may need removal.']};
+  if(!cards.length||cards.some(c=>!joinPdfLines(c.term)||(c.multi?c.answers.length<2||c.answers.some(a=>!joinPdfLines(a)):!joinPdfLines(c.definition))))throw new Error('Unsupported PDF layout. Use a Quizlet print export or a text PDF with each Question: followed by Answer:. Scanned PDFs and separate answer-key pages are not supported.');
+  return {cards:cards.map(c=>c.multi?{term:joinPdfLines(c.term),definition:c.answers.map(joinPdfLines).join('\n'),type:'multi',answers:c.answers.map(joinPdfLines)}:{term:joinPdfLines(c.term),definition:joinPdfLines(c.definition)}),format:'Question / Answer',warnings:['Check every pair: page headers or footers may need removal.']};
 }

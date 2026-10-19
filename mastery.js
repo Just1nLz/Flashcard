@@ -30,7 +30,7 @@ export function completeManualCard(round,id){
  if(!round)return false;const index=round.queue.indexOf(id);
  if(index>=0||[...(round.baseIds||[]),...(round.reviewIds||[]),...round.seen].includes(id)){round.manualIds ||= [];if(!round.manualIds.includes(id))round.manualIds.push(id);}
  if(index<0)return false;round.queue.splice(index,1);round.completed++;
- if(index===0){round.current=null;round.feedback=null;}return true;
+ if(index===0){round.current=null;round.feedback=null;delete round.selection;}return true;
 }
 export function recordMastery(mastery,id,correct){
  const card=mastery.cards[id];if(!Number.isInteger(id)||!card||typeof correct!=='boolean')throw new Error('Invalid mastery answer.');

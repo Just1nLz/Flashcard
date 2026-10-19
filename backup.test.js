@@ -18,3 +18,16 @@ test('backup rejects malformed reward state and completion receipts on unfinishe
  const backup=createStudyBackup(progress());backup.progress.rewards={version:1,xp:-10,completedRounds:0,recapShown:false};assert.throws(()=>parseStudyBackup(JSON.stringify(backup)));
  delete backup.progress.rewards;backup.progress.round.reward={version:1,xp:10,assessed:0,firstCorrect:0,attempts:0,manual:3,total:3,badge:'manual',title:'A step forward'};assert.throws(()=>parseStudyBackup(JSON.stringify(backup)));
 });
+
+test('merged question history and archived original round/exam survive full backup restoration',async()=>{
+ const {migrateStudyCards}=await import('./merge-progress.js');const {prepareStudyCards}=await import('./source-upgrade.js');const {createExam}=await import('./exam.js');
+ const {readFileSync}=await import('node:fs');const original=JSON.parse(readFileSync(new URL('./source-deck.json',import.meta.url))).cards;
+ const round={queue:[1],total:1,completed:0,attempts:0,firstCorrect:0,seen:[],current:makeQuestion(original,1),feedback:null};
+ const state={title:'Original ethics',cards:original,known:[1,2,4],learned:[1,2],mastery:initializeMastery({cards:original,learned:[1,2]}),round,exam:createExam(original),rewards:{version:1,xp:710,completedRounds:7,recapShown:true}};
+ answerQuestion(round,round.current.options.find(option=>option!==round.current.answer));
+ migrateStudyCards(state,prepareStudyCards(original));
+ const restored=parseStudyBackup(JSON.stringify(createStudyBackup(state)));
+ assert.equal(restored.cards.length,80);assert.deepEqual(restored.cardMigration,state.cardMigration);assert.deepEqual(restored.mastery,state.mastery);assert.deepEqual(restored.rewards,state.rewards);
+ assert.equal(restored.cardMigration.previousRound.feedback.correct,false);assert.equal(restored.cardMigration.previousExam.questions.length,94);assert.equal(restored.cardMigration.previousCards.length,94);
+ const invalid=createStudyBackup(state);invalid.progress.cardMigration.toCount=79;invalid.progress.cardMigration.mergedCount=15;assert.throws(()=>parseStudyBackup(JSON.stringify(invalid)),/does not match/);
+});
