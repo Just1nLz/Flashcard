@@ -40,7 +40,7 @@ A standard round contains up to **10 core questions plus 3 labeled past-mistake 
 
 Select all grading requires **every correct option and no incorrect options**. Missing a correct choice or adding an incorrect one counts as a miss. Original true/false cards keep two choices.
 
-A wrong answer resets only that question's streak to **0/3** and returns it later in the round. In standard Learn, one correct response completes that round's encounter; the question returns in later rounds until it reaches **three consecutive correct answers**. For example, `wrong → right → right → right` reaches mastery; `right → right → wrong` resets to zero. Restarting a round keeps per-question history.
+Each correct answer adds **1 mastery point** up to **3/3**; each wrong answer subtracts **1 point**, with a minimum of **0/3**, and returns the question later in the round. For example, `right → right → wrong` leaves **1/3**, and two more correct answers reach mastery. In standard Learn, one correct response completes that round's encounter; unmastered questions return in later rounds. Restarting a round keeps per-question history. This is a mastery score rather than a requirement for consecutive correct answers. Existing saved progress stays unchanged; the gentler penalty applies to future answers.
 
 Strong green/red feedback identifies correct answers, incorrect selections, and omitted correct options. Optional sound and animations reinforce results and respect reduced-motion settings. After checking an answer, **swipe left** or use the pinned **Next question** button; vertical scrolling does not skip questions.
 
@@ -54,7 +54,7 @@ To strengthen recall:
 
 1. Expand **Review the correct answer**, explain it in your own words, then hide it.
 2. Choose **Strengthen this question**, or use the bulk action for up to 10 highest-ranked questions below 3/3.
-3. Recall each answer before choosing. The selected questions rotate within the same strengthening round until each reaches **three consecutive correct answers**. A miss resets only that question's streak.
+3. Recall each answer before choosing. The selected questions rotate within the same strengthening round until each reaches **3/3 mastery points**. Correct answers add 1; a miss subtracts 1 from that question, with a minimum of 0.
 
 Existing streaks count: a question at 2/3 needs one more success. Already verified questions can be rechecked without resetting their history; when all ranked questions reach 3/3, the bulk action offers rechecks. Manual completion is reported separately and does not claim verified strengthening.
 

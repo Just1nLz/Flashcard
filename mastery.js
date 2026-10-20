@@ -36,7 +36,7 @@ export function recordMastery(mastery,id,correct){
  const card=mastery.cards[id];if(!Number.isInteger(id)||!card||typeof correct!=='boolean')throw new Error('Invalid mastery answer.');
  const wasMastered=isCardMastered(card);
  card.lastSeen=++mastery.clock;
- if(correct){card.correct++;card.streak=Math.min(MASTERY_TARGET,card.streak+1);if(card.streak>=MASTERY_TARGET)card.manualMastered=false;}else{card.incorrect++;card.streak=0;card.manualMastered=false;}
+ if(correct){card.correct++;card.streak=Math.min(MASTERY_TARGET,card.streak+1);if(card.streak>=MASTERY_TARGET)card.manualMastered=false;}else{card.incorrect++;card.streak=Math.max(0,card.streak-1);card.manualMastered=false;}
  return {streak:card.streak,mastered:isCardMastered(card),newlyMastered:!wasMastered&&isCardMastered(card)};
 }
 export function masterySummary(mastery){

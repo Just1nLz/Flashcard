@@ -55,7 +55,7 @@ In Learn, solid green/red banners, short animations, and a correct-answer streak
 
 ## What “mastered” means
 
-In Learn, each card must be answered correctly **three times in a row** across practice encounters. Wrong answers reset only that card to 0/3. A wrong card returns later in the current round; after a correct retry it stays eligible for later rounds until 3/3. The app rotates less recently practiced cards into new rounds rather than dropping a card after its first success.
+In Learn, each card reaches mastery at **3/3 points** across practice encounters. Correct answers add **1 point**; wrong answers subtract **1 point**, with a minimum of **0/3**. For example, a miss at 2/3 leaves 1/3. Existing progress stays saved; the new penalty applies to future answers. A wrong card returns later in the current round; after a correct retry it stays eligible for later rounds until 3/3. The app rotates less recently practiced cards into new rounds rather than dropping a card after its first success.
 
 Check the current card's **0/3–3/3** badge or open **Study details → See mastery for every card** for the whole set. The across-card success streak is decorative; it does not determine mastery. Flashcard **Got it** means you marked it familiar, not verified mastered. Exam scoring stays separate.
 
@@ -65,12 +65,12 @@ Older learned cards receive one credited success (1/3) when you update. Scores, 
 
 Choose an answer, review the feedback, then **swipe left across the card** to continue. You can swipe over the feedback or answer choices. You can also tap the **Next question** button pinned above the bottom edge; on the final correct answer it says **Finish round**. The next question automatically comes into view.
 
-Swiping before answering does not skip the question. Vertical scrolling still works if you want to read the full explanation. Wrong answers still return for practice and the three-correct mastery rule stays the same. Swipe from inside the card rather than the phone's edge, where Safari handles its own navigation gestures.
+Swiping before answering does not skip the question. Vertical scrolling still works if you want to read the full explanation. Wrong answers still return for practice and the 3/3 mastery-point rule stays the same. Swipe from inside the card rather than the phone's edge, where Safari handles its own navigation gestures.
 
 ## Past-mistake reviews and “I mastered this”
 
 Normal Learn rounds now contain **up to 10 core cards + 3 extra past-mistake reviews**, for up to 13 unique cards. Amber badges identify the extras. They rotate through recorded earlier mistakes and do not take a bonus slot in consecutive rounds. Errors you make now still return later in the same round. A previous 3/3 card can also return for a retention check if you missed it in the past.
 
-Open **Card options → I mastered this** under the current question to mark it mastered immediately and continue. This is recorded as **manual mastery**, separate from three correct answers; it does not change your actual scores or create correct answers. These cards stop appearing in automatic core and past-mistake slots. You can still deliberately review mastered cards.
+Open **Card options → I mastered this** under the current question to mark it mastered immediately and continue. This is recorded as **manual mastery**, separate from earned 3/3 mastery; it does not change your actual scores or create correct answers. These cards stop appearing in automatic core and past-mistake slots. You can still deliberately review mastered cards.
 
 To undo, open **Study details → See mastery for every card** and tap **Return to practice**. Full backups preserve manual marks, previous mistakes, bonus review assignments, and any unfinished round. Updating the same Netlify site keeps your saved progress; an active older round may grow from 10 to 13 cards as the extra reviews are added once.

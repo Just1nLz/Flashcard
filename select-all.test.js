@@ -42,7 +42,7 @@ test('pending toggles do not grade, invalid submissions do not count, and commit
  advanceRound(round);assert.equal(round.selection,undefined);
 });
 
-test('incomplete select-all answers requeue and mastery still requires three consecutive complete answers',()=>{
+test('incomplete select-all answers requeue and mastery still requires 3/3 points from complete answers',()=>{
  const mastery=initializeMastery({cards});const round=multiRound();
  answerQuestion(round,[round.current.answers[0]]);recordMastery(mastery,0,round.feedback.correct);
  assert.equal(advanceRound(round),null);assert.equal(round.queue.at(-1),0);assert.equal(mastery.cards[0].incorrect,1);
