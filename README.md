@@ -2,7 +2,7 @@
 
 A mobile-friendly flashcard app for studying online or offline, with Learn, Exam, and focused practice for difficult questions. It runs entirely in your browser: no account, API keys, or application server required.
 
-The included **Computer Ethics Final copy** set has **94 original flashcards** and **80 consolidated Learn/Exam questions**, including **19 Select all questions**. You can also import your own study sets.
+The included **Computer Ethics Final copy** set has **94 original flashcards** and **80 consolidated questions for Learn and the Exam pool**, including **19 Select all questions**. You can also import your own study sets.
 
 ## Download and use
 
@@ -21,7 +21,7 @@ The repository includes generated deployment files, so hosting requires no npm i
 | --- | --- |
 | **Flashcards** | Study the 94 original PDF cards separately, with choices on individual **A)**, **B)**, **C)** rows and matching answer codes when available. Flip, shuffle, and mark each original card familiar independently. |
 | **Learn** | Practice the 80 consolidated questions in rounds with immediate feedback, retries, mastery streaks, and rewards. Repeated questions with different correct answers become one Select all question. |
-| **Exam** | Test the whole consolidated set once, with shuffled questions, flags, navigation, and grading after submission. |
+| **Exam** | Test a random 50-question sample with MCQ, True/False, and Select all, shuffled options, flags, navigation, and grading after submission. |
 | **Tricky** | Rank recorded Learn mistakes from most to least, review correct answers, and strengthen one question or up to 10 priorities until they reach 3/3. |
 
 ### Focused study interface
@@ -62,7 +62,9 @@ Mistake totals remain historical while 3/3 labels show improvement. Reviewing an
 
 ### Exam
 
-Choose **Exam → Start full-set exam**. Every consolidated question appears once, in shuffled order. Select or change answers, flag uncertain questions, and revisit them with the navigator. There is no time limit, and grading stays hidden until submission.
+Choose **Exam → Start 50-question exam**. Each new attempt randomly samples 50 distinct questions from the 80-question pool, with a proportional mix of MCQ, True/False, and Select all (22, 16, and 12 for the included set). Smaller imported sets use every question; formats are included when available. Select or change answers, flag uncertain questions, and revisit them with the navigator. There is no time limit, and grading stays hidden until submission.
+
+Original printed MCQ distractors are preferred when the correct option can be matched reliably and the choices do not depend on their positions. Other questions use the existing related-answer distractors. Answer choices, including True/False, are shuffled for each new attempt, then stay fixed during navigation, reloads, and backup restoration. Existing saved 80-question attempts remain intact; start a new exam to use the 50-question format.
 
 Select all questions show the required answer count and use the same exact-set rule as Learn. Submitting locks the attempt, counts unanswered questions as incorrect, and reveals the overall percentage plus correct/incorrect/unanswered totals and answer review. Practice bands are **Strong recall** at 85%+, **Developing recall** at 65–84%, and **More practice will help** below 65%; these are study cues, not predictions of a real test grade.
 

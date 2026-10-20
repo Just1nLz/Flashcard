@@ -24,10 +24,11 @@ test('merged question history and archived original round/exam survive full back
  const {readFileSync}=await import('node:fs');const original=JSON.parse(readFileSync(new URL('./source-deck.json',import.meta.url))).cards;
  const round={queue:[1],total:1,completed:0,attempts:0,firstCorrect:0,seen:[],current:makeQuestion(original,1),feedback:null};
  const state={title:'Original ethics',cards:original,known:[1,2,4],learned:[1,2],mastery:initializeMastery({cards:original,learned:[1,2]}),round,exam:createExam(original),rewards:{version:1,xp:710,completedRounds:7,recapShown:true}};
+ const originalExam=structuredClone(state.exam);
  answerQuestion(round,round.current.options.find(option=>option!==round.current.answer));
  migrateStudyCards(state,prepareStudyCards(original));
  const restored=parseStudyBackup(JSON.stringify(createStudyBackup(state)));
  assert.equal(restored.cards.length,80);assert.deepEqual(restored.cardMigration,state.cardMigration);assert.deepEqual(restored.mastery,state.mastery);assert.deepEqual(restored.rewards,state.rewards);
- assert.equal(restored.cardMigration.previousRound.feedback.correct,false);assert.equal(restored.cardMigration.previousExam.questions.length,94);assert.equal(restored.cardMigration.previousCards.length,94);
+ assert.equal(restored.cardMigration.previousRound.feedback.correct,false);assert.deepEqual(restored.cardMigration.previousExam,originalExam);assert.equal(restored.cardMigration.previousCards.length,94);
  const invalid=createStudyBackup(state);invalid.progress.cardMigration.toCount=79;invalid.progress.cardMigration.mergedCount=15;assert.throws(()=>parseStudyBackup(JSON.stringify(invalid)),/does not match/);
 });

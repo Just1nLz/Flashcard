@@ -2,7 +2,7 @@ import {installLearnSwipe} from './swipe.js';
 import {initializeRewards,validateRoundReward,awardRoundReward,buildSetRecap} from './rewards.js';
 import {rankTrickyQuestions,trickyPracticeIds,newTrickyRound,advanceTrickyRound} from './tricky.js';
 import {MASTERY_TARGET,initializeMastery,recordMastery,masterySummary,newMasteryRound,isCardMastered,setManualMastery,completeManualCard,ensureRoundReviewMix} from './mastery.js';
-import {createExam,setExamAnswer,scoreExam,submitExam,validateExam} from './exam.js';
+import {examSize,createExam,setExamAnswer,scoreExam,submitExam,validateExam} from './exam.js';
 import {createStudyBackup, parseStudyBackup, validateStudyState} from './backup.js';
 import {parsePdfPages} from './pdf-layout.js';
 import {makeQuestion, answerQuestion, advanceRound,isAnswerProvided,ensureQuestionDistractors} from './learn.js';
@@ -323,13 +323,15 @@ function animateLearnResult(correct){
 $('sound-toggle').onclick=()=>{state.soundEnabled=!state.soundEnabled;save();renderLearn();if(state.soundEnabled)playAnswerSound(true);};
 $('exam-mode').onclick=()=>setActivity('exam');
 function beginExam(){
- if(state.exam&&!confirm('Start a fresh full-set exam? This replaces the saved exam only. Your Learn and flashcard progress will stay.'))return;
+ if(state.exam&&!confirm(`Start a fresh ${examSize(state.cards)}-question exam? This replaces the saved exam only. Your Learn and flashcard progress will stay.`))return;
  try{state.exam=createExam(state.cards);save();renderExam();$('exam-question').focus({preventScroll:true});}catch(e){toast(e.message);}
 }
 $('start-exam').onclick=beginExam;$('retake-exam').onclick=beginExam;$('discard-exam').onclick=beginExam;
 function renderExam(){
  const exam=state.exam;
- $('exam-set-size').textContent=`${state.cards.length} questions · no time limit · answers revealed after submission`;
+ $('exam-set-size').textContent=`${examSize(state.cards)} questions sampled from ${state.cards.length} · no time limit · answers revealed after submission`;
+ $('start-exam').textContent=`Start ${examSize(state.cards)}-question exam`;
+ $('discard-exam').textContent=exam&&exam.questions.length!==examSize(state.cards)?`Start new ${examSize(state.cards)}-question exam`:'Start over';
  $('start-exam').disabled=!state.cards.length;
  $('exam-start').hidden=!!exam;$('exam-taking').hidden=!exam||!!exam.submittedAt;$('exam-results').hidden=!exam?.submittedAt;
  if(!exam)return;

@@ -49,7 +49,7 @@ No automatic cloud sync is enabled. Saving a backup in iCloud Drive lets you tra
 
 ## Exam and stronger feedback
 
-Tap **Exam → Start full-set exam** to test every card once. Choose answers, use **Flag for review**, and use the navigator to revisit questions. Your selections save if you close the app. Tap **Submit exam** when ready: unanswered questions lower the total score, and answers appear only after submission. Review missed questions or start a targeted Learn round. Your existing Learn progress stays separate.
+Tap **Exam → Start 50-question exam** for a random sample from the study set, mixing MCQ, True/False, and Select all questions. Smaller sets use all their cards. Options shuffle for each new attempt and remain fixed during that attempt. A saved older 80-question exam stays available until you choose to start a new one. Choose answers, use **Flag for review**, and use the navigator to revisit questions. Your selections save if you close the app. Tap **Submit exam** when ready: unanswered questions lower the total score, and answers appear only after submission. Review missed questions or start a targeted Learn round. Your existing Learn progress stays separate.
 
 In Learn, solid green/red banners, short animations, and a correct-answer streak reinforce each result. Open **Study details** and tap **Sound: off** to enable optional feedback tones; your iPhone/browser must allow sound. Reduced Motion disables the animations. Full backups now include any unfinished or completed exam.
 
